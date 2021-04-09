@@ -6,7 +6,6 @@ const DateStyle = styled.div`
   #day_of_week {
     font-size: ${props => props.theme.fontsize_36}px;
     font-weight: 300;
-    letter-spacing: 2px;
   }
   #current_date {
     font-size: ${props => props.theme.fontsize_18}px;
@@ -46,8 +45,6 @@ export const DayOfWeek = () => {
   )
     .split('.')
     .join('-');
-
-  console.log(dateTime);
 
   return (
     <DateStyle>

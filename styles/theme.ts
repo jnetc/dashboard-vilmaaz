@@ -13,8 +13,10 @@ declare module 'styled-components' {
     bg_middle: string;
     bg_main: string;
     bg_dark: string;
-    element: string;
-    elementhover: string;
+    primary: string;
+    primary_hover: string;
+    danger: string;
+    danger_hover: string;
     bringpink: string;
     bringpinkdark: string;
     polishedpine: string;
@@ -31,7 +33,10 @@ declare module 'styled-components' {
     fontsize_16: number;
     fontsize_14: number;
     shadow: string;
-    shadow_green: string;
+    shadow_primary: string;
+    shadow_primary_hover: string;
+    shadow_danger: string;
+    shadow_danger_hover: string;
   }
 }
 
@@ -45,8 +50,10 @@ export const theme: DefaultTheme = {
   bg_middle: '#242333',
   bg_main: '#1e1d2e',
   bg_dark: '#191829',
-  element: '#b0d3b4',
-  elementhover: '#def2c8',
+  primary: '#b0d3b4',
+  primary_hover: '#8ca88f',
+  danger: '#f986a1',
+  danger_hover: '#CC6E84',
   bringpink: '#f986a1',
   bringpinkdark: '#99354d',
   polishedpine: '#82b3a0',
@@ -63,5 +70,8 @@ export const theme: DefaultTheme = {
   fontsize_16: 16,
   fontsize_14: 14,
   shadow: '0, 0, 0',
-  shadow_green: '176, 211, 180',
+  shadow_primary: '176, 211, 180',
+  shadow_danger: '249, 134, 161',
+  shadow_danger_hover: '204, 110, 132',
+  shadow_primary_hover: '142, 168, 149',
 };

@@ -39,10 +39,10 @@ const LinkStyle = styled.li`
   }
   &.active {
     a {
-      border-color: ${props => props.theme.element};
+      border-color: ${props => props.theme.primary};
       color: ${props => props.theme.white};
-      box-shadow: 0 5px 5px rgba(${props => props.theme.shadow_green}, 0.15),
-        0 20px 20px rgba(${props => props.theme.shadow_green}, 0.1);
+      box-shadow: 0 5px 5px rgba(${props => props.theme.shadow_primary}, 0.15),
+        0 20px 20px rgba(${props => props.theme.shadow_primary}, 0.1);
     }
     svg {
       stroke: ${props => props.theme.white};

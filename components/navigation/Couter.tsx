@@ -22,30 +22,16 @@ const CountStyle = styled.div`
   font-weight: bold;
   border-radius: 50%;
   border: 2px solid ${props => props.theme.bg_main};
-  background-color: ${props => props.theme.element};
+  background-color: ${props => props.theme.primary};
 
   & .counter {
     position: absolute;
     top: 10px;
-  }
-
-  & .plus {
-    width: 15px;
-    height: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0px;
-    left: -15px;
-    border-radius: 50%;
-    background-color: ${props => props.theme.element};
-    color: ${props => props.theme.bg_main};
-    font-size: ${props => props.theme.fontsize_14 - 2}px;
+    letter-spacing: 0.1px;
   }
 
   &.notice {
-    animation: ${props => impulse(props.theme.shadow_green)} 1s ease-in-out
+    animation: ${props => impulse(props.theme.shadow_primary)} 1s ease-in-out
       forwards;
   }
 `;
@@ -80,7 +66,7 @@ export const Counter = () => {
   return (
     <CountStyle ref={element}>
       <div className="counter">
-        {count === 99 && '<'}
+        {/* {count === 99 && '<'} */}
         {count}
       </div>
     </CountStyle>

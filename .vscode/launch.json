@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Next: Chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      // "runtimeArgs": ["--incognito"],
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/./components/main/*": "${webRoot}/*"
+      }
+    }
+  ]
+}

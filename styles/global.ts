@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     line-height: 1;
+    letter-spacing: 1px;
     box-sizing: border-box;
   }
 
@@ -30,6 +31,12 @@ export const GlobalStyle = createGlobalStyle`
 
   ul {
     list-style-type: none;
+  }
+  h1, h2, h3, h4,h5, h6 {
+    font-weight: 400;
+  }
+  p, time, span {
+    font-weight: 300;
   }
   /* SCROLLBAR */
   ::-webkit-scrollbar {

@@ -1,8 +1,8 @@
-import React from 'react';
 import type { AppProps } from 'next/app';
 import styled, { ThemeProvider } from 'styled-components';
 import Navigation from '@Navigation';
 import Header from '@Header';
+import Store from '@Store';
 
 // THEME STYLES
 import { theme } from '@styles/theme';
@@ -29,16 +29,14 @@ const WrapperStyle = styled.div`
 
   main {
     max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr minmax(50px, 350px);
   }
 `;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <React.StrictMode>
+    <Store>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Navigation />
@@ -49,7 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </main>
         </WrapperStyle>
       </ThemeProvider>
-    </React.StrictMode>
+    </Store>
   );
 }
 

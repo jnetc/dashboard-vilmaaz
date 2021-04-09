@@ -1,7 +1,15 @@
 import Head from 'next/head';
-// import style from '../styles/Home.module.css';
+// Global Context
+import { useStore } from '@Store';
+// Components
+import { SidePanel } from '@SidePanel/SidePanel';
+import { IndexSideContent } from '@SidePanel/IndexSideContent';
+import { IndexMainContent } from '@Main/IndexMainContent';
 
 export default function Home() {
+  const data = useStore();
+  console.log(data);
+
   return (
     <>
       <Head>
@@ -9,7 +17,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Dashboard</h1>
+      <IndexMainContent />
+      <SidePanel>
+        <IndexSideContent />
+      </SidePanel>
     </>
   );
 }
