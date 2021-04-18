@@ -1,27 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+// Types
+import { ButtonStyleType, Props } from './types';
 
 import { handleThemeSwitcher } from './ColorTheme';
-
-// TYPES & INTERFACE
-interface ButtonStyleType {
-  isFill?: boolean;
-  colorTheme: string;
-}
-
-type Styled = ({ isFill?: true } | { isFill: never }) &
-  (
-    | { colorTheme: 'primary' }
-    | { colorTheme: 'default' }
-    | { colorTheme: 'danger' }
-  );
-
-type Props = { children: React.ReactNode } & Styled;
 
 // STYLES
 const ButtonStyle = styled.button<ButtonStyleType>`
   padding: 15px 25px;
-  font-size: ${props => props.theme.fontsize_18}px;
+  font-size: ${props => props.theme.fontsize_16};
   border-radius: 10px;
   color: ${props => (props.isFill ? props.theme.bg_main : props.theme.white)};
   border-width: 2px;
@@ -33,10 +20,10 @@ const ButtonStyle = styled.button<ButtonStyleType>`
   ${props => handleThemeSwitcher(props.colorTheme, props.isFill, props.theme)}
 `;
 
-export const Button = (props: Props) => {
+export const Button = ({ children, isFill, colorTheme }: Props) => {
   return (
-    <ButtonStyle isFill={props.isFill} colorTheme={props.colorTheme}>
-      {props.children}
+    <ButtonStyle isFill={isFill} colorTheme={colorTheme}>
+      {children}
     </ButtonStyle>
   );
 };

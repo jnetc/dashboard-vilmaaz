@@ -18,7 +18,7 @@ const CountStyle = styled.div`
   top: 15%;
   left: 55%;
   color: ${props => props.theme.bg_main};
-  font-size: ${props => props.theme.fontsize_14 - 3}px;
+  font-size: ${props => props.theme.fontsize_14};
   font-weight: bold;
   border-radius: 50%;
   border: 2px solid ${props => props.theme.bg_main};

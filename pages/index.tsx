@@ -1,14 +1,14 @@
 import Head from 'next/head';
 // Global Context
-import { useStore } from '@Store';
+// import { useStore } from '@Store';
 // Components
 import { SidePanel } from '@SidePanel/SidePanel';
 import { IndexSideContent } from '@SidePanel/IndexSideContent';
 import { IndexMainContent } from '@Main/IndexMainContent';
 
 export default function Home() {
-  const data = useStore();
-  console.log(data);
+  // const data = useStore();
+  // console.log(data);
 
   return (
     <>

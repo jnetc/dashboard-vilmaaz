@@ -13,6 +13,6 @@ const SidePanelStyle = styled.section`
   z-index: 100;
 `;
 
-export const SidePanel = ({ children }: { children: React.ReactNode }) => {
+export const SidePanel: React.FC = ({ children }) => {
   return <SidePanelStyle>{children}</SidePanelStyle>;
 };

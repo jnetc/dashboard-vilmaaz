@@ -4,11 +4,11 @@ const DateStyle = styled.div`
   display: flex;
   flex-direction: column;
   #day_of_week {
-    font-size: ${props => props.theme.fontsize_36}px;
+    font-size: ${props => props.theme.fontsize_36};
     font-weight: 300;
   }
   #current_date {
-    font-size: ${props => props.theme.fontsize_18}px;
+    font-size: ${props => props.theme.fontsize_16};
     color: ${props => props.theme.grey_light};
     padding-top: 5px;
   }

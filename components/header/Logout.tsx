@@ -14,13 +14,13 @@ const LogoutStyle = styled.div`
     grid-row: 1;
     justify-self: flex-end;
     align-self: flex-end;
-    font-size: ${({ theme }) => theme.fontsize_14}px;
+    font-size: ${({ theme }) => theme.fontsize_14};
     color: ${({ theme }) => theme.grey_light};
   }
   h4 {
     grid-column: 1;
     grid-row: 2;
-    font-size: ${({ theme }) => theme.fontsize_18}px;
+    font-size: ${({ theme }) => theme.fontsize_18};
   }
   button {
     grid-column: 2;

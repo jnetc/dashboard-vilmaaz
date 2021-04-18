@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import styled, { ThemeProvider } from 'styled-components';
 import Navigation from '@Navigation';
 import Header from '@Header';
-import Store from '@Store';
+import Store from '@Store/Store';
 
 // THEME STYLES
 import { theme } from '@styles/theme';
@@ -25,10 +25,11 @@ const WrapperStyle = styled.div`
 
   nav {
     grid-column: 1 / 2;
+    position: fixed;
   }
 
   main {
-    max-height: 100%;
+    height: calc(100vh - 130px);
     display: grid;
     grid-template-columns: 1fr minmax(50px, 350px);
   }

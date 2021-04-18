@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+// Types
+import { NavLink, Props } from './types';
 
-import { NavLink } from './Nav';
 import {
   Lessons,
   Schedule,
@@ -51,7 +52,7 @@ const LinkStyle = styled.li`
 `;
 
 // TYPE
-export const UrlComponent = (props: { icon: JSX.Element; url: NavLink }) => {
+export const UrlComponent = (props: Props) => {
   return (
     <LinkStyle className={`${props.url.active && 'active'}`}>
       <Link href={props.url.href}>

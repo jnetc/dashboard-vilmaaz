@@ -24,7 +24,7 @@
       "@Header": ["./components/header/Header"],
       "@SidePanel/*": ["./components/side-panel/*"],
       "@Main/*": ["./components/main/*"],
-      "@Store": ["./components/store/Store"]
+      "@Store/*": ["./components/store/*"]
     }
   },
   "exclude": ["node_modules"],

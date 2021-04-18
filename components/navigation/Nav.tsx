@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { NavLink } from './types';
+
 import AltLink from './Link';
 import { Logo, MinLogo } from '../icons/Logos';
 
@@ -24,14 +26,6 @@ const NavigationStyle = styled.nav`
     align-self: center;
   }
 `;
-
-// TYPE
-export type NavLink = {
-  href: string;
-  path: string;
-  active: boolean;
-  counter: boolean;
-};
 
 export const navigation: Array<NavLink> = [
   {

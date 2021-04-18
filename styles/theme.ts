@@ -27,11 +27,11 @@ declare module 'styled-components' {
     oldrosedark: string;
     orhid: string;
     orhiddark: string;
-    fontsize_36: number;
-    fontsize_24: number;
-    fontsize_18: number;
-    fontsize_16: number;
-    fontsize_14: number;
+    fontsize_36: string;
+    fontsize_24: string;
+    fontsize_18: string;
+    fontsize_16: string;
+    fontsize_14: string;
     shadow: string;
     shadow_primary: string;
     shadow_primary_hover: string;
@@ -41,37 +41,37 @@ declare module 'styled-components' {
 }
 
 export const theme: DefaultTheme = {
-  white: '#f7f7f9',
-  grey_light: '#a9a9a9',
-  grey_middle: '#515151',
-  grey_dark: '#3c3c4a',
-  bg_light: '#323241',
-  bg_regular: '#282838',
-  bg_middle: '#242333',
-  bg_main: '#1e1d2e',
-  bg_dark: '#191829',
-  primary: '#b0d3b4',
-  primary_hover: '#8ca88f',
-  danger: '#f986a1',
-  danger_hover: '#CC6E84',
-  bringpink: '#f986a1',
-  bringpinkdark: '#99354d',
-  polishedpine: '#82b3a0',
-  polishedpinedark: '#2f4d41',
-  greenbluecayola: '#7eafd8',
-  greenbluecayoladark: '#214666',
-  oldrose: '#cf9d95',
-  oldrosedark: '#664540',
-  orhid: '#e48ad9',
-  orhiddark: '#803d78',
-  fontsize_36: 36,
-  fontsize_24: 24,
-  fontsize_18: 18,
-  fontsize_16: 16,
-  fontsize_14: 14,
+  white: 'hsl(240, 14%, 97%)',
+  grey_light: 'hsl(0, 0%, 66%)',
+  grey_middle: 'hsl(0, 0%, 32%)',
+  grey_dark: 'hsl(240, 10%, 26%)',
+  bg_light: 'hsl(240, 13%, 23%)',
+  bg_regular: 'hsl(240, 17%, 19%)',
+  bg_middle: 'hsl(240, 19%, 17%)',
+  bg_main: 'hsl(240, 23%, 15%)',
+  bg_dark: 'hsl(240, 26%, 13%)',
+  primary: 'hsl(127, 28%, 75%)',
+  primary_hover: 'hsl(127, 28%, 55%)',
+  danger: 'hsl(346, 91%, 75%)',
+  danger_hover: 'hsl(346, 48%, 62%)',
+  bringpink: 'hsl(346, 60%, 75%)',
+  bringpinkdark: 'hsl(346, 60%, 40%)',
+  polishedpine: 'hsl(157, 60%, 75%)',
+  polishedpinedark: 'hsl(157, 60%, 40%)',
+  greenbluecayola: 'hsl(207, 60%, 75%)',
+  greenbluecayoladark: 'hsl(207, 60%, 40%)',
+  oldrose: 'hsl(8, 60%, 75%)',
+  oldrosedark: 'hsl(8, 60%, 40%)',
+  orhid: 'hsl(307, 60%, 75%)',
+  orhiddark: 'hsl(307, 60%, 40%)',
+  fontsize_36: '2rem',
+  fontsize_24: '1.6rem',
+  fontsize_18: '1.3rem',
+  fontsize_16: '1rem',
+  fontsize_14: '.8rem',
   shadow: '0, 0, 0',
   shadow_primary: '176, 211, 180',
+  shadow_primary_hover: '142, 168, 149',
   shadow_danger: '249, 134, 161',
   shadow_danger_hover: '204, 110, 132',
-  shadow_primary_hover: '142, 168, 149',
 };

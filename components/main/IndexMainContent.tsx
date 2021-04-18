@@ -1,21 +1,36 @@
-import React, { useRef, useState, useEffect, MouseEvent } from 'react';
+import { useRef, useState, useEffect, MouseEvent, FC } from 'react';
 import styled from 'styled-components';
+
+import {
+  mouseDownHandler,
+  mouseMoveHandler,
+  mouseUpHandler,
+} from '@Main/utils/MouseMovementHandler';
+import Timeline from '@Main/Timeline';
 
 const IndexMainStyle = styled.section`
   position: relative;
+  height: inherit;
   overflow-y: auto;
   overflow-x: hidden;
-  div {
+  div#timetable {
+    /* width: 100%; */
     min-width: 2000px;
     height: 100%;
     display: grid;
     position: relative;
     background-color: ${({ theme }) => theme.bg_middle};
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 60px 1fr;
+    /* grid-template-columns: 3fr; */
+    div#timefield {
+      grid-row: 2;
+      display: grid;
+      place-items: center;
+    }
     & .will-change {
       will-change: transform;
     }
-    p {
+    /* p {
       &:nth-of-type(1) {
         grid-column: 1 / 2;
         border-left: 1px solid grey;
@@ -28,17 +43,11 @@ const IndexMainStyle = styled.section`
         grid-column: 3 / 4;
         border-left: 1px solid grey;
       }
-    }
+    } */
   }
 `;
 
-// Helper function
-function getTransformStylePosition(el: HTMLDivElement) {
-  let posX = Number(el.style.transform.split('px')[0].split('(')[1]);
-  return Math.abs(posX);
-}
-
-export const IndexMainContent = () => {
+export const IndexMainContent: FC = () => {
   const [currentPositionElement, setCurrentPositionElement] = useState<number>(
     0
   );
@@ -49,93 +58,36 @@ export const IndexMainContent = () => {
   const parentEl = useRef<HTMLDivElement | null>(null);
   const childEl = useRef<HTMLDivElement | null>(null);
 
-  // const animation = () => {
-  //   if (!childEl.current) return;
-  //   console.log('animation');
-  //   return (childEl.current.style.transition = `transform 0.3s ease-in-out`);
-  // };
-
-  ///// Handler mouse move
-  /////////
-  const mouseMove = (
-    ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent
-  ) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    if (ev.type !== 'mousemove') return;
-    if (!startMove ?? !parentEl.current ?? !childEl.current) return;
-
-    // let transformStyle = getTransformStylePosition(childEl.current);
-    let cursorMovement = mouseDownCursorPos - ev.clientX;
-
-    // Out of movement zone
-    // if (
-    //   ev.clientX - parentEl.current.offsetLeft > parentEl.current.offsetWidth ||
-    //   ev.clientX < parentEl.current.offsetLeft
-    // ) {
-    //   return;
-    // }
-
-    // Stop moving far away
-    // if (maxPositionElement < transformStyle) {
-    //   setStartMove(false);
-    // }
-
-    childEl.current.style.transform = `translate3d(-${
-      cursorMovement + currentPositionElement
-    }px, 0, 0)`;
-  };
-
-  ///// MouseDown Handler
+  ///// Mouse Handlers
   /////////
   const mouseDown = (
     ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent
   ) => {
-    ev.preventDefault();
-    if (ev.type !== 'mousedown' ?? !childEl.current ?? !parentEl.current) {
-      return;
-    }
-
-    const invisiblePartOfChildEl =
-      childEl.current.offsetWidth - parentEl.current.offsetWidth;
-
-    let transformStyle = getTransformStylePosition(childEl.current);
-
-    childEl.current.classList.add('will-change');
-    childEl.current.style.transition = '';
-
-    setMaxPositionElement(invisiblePartOfChildEl);
-    setStartMove(true);
-    setCurrentPositionElement(transformStyle);
-    setMouseDownCursorPos(ev.clientX);
+    mouseDownHandler(
+      ev,
+      setStartMove,
+      setMaxPositionElement,
+      setCurrentPositionElement,
+      setMouseDownCursorPos,
+      parentEl.current,
+      childEl.current
+    );
   };
 
-  ///// Up handler
-  /////////
+  const mouseMove = (
+    ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent
+  ) => {
+    mouseMoveHandler(
+      ev,
+      startMove,
+      parentEl.current,
+      childEl.current,
+      mouseDownCursorPos,
+      currentPositionElement
+    );
+  };
   const mouseUp = (ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-    if (ev.type !== 'mouseup' ?? !childEl.current) {
-      return;
-    }
-
-    let transformStyle = getTransformStylePosition(childEl.current);
-
-    if (maxPositionElement < transformStyle) {
-      childEl.current.style.transform = `translate3d(-${maxPositionElement}px, 0, 0)`;
-    }
-
-    if (transformStyle < 0) {
-      childEl.current.style.transform = `translate3d(0, 0, 0)`;
-    }
-
-    childEl.current.classList.remove('will-change');
-
-    setStartMove(false);
-
-    document.onmousemove = null;
-    document.onmousedown = null;
+    mouseUpHandler(ev, setStartMove, childEl.current, maxPositionElement);
   };
 
   ///// Init mouse handlers
@@ -152,12 +104,15 @@ export const IndexMainContent = () => {
   return (
     <IndexMainStyle ref={parentEl}>
       <div
+        id="timetable"
         ref={childEl}
         style={{ transform: `translate3d(0, 0, 0)` }}
         onMouseDown={mouseDown}>
-        <p>1 block</p>
+        <Timeline />
+        <div id="timefield">Timetable</div>
+        {/* <p>1 block</p>
         <p>2 block</p>
-        <p>3 block</p>
+        <p>3 block</p> */}
       </div>
     </IndexMainStyle>
   );
