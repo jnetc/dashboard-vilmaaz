@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import Navigation from '@Navigation';
 import Header from '@Header';
 import Store from '@Store/Store';
+import '../styles/style.css';
 
 // THEME STYLES
 import { theme } from '@styles/theme';

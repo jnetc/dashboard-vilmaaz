@@ -1,23 +1,24 @@
-import { ReactNode } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 // Types
-// import { Timetable } from '@Store/types';
+import { TimelinePointsType, Position } from './types';
 
-export const TimelinePointsStyle = styled.div`
+export const TimelinePointsStyle = styled.div<Position>`
   width: 90px;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  /* position: absolute; */
+  position: absolute;
+  /* left: ${({ pos }) => pos}px; */
+  transform: translate3d(${({ pos }) => pos}px, 0, 0);
   color: ${({ theme }) => theme.grey_light};
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
-  border-color: transparent;
-  background-color: ${({ theme }) => theme.bg_middle};
+  border-color: ${({ theme }) => theme.bg_middle};
+  background-color: ${({ theme }) => theme.bg_middle_alpha};
   box-shadow: 0 5px 5px rgba(${({ theme }) => theme.shadow}, 0.15),
     0 20px 20px rgba(${({ theme }) => theme.shadow}, 0.1);
   &::after {
@@ -33,12 +34,6 @@ export const TimelinePointsStyle = styled.div`
   }
 `;
 
-export const TimelinePoints = ({
-  data,
-}: {
-  data: { time: string; pos: number };
-}) => {
-  console.log(data.time, data.pos);
-
-  return <TimelinePointsStyle>{data.time}</TimelinePointsStyle>;
+export const TimelinePoints: FC<TimelinePointsType> = ({ data }) => {
+  return <TimelinePointsStyle pos={data.pos}>{data.time}</TimelinePointsStyle>;
 };

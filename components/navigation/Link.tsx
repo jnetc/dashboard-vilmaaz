@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 // Types
@@ -52,7 +53,7 @@ const LinkStyle = styled.li`
 `;
 
 // TYPE
-export const UrlComponent = (props: Props) => {
+export const UrlComponent: FC<Props> = props => {
   return (
     <LinkStyle className={`${props.url.active && 'active'}`}>
       <Link href={props.url.href}>

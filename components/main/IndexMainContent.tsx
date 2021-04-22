@@ -9,19 +9,18 @@ import {
 import Timeline from '@Main/Timeline';
 
 const IndexMainStyle = styled.section`
+  grid-column: 1 / 2;
   position: relative;
-  height: inherit;
   overflow-y: auto;
   overflow-x: hidden;
   div#timetable {
-    /* width: 100%; */
-    min-width: 2000px;
+    min-width: ${({ theme }) => theme.timeline}px;
     height: 100%;
     display: grid;
+    /* padding-right: 90px; */
     position: relative;
-    background-color: ${({ theme }) => theme.bg_middle};
+    /* background-color: ${({ theme }) => theme.bg_middle}; */
     grid-template-rows: 60px 1fr;
-    /* grid-template-columns: 3fr; */
     div#timefield {
       grid-row: 2;
       display: grid;
@@ -30,20 +29,6 @@ const IndexMainStyle = styled.section`
     & .will-change {
       will-change: transform;
     }
-    /* p {
-      &:nth-of-type(1) {
-        grid-column: 1 / 2;
-        border-left: 1px solid grey;
-      }
-      &:nth-of-type(2) {
-        grid-column: 2 / 3;
-        border-left: 1px solid grey;
-      }
-      &:nth-of-type(3) {
-        grid-column: 3 / 4;
-        border-left: 1px solid grey;
-      }
-    } */
   }
 `;
 
@@ -110,9 +95,6 @@ export const IndexMainContent: FC = () => {
         onMouseDown={mouseDown}>
         <Timeline />
         <div id="timefield">Timetable</div>
-        {/* <p>1 block</p>
-        <p>2 block</p>
-        <p>3 block</p> */}
       </div>
     </IndexMainStyle>
   );

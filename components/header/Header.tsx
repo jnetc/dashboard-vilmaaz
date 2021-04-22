@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 
 import { DayOfWeek } from './DayOfWeek';
@@ -5,11 +6,11 @@ import { Logout } from './Logout';
 
 const HeaderStyle = styled.header`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: max-content 1fr;
   align-items: center;
 `;
 
-const Header = () => {
+const Header: FC = () => {
   return (
     <HeaderStyle>
       <DayOfWeek />

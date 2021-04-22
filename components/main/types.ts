@@ -1,8 +1,14 @@
-import React, { MouseEvent } from 'react';
+import { MouseEvent, Dispatch, SetStateAction } from 'react';
 
-// export type Props = {
-//   children: ReactNode;
-// };
+export type Time = { time: string };
+
+export type Position = { pos: number };
+
+export type TimeArr = Array<string>;
+
+export type TimeLine = Array<Time & Position>;
+
+export type TimelinePointsType = { data: Time & Position };
 
 export type Event = {
   ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent;
@@ -12,11 +18,13 @@ export type MouseMoveEvents = {
   child: HTMLDivElement | null;
   parent?: HTMLDivElement | null;
   startMove?: boolean;
-  setStartMove?: React.Dispatch<React.SetStateAction<boolean>>;
+  setStartMove?: Dispatch<SetStateAction<boolean>>;
   maxPositionElement?: number;
-  setMaxPositionElement?: React.Dispatch<React.SetStateAction<number>>;
+  setMaxPositionElement?: Dispatch<SetStateAction<number>>;
   currentPositionElement?: number;
-  setCurrentPositionElement?: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPositionElement?: Dispatch<SetStateAction<number>>;
   mouseDownCursorPos?: number;
-  setMouseDownCursorPos?: React.Dispatch<React.SetStateAction<number>>;
+  setMouseDownCursorPos?: Dispatch<SetStateAction<number>>;
 } & Event;
+
+export const foo = <T extends MouseMoveEvents>(arg: T) => arg;

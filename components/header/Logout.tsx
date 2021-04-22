@@ -1,14 +1,16 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 import { Button } from '../buttons/Button';
 
 const LogoutStyle = styled.div`
+  grid-column: 2;
   justify-self: flex-end;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding-right: 30px;
   row-gap: 5px;
-  column-gap: 10px;
+  column-gap: 20px;
   p {
     grid-column: 1;
     grid-row: 1;
@@ -28,7 +30,7 @@ const LogoutStyle = styled.div`
   }
 `;
 
-export const Logout = () => {
+export const Logout: FC = () => {
   return (
     <LogoutStyle>
       <p>Tervetuloa takaisin</p>

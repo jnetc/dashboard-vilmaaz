@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -61,7 +62,7 @@ export const navigation: Array<NavLink> = [
 ];
 
 // COMPONENT
-const Navigation = () => {
+const Navigation: FC = () => {
   const links = navigation.map(link => {
     link.active = false;
     // Init sublink - /link/sublink

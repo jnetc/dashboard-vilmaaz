@@ -1,4 +1,5 @@
 import { MouseEvent, Dispatch, SetStateAction } from 'react';
+// import { MouseMoveEvents, foo } from '@Main/types';
 
 // Helper function
 function getTransformStylePosition(el: HTMLDivElement) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 // Types
 import { ButtonStyleType, Props } from './types';
@@ -20,7 +20,7 @@ const ButtonStyle = styled.button<ButtonStyleType>`
   ${props => handleThemeSwitcher(props.colorTheme, props.isFill, props.theme)}
 `;
 
-export const Button = ({ children, isFill, colorTheme }: Props) => {
+export const Button: FC<Props> = ({ children, isFill, colorTheme }) => {
   return (
     <ButtonStyle isFill={isFill} colorTheme={colorTheme}>
       {children}

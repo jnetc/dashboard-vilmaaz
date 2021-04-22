@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Animation (flash effect)
@@ -25,9 +25,9 @@ const CountStyle = styled.div`
   background-color: ${props => props.theme.primary};
 
   & .counter {
-    position: absolute;
-    top: 10px;
-    letter-spacing: 0.1px;
+    /* position: absolute;
+    top: 10px; */
+    letter-spacing: 0px;
   }
 
   &.notice {
@@ -36,7 +36,7 @@ const CountStyle = styled.div`
   }
 `;
 
-export const Counter = () => {
+export const Counter: FC = () => {
   const [count, setCount] = useState<number>(80);
   const element = useRef<HTMLDivElement | null>(null);
 

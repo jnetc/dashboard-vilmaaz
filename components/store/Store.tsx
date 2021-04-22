@@ -138,6 +138,60 @@ const context: ContextProps = {
         },
       ],
     },
+    {
+      id: '4a5s45d2as1d45rhb',
+      name: 'Katja-Milla',
+      timetable: [
+        {
+          id: 'sdf54we68w5f4s5d8ftrb',
+          lesson: 'Литература',
+          time: { start: '10:15', end: '11:00' },
+          duration: 45,
+        },
+        {
+          id: 'sdf54we68w5f475d4fpb6',
+          lesson: 'Домоводство',
+          time: { start: '11:00', end: '11:45' },
+          duration: 45,
+        },
+        {
+          id: 'sdf54we68w5f4s5d4fq6v',
+          lesson: 'Русский язык',
+          time: { start: '11:45', end: '12:30' },
+          duration: 45,
+        },
+        {
+          id: 'sdf54w588w5f4s5d4f36f',
+          lesson: 'Русский язык',
+          time: { start: '12:30', end: '13:15' },
+          duration: 45,
+        },
+      ],
+    },
+    {
+      id: '4a5s45d2as1d45nvh',
+      name: 'Temu-Pekka',
+      timetable: [
+        {
+          id: 'sdf54we68w5f4s5d8f77y',
+          lesson: 'Литература',
+          time: { start: '11:15', end: '12:00' },
+          duration: 45,
+        },
+        {
+          id: 'sdf54we68w5f475d4fhj7',
+          lesson: 'Домоводство',
+          time: { start: '12:00', end: '12:45' },
+          duration: 45,
+        },
+        {
+          id: 'sdf54we68w5f4s5d4fkjd',
+          lesson: 'Русский язык',
+          time: { start: '12:45', end: '13:30' },
+          duration: 45,
+        },
+      ],
+    },
   ],
 };
 

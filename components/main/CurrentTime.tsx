@@ -1,11 +1,14 @@
+import { FC } from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-// Types
 
+import { transformCurrentTime } from '@Main/utils/timeline';
 import { TimelinePointsStyle } from './TimelinePoints';
 
 const CurrentTimeStyle = styled(TimelinePointsStyle)`
-  /* position: absolute; */
+  position: absolute;
+  transform: translate3d(${({ pos }) => pos}px, 0, 0);
+  transition: transform 0.3s ease-in-out;
   color: ${({ theme }) => theme.primary};
   border-color: ${({ theme }) => theme.primary};
   box-shadow: 0 5px 5px rgba(${({ theme }) => theme.shadow_primary}, 0.15),
@@ -15,7 +18,7 @@ const CurrentTimeStyle = styled(TimelinePointsStyle)`
   }
 `;
 
-export const CurrentTime = () => {
+export const CurrentTime: FC = () => {
   let [hours, setHours] = useState<number | null>(new Date().getHours());
   let [minutes, setMinutes] = useState<number | null>(new Date().getMinutes());
 
@@ -32,11 +35,18 @@ export const CurrentTime = () => {
     };
   }, [minutes, hours]);
 
-  // console.log(`Time: `, `${hours}:${minutes}`);
+  const activeTime = transformCurrentTime(`11:15`);
+  // const activeTime = transformCurrentTime(`${hours}:${minutes}`);
 
   return (
-    <CurrentTimeStyle id="current-time">{`${hours}:${
-      minutes !== null && minutes > 9 ? minutes : '0' + minutes
-    }`}</CurrentTimeStyle>
+    <>
+      {activeTime.visible && (
+        <CurrentTimeStyle
+          id="current-time"
+          pos={activeTime.position}>{`${hours}:${
+          minutes !== null && minutes > 9 ? minutes : '0' + minutes
+        }`}</CurrentTimeStyle>
+      )}
+    </>
   );
 };

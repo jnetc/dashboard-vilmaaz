@@ -1,6 +1,8 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 
 const DateStyle = styled.div`
+  grid-column: 1;
   display: flex;
   flex-direction: column;
   #day_of_week {
@@ -19,7 +21,7 @@ function DateFormat(options: Intl.DateTimeFormatOptions, date: Date) {
   return new Intl.DateTimeFormat('fi-FI', options).format(date);
 }
 
-export const DayOfWeek = () => {
+export const DayOfWeek: FC = () => {
   var date: Date = new Date();
 
   // Day Of the week

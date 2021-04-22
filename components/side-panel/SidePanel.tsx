@@ -1,9 +1,9 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 const SidePanelStyle = styled.section`
-  grid-column: 2;
-  height: 100%;
+  grid-column: 2 / 3;
+  /* height: 100%; */
   padding: 90px 0 0 30px;
   position: relative;
   border-radius: 30px 0 0 30px;
@@ -13,6 +13,6 @@ const SidePanelStyle = styled.section`
   z-index: 100;
 `;
 
-export const SidePanel: React.FC = ({ children }) => {
+export const SidePanel: FC = ({ children }) => {
   return <SidePanelStyle>{children}</SidePanelStyle>;
 };
