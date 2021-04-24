@@ -1,9 +1,13 @@
 import { FC } from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+// Components
+import { transformCurrentTime, movementTimetable } from '@Main/utils/timeline';
+import { TimelinePointsStyle } from '@Main/TimelinePoints';
 
-import { transformCurrentTime } from '@Main/utils/timeline';
-import { TimelinePointsStyle } from './TimelinePoints';
+import { useStore } from '@Store/Store';
+// Types
+import { TimelineProps } from '@Main/types';
 
 const CurrentTimeStyle = styled(TimelinePointsStyle)`
   position: absolute;
@@ -11,14 +15,15 @@ const CurrentTimeStyle = styled(TimelinePointsStyle)`
   transition: transform 0.3s ease-in-out;
   color: ${({ theme }) => theme.primary};
   border-color: ${({ theme }) => theme.primary};
-  box-shadow: 0 5px 5px rgba(${({ theme }) => theme.shadow_primary}, 0.15),
-    0 20px 20px rgba(${({ theme }) => theme.shadow_primary}, 0.1);
+  box-shadow: 0 5px 5px ${({ theme }) => theme.shadow_primary(0.15)},
+    0 20px 20px ${({ theme }) => theme.shadow_primary(0.1)};
   &::after {
     background-color: ${({ theme }) => theme.grey_middle};
   }
 `;
 
-export const CurrentTime: FC = () => {
+export const CurrentTime: FC<TimelineProps> = ({ width }) => {
+  const { autoMovement, timetableEl } = useStore();
   let [hours, setHours] = useState<number | null>(new Date().getHours());
   let [minutes, setMinutes] = useState<number | null>(new Date().getMinutes());
 
@@ -35,8 +40,9 @@ export const CurrentTime: FC = () => {
     };
   }, [minutes, hours]);
 
-  const activeTime = transformCurrentTime(`11:15`);
-  // const activeTime = transformCurrentTime(`${hours}:${minutes}`);
+  // const activeTime = transformCurrentTime(`11:15`);
+  const activeTime = transformCurrentTime(`${hours}:${minutes}`);
+  movementTimetable(width, timetableEl, activeTime.position, autoMovement);
 
   return (
     <>

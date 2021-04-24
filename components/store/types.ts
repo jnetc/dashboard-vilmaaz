@@ -18,5 +18,9 @@ export type Schedule = {
 
 export type ContextProps = {
   menu: boolean;
+  autoMovement: boolean;
+  setAutoMovement: (el: boolean) => void;
+  timetableEl: HTMLDivElement | null;
+  setTimetableEl: (el: HTMLDivElement | null) => void;
   data: Array<Schedule>;
 };

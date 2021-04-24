@@ -1,12 +1,17 @@
-import { useRef, useState, useEffect, MouseEvent, FC } from 'react';
+import { useRef, useState, useEffect, FC } from 'react';
 import styled from 'styled-components';
-
+// Components
 import {
   mouseDownHandler,
   mouseMoveHandler,
   mouseUpHandler,
 } from '@Main/utils/MouseMovementHandler';
 import Timeline from '@Main/Timeline';
+import Timefield from '@Main/Timefield';
+
+import { useStore } from '@Store/Store';
+// Types
+import { Event } from '@Main/types';
 
 const IndexMainStyle = styled.section`
   grid-column: 1 / 2;
@@ -21,58 +26,75 @@ const IndexMainStyle = styled.section`
     position: relative;
     /* background-color: ${({ theme }) => theme.bg_middle}; */
     grid-template-rows: 60px 1fr;
-    div#timefield {
-      grid-row: 2;
-      display: grid;
-      place-items: center;
-    }
-    & .will-change {
+    &.will-change {
       will-change: transform;
+    }
+    &.animate {
+      transition: transform 0.3s ease-in-out;
     }
   }
 `;
 
 export const IndexMainContent: FC = () => {
-  const [currentPositionElement, setCurrentPositionElement] = useState<number>(
-    0
-  );
+  const { setAutoMovement, setTimetableEl } = useStore();
+  const [currentPosEl, setCurrentPosEl] = useState<number>(0);
   let [mouseDownCursorPos, setMouseDownCursorPos] = useState<number>(0);
   const [maxPositionElement, setMaxPositionElement] = useState<number>(0);
   const [startMove, setStartMove] = useState<boolean>(false);
+  const [widthMainEl, setWidthMainEl] = useState(0);
+  // const [getTimetableEl, setGetTimetableEl] = useState<HTMLDivElement | null>(
+  //   null
+  // );
 
-  const parentEl = useRef<HTMLDivElement | null>(null);
-  const childEl = useRef<HTMLDivElement | null>(null);
+  const mainEl = useRef<HTMLDivElement>(null);
+  const timetableEl = useRef<HTMLDivElement>(null);
 
-  ///// Mouse Handlers
-  /////////
-  const mouseDown = (
-    ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent
-  ) => {
+  useEffect(() => {
+    if (mainEl.current && timetableEl.current) {
+      setWidthMainEl(mainEl.current.offsetWidth);
+      setTimetableEl(timetableEl.current);
+      return () => {
+        setWidthMainEl(NaN);
+        setTimetableEl(null);
+      };
+    }
+  }, [mainEl, timetableEl]);
+
+  const mouseDown = (ev: Event) => {
+    setAutoMovement(false);
+
     mouseDownHandler(
       ev,
       setStartMove,
       setMaxPositionElement,
-      setCurrentPositionElement,
+      setCurrentPosEl,
       setMouseDownCursorPos,
-      parentEl.current,
-      childEl.current
+      mainEl.current,
+      timetableEl.current
     );
   };
 
-  const mouseMove = (
-    ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent
-  ) => {
+  const mouseMove = (ev: Event) => {
     mouseMoveHandler(
       ev,
       startMove,
-      parentEl.current,
-      childEl.current,
+      timetableEl.current,
       mouseDownCursorPos,
-      currentPositionElement
+      currentPosEl
     );
   };
-  const mouseUp = (ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent) => {
-    mouseUpHandler(ev, setStartMove, childEl.current, maxPositionElement);
+
+  const mouseUp = (ev: Event) => {
+    transition();
+    mouseUpHandler(ev, setStartMove, timetableEl.current, maxPositionElement);
+    const timer = setTimeout(() => {
+      timetableEl.current?.classList.remove('animate');
+    }, 3000);
+    clearTimeout(timer);
+  };
+
+  const transition = () => {
+    timetableEl.current?.classList.add('animate');
   };
 
   ///// Init mouse handlers
@@ -80,21 +102,23 @@ export const IndexMainContent: FC = () => {
   useEffect(() => {
     document.onmousemove = mouseMove;
     document.onmouseup = mouseUp;
+    document.ontransitionend = transition;
     return () => {
       document.onmousemove = null;
       document.onmouseup = null;
+      document.ontransitionend = null;
     };
   }, [startMove]);
 
   return (
-    <IndexMainStyle ref={parentEl}>
+    <IndexMainStyle id="main" ref={mainEl}>
       <div
         id="timetable"
-        ref={childEl}
+        ref={timetableEl}
         style={{ transform: `translate3d(0, 0, 0)` }}
         onMouseDown={mouseDown}>
-        <Timeline />
-        <div id="timefield">Timetable</div>
+        <Timeline width={widthMainEl} />
+        <Timefield />
       </div>
     </IndexMainStyle>
   );

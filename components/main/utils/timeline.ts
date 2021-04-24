@@ -1,6 +1,10 @@
 // Types
 import { Schedule } from '@Store/types';
-import { TimeArr, TimeLine } from '../types';
+import { TimeArr, TimeLine, Element } from '../types';
+// import { getTransformStylePosition } from './MouseMovementHandler';
+
+export const getElementMain = (x: Element) => x;
+export const getElementTimetable = (x: Element) => x;
 
 let startTime: number;
 let endTime: number;
@@ -59,8 +63,8 @@ export const transformTimeArr = (time: TimeArr) => {
 // Create new array with time & position on the timeline
 export const timelinePositions = (time: TimeLine) => {
   return time.map(t => {
-    const pos = (t.pos * trackWidth) / totalTime;
-    return { ...t, pos: Number(pos.toFixed(2)) };
+    const pos = Math.round((t.pos * trackWidth) / totalTime);
+    return { ...t, pos };
   });
 };
 
@@ -74,9 +78,6 @@ export const getTimePointPos = (arr: TimeArr, track: number) => {
   trackWidth = track;
 
   const transformToNum = transformTimeArr(arr);
-  console.log(startTime, endTime, totalTime);
-
-  console.log('fun', countingTime(sortedTimePoints[0]));
 
   return timelinePositions(transformToNum);
 };
@@ -85,13 +86,43 @@ export const transformCurrentTime = (time: string) => {
   const stepTime = countingTime(time);
   let visible: boolean = false;
 
-  if (startTime < stepTime && endTime > stepTime) {
+  if (startTime <= stepTime && endTime > stepTime) {
     visible = true;
   }
 
   const timepos = Math.abs(startTime - stepTime);
 
-  const position = (timepos * trackWidth) / totalTime;
+  const position = Math.round((timepos * trackWidth) / totalTime);
 
   return { position, visible };
+};
+
+// 1) get transform style position
+// 2) check / is main center
+// 3) set transform style position
+export const movementTimetable = (
+  main: number,
+  timetable: HTMLDivElement | null,
+  timepos: number,
+  autoMovement: boolean
+) => {
+  if (!timetable) return;
+  if (!autoMovement) return;
+
+  const timetableWidth = timetable.offsetWidth;
+  const startPoint = Math.round(main / 2);
+  const endPoint = timetableWidth - startPoint;
+  const endPointTime = Math.abs(startPoint - endPoint);
+
+  if (startPoint > timepos) {
+    return;
+  }
+
+  if (timepos > endPoint) {
+    timetable.style.transform = `translate3d(-${endPointTime}px, 0, 0)`;
+    return;
+  }
+
+  const position = startPoint - timepos;
+  timetable.style.transform = `translate3d(${position}px, 0, 0)`;
 };

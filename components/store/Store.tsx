@@ -5,6 +5,10 @@ import { ContextProps } from './types';
 // State
 const context: ContextProps = {
   menu: false,
+  autoMovement: true,
+  setAutoMovement: x => x,
+  timetableEl: null,
+  setTimetableEl: x => x,
   data: [
     {
       id: '4a5s45d2as1d45we5',
@@ -204,14 +208,26 @@ export const useStore = () => {
 
 const Store: React.FC = ({ children }) => {
   const [data, setData] = useState(context.data);
-  // const [menu, setMenu] = useState(context.menu);
+  const [autoMovement, setAutoMovement] = useState(context.autoMovement);
+  const [timetableEl, setTimetableEl] = useState(context.timetableEl);
+
+  console.log('store ', autoMovement);
 
   useEffect(() => {
     setData(context.data);
-  }, []);
+    setAutoMovement(context.autoMovement);
+  }, [data]);
   return (
     <React.StrictMode>
-      <Context.Provider value={{ menu: true, data }}>
+      <Context.Provider
+        value={{
+          menu: true,
+          autoMovement,
+          setAutoMovement,
+          timetableEl,
+          setTimetableEl,
+          data,
+        }}>
         {children}
       </Context.Provider>
     </React.StrictMode>

@@ -28,12 +28,12 @@ const LinkStyle = styled.li`
     position: relative;
     border-radius: 20px;
     border: 2px solid transparent;
-    color: ${props => props.theme.grey_light};
-    font-size: ${props => props.theme.fontsize_16};
+    color: ${({ theme }) => theme.grey_light};
+    font-size: ${({ theme }) => theme.fontsize_16};
     transition: all 0.3s ease-in-out;
   }
   svg {
-    stroke: ${props => props.theme.grey_light};
+    stroke: ${({ theme }) => theme.grey_light};
     transition: all 0.3s ease-in-out;
   }
   span.link-name {
@@ -41,13 +41,13 @@ const LinkStyle = styled.li`
   }
   &.active {
     a {
-      border-color: ${props => props.theme.primary};
-      color: ${props => props.theme.white};
-      box-shadow: 0 5px 5px rgba(${props => props.theme.shadow_primary}, 0.15),
-        0 20px 20px rgba(${props => props.theme.shadow_primary}, 0.1);
+      border-color: ${({ theme }) => theme.primary};
+      color: ${({ theme }) => theme.white};
+      box-shadow: 0 5px 5px ${({ theme }) => theme.shadow_primary(0.15)},
+        0 20px 20px ${({ theme }) => theme.shadow_primary(0.1)};
     }
     svg {
-      stroke: ${props => props.theme.white};
+      stroke: ${({ theme }) => theme.white};
     }
   }
 `;

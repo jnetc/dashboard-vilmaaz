@@ -21,8 +21,8 @@ const WrapperStyle = styled.div`
   padding-left: 70px;
   border-radius: 30px 0 0 30px;
   background-color: ${props => props.theme.bg_middle};
-  box-shadow: 0px 40px 40px rgba(${props => props.theme.shadow}, 0.2),
-    0px 10px 10px rgba(${props => props.theme.shadow}, 0.3);
+  box-shadow: 0px 40px 40px ${props => props.theme.shadow(0.2)},
+    0px 10px 10px ${props => props.theme.shadow(0.3)};
 
   nav {
     grid-column: 1 / 2;

@@ -3,8 +3,8 @@ import styled, { keyframes } from 'styled-components';
 
 // Animation (flash effect)
 const impulse = (color: string) => keyframes`
-  0% {box-shadow: 0 0 0 0px rgba(${color}, 1)}
-  100%{box-shadow: 0 0 0 10px rgba(${color}, 0)}
+  0% {box-shadow: 0 0 0 0px hsla(${color}, 1)}
+  100%{box-shadow: 0 0 0 10px hsla(${color}, 0)}
 `;
 
 // Main css
@@ -17,12 +17,12 @@ const CountStyle = styled.div`
   position: absolute;
   top: 15%;
   left: 55%;
-  color: ${props => props.theme.bg_main};
-  font-size: ${props => props.theme.fontsize_14};
+  color: ${({ theme }) => theme.bg_main};
+  font-size: ${({ theme }) => theme.fontsize_14};
   font-weight: bold;
   border-radius: 50%;
-  border: 2px solid ${props => props.theme.bg_main};
-  background-color: ${props => props.theme.primary};
+  border: 2px solid ${({ theme }) => theme.bg_main};
+  background-color: ${({ theme }) => theme.primary};
 
   & .counter {
     /* position: absolute;
@@ -31,8 +31,8 @@ const CountStyle = styled.div`
   }
 
   &.notice {
-    animation: ${props => impulse(props.theme.shadow_primary)} 1s ease-in-out
-      forwards;
+    animation: ${({ theme }) => impulse(theme.shadow_primary(null))} 1s
+      ease-in-out forwards;
   }
 `;
 
@@ -61,6 +61,10 @@ export const Counter: FC = () => {
     setTimeout(() => {
       clearInterval(tick);
     }, 5000);
+
+    return () => {
+      clearInterval(tick);
+    };
   }, [count, element]);
 
   return (

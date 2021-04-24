@@ -1,32 +1,31 @@
-import { MouseEvent, Dispatch, SetStateAction } from 'react';
-// import { MouseMoveEvents, foo } from '@Main/types';
+import { Element, Event, StateBoolean, StateNumber } from '@Main/types';
 
 // Helper function
-function getTransformStylePosition(el: HTMLDivElement) {
-  let posX = Number(el.style.transform.split('px')[0].split('(')[1]);
+export function getTransformStylePosition(el: HTMLDivElement | null) {
+  let posX = Number(el?.style.transform.split('px')[0].split('(')[1]);
   return Math.abs(posX);
 }
 
 ///// Handler mouse move
 /////////
 export const mouseMoveHandler = (
-  ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent,
+  ev: Event,
   startMove: boolean,
-  parent: HTMLDivElement | null,
-  child: HTMLDivElement | null,
+  timetable: Element,
   mouseDownCursorPos: number,
-  currentPositionElement: number
+  currentPosEl: number
 ) => {
   ev.preventDefault();
   ev.stopPropagation();
 
   if (ev.type !== 'mousemove') return;
-  if (!startMove ?? !parent ?? !child) return;
+  if (!startMove ?? !timetable) return;
+  timetable.classList.remove('animate');
 
   let cursorMovement = mouseDownCursorPos - ev.clientX;
 
-  child.style.transform = `translate3d(-${
-    cursorMovement + currentPositionElement
+  timetable.style.transform = `translate3d(-${
+    cursorMovement + currentPosEl
   }px, 0, 0)`;
 };
 
@@ -34,62 +33,63 @@ export const mouseMoveHandler = (
 /////////
 
 export const mouseDownHandler = (
-  ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent,
-  setStartMove: Dispatch<SetStateAction<boolean>>,
-  setMaxPositionElement: Dispatch<SetStateAction<number>>,
-  setCurrentPositionElement: Dispatch<SetStateAction<number>>,
-  setMouseDownCursorPos: Dispatch<SetStateAction<number>>,
-  parent: HTMLDivElement | null,
-  child: HTMLDivElement | null
+  ev: Event,
+  setStartMove: StateBoolean,
+  setMaxPositionElement: StateNumber,
+  setCurrentPosEl: StateNumber,
+  setMouseDownCursorPos: StateNumber,
+  main: Element,
+  timetable: Element
 ) => {
   ev.preventDefault();
-  if (ev.type !== 'mousedown' ?? !child ?? !parent) {
+  if (ev.type !== 'mousedown' ?? !timetable ?? !main) {
     return;
   }
 
-  const invisiblePartOfChildEl = child.offsetWidth - parent.offsetWidth;
+  timetable.classList.remove('animate');
 
-  let transformStyle = getTransformStylePosition(child);
+  const invisiblePartOftimetableEl = timetable.offsetWidth - main.offsetWidth;
 
-  child.classList.add('will-change');
-  child.style.transition = '';
+  let transformStyle = getTransformStylePosition(timetable);
 
-  setMaxPositionElement(invisiblePartOfChildEl);
+  timetable.classList.add('will-change');
+
+  setMaxPositionElement(invisiblePartOftimetableEl);
   setStartMove(true);
-  setCurrentPositionElement(transformStyle);
+  setCurrentPosEl(transformStyle);
   setMouseDownCursorPos(ev.clientX);
 };
 
 ///// Up handler
 /////////
 export const mouseUpHandler = (
-  ev: MouseEvent<HTMLDivElement> | globalThis.MouseEvent,
-  setStartMove: Dispatch<SetStateAction<boolean>>,
-  child: HTMLDivElement | null,
+  ev: Event,
+  setStartMove: StateBoolean,
+  timetable: Element,
   maxPositionElement: number
 ) => {
   ev.preventDefault();
   ev.stopPropagation();
-  if (ev.type !== 'mouseup' ?? !child) {
+
+  if (ev.type !== 'mouseup' ?? !timetable) {
     return;
   }
 
-  let transformStyle = getTransformStylePosition(child);
+  let transformStyle = getTransformStylePosition(timetable);
 
   if (maxPositionElement < transformStyle) {
-    child.style.transform = `translate3d(-${maxPositionElement}px, 0, 0)`;
-    child.style.transition = 'all 0.3s ease-in-out';
+    timetable.style.transform = `translate3d(-${maxPositionElement}px, 0, 0)`;
   }
 
   if (transformStyle < 200) {
-    child.style.transform = `translate3d(0, 0, 0)`;
-    child.style.transition = 'all 0.3s ease-in-out';
+    timetable.style.transform = `translate3d(0, 0, 0)`;
   }
 
-  child.classList.remove('will-change');
+  timetable.classList.remove('will-change');
 
   setStartMove(false);
 
   document.onmousemove = null;
   document.onmousedown = null;
+  document.ontransitionend = null;
 };

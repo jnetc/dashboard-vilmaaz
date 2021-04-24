@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 
 // Types
-import { TimelinePointsType, Position } from './types';
+import { TimelinePointsType, Position } from '@Main/types';
 
 export const TimelinePointsStyle = styled.div<Position>`
   width: 90px;
@@ -11,7 +11,6 @@ export const TimelinePointsStyle = styled.div<Position>`
   justify-content: center;
   align-items: center;
   position: absolute;
-  /* left: ${({ pos }) => pos}px; */
   transform: translate3d(${({ pos }) => pos}px, 0, 0);
   color: ${({ theme }) => theme.grey_light};
   border-radius: 15px;
@@ -19,8 +18,8 @@ export const TimelinePointsStyle = styled.div<Position>`
   border-style: solid;
   border-color: ${({ theme }) => theme.bg_middle};
   background-color: ${({ theme }) => theme.bg_middle_alpha};
-  box-shadow: 0 5px 5px rgba(${({ theme }) => theme.shadow}, 0.15),
-    0 20px 20px rgba(${({ theme }) => theme.shadow}, 0.1);
+  /* box-shadow: 0 10px 10px ${({ theme }) => theme.shadow(0.2)},
+    0 30px 30px ${({ theme }) => theme.shadow(0.15)}; */
   &::after {
     content: '';
     width: 2px;

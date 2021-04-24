@@ -17,10 +17,14 @@ export const handleThemeSwitcher = (
       }
       return `
         border-color: ${props.primary};
-        box-shadow: 0px 20px 20px rgba(${props.shadow_primary}, 0.05), 0px 5px 5px rgba(${props.shadow_primary}, 0.2);
+        box-shadow: 0px 20px 20px ${props.shadow_primary(
+          0.05
+        )}, 0px 5px 5px ${props.shadow_primary(0.2)};
         &:hover {
           border-color: ${props.primary_hover};
-          box-shadow: 0px 20px 20px rgba(${props.shadow_primary_hover}, 0.05), 0px 5px 5px rgba(${props.shadow_primary_hover}, 0.2)
+          box-shadow: 0px 20px 20px ${props.shadow_primary_hover(
+            0.05
+          )}, 0px 5px 5px ${props.shadow_primary_hover(0.2)}
         }`;
 
     case 'default':
@@ -45,10 +49,14 @@ export const handleThemeSwitcher = (
       }
       return `
         border-color: ${props.danger};
-        box-shadow: 0px 20px 20px rgba(${props.shadow_danger}, 0.05), 0px 5px 5px rgba(${props.shadow_danger}, 0.2);
+        box-shadow: 0px 20px 20px ${props.shadow_danger(
+          0.05
+        )}, 0px 5px 5px ${props.shadow_danger(0.2)};
         &:hover {
           border-color: ${props.danger_hover};
-          box-shadow: 0px 20px 20px rgba(${props.shadow_danger_hover}, 0.05), 0px 5px 5px rgba(${props.shadow_danger_hover}, 0.2)
+          box-shadow: 0px 20px 20px ${props.shadow_danger_hover(
+            0.05
+          )}, 0px 5px 5px ${props.shadow_danger_hover(0.2)}
         }`;
 
     default:

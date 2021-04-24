@@ -5,7 +5,7 @@ import { DefaultTheme } from 'styled-components';
 //   val: T
 // }
 
-declare function AlphaChanel<T extends number>(alpha?: T): string;
+declare function AlphaChanel<T extends number | null>(alpha: T): string;
 // declare function ColorHSL<T>(color?: T): string;
 
 // const x: Tye<number> = (val: T): T => {
@@ -45,11 +45,12 @@ declare module 'styled-components' {
     fontsize_16: string;
     fontsize_14: string;
     timeline: string;
-    shadow: string;
-    shadow_primary: string;
-    shadow_primary_hover: string;
-    shadow_danger: string;
-    shadow_danger_hover: string;
+    // shadow: string;
+    shadow: typeof AlphaChanel;
+    shadow_primary: typeof AlphaChanel;
+    shadow_primary_hover: typeof AlphaChanel;
+    shadow_danger: typeof AlphaChanel;
+    shadow_danger_hover: typeof AlphaChanel;
   }
 }
 
@@ -58,12 +59,12 @@ export const theme: DefaultTheme = {
   grey_light: 'hsl(0, 0%, 66%)',
   grey_middle: 'hsl(0, 0%, 32%)',
   grey_dark: 'hsl(240, 10%, 26%)',
-  bg_light: 'hsl(240, 13%, 23%)',
-  bg_regular: 'hsl(240, 17%, 19%)',
+  bg_light: 'hsl(240, 19%, 23%)',
+  bg_regular: 'hsl(240, 19%, 19%)',
   bg_middle: 'hsl(240, 19%, 17%)',
   bg_middle_alpha: 'hsla(240, 19%, 17%, 0.7)',
-  bg_main: 'hsl(240, 23%, 15%)',
-  bg_dark: 'hsl(240, 26%, 13%)',
+  bg_main: 'hsl(240, 19%, 15%)',
+  bg_dark: 'hsl(240, 19%, 13%)',
   primary: 'hsl(127, 28%, 75%)',
   primary_hover: 'hsl(127, 28%, 55%)',
   danger: 'hsl(346, 90%, 75%)',
@@ -84,9 +85,10 @@ export const theme: DefaultTheme = {
   fontsize_16: '1rem',
   fontsize_14: '.8rem',
   timeline: '2000',
-  shadow: '0, 0, 0',
-  shadow_primary: '176, 211, 180',
-  shadow_primary_hover: '142, 168, 149',
-  shadow_danger: '249, 134, 161',
-  shadow_danger_hover: '204, 110, 132',
+  shadow: alpha => `hsla(240, 19%, 5%, ${alpha})`,
+  shadow_primary: alpha =>
+    alpha ? `hsla(127, 28%, 75%, ${alpha})` : '127, 28%, 75%',
+  shadow_primary_hover: alpha => `hsla(127, 28%, 55%, ${alpha})`,
+  shadow_danger: alpha => `hsla(346, 90%, 75%, ${alpha})`,
+  shadow_danger_hover: alpha => `hsla(346, 90%, 55%, ${alpha})`,
 };

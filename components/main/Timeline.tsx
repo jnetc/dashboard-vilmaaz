@@ -3,9 +3,11 @@ import styled from 'styled-components';
 // Global Context
 import { useStore } from '@Store/Store';
 // Components
-import { TimelinePoints } from './TimelinePoints';
-import { CurrentTime } from './CurrentTime';
-import { getStartAndEndTime, getTimePointPos } from './utils/timeline';
+import { TimelinePoints } from '@Main/TimelinePoints';
+import { CurrentTime } from '@Main/CurrentTime';
+import { getStartAndEndTime, getTimePointPos } from '@Main/utils/timeline';
+// Types
+import { TimelineProps } from '@Main/types';
 
 const TimelineStyle = styled.div`
   width: inherit;
@@ -20,7 +22,7 @@ const TimelineStyle = styled.div`
   }
 `;
 
-const Timeline: FC = () => {
+const Timeline: FC<TimelineProps> = ({ width }) => {
   const { data } = useStore();
   const [startEndTimeArr, setStartEndTimeArr] = useState<Array<string>>([]);
   const [trackWidth, setTrackWidth] = useState<number>(0);
@@ -45,7 +47,7 @@ const Timeline: FC = () => {
     <TimelineStyle id="timeline">
       <div id="track" ref={trackEl}>
         {timeline}
-        <CurrentTime />
+        <CurrentTime width={width} />
       </div>
     </TimelineStyle>
   );
