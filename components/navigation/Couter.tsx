@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import { Element } from './types';
+
 // Animation (flash effect)
 const impulse = (color: string) => keyframes`
   0% {box-shadow: 0 0 0 0px hsla(${color}, 1)}
@@ -23,13 +25,7 @@ const CountStyle = styled.div`
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.bg_main};
   background-color: ${({ theme }) => theme.primary};
-
-  & .counter {
-    /* position: absolute;
-    top: 10px; */
-    letter-spacing: 0px;
-  }
-
+  letter-spacing: 0px;
   &.notice {
     animation: ${({ theme }) => impulse(theme.shadow_primary(null))} 1s
       ease-in-out forwards;
@@ -38,7 +34,7 @@ const CountStyle = styled.div`
 
 export const Counter: FC = () => {
   const [count, setCount] = useState<number>(80);
-  const element = useRef<HTMLDivElement | null>(null);
+  const element = useRef<Element>(null);
 
   useEffect(() => {
     if (count >= 99) {
@@ -67,12 +63,5 @@ export const Counter: FC = () => {
     };
   }, [count, element]);
 
-  return (
-    <CountStyle ref={element}>
-      <div className="counter">
-        {/* {count === 99 && '<'} */}
-        {count}
-      </div>
-    </CountStyle>
-  );
+  return <CountStyle ref={element}>{count}</CountStyle>;
 };

@@ -5,12 +5,13 @@ const DateStyle = styled.div`
   grid-column: 1;
   display: flex;
   flex-direction: column;
+  text-align: right;
   #day_of_week {
-    font-size: ${props => props.theme.fontsize_36};
-    font-weight: 300;
+    font-size: ${props => props.theme.fontsize_16};
+    font-weight: 400;
   }
   #current_date {
-    font-size: ${props => props.theme.fontsize_16};
+    font-size: ${props => props.theme.fontsize_14};
     color: ${props => props.theme.grey_light};
     padding-top: 5px;
   }

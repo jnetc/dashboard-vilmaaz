@@ -13,6 +13,10 @@ export type Timetable = {
 export type Schedule = {
   id: string;
   name: string;
+  primaryColor: string;
+  secondaryColor: string;
+  avatar: string;
+  order: number;
   timetable: Array<Timetable>;
 };
 

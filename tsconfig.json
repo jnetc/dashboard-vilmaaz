@@ -21,10 +21,10 @@
     "paths": {
       "@styles/*": ["./styles/*"],
       "@Navigation": ["./components/navigation/Nav"],
-      "@Header": ["./components/header/Header"],
-      "@SidePanel/*": ["./components/side-panel/*"],
+      "@Aside/*": ["./components/aside/*"],
       "@Main/*": ["./components/main/*"],
-      "@Store/*": ["./components/store/*"]
+      "@Store/*": ["./components/store/*"],
+      "@Buttons/*": ["./components/buttons/*"]
     }
   },
   "exclude": ["node_modules"],

@@ -6,6 +6,7 @@ import { DefaultTheme } from 'styled-components';
 // }
 
 declare function AlphaChanel<T extends number | null>(alpha: T): string;
+declare function LessonColor(color: string): string;
 // declare function ColorHSL<T>(color?: T): string;
 
 // const x: Tye<number> = (val: T): T => {
@@ -51,6 +52,7 @@ declare module 'styled-components' {
     shadow_primary_hover: typeof AlphaChanel;
     shadow_danger: typeof AlphaChanel;
     shadow_danger_hover: typeof AlphaChanel;
+    lessonColor: typeof LessonColor;
   }
 }
 
@@ -59,26 +61,26 @@ export const theme: DefaultTheme = {
   grey_light: 'hsl(0, 0%, 66%)',
   grey_middle: 'hsl(0, 0%, 32%)',
   grey_dark: 'hsl(240, 10%, 26%)',
-  bg_light: 'hsl(240, 19%, 23%)',
-  bg_regular: 'hsl(240, 19%, 19%)',
-  bg_middle: 'hsl(240, 19%, 17%)',
-  bg_middle_alpha: 'hsla(240, 19%, 17%, 0.7)',
-  bg_main: 'hsl(240, 19%, 15%)',
-  bg_dark: 'hsl(240, 19%, 13%)',
+  bg_light: 'hsl(240, 10%, 23%)',
+  bg_regular: 'hsl(244, 15%, 19%)',
+  bg_middle: 'hsl(244, 16%, 17%)',
+  bg_middle_alpha: 'hsla(244, 16%, 17%, 0.7)',
+  bg_main: 'hsl(244, 20%, 15%)',
+  bg_dark: 'hsl(244, 23%, 13%)',
   primary: 'hsl(127, 28%, 75%)',
   primary_hover: 'hsl(127, 28%, 55%)',
   danger: 'hsl(346, 90%, 75%)',
   danger_hover: 'hsl(346, 90%, 55%)',
-  bringpink: 'hsl(346, 60%, 75%)',
-  bringpinkdark: 'hsl(346, 60%, 40%)',
-  polishedpine: 'hsl(157, 60%, 75%)',
-  polishedpinedark: 'hsl(157, 60%, 40%)',
-  greenbluecayola: 'hsl(207, 60%, 75%)',
-  greenbluecayoladark: 'hsl(207, 60%, 40%)',
-  oldrose: 'hsl(8, 60%, 75%)',
-  oldrosedark: 'hsl(8, 60%, 40%)',
-  orhid: 'hsl(307, 60%, 75%)',
-  orhiddark: 'hsl(307, 60%, 40%)',
+  bringpink: 'hsl(346, 90%, 75%)',
+  bringpinkdark: 'hsl(346, 50%, 30%)',
+  polishedpine: 'hsl(157, 25%, 60%)',
+  polishedpinedark: 'hsl(157, 5%, 30%)',
+  greenbluecayola: 'hsl(207, 55%, 65%)',
+  greenbluecayoladark: 'hsl(207, 35%, 25%)',
+  oldrose: 'hsl(8, 40%, 70%)',
+  oldrosedark: 'hsl(8, 20%, 30%)',
+  orhid: 'hsl(307, 60%, 60%)',
+  orhiddark: 'hsl(307, 40%, 30%)',
   fontsize_36: '2rem',
   fontsize_24: '1.6rem',
   fontsize_18: '1.3rem',
@@ -91,4 +93,5 @@ export const theme: DefaultTheme = {
   shadow_primary_hover: alpha => `hsla(127, 28%, 55%, ${alpha})`,
   shadow_danger: alpha => `hsla(346, 90%, 75%, ${alpha})`,
   shadow_danger_hover: alpha => `hsla(346, 90%, 55%, ${alpha})`,
+  lessonColor: color => color,
 };

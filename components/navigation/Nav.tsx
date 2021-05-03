@@ -5,15 +5,18 @@ import styled from 'styled-components';
 import { NavLink } from './types';
 
 import AltLink from './Link';
-import { Logo, MinLogo } from '../icons/Logos';
+import { Logo } from '../icons/Logos';
 
 // STYLE COMPONENT
 const NavigationStyle = styled.nav`
+  width: 220px;
+  height: 100%;
   display: grid;
   grid-template-rows: 120px 1fr;
   overflow-y: auto;
   justify-content: center;
-  padding: 36px 0;
+  padding: 20px 0 36px;
+  position: fixed;
   svg.logo {
     justify-self: center;
     align-items: flex-start;
@@ -63,7 +66,7 @@ export const navigation: Array<NavLink> = [
 
 // COMPONENT
 const Navigation: FC = () => {
-  const links = navigation.map(link => {
+  const links = navigation.map((link, idx) => {
     link.active = false;
     // Init sublink - /link/sublink
     const sublink = useRouter().pathname.split('/')[1];
@@ -72,7 +75,7 @@ const Navigation: FC = () => {
       link.active = true;
     }
 
-    return <AltLink key={link.path} link={link} />;
+    return <AltLink key={link.path} link={link} index={idx} />;
   });
 
   return (

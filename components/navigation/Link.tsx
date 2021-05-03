@@ -10,14 +10,14 @@ import {
   Teachers,
   Notifications,
   Settings,
-} from '../icons/Icons48px';
+} from '../icons/Navigation48px';
 import { Counter } from './Couter';
 
 // STYLE COMPONENT
 const LinkStyle = styled.li`
-  margin-bottom: 30px;
-  width: 120px;
-  height: 120px;
+  margin-bottom: 1.9rem;
+  width: 7.5rem;
+  height: 7.5rem;
   a {
     width: inherit;
     height: inherit;
@@ -39,6 +39,15 @@ const LinkStyle = styled.li`
   span.link-name {
     margin-top: 10px;
   }
+  &:hover,
+  &:focus {
+    a {
+      color: ${({ theme }) => theme.white};
+    }
+    svg {
+      stroke: ${({ theme }) => theme.white};
+    }
+  }
   &.active {
     a {
       border-color: ${({ theme }) => theme.primary};
@@ -52,34 +61,33 @@ const LinkStyle = styled.li`
   }
 `;
 
-// TYPE
-export const UrlComponent: FC<Props> = props => {
-  return (
-    <LinkStyle className={`${props.url.active && 'active'}`}>
-      <Link href={props.url.href}>
-        <a>
-          {props.url.counter && <Counter />}
-          {props.icon}
-          <span className="link-name">{props.url.path}</span>
-        </a>
-      </Link>
-    </LinkStyle>
-  );
-};
+const UrlComponent: FC<Props> = props => (
+  <LinkStyle
+    className={`${props.url.active && 'active'}`}
+    tabIndex={props.index + 1}>
+    <Link href={props.url.href}>
+      <a>
+        {props.url.counter && <Counter />}
+        {props.icon}
+        <span className="link-name">{props.url.path}</span>
+      </a>
+    </Link>
+  </LinkStyle>
+);
 
 // COMPONENT
-const AltLink = ({ link }: { link: NavLink }) => {
+const AltLink = ({ link, index }: { link: NavLink; index: number }) => {
   switch (link.href) {
     case '/schedule' || '/schedule/[user]':
-      return <UrlComponent icon={<Schedule />} url={link} />;
+      return <UrlComponent icon={<Schedule />} url={link} index={index} />;
     case '/teachers':
-      return <UrlComponent icon={<Teachers />} url={link} />;
+      return <UrlComponent icon={<Teachers />} url={link} index={index} />;
     case '/notifications':
-      return <UrlComponent icon={<Notifications />} url={link} />;
+      return <UrlComponent icon={<Notifications />} url={link} index={index} />;
     case '/settings':
-      return <UrlComponent icon={<Settings />} url={link} />;
+      return <UrlComponent icon={<Settings />} url={link} index={index} />;
     default:
-      return <UrlComponent icon={<Lessons />} url={link} />;
+      return <UrlComponent icon={<Lessons />} url={link} index={index} />;
   }
 };
 

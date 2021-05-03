@@ -3,23 +3,31 @@
   --grey_light: hsl(0, 0%, 66%);
   --grey_middle: hsl(0, 0%, 32%);
   --grey_dark: hsl(240, 10%, 26%);
-  --bg_light: hsl(240, 13%, 23%);
-  --bg_regular: hsl(240, 17%, 19%);
-  --bg_middle: hsl(240, 19%, 17%);
-  --bg_main: hsl(240, 24%, 15%);
-  --bg_dark: hsl(240, 26%, 13%);
+  --bg_light: hsl(240, 10%, 23%);
+  --bg_regular: hsl(240, 15%, 19%);
+  --bg_middle: hsl(240, 16%, 17%);
+  --bg_main: hsl(240, 20%, 15%);
+  --bg_dark: hsl(240, 23%, 13%);
   --primary: hsl(127, 28%, 75%);
   --primary_hover: hsl(127, 28%, 55%);
-  --danger: hsl(346, 91%, 75%);
-  --danger_hover: hsl(346, 48%, 62%);
-  --bringpink: hsl(346, 60%, 75%);
-  --bringpinkdark: hsl(346, 60%, 40%);
-  --polishedpine: hsl(157, 60%, 75%);
-  --polishedpinedark: hsl(157, 60%, 40%);
-  --greenbluecayola: hsl(207, 60%, 75%);
-  --greenbluecayoladark: hsl(207, 60%, 40%);
-  --oldrose: hsl(8, 60%, 75%);
-  --oldrosedark: hsl(8, 60%, 40%);
-  --orhid: hsl(307, 60%, 75%);
-  --orhiddark: hsl(307, 60%, 40%);
+  --danger: hsl(346, 90%, 75%);
+  --danger_hover: hsl(346, 90%, 55%);
+
+  --oldrose: hsl(8, 40%, 70%);
+  --oldrosedark: hsl(8, 20%, 30%);
+  --polishedpine: hsl(157, 10%, 60%);
+  --polishedpinedark: hsl(157, 5%, 30%);
+  --bringpink: hsl(346, 75%, 75%);
+  --bringpinkdark: hsl(346, 50%, 30%);
+  --orhid: hsl(307, 40%, 60%);
+  --orhiddark: hsl(307, 40%, 30%);
+  --greenbluecayola: hsl(207, 40%, 65%);
+  --greenbluecayoladark: hsl(207, 35%, 25%);
+
+  --alpha-02: 0.2;
+  --alpha-015: 0.15;
+  --shadow: '240, 19%, 5%';
+  /* --shadow: hsla(var(--hsl) / var(--alpha)); */
 }
+
+/* @import url('./lesson.css'); */
