@@ -14,7 +14,7 @@ import Timefield from '@Main/lessons/Timefield';
 
 import { useStore } from '@Store/Store';
 // Types
-import { Event, Element, Div } from '@Main/lessons/types';
+import { Event, Element, Div } from '@types';
 
 const TimetableStyle = styled.div`
   min-width: ${({ theme }) => theme.timeline}px;

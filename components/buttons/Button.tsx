@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 // Types
-import { ButtonStyleType, Props } from './types';
+import { ButtonStyleType, ButtonProps } from '@types';
 
 import { handleThemeSwitcher } from './ColorTheme';
 
@@ -20,7 +20,7 @@ const ButtonStyle = styled.button<ButtonStyleType>`
   ${props => handleThemeSwitcher(props.colorTheme, props.isFill, props.theme)}
 `;
 
-export const Button: FC<Props> = ({ children, isFill, colorTheme }) => {
+export const Button: FC<ButtonProps> = ({ children, isFill, colorTheme }) => {
   return (
     <ButtonStyle isFill={isFill} colorTheme={colorTheme}>
       {children}

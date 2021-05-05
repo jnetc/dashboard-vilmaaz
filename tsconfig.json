@@ -24,7 +24,8 @@
       "@Aside/*": ["./components/aside/*"],
       "@Main/*": ["./components/main/*"],
       "@Store/*": ["./components/store/*"],
-      "@Buttons/*": ["./components/buttons/*"]
+      "@Buttons/*": ["./components/buttons/*"],
+      "@types": ["./types/types"]
     }
   },
   "exclude": ["node_modules"],

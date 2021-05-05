@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { NavLink } from './types';
+import { NavLink } from '@types';
 
 import AltLink from './Link';
 import { Logo } from '../icons/Logos';

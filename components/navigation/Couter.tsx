@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, FC } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import { Element } from './types';
+import { Element } from '@types';
 
 // Animation (flash effect)
 const impulse = (color: string) => keyframes`

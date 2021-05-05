@@ -12,8 +12,8 @@ export const Time = () => (
     <path
       d="M11.5637 5.36092V12.7069L15.5077 15.7176M23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12Z"
       stroke="#F7F7F9"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -23,9 +23,9 @@ export const Done = () => (
     <path
       d="M7.6626 11.2678L11.9616 15.4186L22.8326 3.16396M15.13 1.45749C12.9463 0.812483 10.6163 0.860995 8.46144 1.59633C4.09402 3.08665 1.05981 7.28426 1.01443 11.8987C0.969055 16.5132 3.92013 20.7697 8.2574 22.3456C12.5947 23.9215 17.5898 22.5523 20.5172 18.985C21.9616 17.2248 22.8243 15.0599 22.9861 12.7887"
       stroke="#F7F7F9"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

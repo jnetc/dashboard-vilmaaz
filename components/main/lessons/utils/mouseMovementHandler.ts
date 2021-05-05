@@ -1,4 +1,4 @@
-import { Element, Event, StateNumber } from '@Main/lessons/types';
+import { Element, Event, StateNumber } from '@types';
 
 // Helper function
 export function getTransformStylePosition(el: Element) {

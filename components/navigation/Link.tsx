@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 // Types
-import { NavLink, Props } from './types';
+import { NavLink, NavigationProps } from '@types';
 
 import {
   Lessons,
@@ -61,7 +61,7 @@ const LinkStyle = styled.li`
   }
 `;
 
-const UrlComponent: FC<Props> = props => (
+const UrlComponent: FC<NavigationProps> = props => (
   <LinkStyle
     className={`${props.url.active && 'active'}`}
     tabIndex={props.index + 1}>

@@ -5,56 +5,53 @@ import { useStore } from '@Store/Store';
 // Components
 import { TimelinePoints } from '@Main/lessons/TimelinePoints';
 import { TimelineStep } from '@Main/lessons/TimelineStep';
-import {
-  transformDataForTimeline,
-  getTimePointPos,
-} from '@Main/lessons/utils/timeline';
+import { getTimePointPos } from '@Main/lessons/utils/timeline';
 // Types
-import {
-  TimelineWidth,
-  TimelinePointsHeight,
-  Element,
-  ArrayString,
-} from '@Main/lessons/types';
+import { Element, Width, Lines } from '@types';
 
 const TimelineStyle = styled.div`
   width: 100%;
   grid-row: 1;
-  user-select: none;
-  pointer-events: none;
+  /* user-select: none;
+  pointer-events: none; */
+  cursor: default;
   padding: 0 160px 0 2px;
   div#track {
     position: relative;
   }
 `;
 
-const Timeline: FC<TimelineWidth & TimelinePointsHeight> = ({
-  width,
-  lines,
-}) => {
-  const { data } = useStore();
-  const [startEndTime, setStartEndTime] = useState<ArrayString>([]);
-  const [trackWidth, setTrackWidth] = useState<number>(0);
+const Timeline: FC<Width & Lines> = ({ width, lines }) => {
+  const { timepoints, setTrackWidth, trackWidth, timeline } = useStore();
+  const [startEndTime, setStartEndTime] = useState<Array<string>>([]);
   const trackEl = useRef<Element>(null);
 
   useEffect(() => {
-    const timePoints = transformDataForTimeline(data);
-    setStartEndTime(timePoints);
+    setStartEndTime(timepoints);
     if (trackEl.current) {
       setTrackWidth(trackEl.current.offsetWidth);
     }
   }, [trackEl]);
 
-  const timePointPositions = getTimePointPos(startEndTime, trackWidth);
+  const timePointPositions = getTimePointPos(
+    startEndTime,
+    trackWidth,
+    timeline
+  );
 
-  const timeline = timePointPositions.map((time, idx) => {
-    return <TimelinePoints key={idx} data={time} lines={lines} />;
-  });
+  const points = timePointPositions
+    .sort((a, b) => {
+      if (a.position < b.position) return -1;
+      return 1;
+    })
+    .map((point, idx) => {
+      return <TimelinePoints key={idx} data={point} lines={lines} />;
+    });
 
   return (
     <TimelineStyle id="timeline">
       <div id="track" ref={trackEl}>
-        {timeline}
+        {points}
         <TimelineStep width={width} lines={lines} />
       </div>
     </TimelineStyle>

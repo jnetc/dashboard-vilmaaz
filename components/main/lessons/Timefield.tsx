@@ -1,16 +1,13 @@
-import { FC, useEffect, useState, useRef } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Lesson from '@Main/lessons/Lesson';
 
 import { useStore } from '@Store/Store';
 
-import {
-  transformDataForTimeline,
-  getLessonData,
-} from '@Main/lessons/utils/timeline';
+import { getLessonStartEndPoint } from '@Main/lessons/utils/timeline';
 // Types
-import { LessonsArray, Element } from '@Main/lessons/types';
+import { LessonsType } from '@types';
 
 const TimefieldStyle = styled.div`
   grid-row: 2;
@@ -23,16 +20,14 @@ const TimefieldStyle = styled.div`
 `;
 
 const Timefield: FC = () => {
-  const { data } = useStore();
-  const [startEndLesson, setStartEndLesson] = useState<LessonsArray>([]);
-  const fieldEl = useRef<Element>(null);
+  const { content } = useStore();
+  const [startEndLesson, setStartEndLesson] = useState<Array<LessonsType>>([]);
 
   useEffect(() => {
-    const startEnd = transformDataForTimeline(data, false);
-    setStartEndLesson(startEnd);
+    setStartEndLesson(content);
   }, []);
 
-  const lessonData = getLessonData(startEndLesson);
+  const lessonData = getLessonStartEndPoint(startEndLesson);
 
   const lessons = lessonData.map(data => {
     return <Lesson key={data.id} data={data} />;
@@ -40,9 +35,7 @@ const Timefield: FC = () => {
 
   return (
     <TimefieldStyle id="timefield">
-      <div id="field" ref={fieldEl}>
-        {lessons}
-      </div>
+      <div id="field">{lessons}</div>
     </TimefieldStyle>
   );
 };
