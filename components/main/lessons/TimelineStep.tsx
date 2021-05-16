@@ -7,7 +7,7 @@ import { movementTimeAndTimetable } from '@Main/lessons/utils/timeline';
 import { useRealtime } from '@Main/lessons/hook/useRealtime';
 import { TimelinePointsStyle } from '@Main/lessons/TimelinePoints';
 
-import { useStore } from '@Store/Store';
+import { useGlobalStore } from '@Store/GlobalStore';
 // Types
 import { Lines, Width } from '@types';
 
@@ -15,19 +15,19 @@ const TimelineStepStyle = styled(TimelinePointsStyle)`
   position: absolute;
   transform: translate3d(${({ position }) => position}px, 0, 0);
   transition: transform 0.3s ease-in-out;
-  color: ${({ theme }) => theme.primary};
-  border-color: ${({ theme }) => theme.primary};
-  box-shadow: 0 5px 5px ${({ theme }) => theme.shadow_primary(0.15)},
-    0 20px 20px ${({ theme }) => theme.shadow_primary(0.1)};
-  z-index: 3;
+  color: ${({ theme }) => theme.primary()};
+  border-color: ${({ theme }) => theme.primary()};
+  box-shadow: 0 5px 5px ${({ theme }) => theme.primary(0.15)},
+    0 20px 20px ${({ theme }) => theme.primary(0.1)};
+  z-index: 100;
   pointer-events: none;
   &::after {
-    background-color: ${({ theme }) => theme.shadow_primary(0.5)};
+    background-color: ${({ theme }) => theme.primary(0.5)};
   }
 `;
 
 export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
-  const { autoMovement, timetableEl } = useStore();
+  const { timetableEl, autoMovement } = useGlobalStore();
   const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
           id="current-time"
           position={realtime.position}
           lines={lines}>
-          {realtime.time}
+          {realtime.timeString}
         </TimelineStepStyle>
       )}
     </>

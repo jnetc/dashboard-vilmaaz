@@ -1,41 +1,40 @@
 import { FC } from 'react';
+import { Done, Wait } from '../../icons/Lesson';
 import styled from 'styled-components';
-import { Done, Time, Wait } from '../../icons/Lesson';
 
-const LessonStatusIconStyle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.bg_light};
-  box-shadow: 0 10px 10px ${({ theme }) => theme.shadow(0.2)},
-    0 30px 30px ${({ theme }) => theme.shadow(0.15)};
+import { AvatarAndIconCommonStyle } from '@Main/lessons/LessonAvatarProgress';
+const LessonStatusIconStyle = styled(AvatarAndIconCommonStyle)`
+  font-size: ${({ theme }) => theme.fontsize_16};
+  right: 7px;
+  box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
+    0px 10px 10px ${props => props.theme.bg_dark(0.3)};
+  z-index: 3;
 `;
 
-export const LessonStatusIcon: FC<{ status: string }> = ({ status }) => {
+export const LessonStatusIcon: FC<{
+  status: string;
+  timer: number | undefined;
+}> = ({ status, timer }) => {
   switch (status) {
     case 'done':
       return (
-        <LessonStatusIconStyle className="progress-icon">
+        <LessonStatusIconStyle>
           <Done />
         </LessonStatusIconStyle>
       );
     case 'time':
-      return (
-        <LessonStatusIconStyle className="progress-icon">
-          <Time />
-        </LessonStatusIconStyle>
+      return timer ? (
+        <LessonStatusIconStyle>{timer}m</LessonStatusIconStyle>
+      ) : (
+        <></>
       );
     case 'wait':
       return (
-        <LessonStatusIconStyle className="progress-icon">
+        <LessonStatusIconStyle>
           <Wait />
         </LessonStatusIconStyle>
       );
     default:
-      return (
-        <LessonStatusIconStyle className="progress-icon">
-          !
-        </LessonStatusIconStyle>
-      );
+      return <LessonStatusIconStyle>!</LessonStatusIconStyle>;
   }
 };

@@ -3,25 +3,28 @@ import styled from 'styled-components';
 // Components
 import { MainContent } from '@Main/Main';
 import {
-  mouseDownHandler,
-  mouseMoveHandler,
-  mouseUpHandler,
-  mouseLeaveHandler,
   transition,
-} from '@Main/lessons/utils/mouseMovementHandler';
+  getTransformStylePosition,
+} from '@Main/lessons/utils/timeline';
 import Timeline from '@Main/lessons/Timeline';
 import Timefield from '@Main/lessons/Timefield';
 
-import { useStore } from '@Store/Store';
+import { useGlobalStore } from '@Store/GlobalStore';
+import { useMainStore } from '@Store/MainStore';
 // Types
 import { Event, Element, Div } from '@types';
 
 const TimetableStyle = styled.div`
-  min-width: ${({ theme }) => theme.timeline}px;
+  width: 100%;
   height: 100%;
   display: grid;
   position: relative;
   grid-template-rows: 60px 1fr;
+  /* padding: 0 160px 0 2px; */
+  padding: 0 120px 0 2px;
+  @media (max-width: 1920px) {
+    width: 1920px;
+  }
   &.will-change {
     will-change: transform;
   }
@@ -29,9 +32,14 @@ const TimetableStyle = styled.div`
     transition: transform 0.3s ease-in-out;
   }
 `;
+const TimetableEmptyStyle = styled.h2`
+  justify-self: center;
+  align-self: center;
+`;
 
 export const Timetable: FC = () => {
-  const { setAutoMovement, setTimetableEl } = useStore();
+  const { setTimetableEl, setAutoMovement } = useGlobalStore();
+  const { content } = useMainStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
   let [mouseDownCursorPos, setMouseDownCursorPos] = useState<number>(0);
@@ -48,13 +56,8 @@ export const Timetable: FC = () => {
       setWidthMainEl(mainEl.current.offsetWidth);
       setTimetableEl(timetableEl.current);
       setTimepointsHeight(timetableEl.current.offsetHeight);
-      return () => {
-        setWidthMainEl(NaN);
-        setTimepointsHeight(NaN);
-        setTimetableEl(null);
-      };
     }
-  }, [mainEl, timetableEl]);
+  }, [timetableEl]);
 
   // Mount component with current position time
   useEffect(() => {
@@ -69,59 +72,88 @@ export const Timetable: FC = () => {
     setAutoMovement(false);
     setStartMove(true);
 
-    mouseDownHandler(
-      ev,
-      setMaxPositionElement,
-      setCurrentPosEl,
-      setMouseDownCursorPos,
-      mainEl.current,
-      timetableEl.current
-    );
+    if (ev.type !== 'mousedown' ?? !timetableEl.current ?? !mainEl.current) {
+      return;
+    }
+
+    timetableEl.current.classList.remove('animate');
+    timetableEl.current.classList.add('will-change');
+
+    const invisiblePartOftimetableEl =
+      timetableEl.current.offsetWidth - mainEl.current.offsetWidth;
+
+    let transformStyle = getTransformStylePosition(timetableEl.current);
+
+    setMaxPositionElement(invisiblePartOftimetableEl);
+    setCurrentPosEl(transformStyle);
+    setMouseDownCursorPos(ev.clientX);
   };
 
   const mouseMove = (ev: Event) => {
-    if (startMove) {
-      mouseMoveHandler(
-        ev,
-        timetableEl.current,
-        mouseDownCursorPos,
-        currentPosEl
-      );
-    }
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (!startMove ?? !timetableEl.current) return;
+
+    timetableEl.current.classList.remove('animate');
+
+    let cursorMovement = mouseDownCursorPos - ev.clientX;
+    timetableEl.current.style.transform = `translate3d(-${
+      cursorMovement + currentPosEl
+    }px, 0, 0)`;
   };
 
   const mouseUp = (ev: Event) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+
     transition(timetableEl.current);
 
-    if (startMove) {
-      mouseUpHandler(ev, timetableEl.current, maxPositionElement);
-      setStartMove(false);
+    if (!startMove ?? !timetableEl.current) return;
+
+    let transformStyle = getTransformStylePosition(timetableEl.current);
+
+    if (maxPositionElement < transformStyle) {
+      timetableEl.current.style.transform = `translate3d(-${maxPositionElement}px, 0, 0)`;
     }
+
+    if (transformStyle < 100) {
+      timetableEl.current.style.transform = `translate3d(0, 0, 0)`;
+    }
+
+    timetableEl.current.classList.remove('will-change');
+    setStartMove(false);
   };
 
   const mouseLeave = (ev: Event) => {
+    ev.preventDefault();
+    ev.stopPropagation();
     transition(timetableEl.current);
 
-    if (startMove) {
-      mouseLeaveHandler(ev, timetableEl.current, maxPositionElement);
-      setStartMove(false);
+    if (!startMove ?? !timetableEl.current) return;
+
+    let transformStyle = getTransformStylePosition(timetableEl.current);
+    if (maxPositionElement < transformStyle) {
+      timetableEl.current.style.transform = `translate3d(-${maxPositionElement}px, 0, 0)`;
     }
+    setStartMove(false);
   };
 
-  return (
+  return content.length > 0 ? (
     <MainContent ref={mainEl}>
       <TimetableStyle
         id="timetable"
         ref={timetableEl}
         style={{ transform: `translate3d(0, 0, 0)` }}
         onMouseDown={mouseDown}
-        onMouseMove={startMove ? ev => mouseMove(ev) : undefined}
-        onMouseUp={startMove ? ev => mouseUp(ev) : undefined}
-        onMouseLeave={startMove ? ev => mouseLeave(ev) : undefined}
+        onMouseMove={mouseMove}
+        onMouseUp={mouseUp}
+        onMouseLeave={mouseLeave}
         onTransitionEnd={() => transition}>
         <Timeline width={widthMainEl} lines={timepoinsHeight} />
         <Timefield />
       </TimetableStyle>
     </MainContent>
+  ) : (
+    <TimetableEmptyStyle>Viikonloppu</TimetableEmptyStyle>
   );
 };

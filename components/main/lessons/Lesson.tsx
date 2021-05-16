@@ -1,15 +1,13 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-
+// Types
 import { LessonDataProps, Position, Distance } from '@types';
 
-import { lessonProgress } from '@Main/lessons/utils/timeline';
-
-import { useRealtime } from '@Main/lessons/hook/useRealtime';
-
-import { LessonStatusIcon } from '@Main/lessons/LessonStatusIcon';
+// Store
+import { useMainStore } from '@Store/MainStore';
+// Components
+import { LessonProgressBar } from '@Main/lessons/LessonProgressBar';
 import { LessonCommonProgress } from '@Main/lessons/LessonCommonProgress';
-import { LessonAvatarProgress } from '@Main/lessons/LessonAvatarProgress';
 
 const LessonStyle = styled.div<Distance & { primary: string } & Position>`
   width: ${({ distance }) => distance}px;
@@ -20,44 +18,13 @@ const LessonStyle = styled.div<Distance & { primary: string } & Position>`
   left: ${({ position }) => position}px;
   border-radius: 35px;
   cursor: pointer;
-  z-index: 4;
-  & .progress {
-    height: 68px;
-    position: relative;
-    padding: 10px;
-    position: relative;
-    border-radius: inherit;
-    background-color: ${({ theme }) => theme.bg_middle};
-    border: 2px solid var(--${({ primary }) => primary});
-    box-shadow: 0 10px 10px ${({ theme }) => theme.shadow(0.2)},
-      0 30px 30px ${({ theme }) => theme.shadow(0.15)};
-    transition: width 0.3s ease-in-out;
-    z-index: 5;
-    & .progress-avatar,
-    & .progress-icon {
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: ${({ theme }) => theme.bg_light};
-      transition: all 0.3s ease-in-out;
-    }
-    & .progress-avatar {
-      left: 7px;
-      object-fit: cover;
-      z-index: 2;
-    }
-    & .progress-icon {
-      right: 7px;
-      z-index: 3;
-    }
-  }
+  z-index: 10;
   &:hover {
+    .progress {
+      border-color: ${({ theme }) => theme.grey_middle()};
+      /* box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
+        0px 10px 10px ${props => props.theme.bg_dark(0.3)}; */
+    }
     > svg {
       stroke: var(--${({ primary }) => primary});
     }
@@ -65,33 +32,25 @@ const LessonStyle = styled.div<Distance & { primary: string } & Position>`
 `;
 
 const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
+  const { setDetailLesson } = useMainStore();
 
   const lengthLessons = data.end - data.start;
 
-  useEffect(() => {
-    let timer = setInterval(() => setMinutes(new Date().getMinutes()), 1000);
-    return () => clearInterval(timer);
-  }, [minutes]);
-
-  const realTime = useRealtime(minutes);
-
-  const { pos, status } = lessonProgress(
-    data.start,
-    lengthLessons,
-    realTime.position
-  );
+  const openDetail = () => {
+    setDetailLesson({
+      open: true,
+      id: data.id,
+    });
+  };
 
   return (
     <LessonStyle
       position={data.start}
       distance={lengthLessons}
       primary={data.primaryColor}
-      className="timefield-lesson">
-      <div className="progress" style={{ width: pos }}>
-        <LessonAvatarProgress avatar={data.avatar} />
-        <LessonStatusIcon status={status} />
-      </div>
+      className="timefield-lesson"
+      onClick={openDetail}>
+      <LessonProgressBar data={data} />
       <LessonCommonProgress
         length={lengthLessons}
         secondary={data.secondaryColor}

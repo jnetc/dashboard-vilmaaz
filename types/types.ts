@@ -1,9 +1,10 @@
-import { MouseEvent, Dispatch, SetStateAction } from 'react';
+import { MouseEvent, Dispatch, SetStateAction, TouchEventHandler } from 'react';
 
 // SIMPLE TYPES
 export type Div = HTMLDivElement;
 export type Element = Div | null;
 export type Event = MouseEvent<Div>;
+export type Touch = TouchEventHandler<Div>;
 export type StateBoolean = Dispatch<SetStateAction<boolean>>;
 export type StateNumber = Dispatch<SetStateAction<number>>;
 export type DispatchTime = Dispatch<SetStateAction<number | null>>;
@@ -23,7 +24,11 @@ export type Lesson = {
   id: string;
   lesson: string;
   time: StartEnd;
-  duration: number;
+};
+
+export type SchoolDay = {
+  day: string;
+  lessons: Array<Lesson>;
 };
 
 export type UserType = {
@@ -34,18 +39,34 @@ export type UserType = {
   avatar: Avatar;
   order: number;
 };
-export type Schedule = {
+
+export type UserDataType = {
   timetable: Array<Lesson>;
 } & UserType;
 
-export type UseContextProps = {
-  menu: boolean;
+export type Schedule = {
+  timetable: Array<SchoolDay>;
+} & UserType;
+
+export type OpenAsideDetailLesson = {
+  open: boolean;
+  id?: string;
+};
+
+export type GlobalStoreProps = {
+  openMenu: boolean;
+  setOpenMenu: (el: boolean) => void;
+  timetableEl: Element;
+  setTimetableEl: (el: Element) => void;
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
-  timetableEl: HTMLDivElement | null;
-  setTimetableEl: (el: HTMLDivElement | null) => void;
-  trackWidth: number;
-  setTrackWidth: (el: number) => void;
+};
+
+export type MainStoreProps = {
+  detailLesson: OpenAsideDetailLesson;
+  setDetailLesson: (data: OpenAsideDetailLesson) => void;
+  timelineWidth: number;
+  setTimelineWidth: (el: number) => void;
   content: Array<LessonsType>;
   timepoints: Array<string>;
   timeline: StaticValues;
@@ -60,7 +81,7 @@ export type StaticValues = {
 export type LessonsType = {
   start: string;
   end: string;
-} & UserType;
+} & UserDataType;
 
 // NAVIGATION
 export type NavLink = {
@@ -114,4 +135,4 @@ export type TimelinePointsType = { data: Time & Position };
 export type LessonDataProps = {
   start: number;
   end: number;
-} & UserType;
+} & UserDataType;

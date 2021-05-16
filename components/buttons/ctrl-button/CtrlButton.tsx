@@ -1,3 +1,4 @@
+import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const CtrlButtonStyle = styled.button`
@@ -5,12 +6,16 @@ const CtrlButtonStyle = styled.button`
   height: 48px;
   border-radius: 50%;
   border: none;
-  background-color: ${({ theme }) => theme.bg_light};
+  background-color: ${({ theme }) => theme.bg_light()};
   cursor: pointer;
 `;
+type Props = {
+  children?: ReactNode;
+  onClick: () => void;
+};
 
-const CtrlButton = () => {
-  return <CtrlButtonStyle></CtrlButtonStyle>;
+const CtrlButton: FC<Props> = props => {
+  return <CtrlButtonStyle onClick={props.onClick}></CtrlButtonStyle>;
 };
 
 export default CtrlButton;

@@ -28,12 +28,12 @@ const LinkStyle = styled.li`
     position: relative;
     border-radius: 20px;
     border: 2px solid transparent;
-    color: ${({ theme }) => theme.grey_light};
+    color: ${({ theme }) => theme.grey_light()};
     font-size: ${({ theme }) => theme.fontsize_16};
     transition: all 0.3s ease-in-out;
   }
   svg {
-    stroke: ${({ theme }) => theme.grey_light};
+    stroke: ${({ theme }) => theme.grey_light()};
     transition: all 0.3s ease-in-out;
   }
   span.link-name {
@@ -42,21 +42,21 @@ const LinkStyle = styled.li`
   &:hover,
   &:focus {
     a {
-      color: ${({ theme }) => theme.white};
+      color: ${({ theme }) => theme.white()};
     }
     svg {
-      stroke: ${({ theme }) => theme.white};
+      stroke: ${({ theme }) => theme.white()};
     }
   }
   &.active {
     a {
-      border-color: ${({ theme }) => theme.primary};
-      color: ${({ theme }) => theme.white};
-      box-shadow: 0 5px 5px ${({ theme }) => theme.shadow_primary(0.15)},
-        0 20px 20px ${({ theme }) => theme.shadow_primary(0.1)};
+      border-color: ${({ theme }) => theme.primary()};
+      color: ${({ theme }) => theme.white()};
+      box-shadow: 0 5px 5px ${({ theme }) => theme.primary(0.15)},
+        0 20px 20px ${({ theme }) => theme.primary(0.1)};
     }
     svg {
-      stroke: ${({ theme }) => theme.white};
+      stroke: ${({ theme }) => theme.white()};
     }
   }
 `;

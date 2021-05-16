@@ -19,16 +19,16 @@ const CountStyle = styled.div`
   position: absolute;
   top: 15%;
   left: 55%;
-  color: ${({ theme }) => theme.bg_main};
+  color: ${({ theme }) => theme.bg_main()};
   font-size: ${({ theme }) => theme.fontsize_14};
   font-weight: bold;
   border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.bg_main};
-  background-color: ${({ theme }) => theme.primary};
+  border: 2px solid ${({ theme }) => theme.bg_main()};
+  background-color: ${({ theme }) => theme.primary()};
   letter-spacing: 0px;
   &.notice {
-    animation: ${({ theme }) => impulse(theme.shadow_primary(null))} 1s
-      ease-in-out forwards;
+    animation: ${({ theme }) => impulse(theme.primary())} 1s ease-in-out
+      forwards;
   }
 `;
 

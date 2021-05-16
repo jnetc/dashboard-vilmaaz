@@ -1,50 +1,37 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { StrictMode, FC, createContext, useContext, useState } from 'react';
 // Types
-import { UseContextProps } from '@types';
-import { transform, staticValues } from '@Store/utils/helperFunc';
-import { fetch } from '@Store/utils/data';
+import { GlobalStoreProps } from '@types';
 
 // State
-const context: UseContextProps = {
-  menu: false,
-  autoMovement: true,
-  setAutoMovement: x => x,
+const state: GlobalStoreProps = {
+  openMenu: true,
+  setOpenMenu: x => x,
   timetableEl: null,
-  setTimetableEl: x => x,
-  trackWidth: 0,
-  setTrackWidth: x => x,
-  content: [],
-  timepoints: [],
-  timeline: {
-    startLessons: 0,
-    endLessons: 0,
-    totalTime: 0,
-  },
+  setTimetableEl: el => el,
+  autoMovement: true,
+  setAutoMovement: el => el,
 };
 
 // let request = null;
 // let objectStore = null;
 
 // Create context
-const Context = createContext<UseContextProps>(context);
+const GlobalContext = createContext(state);
 // Store Hook
-export const useStore = () => {
-  return useContext(Context);
+export const useGlobalStore = () => {
+  return useContext(GlobalContext);
 };
-// console.log(fetch);
 
-const Store: React.FC = ({ children }) => {
-  const [data, setData] = useState(fetch);
-  const [autoMovement, setAutoMovement] = useState(context.autoMovement);
-  const [timetableEl, setTimetableEl] = useState(context.timetableEl);
-  const [trackWidth, setTrackWidth] = useState(context.trackWidth);
-  const [timeline, setTimeline] = useState(context.timeline);
+const GlobalStore: FC = ({ children }) => {
+  const [openMenu, setOpenMenu] = useState(state.openMenu);
+  const [timetableEl, setTimetableEl] = useState(state.timetableEl);
+  const [autoMovement, setAutoMovement] = useState(state.autoMovement);
 
-  // console.log(data);
+  console.log('GlobalStore');
 
-  let content = transform(data, false);
-  let timepoints = transform(data);
-  // console.log('store ', content, timepoints);
+  // useEffect(() => {
+  //   setAutoMovement(context.autoMovement);
+  // }, []);
 
   // let lesson = {
   //   id: 'sdf54we68w5f4s5d4fkjd',
@@ -80,43 +67,24 @@ const Store: React.FC = ({ children }) => {
   //   console.log('success ');
   // };
 
-  useEffect(() => {
-    setData(fetch);
-    setAutoMovement(context.autoMovement);
-    setTimeline(staticValues(timepoints));
-
-    // let xx = indexedDatabase(context.data);
-    // indexedDatabase(lesson);
-    // console.log('useEffect ', xx);
-
-    // console.log('useEffect ', db);
-    // let db = null;
-  }, [data]);
-
-  // console.log(timeline);
-
   return (
-    <React.StrictMode>
-      <Context.Provider
+    <StrictMode>
+      <GlobalContext.Provider
         value={{
-          menu: true,
-          autoMovement,
-          setAutoMovement,
+          openMenu,
+          setOpenMenu,
           timetableEl,
           setTimetableEl,
-          trackWidth,
-          setTrackWidth,
-          content,
-          timepoints,
-          timeline,
+          autoMovement,
+          setAutoMovement,
         }}>
         {children}
-      </Context.Provider>
-    </React.StrictMode>
+      </GlobalContext.Provider>
+    </StrictMode>
   );
 };
 
-export default Store;
+export default GlobalStore;
 
 // const indexedDatabase = (data: Array<Schedule>) => {
 //   let indexDB = null;

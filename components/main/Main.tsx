@@ -2,26 +2,37 @@ import React, { forwardRef, HTMLProps } from 'react';
 import styled from 'styled-components';
 
 const MainStyle = styled.main`
+  width: 100%;
   height: 100%;
-  grid-column: 1 / 2;
-  display: grid;
-  grid-template-columns: 1fr minmax(50px, 350px);
+  /* grid-column: 1 / 2; */
   padding-top: 20px;
   position: relative;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  div#timetable {
-    min-width: ${({ theme }) => theme.timeline}px;
-    height: 100%;
-    display: grid;
-    position: relative;
-    grid-template-rows: 60px 1fr;
-    &.will-change {
-      will-change: transform;
-    }
-    &.animate {
-      transition: transform 0.3s ease-in-out;
-    }
+  overflow: hidden;
+  position: relative;
+  &::after,
+  &::before {
+    content: '';
+    width: 20px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  &::after {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      ${({ theme }) => theme.bg_middle(0.5)} 0%,
+      ${({ theme }) => theme.bg_middle(0)} 100%
+    );
+  }
+  &::before {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      ${({ theme }) => theme.bg_middle()} 0%,
+      ${({ theme }) => theme.bg_middle(0)} 100%
+    );
   }
 `;
 
@@ -29,9 +40,5 @@ export const MainContent = forwardRef<
   HTMLDivElement,
   HTMLProps<HTMLDivElement>
 >((props, ref) => {
-  return (
-    <MainStyle id="main" ref={ref}>
-      {props.children}
-    </MainStyle>
-  );
+  return <MainStyle ref={ref}>{props.children}</MainStyle>;
 });

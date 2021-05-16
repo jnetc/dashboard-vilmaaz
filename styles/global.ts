@@ -13,20 +13,22 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     font-family: Roboto, sans-serif;
-    color: ${props => props.theme.white};
+    color: ${({ theme }) => theme.white()};
   }
 
   #__next {
     overflow: hidden;
     min-height: 100%;
-    display: grid;
-    grid-template-columns: minmax(120px, 220px) 1fr;
+    display: flex;
+    /* display: grid; */
+    /* grid-template-columns: minmax(120px, 220px) 1fr; */
+    /* grid-template-columns:  1fr; */
     position: relative;
-    background-color: ${props => props.theme.bg_main};
+    background-color: ${({ theme }) => theme.bg_main()};
   }
 
   a {
-    color: ${props => props.theme.white};
+    color: ${({ theme }) => theme.white()};
     text-decoration: none;
   }
 
@@ -46,10 +48,10 @@ export const GlobalStyle = createGlobalStyle`
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: ${props => props.theme.bg_regular};
+    background: ${({ theme }) => theme.bg_regular()};
   }
   ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.grey_dark};
+    background: ${({ theme }) => theme.grey_dark()};
     /* border-right: 1px solid green; */
     border-radius: 50px;
   }

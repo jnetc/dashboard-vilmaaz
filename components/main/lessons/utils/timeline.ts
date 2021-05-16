@@ -1,5 +1,5 @@
 // Types
-import { StaticValues, Element, LessonsType, TimeLine } from '@types';
+import { StaticValues, Element, LessonsType, TimeLine, Lesson } from '@types';
 import { transformTimeToNum } from '@Store/utils/helperFunc';
 
 let startTime: number;
@@ -84,17 +84,59 @@ export const getLessonStartEndPoint = (arr: Array<LessonsType>) => {
   return numArr;
 };
 
-export const lessonProgress = (start: number, length: number, time: number) => {
-  const defaultPos = 68; // width lesson at start
+export const learningProgress = (
+  start: number,
+  lessons: Array<Lesson>,
+  length: number,
+  position: number,
+  timeNumber: number
+) => {
+  const startWidth = 68; // element width at start
 
-  const startPosition = start + defaultPos;
+  const startPosition = start + startWidth;
   const endPosition = start + length;
 
-  if (start > time) return { status: 'wait', pos: defaultPos };
-  if (startPosition > time) return { status: 'time', pos: defaultPos };
-  if (endPosition < time) return { status: 'done', pos: endPosition };
+  const { lesson, timer } = getTimerAndName(lessons, timeNumber);
 
-  const initGrowing = time - startPosition + defaultPos;
+  if (start > position) return { status: 'wait', pos: startWidth };
+  if (startPosition > position)
+    return { timer: timer, lesson: undefined, status: 'time', pos: startWidth };
+  if (endPosition <= position) return { status: 'done', pos: endPosition };
 
-  return { status: 'time', pos: initGrowing };
+  const initGrowing = position - startPosition + startWidth;
+
+  return { timer: timer, lesson: lesson, status: 'time', pos: initGrowing };
+};
+
+const getTimerAndName = (arr: Array<Lesson>, timeNumber: number) => {
+  const timeAndName = [];
+
+  for (const i of arr) {
+    const startLesson = transformTimeToNum(i.time.start);
+    const endLesson = transformTimeToNum(i.time.end);
+
+    const currentLessonTime = endLesson - timeNumber;
+    if (startLesson <= timeNumber && endLesson > timeNumber) {
+      timeAndName.push({ lesson: i.lesson, timer: currentLessonTime });
+    }
+  }
+
+  return timeAndName.length > 0
+    ? timeAndName[0]
+    : { lesson: undefined, timer: undefined };
+};
+
+// MOUSE EVENT HELPER FUNCTION
+export function getTransformStylePosition(el: Element) {
+  let posX = Number(el?.style.transform.split('px')[0].split('(')[1]);
+  return Math.abs(posX);
+}
+
+// MOUSE EVENT HELPER FUNCTION
+export const transition = (timetable: Element) => {
+  timetable?.classList.add('animate');
+  const timer = setTimeout(() => {
+    timetable?.classList.remove('animate');
+  }, 3000);
+  clearTimeout(timer);
 };

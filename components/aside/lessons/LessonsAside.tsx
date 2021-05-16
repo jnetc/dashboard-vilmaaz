@@ -1,10 +1,11 @@
-import { FC, MouseEvent, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
+
+import { useMainStore } from '@Store/MainStore';
+import { useGlobalStore } from '@Store/GlobalStore';
 import { Aside } from '@Aside/Aside';
 import { DayOfWeek } from '@Aside/lessons/DayOfWeek';
-
 import CtrlButton from '@Buttons/ctrl-button/CtrlButton';
-
 import ListLessons from '@Aside/lessons/current/ListLessons';
 
 const LessonsAsideStyle = styled.h2`
@@ -20,24 +21,40 @@ const AsideHeader = styled.div`
   position: relative;
 `;
 
+const Perespective = styled.div`
+  /* transform: rotateY(45deg); */
+`;
+
 export const LessonsAside: FC = () => {
-  const sendLesson = (ev: MouseEvent<HTMLButtonElement>) => {
-    ev.preventDefault;
-    console.log('log');
+  const {
+    setDetailLesson,
+
+    detailLesson: { id },
+  } = useMainStore();
+  const { setAutoMovement } = useGlobalStore();
+
+  const openAside = () => {
+    setDetailLesson({ open: false, id: undefined });
+    setAutoMovement(true);
+    console.log('click');
   };
+
+  // console.log(id);
 
   useEffect(() => {});
 
   return (
     <Aside>
-      <AsideHeader>
-        <CtrlButton />
-        <DayOfWeek />
-      </AsideHeader>
-      <LessonsAsideStyle>
-        <ListLessons />
-        <button onClick={sendLesson}>send data</button>
-      </LessonsAsideStyle>
+      <Perespective className="perespective">
+        <AsideHeader>
+          <CtrlButton onClick={() => openAside()} />
+          <DayOfWeek />
+        </AsideHeader>
+        <LessonsAsideStyle>
+          {id}
+          <ListLessons />
+        </LessonsAsideStyle>
+      </Perespective>
     </Aside>
   );
 };

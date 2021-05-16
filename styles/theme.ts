@@ -5,7 +5,7 @@ import { DefaultTheme } from 'styled-components';
 //   val: T
 // }
 
-declare function AlphaChanel<T extends number | null>(alpha: T): string;
+declare function AlphaChanel(alpha?: number): string;
 declare function LessonColor(color: string): string;
 // declare function ColorHSL<T>(color?: T): string;
 
@@ -16,30 +16,29 @@ declare function LessonColor(color: string): string;
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
-    white: string;
-    grey_light: string;
-    grey_middle: string;
-    grey_dark: string;
-    bg_light: string;
-    bg_regular: string;
-    bg_middle: string;
-    bg_middle_alpha: string;
-    bg_main: string;
-    bg_dark: string;
-    primary: string;
-    primary_hover: string;
-    danger: string;
-    danger_hover: string;
-    bringpink: string;
-    bringpinkdark: string;
-    polishedpine: string;
-    polishedpinedark: string;
-    greenbluecayola: string;
-    greenbluecayoladark: string;
-    oldrose: string;
-    oldrosedark: string;
-    orhid: string;
-    orhiddark: string;
+    white: typeof AlphaChanel;
+    grey_light: typeof AlphaChanel;
+    grey_middle: typeof AlphaChanel;
+    grey_dark: typeof AlphaChanel;
+    bg_light: typeof AlphaChanel;
+    bg_regular: typeof AlphaChanel;
+    bg_middle: typeof AlphaChanel;
+    bg_main: typeof AlphaChanel;
+    bg_dark: typeof AlphaChanel;
+    primary: typeof AlphaChanel;
+    primary_hover: typeof AlphaChanel;
+    danger: typeof AlphaChanel;
+    danger_hover: typeof AlphaChanel;
+    bringpink: typeof AlphaChanel;
+    bringpinkdark: typeof AlphaChanel;
+    polishedpine: typeof AlphaChanel;
+    polishedpinedark: typeof AlphaChanel;
+    greenbluecayola: typeof AlphaChanel;
+    greenbluecayoladark: typeof AlphaChanel;
+    oldrose: typeof AlphaChanel;
+    oldrosedark: typeof AlphaChanel;
+    orhid: typeof AlphaChanel;
+    orhiddark: typeof AlphaChanel;
     fontsize_36: string;
     fontsize_24: string;
     fontsize_18: string;
@@ -47,51 +46,39 @@ declare module 'styled-components' {
     fontsize_14: string;
     timeline: string;
     // shadow: string;
-    shadow: typeof AlphaChanel;
-    shadow_primary: typeof AlphaChanel;
-    shadow_primary_hover: typeof AlphaChanel;
-    shadow_danger: typeof AlphaChanel;
-    shadow_danger_hover: typeof AlphaChanel;
-    lessonColor: typeof LessonColor;
+    // lessonColor: typeof LessonColor;
   }
 }
 
 export const theme: DefaultTheme = {
-  white: 'hsl(0, 0%, 97%)',
-  grey_light: 'hsl(0, 0%, 66%)',
-  grey_middle: 'hsl(0, 0%, 32%)',
-  grey_dark: 'hsl(240, 10%, 26%)',
-  bg_light: 'hsl(240, 10%, 23%)',
-  bg_regular: 'hsl(244, 15%, 19%)',
-  bg_middle: 'hsl(244, 16%, 17%)',
-  bg_middle_alpha: 'hsla(244, 16%, 17%, 0.7)',
-  bg_main: 'hsl(244, 20%, 15%)',
-  bg_dark: 'hsl(244, 23%, 13%)',
-  primary: 'hsl(127, 28%, 75%)',
-  primary_hover: 'hsl(127, 28%, 55%)',
-  danger: 'hsl(346, 90%, 75%)',
-  danger_hover: 'hsl(346, 90%, 55%)',
-  bringpink: 'hsl(346, 90%, 75%)',
-  bringpinkdark: 'hsl(346, 50%, 30%)',
-  polishedpine: 'hsl(157, 25%, 60%)',
-  polishedpinedark: 'hsl(157, 5%, 30%)',
-  greenbluecayola: 'hsl(207, 55%, 65%)',
-  greenbluecayoladark: 'hsl(207, 35%, 25%)',
-  oldrose: 'hsl(8, 40%, 70%)',
-  oldrosedark: 'hsl(8, 20%, 30%)',
-  orhid: 'hsl(307, 60%, 60%)',
-  orhiddark: 'hsl(307, 40%, 30%)',
+  white: (alpha = 1) => `hsl(0 0% 97% / ${alpha})`, //'hsl(0, 0%, 97%)'
+  grey_light: (alpha = 1) => `hsl(0 0% 66% / ${alpha})`, //'hsl(0, 0%, 66%)'
+  grey_middle: (alpha = 1) => `hsl(0 0% 32% / ${alpha})`, //'hsl(0, 0%, 32%)'
+  grey_dark: (alpha = 1) => `hsl(240 10% 26% / ${alpha})`, //'hsl(240, 10%, 26%)'
+  bg_light: (alpha = 1) => `hsl(240 13% 23% / ${alpha})`, //'hsl(240, 10%, 23%)'
+  bg_regular: (alpha = 1) => `hsl(244 17% 19% / ${alpha})`, //'hsl(244, 15%, 19%)'
+  bg_middle: (alpha = 1) => `hsl(244 19% 17% / ${alpha})`, //'hsl(244, 16%, 17%)'
+  bg_main: (alpha = 1) => `hsl(244 23% 15% / ${alpha})`, //'hsl(244, 20%, 15%)'
+  bg_dark: (alpha = 1) => `hsl(244 26% 13% / ${alpha})`, //'hsl(244, 23%, 13%)'
+  primary: (alpha = 1) => `hsl(127 28% 75% / ${alpha})`, // 'hsl(127, 28%, 75%)'
+  primary_hover: (alpha = 1) => `hsl(127 28% 55% / ${alpha})`, //'hsl(127, 28%, 55%)'
+  danger: (alpha = 1) => `hsl(346 90% 75% / ${alpha})`, //'hsl(346, 90%, 75%)'
+  danger_hover: (alpha = 1) => `hsl(346 90% 55% / ${alpha})`, //'hsl(346, 90%, 55%)'
+  bringpink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'
+  bringpinkdark: (alpha = 1) => `hsl(346 50% 30% / ${alpha})`, //'hsl(346, 50%, 30%)'
+  polishedpine: (alpha = 1) => `hsl(157 25% 60% / ${alpha})`, //'hsl(157, 25%, 60%)'
+  polishedpinedark: (alpha = 1) => `hsl(157 5% 30% / ${alpha})`, //'hsl(157, 5%, 30%)'
+  greenbluecayola: (alpha = 1) => `hsl(207 55% 65% / ${alpha})`, //'hsl(207, 55%, 65%)'
+  greenbluecayoladark: (alpha = 1) => `hsl(207 35% 25% / ${alpha})`, //'hsl(207, 35%, 25%)'
+  oldrose: (alpha = 1) => `hsl(8 40% 70% / ${alpha})`, //'hsl(8, 40%, 70%)'
+  oldrosedark: (alpha = 1) => `hsl(8 20% 30% / ${alpha})`, //'hsl(8, 20%, 30%)'
+  orhid: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
+  orhiddark: (alpha = 1) => `hsl(307 40% 30% / ${alpha})`, //'hsl(307, 40%, 30%)'
   fontsize_36: '2rem',
   fontsize_24: '1.6rem',
   fontsize_18: '1.3rem',
   fontsize_16: '1rem',
   fontsize_14: '.8rem',
   timeline: '2000',
-  shadow: alpha => `hsla(240, 19%, 5%, ${alpha})`,
-  shadow_primary: alpha =>
-    alpha ? `hsla(127, 28%, 75%, ${alpha})` : '127, 28%, 75%',
-  shadow_primary_hover: alpha => `hsla(127, 28%, 55%, ${alpha})`,
-  shadow_danger: alpha => `hsla(346, 90%, 75%, ${alpha})`,
-  shadow_danger_hover: alpha => `hsla(346, 90%, 55%, ${alpha})`,
-  lessonColor: color => color,
+  // lessonColor: color => color,
 };

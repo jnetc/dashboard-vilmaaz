@@ -9,23 +9,19 @@ import { Logo } from '../icons/Logos';
 
 // STYLE COMPONENT
 const NavigationStyle = styled.nav`
-  width: 220px;
-  height: 100%;
-  display: grid;
-  grid-template-rows: 120px 1fr;
+  min-width: 220px;
+  min-height: 100%;
   overflow-y: auto;
+  display: grid;
+  /* display: none; */
+  grid-template-rows: 120px 1fr;
   justify-content: center;
   padding: 20px 0 36px;
-  position: fixed;
   svg.logo {
     justify-self: center;
     align-items: flex-start;
   }
-  h1 {
-    grid-row: 1;
-  }
   ul {
-    grid-row: 2;
     justify-self: center;
     align-self: center;
   }

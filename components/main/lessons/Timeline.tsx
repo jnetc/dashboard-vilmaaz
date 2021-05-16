@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, FC } from 'react';
 import styled from 'styled-components';
 // Global Context
-import { useStore } from '@Store/Store';
+import { useMainStore } from '@Store/MainStore';
 // Components
 import { TimelinePoints } from '@Main/lessons/TimelinePoints';
 import { TimelineStep } from '@Main/lessons/TimelineStep';
@@ -12,30 +12,33 @@ import { Element, Width, Lines } from '@types';
 const TimelineStyle = styled.div`
   width: 100%;
   grid-row: 1;
+  position: relative;
   /* user-select: none;
   pointer-events: none; */
+  /* padding: 0 160px 0 2px; */
   cursor: default;
-  padding: 0 160px 0 2px;
   div#track {
     position: relative;
   }
 `;
 
 const Timeline: FC<Width & Lines> = ({ width, lines }) => {
-  const { timepoints, setTrackWidth, trackWidth, timeline } = useStore();
+  const { timepoints, timelineWidth, setTimelineWidth, timeline } =
+    useMainStore();
+  // const [timelineW, setTimelineW] = useState(0)
   const [startEndTime, setStartEndTime] = useState<Array<string>>([]);
-  const trackEl = useRef<Element>(null);
+  const timelineEl = useRef<Element>(null);
 
   useEffect(() => {
     setStartEndTime(timepoints);
-    if (trackEl.current) {
-      setTrackWidth(trackEl.current.offsetWidth);
+    if (timelineEl.current) {
+      setTimelineWidth(timelineEl.current.offsetWidth);
     }
-  }, [trackEl]);
+  }, [timelineEl]);
 
   const timePointPositions = getTimePointPos(
     startEndTime,
-    trackWidth,
+    timelineWidth,
     timeline
   );
 
@@ -49,11 +52,9 @@ const Timeline: FC<Width & Lines> = ({ width, lines }) => {
     });
 
   return (
-    <TimelineStyle id="timeline">
-      <div id="track" ref={trackEl}>
-        {points}
-        <TimelineStep width={width} lines={lines} />
-      </div>
+    <TimelineStyle id="timeline" ref={timelineEl}>
+      {points}
+      <TimelineStep width={width} lines={lines} />
     </TimelineStyle>
   );
 };
