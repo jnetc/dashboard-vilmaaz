@@ -40,12 +40,13 @@ export const movementTimeAndTimetable = (
   main: number,
   timetable: Element,
   timepos: number,
-  autoMovement: boolean
+  autoMovement: boolean,
+  mainPaddingLeft: number
 ) => {
   if (!timetable) return;
   if (!autoMovement) return;
 
-  const timetableWidth = timetable.offsetWidth;
+  const timetableWidth = timetable.offsetWidth + mainPaddingLeft;
   const startPoint = Math.round(main / 2);
   const endPoint = timetableWidth - startPoint;
   const endPointTime = Math.abs(startPoint - endPoint);

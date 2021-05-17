@@ -43,6 +43,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     line-height: 1;
   }
+
   /* SCROLLBAR */
   ::-webkit-scrollbar {
     width: 8px;

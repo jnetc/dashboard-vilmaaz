@@ -31,6 +31,7 @@ const LinkStyle = styled.li`
     color: ${({ theme }) => theme.grey_light()};
     font-size: ${({ theme }) => theme.fontsize_16};
     transition: all 0.3s ease-in-out;
+    user-select: none;
   }
   svg {
     stroke: ${({ theme }) => theme.grey_light()};

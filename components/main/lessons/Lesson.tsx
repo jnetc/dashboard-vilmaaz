@@ -17,6 +17,7 @@ const LessonStyle = styled.div<Distance & { primary: string } & Position>`
   position: relative;
   left: ${({ position }) => position}px;
   border-radius: 35px;
+  user-select: none;
   cursor: pointer;
   z-index: 10;
   &:hover {
@@ -36,10 +37,12 @@ const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
 
   const lengthLessons = data.end - data.start;
 
+  // console.log('Lesson date', data);
+
   const openDetail = () => {
     setDetailLesson({
       open: true,
-      id: data.id,
+      data: data,
     });
   };
 

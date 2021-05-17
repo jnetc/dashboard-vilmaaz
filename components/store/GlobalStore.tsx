@@ -5,11 +5,9 @@ import { GlobalStoreProps } from '@types';
 // State
 const state: GlobalStoreProps = {
   openMenu: true,
-  setOpenMenu: x => x,
-  timetableEl: null,
-  setTimetableEl: el => el,
-  autoMovement: true,
-  setAutoMovement: el => el,
+  setOpenMenu: boolean => boolean,
+  mainPaddingLeft: 0,
+  setMainPaddingLeft: num => num,
 };
 
 // let request = null;
@@ -24,14 +22,8 @@ export const useGlobalStore = () => {
 
 const GlobalStore: FC = ({ children }) => {
   const [openMenu, setOpenMenu] = useState(state.openMenu);
-  const [timetableEl, setTimetableEl] = useState(state.timetableEl);
-  const [autoMovement, setAutoMovement] = useState(state.autoMovement);
-
+  const [mainPaddingLeft, setMainPaddingLeft] = useState(state.mainPaddingLeft);
   console.log('GlobalStore');
-
-  // useEffect(() => {
-  //   setAutoMovement(context.autoMovement);
-  // }, []);
 
   // let lesson = {
   //   id: 'sdf54we68w5f4s5d4fkjd',
@@ -73,10 +65,8 @@ const GlobalStore: FC = ({ children }) => {
         value={{
           openMenu,
           setOpenMenu,
-          timetableEl,
-          setTimetableEl,
-          autoMovement,
-          setAutoMovement,
+          mainPaddingLeft,
+          setMainPaddingLeft,
         }}>
         {children}
       </GlobalContext.Provider>

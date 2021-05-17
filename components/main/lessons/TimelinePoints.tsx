@@ -19,6 +19,7 @@ export const TimelinePointsStyle = styled.div<Position & Lines>`
   border-color: ${({ theme }) => theme.bg_middle()};
   background-color: ${({ theme }) => theme.bg_middle(0.7)};
   transition: all 0.3s ease-in-out;
+  user-select: none;
   z-index: 0;
   &::after {
     content: '';

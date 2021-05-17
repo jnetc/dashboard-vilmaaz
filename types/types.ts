@@ -50,21 +50,28 @@ export type Schedule = {
 
 export type OpenAsideDetailLesson = {
   open: boolean;
-  id?: string;
+  data?: LessonDataProps;
 };
+
+export type LessonDataProps = {
+  start: number;
+  end: number;
+} & UserDataType;
 
 export type GlobalStoreProps = {
   openMenu: boolean;
   setOpenMenu: (el: boolean) => void;
-  timetableEl: Element;
-  setTimetableEl: (el: Element) => void;
-  autoMovement: boolean;
-  setAutoMovement: (el: boolean) => void;
+  mainPaddingLeft: number;
+  setMainPaddingLeft: (num: number) => void;
 };
 
 export type MainStoreProps = {
+  autoMovement: boolean;
+  setAutoMovement: (el: boolean) => void;
   detailLesson: OpenAsideDetailLesson;
   setDetailLesson: (data: OpenAsideDetailLesson) => void;
+  timetableEl: Element;
+  setTimetableEl: (el: Element) => void;
   timelineWidth: number;
   setTimelineWidth: (el: number) => void;
   content: Array<LessonsType>;
@@ -131,8 +138,3 @@ export type Width = { width: number };
 export type TimeLine = Array<Time & Position>;
 
 export type TimelinePointsType = { data: Time & Position };
-
-export type LessonDataProps = {
-  start: number;
-  end: number;
-} & UserDataType;

@@ -7,6 +7,7 @@ import { movementTimeAndTimetable } from '@Main/lessons/utils/timeline';
 import { useRealtime } from '@Main/lessons/hook/useRealtime';
 import { TimelinePointsStyle } from '@Main/lessons/TimelinePoints';
 
+import { useMainStore } from '@Store/MainStore';
 import { useGlobalStore } from '@Store/GlobalStore';
 // Types
 import { Lines, Width } from '@types';
@@ -27,7 +28,8 @@ const TimelineStepStyle = styled(TimelinePointsStyle)`
 `;
 
 export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
-  const { timetableEl, autoMovement } = useGlobalStore();
+  const { timetableEl, autoMovement } = useMainStore();
+  const { mainPaddingLeft } = useGlobalStore();
   const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
 
   useEffect(() => {
@@ -37,7 +39,13 @@ export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
 
   const realtime = useRealtime(minutes);
 
-  movementTimeAndTimetable(width, timetableEl, realtime.position, autoMovement);
+  movementTimeAndTimetable(
+    width,
+    timetableEl,
+    realtime.position,
+    autoMovement,
+    mainPaddingLeft
+  );
 
   return (
     <>

@@ -6,11 +6,12 @@ import { transform, staticValues } from '@Store/utils/helperFunc';
 import { database } from '@Store/utils/data';
 
 const state: MainStoreProps = {
-  detailLesson: {
-    open: false,
-    id: undefined,
-  },
+  autoMovement: true,
+  setAutoMovement: el => el,
+  detailLesson: { open: false, data: undefined },
   setDetailLesson: obj => obj,
+  timetableEl: null,
+  setTimetableEl: el => el,
   timelineWidth: 0,
   setTimelineWidth: num => num,
   content: [],
@@ -32,6 +33,8 @@ const MainStore: FC = ({ children }) => {
   const [detailLesson, setDetailLesson] = useState(state.detailLesson);
   const [timelineWidth, setTimelineWidth] = useState(state.timelineWidth);
   const [timeline, setTimeline] = useState(state.timeline);
+  const [timetableEl, setTimetableEl] = useState(state.timetableEl);
+  const [autoMovement, setAutoMovement] = useState(state.autoMovement);
 
   let content = transform(data, false);
   let timepoints = transform(data);
@@ -47,6 +50,10 @@ const MainStore: FC = ({ children }) => {
   return (
     <MainContext.Provider
       value={{
+        autoMovement,
+        setAutoMovement,
+        timetableEl,
+        setTimetableEl,
         detailLesson,
         setDetailLesson,
         timelineWidth,
