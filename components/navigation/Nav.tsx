@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-
+// Types
 import { NavLink } from '@types';
-
+// Components
 import AltLink from './Link';
 import { Logo } from '../icons/Logos';
+// Store
+import { useGlobalStore } from '@Store/GlobalStore';
 
 // STYLE COMPONENT
 const NavigationStyle = styled.nav`
@@ -16,7 +18,7 @@ const NavigationStyle = styled.nav`
   /* display: none; */
   grid-template-rows: 120px 1fr;
   justify-content: center;
-  padding: 20px 0 36px;
+  padding: 35px 0;
   svg.logo {
     justify-self: center;
     align-items: flex-start;
@@ -62,6 +64,7 @@ export const navigation: Array<NavLink> = [
 
 // COMPONENT
 const Navigation: FC = () => {
+  const { openMenu } = useGlobalStore();
   const links = navigation.map((link, idx) => {
     link.active = false;
     // Init sublink - /link/sublink
@@ -74,11 +77,13 @@ const Navigation: FC = () => {
     return <AltLink key={link.path} link={link} index={idx} />;
   });
 
-  return (
+  return openMenu ? (
     <NavigationStyle>
       <Logo />
       <ul>{links}</ul>
     </NavigationStyle>
+  ) : (
+    <></>
   );
 };
 

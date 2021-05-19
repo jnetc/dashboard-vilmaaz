@@ -3,15 +3,19 @@ import styled from 'styled-components';
 
 import { useMainStore } from '@Store/MainStore';
 
-import { DayOfWeek } from '@Aside/lessons/DayOfWeek';
-import { AsideProgress } from '@Aside/lessons/AsideProgress';
-import CtrlButton from '@Buttons/ctrl-button/CtrlButton';
+import { DayOfWeek } from '@Main/lessons/right-side-panel/DayOfWeek';
+import { RightSideProgress } from '@Main/lessons/right-side-panel/RightSideProgress';
+import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 
-const AsideStyle = styled.aside<{ open: boolean }>`
+const RightSidePanelStyle = styled.section<{ open: boolean }>`
   min-width: 300px;
   display: ${({ open }) => (open ? 'grid' : 'none')};
   grid-template-rows: 48px 250px 100px 1fr;
   padding: 35px 30px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
   overflow-y: auto;
   backdrop-filter: blur(4px);
   border-radius: 30px 0 0 30px;
@@ -21,36 +25,40 @@ const AsideStyle = styled.aside<{ open: boolean }>`
   z-index: 100;
 `;
 
-const AsideHeader = styled.div`
+const RightSidePanelHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-export const Aside: FC = () => {
+export const RightSidePanel: FC = () => {
   const {
     detailLesson: { open, data },
     setDetailLesson,
     setAutoMovement,
   } = useMainStore();
 
-  const openAside = () => {
+  const openPanel = () => {
     setDetailLesson({ open: false, data: undefined });
     setAutoMovement(true);
   };
 
   useEffect(() => {});
 
-  return (
-    <AsideStyle open={open}>
-      <AsideHeader>
-        <CtrlButton onClick={() => openAside()} />
+  return open ? (
+    <RightSidePanelStyle open={open}>
+      <RightSidePanelHeader>
+        <CtrlButton onClick={() => openPanel()}>
+          <CloseButtonStyle />
+        </CtrlButton>
         <DayOfWeek />
-      </AsideHeader>
-      <AsideProgress>
+      </RightSidePanelHeader>
+      <RightSideProgress>
         {/* {data?.name} */}
         {/* <ListLessons /> */}
-      </AsideProgress>
-    </AsideStyle>
+      </RightSideProgress>
+    </RightSidePanelStyle>
+  ) : (
+    <></>
   );
 };

@@ -9,6 +9,8 @@ import {
 import Timeline from '@Main/lessons/Timeline';
 import Timefield from '@Main/lessons/Timefield';
 
+import { LeftSidePanel } from '@Main/lessons/left-side-panel';
+// Stores
 import { useMainStore } from '@Store/MainStore';
 import { useGlobalStore } from '@Store/GlobalStore';
 // Types
@@ -22,6 +24,7 @@ const TimetableStyle = styled.div`
   grid-template-rows: 60px 1fr;
   /* padding: 0 160px 0 2px; */
   padding: 0 120px 0 2px;
+  z-index: 1;
   @media (max-width: 1920px) {
     width: 1920px;
   }
@@ -32,44 +35,7 @@ const TimetableStyle = styled.div`
     transition: transform 0.3s ease-in-out;
   }
 `;
-const LeftSidePanelStyle = styled.div`
-  min-width: 140px;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  background-color: ${({ theme }) => theme.bg_middle(0.8)};
-  backdrop-filter: blur(4px);
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    pointer-events: none;
-  }
-  &::after {
-    width: 20px;
-    right: -20px;
-    background: linear-gradient(
-      to right,
-      ${({ theme }) => theme.bg_middle(0.7)} 0%,
-      ${({ theme }) => theme.bg_middle(0)} 100%
-    );
-  }
-  &::before {
-    width: 100px;
-    left: 0;
-    background: linear-gradient(
-      to right,
-      ${({ theme }) => theme.bg_middle(1)} 0%,
-      ${({ theme }) => theme.bg_middle(0)} 100%
-    );
-  }
-`;
+
 const TimetableEmptyStyle = styled.h2`
   justify-self: center;
   align-self: center;
@@ -77,7 +43,7 @@ const TimetableEmptyStyle = styled.h2`
 
 export const Timetable: FC = () => {
   const { setTimetableEl, setAutoMovement, content } = useMainStore();
-  const { setMainPaddingLeft, mainPaddingLeft } = useGlobalStore();
+  const { mainPaddingLeft } = useGlobalStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
   let [mouseDownCursorPos, setMouseDownCursorPos] = useState<number>(0);
@@ -88,18 +54,15 @@ export const Timetable: FC = () => {
 
   const mainEl = createRef<Div>();
   const timetableEl = useRef<Element>(null);
-  const sidepanelEl = useRef<Element>(null);
 
   useEffect(() => {
-    if (mainEl.current && timetableEl.current && sidepanelEl.current) {
+    if (mainEl.current && timetableEl.current) {
       setWidthMainEl(mainEl.current.offsetWidth);
       setTimetableEl(timetableEl.current);
       setTimepointsHeight(timetableEl.current.offsetHeight);
-      setMainPaddingLeft(sidepanelEl.current.offsetWidth);
     }
   }, []);
 
-  // Mount component with current position time
   useEffect(() => {
     timetableEl.current?.classList.add('animate');
     setAutoMovement(true);
@@ -184,6 +147,7 @@ export const Timetable: FC = () => {
 
   return content.length > 0 ? (
     <MainContent ref={mainEl}>
+      <LeftSidePanel />
       <TimetableStyle
         id="timetable"
         ref={timetableEl}
@@ -196,7 +160,6 @@ export const Timetable: FC = () => {
         <Timeline width={widthMainEl} lines={timepoinsHeight} />
         <Timefield />
       </TimetableStyle>
-      <LeftSidePanelStyle ref={sidepanelEl}>Side</LeftSidePanelStyle>
     </MainContent>
   ) : (
     <TimetableEmptyStyle>Viikonloppu</TimetableEmptyStyle>

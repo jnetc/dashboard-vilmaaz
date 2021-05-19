@@ -25,7 +25,7 @@ export const LessonCommonProgress: FC<{
       className="common-progress">
       <rect
         x="0"
-        y="2.3"
+        y="2"
         width={length - strokeWidth}
         height="66"
         rx="35"

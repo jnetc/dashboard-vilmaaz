@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const MainStyle = styled.main`
   width: 100%;
   min-height: 100%;
-  padding: 20px 0 0 140px;
+  padding: 35px 0 0 140px;
   /* padding: 20px 0 0 70px; */
   border-radius: 30px 0 0 30px;
   position: relative;

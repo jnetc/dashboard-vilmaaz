@@ -6,14 +6,11 @@ export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
 };
 
 export const transform = (data: Array<Schedule>, set: boolean = true): any => {
-  // if (data.length === 0) {
-  //   return undefined;
-  // }
-
   const date = new Date();
   const day = dateFormat({ weekday: 'long' }, date);
   // const day = 'perjantai';
-  // Used Set constructor for remove duplicate from array
+
+  //* Used Set constructor for remove duplicate from array
   const newTimelineSet: Set<string> = new Set();
   const newTimefieldArr: Array<LessonsType> = new Array();
 
@@ -22,8 +19,6 @@ export const transform = (data: Array<Schedule>, set: boolean = true): any => {
 
     const schoolday = timetable.find(l => l.day === day && l.lessons);
     if (!schoolday) return;
-
-    // console.log(schoolday);
 
     const findEndOfArr = schoolday.lessons.length - 1;
     const start = schoolday.lessons[0].time.start;

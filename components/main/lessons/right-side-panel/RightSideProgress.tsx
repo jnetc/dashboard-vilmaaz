@@ -1,11 +1,11 @@
 import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 
-const AsideProgressStyle = styled.div`
+const RightSideProgressStyle = styled.div`
   margin-bottom: 50px;
 `;
 
-const AsideHeader = styled.div`
+const RightSideHeader = styled.div`
   width: 100%;
   height: 48px;
   display: flex;
@@ -14,8 +14,10 @@ const AsideHeader = styled.div`
   position: relative;
 `;
 
-export const AsideProgress: FC = () => {
+export const RightSideProgress: FC = () => {
   useEffect(() => {});
 
-  return <AsideProgressStyle className="perespective"></AsideProgressStyle>;
+  return (
+    <RightSideProgressStyle className="perespective"></RightSideProgressStyle>
+  );
 };

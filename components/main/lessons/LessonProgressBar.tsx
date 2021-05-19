@@ -12,7 +12,7 @@ import { LessonAvatarProgress } from '@Main/lessons/LessonAvatarProgress';
 import { LessonName } from '@Main/lessons/LessonName';
 
 const LessonProgressBarStyle = styled.div<{ primary: string }>`
-  height: 68px;
+  height: 70px;
   position: relative;
   padding: 10px;
   position: relative;
