@@ -1,16 +1,5 @@
-import { FC, ReactNode, useState, useCallback, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-
-const anim = keyframes`
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.5);
-    opacity: 0;
-  }
-`;
+import { FC, ReactNode } from 'react';
+import styled from 'styled-components';
 
 const CtrlButtonStyle = styled.button`
   width: 3rem;
@@ -27,19 +16,6 @@ const CtrlButtonStyle = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.bg_light(0.7)};
   }
-`;
-
-const NoticeStyle = styled.div<{ notice: boolean }>`
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  animation: ${anim} 0.5s ease-in-out forwards;
-  border: 2px solid ${({ theme }) => theme.grey_middle(0.5)};
-  background-color: ${({ theme }) => theme.white(0.05)};
-  z-index: 5;
 `;
 
 const ButtonStyle = styled.div`
@@ -93,26 +69,10 @@ type Props = {
 };
 
 const CtrlButton: FC<Props> = props => {
-  const [notice, setNotice] = useState(false);
-  // const notice = () => {
-  //   console.log('button click');
-  // };
-
-  console.log('onclick button???? ');
+  // console.log('onclick button???? ');
 
   return (
-    <CtrlButtonStyle
-      onClick={props.onClick}
-      onMouseDown={() => setNotice(!notice)}>
-      {notice && (
-        <NoticeStyle
-          notice={notice}
-          onAnimationEnd={() => setNotice(!notice)}
-        />
-      )}
-
-      {props.children}
-    </CtrlButtonStyle>
+    <CtrlButtonStyle onClick={props.onClick}>{props.children}</CtrlButtonStyle>
   );
 };
 

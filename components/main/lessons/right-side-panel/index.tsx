@@ -1,16 +1,16 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useMainStore } from '@Store/MainStore';
 
 import { DayOfWeek } from '@Main/lessons/right-side-panel/DayOfWeek';
-import { RightSideProgress } from '@Main/lessons/right-side-panel/RightSideProgress';
+import { ProgressBar } from '@Main/lessons/right-side-panel/ProgressBar';
 import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 
 const RightSidePanelStyle = styled.section<{ open: boolean }>`
   min-width: 300px;
   display: ${({ open }) => (open ? 'grid' : 'none')};
-  grid-template-rows: 48px 250px 100px 1fr;
+  grid-template-rows: repeat(2, 48px) 300px 40px 1fr;
   padding: 35px 30px;
   position: absolute;
   top: 0;
@@ -23,6 +23,11 @@ const RightSidePanelStyle = styled.section<{ open: boolean }>`
   box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
     0px 10px 10px ${props => props.theme.bg_dark(0.3)};
   z-index: 100;
+  user-select: none;
+  h2 {
+    grid-row: 2;
+    align-self: flex-end;
+  }
 `;
 
 const RightSidePanelHeader = styled.div`
@@ -38,6 +43,26 @@ export const RightSidePanel: FC = () => {
     setAutoMovement,
   } = useMainStore();
 
+  const [progressBar, setProgressBar] = useState({
+    line: '',
+    bar: '',
+    start: '',
+    end: '',
+  });
+
+  useEffect(() => {
+    if (data) {
+      const lastTimeEnd = data.timetable.length - 1;
+
+      setProgressBar({
+        start: data.timetable[0].time.start,
+        end: data.timetable[lastTimeEnd].time.end,
+        line: data.primaryColor,
+        bar: data.secondaryColor,
+      });
+    }
+  }, [data]);
+
   const openPanel = () => {
     setDetailLesson({ open: false, data: undefined });
     setAutoMovement(true);
@@ -45,7 +70,7 @@ export const RightSidePanel: FC = () => {
 
   useEffect(() => {});
 
-  return open ? (
+  return open && data ? (
     <RightSidePanelStyle open={open}>
       <RightSidePanelHeader>
         <CtrlButton onClick={() => openPanel()}>
@@ -53,10 +78,8 @@ export const RightSidePanel: FC = () => {
         </CtrlButton>
         <DayOfWeek />
       </RightSidePanelHeader>
-      <RightSideProgress>
-        {/* {data?.name} */}
-        {/* <ListLessons /> */}
-      </RightSideProgress>
+      <h2>{data?.name}</h2>
+      <ProgressBar data={progressBar} />
     </RightSidePanelStyle>
   ) : (
     <></>

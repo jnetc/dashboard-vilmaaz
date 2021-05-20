@@ -1,4 +1,4 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 // Types
 import { LessonDataProps, Position, Distance } from '@types';

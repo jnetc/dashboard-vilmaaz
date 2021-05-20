@@ -36,6 +36,19 @@ const TimetableStyle = styled.div`
   }
 `;
 
+const MainStyle = styled.main`
+  width: 100%;
+  min-height: 100%;
+  padding: 35px 0 0 140px;
+  /* padding: 20px 0 0 70px; */
+  border-radius: 30px 0 0 30px;
+  position: relative;
+  overflow: hidden;
+  background-color: ${props => props.theme.bg_middle()};
+  box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
+    0px 10px 10px ${props => props.theme.bg_dark(0.3)};
+`;
+
 const TimetableEmptyStyle = styled.h2`
   justify-self: center;
   align-self: center;
@@ -72,6 +85,9 @@ export const Timetable: FC = () => {
   }, []);
 
   const mouseDown = (ev: Event) => {
+    ev.stopPropagation();
+    ev.nativeEvent.stopImmediatePropagation();
+
     setAutoMovement(false);
     setStartMove(true);
 
@@ -88,8 +104,6 @@ export const Timetable: FC = () => {
       mainPaddingLeft;
 
     let transformStyle = getTransformStylePosition(timetableEl.current);
-
-    console.log(invisiblePartOftimetableEl);
 
     setMaxPositionElement(invisiblePartOftimetableEl);
     setCurrentPosEl(transformStyle);
@@ -146,7 +160,7 @@ export const Timetable: FC = () => {
   };
 
   return content.length > 0 ? (
-    <MainContent ref={mainEl}>
+    <MainStyle ref={mainEl}>
       <LeftSidePanel />
       <TimetableStyle
         id="timetable"
@@ -160,7 +174,7 @@ export const Timetable: FC = () => {
         <Timeline width={widthMainEl} lines={timepoinsHeight} />
         <Timefield />
       </TimetableStyle>
-    </MainContent>
+    </MainStyle>
   ) : (
     <TimetableEmptyStyle>Viikonloppu</TimetableEmptyStyle>
   );

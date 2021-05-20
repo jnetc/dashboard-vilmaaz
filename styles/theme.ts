@@ -39,6 +39,7 @@ declare module 'styled-components' {
     oldrosedark: typeof AlphaChanel;
     orhid: typeof AlphaChanel;
     orhiddark: typeof AlphaChanel;
+    fontsize_48: string;
     fontsize_36: string;
     fontsize_24: string;
     fontsize_18: string;
@@ -74,6 +75,7 @@ export const theme: DefaultTheme = {
   oldrosedark: (alpha = 1) => `hsl(8 20% 30% / ${alpha})`, //'hsl(8, 20%, 30%)'
   orhid: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
   orhiddark: (alpha = 1) => `hsl(307 40% 30% / ${alpha})`, //'hsl(307, 40%, 30%)'
+  fontsize_48: '3rem',
   fontsize_36: '2rem',
   fontsize_24: '1.6rem',
   fontsize_18: '1.3rem',

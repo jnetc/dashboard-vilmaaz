@@ -138,3 +138,10 @@ export type Width = { width: number };
 export type TimeLine = Array<Time & Position>;
 
 export type TimelinePointsType = { data: Time & Position };
+
+export type ProgressBarType = {
+  start: string;
+  end: string;
+  line: string;
+  bar: string;
+};

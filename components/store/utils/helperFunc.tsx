@@ -75,7 +75,7 @@ const fillEmptySpace = (arr: Array<Lesson>) => {
   return fillArray;
 };
 
-export const transformTimeToNum = (time: string | number) => {
+export const transformTimeToNum = (time: string | number): number => {
   if ('number' === typeof time) return time;
 
   const minInHour = 60;

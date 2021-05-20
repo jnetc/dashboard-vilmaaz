@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const MainStyle = styled.main`
   width: 100%;
   min-height: 100%;
-  padding: 35px 0 0 140px;
+  padding: 20px 0 0 140px;
   /* padding: 20px 0 0 70px; */
   border-radius: 30px 0 0 30px;
   position: relative;
@@ -12,7 +12,7 @@ const MainStyle = styled.main`
   background-color: ${props => props.theme.bg_middle()};
   box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
     0px 10px 10px ${props => props.theme.bg_dark(0.3)};
-  &::after,
+  /* &::after,
   &::before {
     content: '';
     width: 20px;
@@ -36,7 +36,7 @@ const MainStyle = styled.main`
       ${({ theme }) => theme.bg_middle()} 0%,
       ${({ theme }) => theme.bg_middle(0)} 100%
     );
-  }
+  } */
 `;
 // const MainStyle = styled.main`
 //   width: 100%;

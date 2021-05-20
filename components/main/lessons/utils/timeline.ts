@@ -92,7 +92,7 @@ export const learningProgress = (
   position: number,
   timeNumber: number
 ) => {
-  const startWidth = 68; //! element width at start
+  const startWidth = 68; //! default lesson width at start
 
   const startPosition = start + startWidth;
   const endPosition = start + length;
