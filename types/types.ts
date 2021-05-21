@@ -145,3 +145,11 @@ export type ProgressBarType = {
   line: string;
   bar: string;
 };
+
+export type ProgressLessonsType = {
+  active: string;
+  inactive: string;
+  start: string;
+  end: string;
+  lessons: Array<Lesson>;
+};
