@@ -10,11 +10,12 @@ const CtrlButtonStyle = styled.button`
   position: relative;
   border-radius: 50%;
   border: none;
-  background-color: ${({ theme }) => theme.bg_light()};
+  background-color: transparent;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.bg_light(0.7)};
+    background-color: ${({ theme }) => theme.bg_light()};
+    /* background-color: ${({ theme }) => theme.bg_light(0.7)}; */
   }
 `;
 

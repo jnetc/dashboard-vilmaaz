@@ -21,7 +21,7 @@ const LeftSidePanelStyle = styled.div`
   padding: 35px 0;
   background-color: ${({ theme }) => theme.bg_middle(0.8)};
   backdrop-filter: blur(4px);
-  z-index: 5;
+  z-index: 100;
   /* pointer-events: none; */
   &::after,
   &::before {

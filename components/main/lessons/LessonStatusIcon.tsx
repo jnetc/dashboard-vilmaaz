@@ -8,7 +8,7 @@ const LessonStatusIconStyle = styled(AvatarAndIconCommonStyle)`
   right: 7px;
   box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
     0px 10px 10px ${props => props.theme.bg_dark(0.3)};
-  z-index: 3;
+  z-index: 13;
 `;
 
 export const LessonStatusIcon: FC<{

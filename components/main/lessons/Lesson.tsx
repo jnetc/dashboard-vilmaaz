@@ -37,8 +37,6 @@ const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
 
   const lengthLessons = data.end - data.start;
 
-  // console.log('Lesson date', data);
-
   const openDetail = () => {
     setDetailLesson({
       open: true,

@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect, FC, createRef } from 'react';
 import styled from 'styled-components';
 // Components
-import { MainContent } from '@Main/Main';
 import {
   transition,
   getTransformStylePosition,
@@ -27,9 +26,6 @@ const TimetableStyle = styled.div`
   z-index: 1;
   @media (max-width: 1920px) {
     width: 1920px;
-  }
-  &.will-change {
-    will-change: transform;
   }
   &.animate {
     transition: transform 0.3s ease-in-out;
@@ -85,8 +81,8 @@ export const Timetable: FC = () => {
   }, []);
 
   const mouseDown = (ev: Event) => {
-    ev.stopPropagation();
-    ev.nativeEvent.stopImmediatePropagation();
+    // ev.stopPropagation();
+    // ev.nativeEvent.stopImmediatePropagation();
 
     setAutoMovement(false);
     setStartMove(true);
@@ -96,7 +92,6 @@ export const Timetable: FC = () => {
     }
 
     timetableEl.current.classList.remove('animate');
-    timetableEl.current.classList.add('will-change');
 
     const invisiblePartOftimetableEl =
       timetableEl.current.offsetWidth -
@@ -141,7 +136,6 @@ export const Timetable: FC = () => {
       timetableEl.current.style.transform = `translate3d(0, 0, 0)`;
     }
 
-    timetableEl.current.classList.remove('will-change');
     setStartMove(false);
   };
 

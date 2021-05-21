@@ -19,16 +19,17 @@ export const useRealtime = (minutes: number) => {
     };
   }, []);
 
+  // !!! Проверить промежуток времени с 8:59 - 9:00
   // !!! Проверить промежуток времени с 10:59 - 11:00
   // !!! Проверить промежуток времени с 13:59 - 14:00
   // TODO Узнать из-за чего это происходит
 
   // const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
-  // const h = (new Date().getHours() - 4).toString();
+  // const h = (new Date().getHours() - 2).toString();
   // const m = new Date().getMinutes().toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
-  const stepTime = transformTimeToNum(`11:59`);
+  const stepTime = transformTimeToNum(`9:55`);
   let visible: boolean = false;
 
   if (startLessons <= stepTime && endLessons > stepTime) {

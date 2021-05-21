@@ -19,7 +19,7 @@ export const AvatarAndIconCommonStyle = styled.div`
 const LessonAvatarProgressStyle = styled(AvatarAndIconCommonStyle)`
   left: 7px;
   object-fit: cover;
-  z-index: 2;
+  z-index: 12;
 `;
 
 export const LessonAvatarProgress: FC<{ avatar: Avatar }> = ({ avatar }) => {

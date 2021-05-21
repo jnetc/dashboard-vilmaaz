@@ -13,7 +13,6 @@ import { LessonName } from '@Main/lessons/LessonName';
 
 const LessonProgressBarStyle = styled.div<{ primary: string }>`
   height: 70px;
-  position: relative;
   padding: 10px;
   position: relative;
   display: flex;
@@ -23,7 +22,7 @@ const LessonProgressBarStyle = styled.div<{ primary: string }>`
   background-color: ${({ theme }) => theme.bg_middle()};
   border: 2px solid var(--${({ primary }) => primary});
   transition: all 0.3s ease-in-out;
-  z-index: 5;
+  z-index: 11;
   .active {
     border-color: ${({ theme }) => theme.grey_middle()};
     box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},

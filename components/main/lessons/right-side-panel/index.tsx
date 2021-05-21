@@ -1,11 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+// Store
 import { useMainStore } from '@Store/MainStore';
-
+// Components
 import { DayOfWeek } from '@Main/lessons/right-side-panel/DayOfWeek';
 import { ProgressBar } from '@Main/lessons/right-side-panel/ProgressBar';
+import { ProgressLessons } from '@Main/lessons/right-side-panel/ProgressLessons';
 import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
+// Types
+import { ProgressBarType, ProgressLessonsType } from '@types';
 
 const RightSidePanelStyle = styled.section<{ open: boolean }>`
   min-width: 300px;
@@ -43,11 +46,19 @@ export const RightSidePanel: FC = () => {
     setAutoMovement,
   } = useMainStore();
 
-  const [progressBar, setProgressBar] = useState({
+  const [progressBar, setProgressBar] = useState<ProgressBarType>({
     line: '',
     bar: '',
     start: '',
     end: '',
+  });
+
+  const [progressLessons, setProgressLessons] = useState<ProgressLessonsType>({
+    active: '',
+    inactive: '',
+    start: '',
+    end: '',
+    lessons: [],
   });
 
   useEffect(() => {
@@ -60,8 +71,17 @@ export const RightSidePanel: FC = () => {
         line: data.primaryColor,
         bar: data.secondaryColor,
       });
+      setProgressLessons({
+        start: data.timetable[0].time.start,
+        end: data.timetable[lastTimeEnd].time.end,
+        active: data.primaryColor,
+        inactive: data.secondaryColor,
+        lessons: data.timetable,
+      });
     }
   }, [data]);
+
+  console.log(data);
 
   const openPanel = () => {
     setDetailLesson({ open: false, data: undefined });
@@ -80,6 +100,7 @@ export const RightSidePanel: FC = () => {
       </RightSidePanelHeader>
       <h2>{data?.name}</h2>
       <ProgressBar data={progressBar} />
+      <ProgressLessons data={progressLessons} />
     </RightSidePanelStyle>
   ) : (
     <></>
