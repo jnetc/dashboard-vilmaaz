@@ -50,9 +50,6 @@ const ProgressStyle = styled.circle<{
 // TODO Сделать прогрессивную шкалу + анимация
 export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
   const { bar, line, ...time } = data;
-  const radius = 100;
-  const circumference = Math.round(2 * Math.PI * radius); //?  2 * (π = 3,14) * (r = 100)
-
   const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
 
   useEffect(() => {
@@ -61,21 +58,16 @@ export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
   }, [minutes]);
 
   const realtime = useRealtime(minutes);
+  const radius = 100;
+  const circumference = Math.round(2 * Math.PI * radius); //?  2 * (π = 3,14) * (r = 100)
   const startDrawPoint = transformTimeToNum(time.start);
   const endDrawPoint = transformTimeToNum(time.end);
   const totalTime = endDrawPoint - startDrawPoint;
-
-  console.log('realtime_', realtime.timeNumber);
-  console.info(circumference);
-  console.log('data_', startDrawPoint, endDrawPoint, totalTime);
-  console.log('');
-
   const start = realtime.timeNumber - startDrawPoint;
-
-  console.log(endDrawPoint <= realtime.timeNumber);
 
   let step = 0;
   let showMeTime = '00:00';
+
   if (realtime.timeNumber < startDrawPoint) {
     step = circumference;
     showMeTime = 'SLEEP';

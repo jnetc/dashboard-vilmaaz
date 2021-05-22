@@ -29,16 +29,16 @@ declare module 'styled-components' {
     primary_hover: typeof AlphaChanel;
     danger: typeof AlphaChanel;
     danger_hover: typeof AlphaChanel;
-    bringpink: typeof AlphaChanel;
-    bringpinkdark: typeof AlphaChanel;
-    polishedpine: typeof AlphaChanel;
-    polishedpinedark: typeof AlphaChanel;
-    greenbluecayola: typeof AlphaChanel;
-    greenbluecayoladark: typeof AlphaChanel;
-    oldrose: typeof AlphaChanel;
-    oldrosedark: typeof AlphaChanel;
-    orhid: typeof AlphaChanel;
-    orhiddark: typeof AlphaChanel;
+    pink: typeof AlphaChanel;
+    pink_shade: typeof AlphaChanel;
+    green: typeof AlphaChanel;
+    green_shade: typeof AlphaChanel;
+    blue: typeof AlphaChanel;
+    blue_shade: typeof AlphaChanel;
+    brown: typeof AlphaChanel;
+    brown_shade: typeof AlphaChanel;
+    magenta: typeof AlphaChanel;
+    magenta_shade: typeof AlphaChanel;
     fontsize_48: string;
     fontsize_36: string;
     fontsize_24: string;
@@ -65,16 +65,16 @@ export const theme: DefaultTheme = {
   primary_hover: (alpha = 1) => `hsl(127 28% 55% / ${alpha})`, //'hsl(127, 28%, 55%)'
   danger: (alpha = 1) => `hsl(346 90% 75% / ${alpha})`, //'hsl(346, 90%, 75%)'
   danger_hover: (alpha = 1) => `hsl(346 90% 55% / ${alpha})`, //'hsl(346, 90%, 55%)'
-  bringpink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'
-  bringpinkdark: (alpha = 1) => `hsl(346 50% 30% / ${alpha})`, //'hsl(346, 50%, 30%)'
-  polishedpine: (alpha = 1) => `hsl(157 25% 60% / ${alpha})`, //'hsl(157, 25%, 60%)'
-  polishedpinedark: (alpha = 1) => `hsl(157 5% 30% / ${alpha})`, //'hsl(157, 5%, 30%)'
-  greenbluecayola: (alpha = 1) => `hsl(207 55% 65% / ${alpha})`, //'hsl(207, 55%, 65%)'
-  greenbluecayoladark: (alpha = 1) => `hsl(207 35% 25% / ${alpha})`, //'hsl(207, 35%, 25%)'
-  oldrose: (alpha = 1) => `hsl(8 40% 70% / ${alpha})`, //'hsl(8, 40%, 70%)'
-  oldrosedark: (alpha = 1) => `hsl(8 20% 30% / ${alpha})`, //'hsl(8, 20%, 30%)'
-  orhid: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
-  orhiddark: (alpha = 1) => `hsl(307 40% 30% / ${alpha})`, //'hsl(307, 40%, 30%)'
+  pink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'
+  pink_shade: (alpha = 1) => `hsl(346 50% 30% / ${alpha})`, //'hsl(346, 50%, 30%)'
+  green: (alpha = 1) => `hsl(157 25% 60% / ${alpha})`, //'hsl(157, 25%, 60%)'
+  green_shade: (alpha = 1) => `hsl(157 5% 30% / ${alpha})`, //'hsl(157, 5%, 30%)'
+  blue: (alpha = 1) => `hsl(207 55% 65% / ${alpha})`, //'hsl(207, 55%, 65%)'
+  blue_shade: (alpha = 1) => `hsl(207 35% 25% / ${alpha})`, //'hsl(207, 35%, 25%)'
+  brown: (alpha = 1) => `hsl(8 40% 70% / ${alpha})`, //'hsl(8, 40%, 70%)'
+  brown_shade: (alpha = 1) => `hsl(8 20% 30% / ${alpha})`, //'hsl(8, 20%, 30%)'
+  magenta: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
+  magenta_shade: (alpha = 1) => `hsl(307 40% 30% / ${alpha})`, //'hsl(307, 40%, 30%)'
   fontsize_48: '3rem',
   fontsize_36: '2rem',
   fontsize_24: '1.6rem',

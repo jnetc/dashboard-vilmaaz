@@ -26,6 +26,11 @@ export type Lesson = {
   time: StartEnd;
 };
 
+export type LessonsColor = {
+  accent: string; //? акцентирующий цвет
+  shade: string; //? оттенок цета, акцентный + чёрный
+};
+
 export type SchoolDay = {
   day: string;
   lessons: Array<Lesson>;
@@ -34,10 +39,8 @@ export type SchoolDay = {
 export type UserType = {
   id: string;
   name: string;
-  primaryColor: string;
-  secondaryColor: string;
+  colors: LessonsColor;
   avatar: Avatar;
-  order: number;
 };
 
 export type UserDataType = {
@@ -146,10 +149,6 @@ export type ProgressBarType = {
   bar: string;
 };
 
-export type ProgressLessonsType = {
-  active: string;
-  inactive: string;
-  start: string;
-  end: string;
+export type ProgressLessonsData = {
   lessons: Array<Lesson>;
-};
+} & LessonsColor;

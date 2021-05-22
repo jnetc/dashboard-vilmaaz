@@ -13,16 +13,16 @@
   --danger: hsl(346, 90%, 75%);
   --danger_hover: hsl(346, 90%, 55%);
 
-  --oldrose: hsl(8, 40%, 70%);
-  --oldrosedark: hsl(8, 20%, 30%);
-  --polishedpine: hsl(157, 10%, 60%);
-  --polishedpinedark: hsl(157, 5%, 30%);
-  --bringpink: hsl(346, 75%, 75%);
-  --bringpinkdark: hsl(346, 50%, 30%);
-  --orhid: hsl(307, 40%, 60%);
-  --orhiddark: hsl(307, 40%, 30%);
-  --greenbluecayola: hsl(207, 40%, 65%);
-  --greenbluecayoladark: hsl(207, 35%, 25%);
+  --brown: hsl(8, 40%, 70%);
+  --brown_shade: hsl(8, 20%, 30%);
+  --green: hsl(157, 10%, 60%);
+  --green_shade: hsl(157, 5%, 30%);
+  --pink: hsl(346, 75%, 75%);
+  --pink_shade: hsl(346, 50%, 30%);
+  --magenta: hsl(307, 40%, 60%);
+  --magenta_shade: hsl(307, 40%, 30%);
+  --blue: hsl(207, 40%, 65%);
+  --blue_shade: hsl(207, 35%, 25%);
 
   --alpha-02: 0.2;
   --alpha-015: 0.15;

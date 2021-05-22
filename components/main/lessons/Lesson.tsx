@@ -48,14 +48,11 @@ const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
     <LessonStyle
       position={data.start}
       distance={lengthLessons}
-      primary={data.primaryColor}
+      primary={data.colors.accent}
       className="timefield-lesson"
       onClick={openDetail}>
       <LessonProgressBar data={data} />
-      <LessonCommonProgress
-        length={lengthLessons}
-        secondary={data.secondaryColor}
-      />
+      <LessonCommonProgress length={lengthLessons} shade={data.colors.shade} />
     </LessonStyle>
   );
 };

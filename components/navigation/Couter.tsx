@@ -4,9 +4,9 @@ import styled, { keyframes } from 'styled-components';
 import { Element } from '@types';
 
 // Animation (flash effect)
-const impulse = (color: string) => keyframes`
-  0% {box-shadow: 0 0 0 0px hsla(${color}, 1)}
-  100%{box-shadow: 0 0 0 10px hsla(${color}, 0)}
+const impulse = (visible: string, hidden: string) => keyframes`
+  0% {box-shadow: 0 0 0 0px ${visible}}
+  100%{box-shadow: 0 0 0 10px ${hidden}}
 `;
 
 // Main css
@@ -27,8 +27,8 @@ const CountStyle = styled.div`
   background-color: ${({ theme }) => theme.primary()};
   letter-spacing: 0px;
   &.notice {
-    animation: ${({ theme }) => impulse(theme.primary())} 1s ease-in-out
-      forwards;
+    animation: ${({ theme }) => impulse(theme.primary(), theme.primary(0))} 1s
+      ease-in-out forwards;
   }
 `;
 

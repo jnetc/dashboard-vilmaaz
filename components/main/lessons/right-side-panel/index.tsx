@@ -8,7 +8,7 @@ import { ProgressBar } from '@Main/lessons/right-side-panel/ProgressBar';
 import { ProgressLessons } from '@Main/lessons/right-side-panel/ProgressLessons';
 import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 // Types
-import { ProgressBarType, ProgressLessonsType } from '@types';
+import { ProgressBarType, ProgressLessonsData } from '@types';
 
 const RightSidePanelStyle = styled.section<{ open: boolean }>`
   min-width: 300px;
@@ -53,11 +53,9 @@ export const RightSidePanel: FC = () => {
     end: '',
   });
 
-  const [progressLessons, setProgressLessons] = useState<ProgressLessonsType>({
-    active: '',
-    inactive: '',
-    start: '',
-    end: '',
+  const [progressLessons, setProgressLessons] = useState<ProgressLessonsData>({
+    accent: '',
+    shade: '',
     lessons: [],
   });
 
@@ -68,20 +66,18 @@ export const RightSidePanel: FC = () => {
       setProgressBar({
         start: data.timetable[0].time.start,
         end: data.timetable[lastTimeEnd].time.end,
-        line: data.primaryColor,
-        bar: data.secondaryColor,
+        line: data.colors.accent,
+        bar: data.colors.shade,
       });
       setProgressLessons({
-        start: data.timetable[0].time.start,
-        end: data.timetable[lastTimeEnd].time.end,
-        active: data.primaryColor,
-        inactive: data.secondaryColor,
+        // start: data.timetable[0].time.start,
+        // end: data.timetable[lastTimeEnd].time.end,
+        accent: data.colors.accent,
+        shade: data.colors.shade,
         lessons: data.timetable,
       });
     }
   }, [data]);
-
-  console.log(data);
 
   const openPanel = () => {
     setDetailLesson({ open: false, data: undefined });

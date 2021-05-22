@@ -54,7 +54,7 @@ export const LessonProgressBar: FC<{ data: LessonDataProps }> = ({ data }) => {
     <LessonProgressBarStyle
       className="progress"
       style={{ width: pos }}
-      primary={data.primaryColor}>
+      primary={data.colors.accent}>
       <LessonAvatarProgress avatar={data.avatar} />
       <LessonName name={lesson} />
       <LessonStatusIcon status={status} timer={timer} />

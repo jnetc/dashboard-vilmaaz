@@ -1,9 +1,9 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-// Hook
-import { useRealtime } from '@Main/lessons/hook/useRealtime';
 // Types
-import { ProgressLessonsType } from '@types';
+import { ProgressLessonsData } from '@types';
+// Component
+import { ProgressLesson } from '@Main/lessons/right-side-panel/ProgressLesson';
 
 const ProgressLessonsStyle = styled.div`
   grid-row: 5;
@@ -11,26 +11,20 @@ const ProgressLessonsStyle = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
   gap: 0.4rem;
+  padding-bottom: 35px;
   transition: all 0.3s ease-in-out;
 `;
 
-// TODO Вывести список уроков
-
-export const ProgressLessons: FC<{ data: ProgressLessonsType }> = ({
+export const ProgressLessons: FC<{ data: ProgressLessonsData }> = ({
   data,
 }) => {
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
+  const { accent, shade, lessons } = data;
+  const color = { accent, shade };
 
-  useEffect(() => {
-    let timer = setInterval(() => setMinutes(new Date().getMinutes()), 1000);
-    return () => clearInterval(timer);
-  }, [minutes]);
+  const elements = lessons.map(l => {
+    return <ProgressLesson key={l.id} data={l} color={color} />;
+  });
 
-  const realtime = useRealtime(minutes);
-  console.log(realtime);
-
-  return <ProgressLessonsStyle>Lessons{data.active}</ProgressLessonsStyle>;
+  return <ProgressLessonsStyle>{elements}</ProgressLessonsStyle>;
 };

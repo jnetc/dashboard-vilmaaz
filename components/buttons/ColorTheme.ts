@@ -17,14 +17,14 @@ export const handleThemeSwitcher = (
       }
       return `
         border-color: ${props.primary};
-        box-shadow: 0px 20px 20px ${props.shadow_primary(
+        box-shadow: 0px 20px 20px ${props.primary(
           0.05
-        )}, 0px 5px 5px ${props.shadow_primary(0.2)};
+        )}, 0px 5px 5px ${props.primary(0.2)};
         &:hover {
           border-color: ${props.primary_hover};
-          box-shadow: 0px 20px 20px ${props.shadow_primary_hover(
+          box-shadow: 0px 20px 20px ${props.primary_hover(
             0.05
-          )}, 0px 5px 5px ${props.shadow_primary_hover(0.2)}
+          )}, 0px 5px 5px ${props.primary_hover(0.2)}
         }`;
 
     case 'default':
@@ -49,14 +49,14 @@ export const handleThemeSwitcher = (
       }
       return `
         border-color: ${props.danger};
-        box-shadow: 0px 20px 20px ${props.shadow_danger(
+        box-shadow: 0px 20px 20px ${props.danger(
           0.05
-        )}, 0px 5px 5px ${props.shadow_danger(0.2)};
+        )}, 0px 5px 5px ${props.danger(0.2)};
         &:hover {
           border-color: ${props.danger_hover};
-          box-shadow: 0px 20px 20px ${props.shadow_danger_hover(
+          box-shadow: 0px 20px 20px ${props.danger_hover(
             0.05
-          )}, 0px 5px 5px ${props.shadow_danger_hover(0.2)}
+          )}, 0px 5px 5px ${props.danger_hover(0.2)}
         }`;
 
     default:
