@@ -1,17 +1,7 @@
 // import original module declarations
 import { DefaultTheme } from 'styled-components';
 
-// type Tye<T> = {
-//   val: T
-// }
-
 declare function AlphaChanel(alpha?: number): string;
-declare function LessonColor(color: string): string;
-// declare function ColorHSL<T>(color?: T): string;
-
-// const x: Tye<number> = (val: T): T => {
-//   return val
-// }
 
 // and extend them!
 declare module 'styled-components' {
@@ -46,8 +36,6 @@ declare module 'styled-components' {
     fontsize_16: string;
     fontsize_14: string;
     timeline: string;
-    // shadow: string;
-    // lessonColor: typeof LessonColor;
   }
 }
 
@@ -82,5 +70,4 @@ export const theme: DefaultTheme = {
   fontsize_16: '1rem',
   fontsize_14: '.8rem',
   timeline: '2000',
-  // lessonColor: color => color,
 };

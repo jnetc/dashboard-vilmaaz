@@ -1,11 +1,17 @@
 import { FC, useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 // Hook
 import { useRealtime } from '@Main/lessons/hook/useRealtime';
 // Types
-import { Lesson, LessonsColor } from '@types';
+import { Lesson, LessonsColor, ProgressLessonsDataStyle } from '@types';
+// Helper functions
+import { transformTimeToNum } from '@Store/utils/helperFunc';
 
-const ProgressLessonStyle = styled.div`
+const markerPoint = keyframes`
+  50% {transform: scale(0.5) }
+`;
+
+const ProgressLessonStyle = styled.div<ProgressLessonsDataStyle>`
   display: grid;
   grid-template-columns: 3.125rem 1fr;
   grid-template-rows: repeat(2, 1.563rem);
@@ -16,22 +22,36 @@ const ProgressLessonStyle = styled.div`
     grid-row: 1 / -1;
     width: 16px;
     height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     margin: auto;
     border-radius: 50%;
-    border: 2px solid var(--brown); // TODO смена цвета / логическое
-    background-color: var(--bg-regular); // TODO смена цвета / логическое
-    // TODO Удаление, создание псевдокласса при активности / логическое
-    &::after {
-      content: '';
-      width: 6px;
-      height: 6px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: ${({ flow, colors }) =>
+      flow.process === 'wait'
+        ? css`var(--${colors.shade})`
+        : css`var(--${colors.accent})`};
+
+    z-index: 1;
+
+    & .marker-point {
+      width: 8px;
+      height: 8px;
       border-radius: inherit;
-      background-color: var(--brown);
-      transform: translate(-50%, -50%);
+
+      background-color: ${({ flow, colors }) =>
+        flow.process === 'wait' ? `transparent` : css`var(--${colors.accent})`};
+
+      animation: ${({ flow }) =>
+        flow.process === 'run'
+          ? css`
+              ${markerPoint} 1s ease-in-out infinite
+            `
+          : ''};
+
       z-index: 5;
     }
   }
@@ -42,7 +62,10 @@ const ProgressLessonStyle = styled.div`
     position: absolute;
     top: 12px;
     left: 4px;
-    background-color: var(--brown); // TODO смена цвета / логическое
+    background: ${({ flow, colors }) =>
+      flow.process === 'wait'
+        ? css`var(--${colors.shade})`
+        : css`var(--${colors.accent})`};
     z-index: -1;
   }
 
@@ -74,14 +97,24 @@ export const ProgressLesson: FC<{ data: Lesson; color: LessonsColor }> = ({
     return () => clearInterval(timer);
   }, [minutes]);
 
-  const realtime = useRealtime(minutes);
-  console.log(realtime);
+  const { currentTimeNum } = useRealtime(minutes);
+  const startLesson = transformTimeToNum(data.time.start);
+  const endLesson = transformTimeToNum(data.time.end);
 
-  console.log('Каждый урок', data, color);
+  const flow = { process: 'wait' };
+
+  if (startLesson <= currentTimeNum) {
+    flow.process = 'run';
+  }
+  if (endLesson < currentTimeNum) {
+    flow.process = 'done';
+  }
 
   return (
-    <ProgressLessonStyle>
-      <div className="marker" />
+    <ProgressLessonStyle colors={color} flow={flow}>
+      <div className="marker">
+        <div className="marker-point" />
+      </div>
       <time>
         {data.time.start} - {data.time.end}
       </time>

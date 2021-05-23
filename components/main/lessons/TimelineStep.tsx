@@ -37,24 +37,21 @@ export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
     return () => clearInterval(timer);
   }, [minutes]);
 
-  const realtime = useRealtime(minutes);
+  const { position, visible, currentTimeStr } = useRealtime(minutes);
 
   movementTimeAndTimetable(
     width,
     timetableEl,
-    realtime.position,
+    position,
     autoMovement,
     mainPaddingLeft
   );
 
   return (
     <>
-      {realtime.visible && (
-        <TimelineStepStyle
-          id="current-time"
-          position={realtime.position}
-          lines={lines}>
-          {realtime.timeString}
+      {visible && (
+        <TimelineStepStyle id="current-time" position={position} lines={lines}>
+          {currentTimeStr}
         </TimelineStepStyle>
       )}
     </>

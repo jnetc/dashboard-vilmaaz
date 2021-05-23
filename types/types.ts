@@ -152,3 +152,10 @@ export type ProgressBarType = {
 export type ProgressLessonsData = {
   lessons: Array<Lesson>;
 } & LessonsColor;
+
+export type ProgressLessonsDataStyle = {
+  colors: LessonsColor;
+  flow: {
+    process: string;
+  };
+};

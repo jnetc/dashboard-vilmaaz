@@ -40,14 +40,14 @@ export const LessonProgressBar: FC<{ data: LessonDataProps }> = ({ data }) => {
     return () => clearInterval(timer);
   }, [minutes]);
 
-  const { position, timeNumber } = useRealtime(minutes);
+  const { position, currentTimeNum } = useRealtime(minutes);
 
   const { pos, status, lesson, timer } = learningProgress(
     data.start,
     data.timetable,
     lengthLessons,
     position,
-    timeNumber
+    currentTimeNum
   );
 
   return (

@@ -24,12 +24,12 @@ export const useRealtime = (minutes: number) => {
   // !!! Проверить промежуток времени с 13:59 - 14:00
   // TODO Узнать из-за чего это происходит
 
-  // const stepTime = transformTimeToNum(`${hours}:${minutes}`);
+  const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
   // const h = (new Date().getHours() - 2).toString();
   // const m = new Date().getMinutes().toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
-  const stepTime = transformTimeToNum(`9:55`);
+  // const stepTime = transformTimeToNum(`9:46`);
   let visible: boolean = false;
 
   if (startLessons <= stepTime && endLessons > stepTime) {
@@ -42,7 +42,7 @@ export const useRealtime = (minutes: number) => {
   return {
     position,
     visible,
-    timeString: `${hours}:${minutes > 9 ? minutes : '0' + minutes}`,
-    timeNumber: stepTime,
+    currentTimeStr: `${hours}:${minutes > 9 ? minutes : '0' + minutes}`,
+    currentTimeNum: stepTime,
   };
 };

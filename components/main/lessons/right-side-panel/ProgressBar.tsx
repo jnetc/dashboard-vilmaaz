@@ -57,21 +57,21 @@ export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
     return () => clearInterval(timer);
   }, [minutes]);
 
-  const realtime = useRealtime(minutes);
+  const { currentTimeNum } = useRealtime(minutes);
   const radius = 100;
   const circumference = Math.round(2 * Math.PI * radius); //?  2 * (π = 3,14) * (r = 100)
   const startDrawPoint = transformTimeToNum(time.start);
   const endDrawPoint = transformTimeToNum(time.end);
   const totalTime = endDrawPoint - startDrawPoint;
-  const start = realtime.timeNumber - startDrawPoint;
+  const start = currentTimeNum - startDrawPoint;
 
   let step = 0;
-  let showMeTime = '00:00';
+  let showMeTime = '';
 
-  if (realtime.timeNumber < startDrawPoint) {
+  if (currentTimeNum < startDrawPoint) {
     step = circumference;
     showMeTime = 'SLEEP';
-  } else if (endDrawPoint <= realtime.timeNumber) {
+  } else if (endDrawPoint <= currentTimeNum) {
     step = 0;
     showMeTime = 'DONE';
   } else {
@@ -79,7 +79,7 @@ export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
     const calcStep = (timeByStep * circumference) / 100;
     step = circumference - calcStep;
 
-    const calcTime = endDrawPoint - realtime.timeNumber;
+    const calcTime = endDrawPoint - currentTimeNum;
     showMeTime = transformNumToTime(calcTime);
   }
 
