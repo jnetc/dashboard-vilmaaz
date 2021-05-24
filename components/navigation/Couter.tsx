@@ -6,7 +6,7 @@ import { Element } from '@types';
 // Animation (flash effect)
 const impulse = (visible: string, hidden: string) => keyframes`
   0% {box-shadow: 0 0 0 0px ${visible}}
-  100%{box-shadow: 0 0 0 10px ${hidden}}
+  100% {box-shadow: 0 0 0 10px ${hidden}}
 `;
 
 // Main css

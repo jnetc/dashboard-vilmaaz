@@ -8,12 +8,12 @@ import { Lesson, LessonsColor, ProgressLessonsDataStyle } from '@types';
 import { transformTimeToNum } from '@Store/utils/helperFunc';
 
 const markerPoint = keyframes`
-  50% {transform: scale(0.5) }
+  50% { transform: scale(0.5) }
 `;
 
 const ProgressLessonStyle = styled.div<ProgressLessonsDataStyle>`
   display: grid;
-  grid-template-columns: 3.125rem 1fr;
+  grid-template-columns: 2rem 1fr;
   grid-template-rows: repeat(2, 1.563rem);
   gap: 4px;
   transition: all 0.3s ease-in-out;
@@ -26,7 +26,8 @@ const ProgressLessonStyle = styled.div<ProgressLessonsDataStyle>`
     justify-content: center;
     align-items: center;
     position: relative;
-    margin: auto;
+    align-self: center;
+    /* margin: auto; */
     border-radius: 50%;
     border-style: solid;
     border-width: 2px;
@@ -48,9 +49,9 @@ const ProgressLessonStyle = styled.div<ProgressLessonsDataStyle>`
       animation: ${({ flow }) =>
         flow.process === 'run'
           ? css`
-              ${markerPoint} 1s ease-in-out infinite
+              ${markerPoint} 1s ease-in-out infinite;
             `
-          : ''};
+          : 'none'};
 
       z-index: 5;
     }

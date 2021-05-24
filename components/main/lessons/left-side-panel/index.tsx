@@ -37,7 +37,7 @@ const LeftSidePanelStyle = styled.div`
     right: -20px;
     background: linear-gradient(
       to right,
-      ${({ theme }) => theme.bg_middle(0.7)} 0%,
+      ${({ theme }) => theme.bg_middle(1)} 0%,
       ${({ theme }) => theme.bg_middle(0)} 100%
     );
   }

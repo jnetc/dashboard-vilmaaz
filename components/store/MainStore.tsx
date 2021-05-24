@@ -45,8 +45,6 @@ const MainStore: FC = ({ children }) => {
     setTimeline(staticValues(timepoints));
   }, []);
 
-  console.log('MainStore', detailLesson);
-
   return (
     <MainContext.Provider
       value={{

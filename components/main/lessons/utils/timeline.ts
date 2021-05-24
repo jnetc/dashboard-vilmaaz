@@ -100,12 +100,13 @@ export const learningProgress = (
   const { lesson, timer } = getTimerAndName(lessons, timeNumber);
 
   if (start > position) return { status: 'wait', pos: startWidth };
+
   if (startPosition > position)
     return { timer: timer, lesson: undefined, status: 'time', pos: startWidth };
+
   if (endPosition <= position) return { status: 'done', pos: endPosition };
 
   const initGrowing = position - startPosition + startWidth;
-
   return { timer: timer, lesson: lesson, status: 'time', pos: initGrowing };
 };
 

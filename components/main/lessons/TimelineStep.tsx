@@ -20,7 +20,7 @@ const TimelineStepStyle = styled(TimelinePointsStyle)`
   border-color: ${({ theme }) => theme.primary()};
   box-shadow: 0 5px 5px ${({ theme }) => theme.primary(0.15)},
     0 20px 20px ${({ theme }) => theme.primary(0.1)};
-  z-index: 100;
+  z-index: 1;
   pointer-events: none;
   &::after {
     background-color: ${({ theme }) => theme.primary(0.5)};

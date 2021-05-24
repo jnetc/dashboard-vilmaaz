@@ -29,14 +29,15 @@ export const useRealtime = (minutes: number) => {
   // const h = (new Date().getHours() - 2).toString();
   // const m = new Date().getMinutes().toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
-  // const stepTime = transformTimeToNum(`9:46`);
-  let visible: boolean = false;
+  // const stepTime = transformTimeToNum(`9:50`);
 
-  if (startLessons <= stepTime && endLessons > stepTime) {
+  //* Hide timeline clock bar
+  let visible: boolean = false;
+  if (startLessons <= stepTime || endLessons > stepTime) {
     visible = true;
   }
 
-  const timepos = Math.abs(startLessons - stepTime);
+  const timepos = stepTime - startLessons;
   const position = Math.round((timepos * timelineWidth) / totalTime);
 
   return {

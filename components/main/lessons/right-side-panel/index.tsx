@@ -11,9 +11,9 @@ import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 import { ProgressBarType, ProgressLessonsData } from '@types';
 
 const RightSidePanelStyle = styled.section<{ open: boolean }>`
-  min-width: 300px;
+  min-width: 226px;
   display: ${({ open }) => (open ? 'grid' : 'none')};
-  grid-template-rows: repeat(2, 48px) 300px 40px 1fr;
+  grid-template-rows: 48px 60px 300px 40px 1fr;
   padding: 35px 30px;
   position: absolute;
   top: 0;
@@ -22,7 +22,7 @@ const RightSidePanelStyle = styled.section<{ open: boolean }>`
   overflow-y: auto;
   backdrop-filter: blur(4px);
   border-radius: 30px 0 0 30px;
-  background-color: ${({ theme }) => theme.bg_regular(0.7)};
+  background-color: ${({ theme }) => theme.bg_regular(0.9)};
   box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
     0px 10px 10px ${props => props.theme.bg_dark(0.3)};
   z-index: 100;

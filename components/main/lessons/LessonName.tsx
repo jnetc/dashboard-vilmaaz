@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
+// TODO fix overflow text position
 const ProgressNameStyle = styled.div`
   width: 100%;
   padding: 0 65px;
