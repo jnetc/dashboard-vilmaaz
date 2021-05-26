@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import CtrlButton, {
   MenuHideBottonStyle,
 } from '@Buttons/ctrl-button/CtrlButton';
+import { DraggableArea } from '@Main/lessons/left-side-panel/DraggableArea';
 // Store
 import { useGlobalStore } from '@Store/GlobalStore';
 // Types
@@ -11,14 +12,14 @@ import { Element } from '@types';
 
 const LeftSidePanelStyle = styled.div`
   min-width: 140px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 60px 1fr;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  padding: 35px 0;
+  padding: 35px;
   background-color: ${({ theme }) => theme.bg_middle(0.8)};
   backdrop-filter: blur(4px);
   z-index: 100;
@@ -68,9 +69,12 @@ export const LeftSidePanel: FC = () => {
 
   return (
     <LeftSidePanelStyle ref={sidepanelEl}>
-      <CtrlButton onClick={hidemenu}>
+      <CtrlButton
+        onClick={hidemenu}
+        gridpos={{ row: 1, align: 'center', justify: 'center' }}>
         <MenuHideBottonStyle />
       </CtrlButton>
+      <DraggableArea />
     </LeftSidePanelStyle>
   );
 };

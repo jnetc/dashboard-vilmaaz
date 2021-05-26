@@ -36,7 +36,7 @@ export const TimelinePointsStyle = styled.div<Position & Lines>`
   }
   &:hover {
     background-color: ${({ theme }) => theme.bg_regular(0.8)};
-    border-color: ${({ theme }) => theme.primary(0.5)};
+    border-color: ${({ theme }) => theme.grey_light()};
     /* box-shadow: 0 10px 10px ${({ theme }) => theme.bg_dark(0.3)},
       0 40px 40px ${({ theme }) => theme.bg_dark(0.2)}; */
     z-index: 2;

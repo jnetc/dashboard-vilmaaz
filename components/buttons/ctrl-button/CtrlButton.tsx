@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
-const CtrlButtonStyle = styled.button`
+export const CtrlButtonStyle = styled.button<{ gridpos: Grid | undefined }>`
   width: 3rem;
   height: 3rem;
   display: flex;
@@ -17,6 +17,9 @@ const CtrlButtonStyle = styled.button`
     background-color: ${({ theme }) => theme.bg_light()};
     /* background-color: ${({ theme }) => theme.bg_light(0.7)}; */
   }
+  grid-row: ${({ gridpos }) => (gridpos ? gridpos.row : '')};
+  justify-self: ${({ gridpos }) => (gridpos ? gridpos.justify : '')};
+  align-self: ${({ gridpos }) => (gridpos ? gridpos.align : '')};
 `;
 
 const ButtonStyle = styled.div`
@@ -64,16 +67,23 @@ export const MenuHideBottonStyle = styled(ButtonStyle)`
   }
 `;
 
+type Grid = {
+  row: number;
+  justify?: 'center' | 'flex-start' | 'flex-end';
+  align?: 'center' | 'flex-start' | 'flex-end';
+};
+
 type Props = {
   children?: ReactNode;
   onClick?: () => void;
+  gridpos?: Grid;
 };
 
 const CtrlButton: FC<Props> = props => {
-  // console.log('onclick button???? ');
-
   return (
-    <CtrlButtonStyle onClick={props.onClick}>{props.children}</CtrlButtonStyle>
+    <CtrlButtonStyle onClick={props.onClick} gridpos={props.gridpos}>
+      {props.children}
+    </CtrlButtonStyle>
   );
 };
 

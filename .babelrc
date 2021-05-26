@@ -8,7 +8,8 @@
         "minify": true,
         "transpileTemplateLiterals": true,
         "pure": true,
-        "displayName": false,
+        "displayName": false, // generate other classname
+        "fileName": false, // generate other classname
         "preprocess": false
       }
     ]

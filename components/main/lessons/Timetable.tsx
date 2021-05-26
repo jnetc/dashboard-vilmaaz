@@ -24,6 +24,7 @@ const TimetableStyle = styled.div`
   /* padding: 0 160px 0 2px; */
   padding: 0 120px 0 2px;
   z-index: 1;
+  user-select: none;
   @media (max-width: 1920px) {
     width: 1920px;
   }
@@ -119,9 +120,6 @@ export const Timetable: FC = () => {
   };
 
   const mouseUp = (ev: Event) => {
-    ev.preventDefault();
-    ev.stopPropagation();
-
     transition(timetableEl.current);
 
     if (!startMove ?? !timetableEl.current) return;
@@ -140,8 +138,6 @@ export const Timetable: FC = () => {
   };
 
   const mouseLeave = (ev: Event) => {
-    ev.preventDefault();
-    ev.stopPropagation();
     transition(timetableEl.current);
 
     if (!startMove ?? !timetableEl.current) return;
