@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 // Types
 import { NavLink } from '@types';
 // Components
@@ -8,26 +7,8 @@ import AltLink from './Link';
 import { Logo } from '../icons/Logos';
 // Store
 import { useGlobalStore } from '@Store/GlobalStore';
-
-// STYLE COMPONENT
-const NavigationStyle = styled.nav`
-  min-width: 220px;
-  min-height: 100%;
-  overflow-y: auto;
-  display: grid;
-  /* display: none; */
-  grid-template-rows: 120px 1fr;
-  justify-content: center;
-  padding: 35px 0;
-  svg.logo {
-    justify-self: center;
-    align-items: flex-start;
-  }
-  ul {
-    justify-self: center;
-    align-self: center;
-  }
-`;
+// Styles
+import { NavigationStyle } from './styles/navigation';
 
 export const navigation: Array<NavLink> = [
   {

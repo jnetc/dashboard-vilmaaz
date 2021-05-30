@@ -1,16 +1,6 @@
 import { FC } from 'react';
-import styled from 'styled-components';
-
-const LessonCommonProgressStyle = styled.svg<{ shade: string }>`
-  position: absolute;
-  top: 0;
-  left: 1px;
-  fill: ${({ theme }) => theme.bg_middle()};
-  stroke: var(--${({ shade }) => shade});
-  stroke-width: 2;
-  stroke-dasharray: 12;
-  transition: stroke 0.3s ease-in-out;
-`;
+// Styles
+import { LessonCommonProgressStyle } from './styles/lessons';
 
 export const LessonCommonProgress: FC<{
   length: number;

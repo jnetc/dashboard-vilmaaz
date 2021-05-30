@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import styled from 'styled-components';
 // Types
 import { NavLink, NavigationProps } from '@types';
-
+// Icons
 import {
   Lessons,
   Schedule,
@@ -12,55 +11,8 @@ import {
   Settings,
 } from '../icons/Navigation48px';
 import { Counter } from './Couter';
-
-// STYLE COMPONENT
-const LinkStyle = styled.li`
-  margin-bottom: 1.9rem;
-  width: 7.5rem;
-  height: 7.5rem;
-  a {
-    width: inherit;
-    height: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    border-radius: 20px;
-    border: 2px solid transparent;
-    color: ${({ theme }) => theme.grey_light()};
-    font-size: ${({ theme }) => theme.fontsize_16};
-    transition: all 0.3s ease-in-out;
-    user-select: none;
-  }
-  svg {
-    stroke: ${({ theme }) => theme.grey_light()};
-    transition: all 0.3s ease-in-out;
-  }
-  span.link-name {
-    margin-top: 10px;
-  }
-  &:hover,
-  &:focus {
-    a {
-      color: ${({ theme }) => theme.white()};
-    }
-    svg {
-      stroke: ${({ theme }) => theme.white()};
-    }
-  }
-  &.active {
-    a {
-      border-color: ${({ theme }) => theme.primary()};
-      color: ${({ theme }) => theme.white()};
-      box-shadow: 0 5px 5px ${({ theme }) => theme.primary(0.15)},
-        0 20px 20px ${({ theme }) => theme.primary(0.1)};
-    }
-    svg {
-      stroke: ${({ theme }) => theme.white()};
-    }
-  }
-`;
+// Styles
+import { LinkStyle } from './styles/navigation';
 
 const UrlComponent: FC<NavigationProps> = props => (
   <LinkStyle

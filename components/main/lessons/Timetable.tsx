@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect, FC, createRef } from 'react';
-import styled from 'styled-components';
-// Components
+
 import {
   transition,
   getTransformStylePosition,
@@ -14,42 +13,12 @@ import { useMainStore } from '@Store/MainStore';
 import { useGlobalStore } from '@Store/GlobalStore';
 // Types
 import { Event, Element, Div } from '@types';
-
-const TimetableStyle = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  position: relative;
-  grid-template-rows: 60px 1fr;
-  /* padding: 0 160px 0 2px; */
-  padding: 0 120px 0 2px;
-  z-index: 1;
-  user-select: none;
-  @media (max-width: 1920px) {
-    width: 1920px;
-  }
-  &.animate {
-    transition: transform 0.3s ease-in-out;
-  }
-`;
-
-const MainStyle = styled.main`
-  width: 100%;
-  min-height: 100%;
-  padding: 35px 0 0 140px;
-  /* padding: 20px 0 0 70px; */
-  border-radius: 30px 0 0 30px;
-  position: relative;
-  overflow: hidden;
-  background-color: ${props => props.theme.bg_middle()};
-  box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-    0px 10px 10px ${props => props.theme.bg_dark(0.3)};
-`;
-
-const TimetableEmptyStyle = styled.h2`
-  justify-self: center;
-  align-self: center;
-`;
+// Styles
+import {
+  MainStyle,
+  TimetableStyle,
+  TimetableEmptyStyle,
+} from './styles/lessons';
 
 export const Timetable: FC = () => {
   const { setTimetableEl, setAutoMovement, content } = useMainStore();
@@ -108,7 +77,7 @@ export const Timetable: FC = () => {
 
   const mouseMove = (ev: Event) => {
     ev.preventDefault();
-    ev.stopPropagation();
+
     if (!startMove ?? !timetableEl.current) return;
 
     timetableEl.current.classList.remove('animate');
@@ -120,6 +89,8 @@ export const Timetable: FC = () => {
   };
 
   const mouseUp = (ev: Event) => {
+    ev.preventDefault();
+
     transition(timetableEl.current);
 
     if (!startMove ?? !timetableEl.current) return;
@@ -138,6 +109,8 @@ export const Timetable: FC = () => {
   };
 
   const mouseLeave = (ev: Event) => {
+    ev.preventDefault();
+
     transition(timetableEl.current);
 
     if (!startMove ?? !timetableEl.current) return;
@@ -156,10 +129,10 @@ export const Timetable: FC = () => {
         id="timetable"
         ref={timetableEl}
         style={{ transform: `translate3d(0, 0, 0)` }}
-        onMouseDown={mouseDown}
-        onMouseMove={mouseMove}
-        onMouseUp={mouseUp}
-        onMouseLeave={mouseLeave}
+        onMouseDown={ev => mouseDown(ev)}
+        onMouseMove={ev => mouseMove(ev)}
+        onMouseUp={ev => mouseUp(ev)}
+        onMouseLeave={ev => mouseLeave(ev)}
         onTransitionEnd={() => transition}>
         <Timeline width={widthMainEl} lines={timepoinsHeight} />
         <Timefield />

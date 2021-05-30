@@ -134,7 +134,7 @@ export type Color = { primary: string; secondary: string };
 
 export type Lines = { lines: number };
 
-export type Order = { order: number };
+// export type Order = { order: number };
 
 export type Width = { width: number };
 
@@ -158,4 +158,10 @@ export type ProgressLessonsDataStyle = {
   flow: {
     process: string;
   };
+};
+
+export type Order = {
+  id: string;
+  name: string;
+  order: number;
 };

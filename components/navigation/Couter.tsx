@@ -1,36 +1,8 @@
 import { useState, useEffect, useRef, FC } from 'react';
-import styled, { keyframes } from 'styled-components';
-
+// Types
 import { Element } from '@types';
-
-// Animation (flash effect)
-const impulse = (visible: string, hidden: string) => keyframes`
-  0% {box-shadow: 0 0 0 0px ${visible}}
-  100% {box-shadow: 0 0 0 10px ${hidden}}
-`;
-
-// Main css
-const CountStyle = styled.div`
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 15%;
-  left: 55%;
-  color: ${({ theme }) => theme.bg_main()};
-  font-size: ${({ theme }) => theme.fontsize_14};
-  font-weight: bold;
-  border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.bg_main()};
-  background-color: ${({ theme }) => theme.primary()};
-  letter-spacing: 0px;
-  &.notice {
-    animation: ${({ theme }) => impulse(theme.primary(), theme.primary(0))} 1s
-      ease-in-out forwards;
-  }
-`;
+// Styles
+import { CountStyle } from './styles/navigation';
 
 export const Counter: FC = () => {
   const [count, setCount] = useState<number>(80);

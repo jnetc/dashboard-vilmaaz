@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-import styled from 'styled-components';
 // Types
 import { ProgressBarType } from '@types';
 // Hook
@@ -11,43 +10,14 @@ import {
   transformTimeToNum,
   transformNumToTime,
 } from '@Store/utils/helperFunc';
+// Styles
+import {
+  BarStyle,
+  ProgressBarStyle,
+  SvgStyle,
+  ProgressStyle,
+} from './styles/right-panel-styles';
 
-const ProgressBarStyle = styled.div`
-  grid-row: 3;
-  margin: auto;
-  position: relative;
-`;
-
-const SvgStyle = styled.svg`
-  fill: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-`;
-
-const BarStyle = styled.circle<{ barColor: string }>`
-  stroke: var(--${({ barColor }) => barColor});
-  stroke-width: 25;
-`;
-
-const ProgressStyle = styled.circle<{
-  lineColor: string;
-  track: number;
-  progress: number;
-}>`
-  stroke: var(--${({ lineColor }) => lineColor});
-  stroke-dasharray: ${({ track }) => track};
-  stroke-dashoffset: ${({ progress }) => progress};
-  stroke-linecap: round;
-  stroke-width: 10;
-  transform: rotate(-90deg);
-  transform-origin: center;
-  transition: all 0.3s ease-in-out;
-  will-change: stroke-dashoffset stroke;
-`;
-
-// TODO Сделать прогрессивную шкалу + анимация
 export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
   const { bar, line, ...time } = data;
   const [minutes, setMinutes] = useState<number>(new Date().getMinutes());

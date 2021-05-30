@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Components
@@ -9,35 +8,11 @@ import { ProgressLessons } from '@Main/lessons/right-side-panel/ProgressLessons'
 import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 // Types
 import { ProgressBarType, ProgressLessonsData } from '@types';
-
-const RightSidePanelStyle = styled.section<{ open: boolean }>`
-  min-width: 226px;
-  display: ${({ open }) => (open ? 'grid' : 'none')};
-  grid-template-rows: 48px 60px 300px 40px 1fr;
-  padding: 35px 30px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  overflow-y: auto;
-  backdrop-filter: blur(4px);
-  border-radius: 30px 0 0 30px;
-  background-color: ${({ theme }) => theme.bg_regular(0.9)};
-  box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-    0px 10px 10px ${props => props.theme.bg_dark(0.3)};
-  z-index: 100;
-  user-select: none;
-  h2 {
-    grid-row: 2;
-    align-self: flex-end;
-  }
-`;
-
-const RightSidePanelHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
+// Styles
+import {
+  RightSidePanelStyle,
+  RightSidePanelHeader,
+} from './styles/right-panel-styles';
 
 export const RightSidePanel: FC = () => {
   const {
@@ -70,8 +45,6 @@ export const RightSidePanel: FC = () => {
         bar: data.colors.shade,
       });
       setProgressLessons({
-        // start: data.timetable[0].time.start,
-        // end: data.timetable[lastTimeEnd].time.end,
         accent: data.colors.accent,
         shade: data.colors.shade,
         lessons: data.timetable,
@@ -89,10 +62,10 @@ export const RightSidePanel: FC = () => {
   return open && data ? (
     <RightSidePanelStyle open={open}>
       <RightSidePanelHeader>
+        <DayOfWeek />
         <CtrlButton onClick={() => openPanel()}>
           <CloseButtonStyle />
         </CtrlButton>
-        <DayOfWeek />
       </RightSidePanelHeader>
       <h2>{data?.name}</h2>
       <ProgressBar data={progressBar} />

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, FC } from 'react';
-import styled from 'styled-components';
 // Global Context
 import { useMainStore } from '@Store/MainStore';
 // Components
@@ -8,24 +7,12 @@ import { TimelineStep } from '@Main/lessons/TimelineStep';
 import { getTimePointPos } from '@Main/lessons/utils/timeline';
 // Types
 import { Element, Width, Lines } from '@types';
-
-const TimelineStyle = styled.div`
-  width: 100%;
-  grid-row: 1;
-  position: relative;
-  /* user-select: none;
-  pointer-events: none; */
-  /* padding: 0 160px 0 2px; */
-  cursor: default;
-  div#track {
-    position: relative;
-  }
-`;
+// Styles
+import { TimelineStyle } from './styles/lessons';
 
 const Timeline: FC<Width & Lines> = ({ width, lines }) => {
   const { timepoints, timelineWidth, setTimelineWidth, timeline } =
     useMainStore();
-  // const [timelineW, setTimelineW] = useState(0)
   const [startEndTime, setStartEndTime] = useState<Array<string>>([]);
   const timelineEl = useRef<Element>(null);
 

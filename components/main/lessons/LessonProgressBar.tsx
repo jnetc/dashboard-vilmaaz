@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from 'react';
-import styled from 'styled-components';
 // Types
 import { LessonDataProps } from '@types';
 // Helper function
@@ -10,25 +9,8 @@ import { useRealtime } from '@Main/lessons/hook/useRealtime';
 import { LessonStatusIcon } from '@Main/lessons/LessonStatusIcon';
 import { LessonAvatarProgress } from '@Main/lessons/LessonAvatarProgress';
 import { LessonName } from '@Main/lessons/LessonName';
-
-const LessonProgressBarStyle = styled.div<{ primary: string }>`
-  height: 70px;
-  padding: 10px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  border-radius: inherit;
-  background-color: ${({ theme }) => theme.bg_middle()};
-  border: 2px solid var(--${({ primary }) => primary});
-  transition: all 0.3s ease-in-out;
-  z-index: 11;
-  .active {
-    border-color: ${({ theme }) => theme.grey_middle()};
-    box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-      0px 10px 10px ${props => props.theme.bg_dark(0.3)};
-  }
-`;
+// Styles
+import { LessonProgressBarStyle } from './styles/lessons';
 
 export const LessonProgressBar: FC<{ data: LessonDataProps }> = ({ data }) => {
   const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
