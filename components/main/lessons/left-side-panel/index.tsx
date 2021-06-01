@@ -30,7 +30,7 @@ export const LeftSidePanel: FC = () => {
       <CtrlButton
         onClick={hidemenu}
         gridpos={{ row: 1, align: 'center', justify: 'center' }}>
-        <MenuHideBottonStyle />
+        <MenuHideBottonStyle hide={openMenu} />
       </CtrlButton>
       <DraggableArea />
     </LeftSidePanelStyle>

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Components
@@ -7,7 +7,8 @@ import { ProgressBar } from '@Main/lessons/right-side-panel/ProgressBar';
 import { ProgressLessons } from '@Main/lessons/right-side-panel/ProgressLessons';
 import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 // Types
-import { ProgressBarType, ProgressLessonsData } from '@types';
+import { ProgressBarType, ProgressLessonsData, Element } from '@types';
+import { transition } from '@Store/utils/helperFunc';
 // Styles
 import {
   RightSidePanelStyle,
@@ -34,6 +35,8 @@ export const RightSidePanel: FC = () => {
     lessons: [],
   });
 
+  const lessonRef = useRef<Element>(null);
+
   useEffect(() => {
     if (data) {
       const lastTimeEnd = data.timetable.length - 1;
@@ -55,23 +58,27 @@ export const RightSidePanel: FC = () => {
   const openPanel = () => {
     setDetailLesson({ open: false, data: undefined });
     setAutoMovement(true);
+    document.querySelector('body')?.classList.remove('right-side');
+    document.querySelector('main')?.classList.remove('opacity');
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    transition(open, lessonRef, 'open', 'show');
+  }, [open]);
 
-  return open && data ? (
-    <RightSidePanelStyle open={open}>
-      <RightSidePanelHeader>
-        <DayOfWeek />
-        <CtrlButton onClick={() => openPanel()}>
-          <CloseButtonStyle />
-        </CtrlButton>
-      </RightSidePanelHeader>
-      <h2>{data?.name}</h2>
-      <ProgressBar data={progressBar} />
-      <ProgressLessons data={progressLessons} />
+  return (
+    <RightSidePanelStyle open={open} ref={lessonRef}>
+      <div>
+        <RightSidePanelHeader>
+          <DayOfWeek />
+          <CtrlButton onClick={() => openPanel()}>
+            <CloseButtonStyle />
+          </CtrlButton>
+        </RightSidePanelHeader>
+        <h2>{data?.name}</h2>
+        <ProgressBar data={progressBar} />
+        <ProgressLessons data={progressLessons} />
+      </div>
     </RightSidePanelStyle>
-  ) : (
-    <></>
   );
 };

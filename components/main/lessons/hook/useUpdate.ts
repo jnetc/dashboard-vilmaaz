@@ -2,22 +2,26 @@ import { useState, useEffect } from 'react';
 import { useMainStore } from '@Store/MainStore';
 import { transformTimeToNum } from '@Store/utils/helperFunc';
 
-export const useRealtime = (minutes: number) => {
+export const useUpdate = () => {
   const {
     timelineWidth,
     timeline: { startLessons, endLessons, totalTime },
   } = useMainStore();
-  let [hours, setHours] = useState<number>(new Date().getHours());
+  const [hours, setHours] = useState<number>(new Date().getHours());
+  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
 
   useEffect(() => {
-    let tick = setInterval(() => {
-      setHours(new Date().getHours());
-    }, 1000);
+    const counter = setInterval(
+      () => setMinutes(new Date().getMinutes()),
+      1000
+    );
 
-    return () => {
-      clearInterval(tick);
-    };
+    return () => clearInterval(counter);
   }, []);
+
+  useEffect(() => {
+    setHours(new Date().getHours());
+  }, [minutes]);
 
   //! Проверить промежуток времени с 8:59 - 9:00
   //! Проверить промежуток времени с 10:59 - 11:00
@@ -30,7 +34,7 @@ export const useRealtime = (minutes: number) => {
   const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
   // const h = (new Date().getHours() - 2).toString();
-  // const m = new Date().getMinutes().toString();
+  // const m = (new Date().getMinutes() + 54).toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
   // const stepTime = transformTimeToNum(`9:50`);
 
@@ -40,9 +44,11 @@ export const useRealtime = (minutes: number) => {
     visible = true;
   }
 
+  // console.log('hook', stepTime);
+
   const timepos = stepTime - startLessons;
   const position = Math.round((timepos * timelineWidth) / totalTime);
-
+  // debugger
   return {
     position,
     visible,

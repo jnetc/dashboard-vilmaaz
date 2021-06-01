@@ -1,15 +1,12 @@
 import { FC } from 'react';
 // Types
-import { TimelinePointsType, Lines } from '@types';
+import { TimelinePointsType } from '@types';
 // Styles
 import { TimelinePointsStyle } from './styles/lessons';
 
-export const TimelinePoints: FC<TimelinePointsType & Lines> = ({
-  data,
-  lines,
-}) => {
+export const TimelinePoints: FC<TimelinePointsType> = ({ data }) => {
   return (
-    <TimelinePointsStyle position={data.position} lines={lines}>
+    <TimelinePointsStyle position={data.position}>
       {data.time}
     </TimelinePointsStyle>
   );

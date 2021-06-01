@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const CtrlButtonStyle = styled.button<{ gridpos: Grid | undefined }>`
   width: 3rem;
@@ -47,7 +47,7 @@ export const CloseButtonStyle = styled(ButtonStyle)`
   }
 `;
 
-export const MenuHideBottonStyle = styled(ButtonStyle)`
+export const MenuHideBottonStyle = styled(ButtonStyle)<{ hide: boolean }>`
   &::after,
   &::before {
     content: '';
@@ -57,7 +57,14 @@ export const MenuHideBottonStyle = styled(ButtonStyle)`
     top: 50%;
     left: 0.4rem;
     background: ${({ theme }) => theme.grey_light()};
-    transform-origin: 0;
+    ${({ hide }) =>
+      hide
+        ? css`
+            transform-origin: 0px;
+          `
+        : css`
+            transform-origin: 10px;
+          `}
   }
   &::after {
     transform: translateY(-50%) rotate(45deg);

@@ -81,13 +81,26 @@ export const LinkStyle = styled.li`
 //* NAV => component
 export const NavigationStyle = styled.nav`
   min-width: 220px;
-  min-height: 100%;
-  overflow-y: auto;
-  display: grid;
+  /* min-height: 100%; */
+  height: 100vh;
+  display: flex;
+  /* overflow-y: auto; */
   /* display: none; */
-  grid-template-rows: 120px 1fr;
-  justify-content: center;
-  padding: 35px 0;
+  top: 0px;
+  position: sticky;
+  /* overflow: hidden; */
+  /* transform: translateX(220px); */
+  transition: all 0.3s ease-in-out;
+  z-index: 500;
+  > div {
+    display: grid;
+    grid-template-rows: 120px 1fr;
+    justify-content: center;
+    min-width: inherit;
+    height: 100%;
+    padding: 35px 0;
+    overflow-y: auto;
+  }
   svg.logo {
     justify-self: center;
     align-items: flex-start;
@@ -95,5 +108,12 @@ export const NavigationStyle = styled.nav`
   ul {
     justify-self: center;
     align-self: center;
+  }
+  &.open {
+    display: grid;
+  }
+  &.show {
+    display: grid;
+    transform: translateX(0);
   }
 `;

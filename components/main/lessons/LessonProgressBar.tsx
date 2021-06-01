@@ -1,10 +1,10 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 // Types
 import { LessonDataProps } from '@types';
 // Helper function
 import { learningProgress } from '@Main/lessons/utils/timeline';
 // Hook
-import { useRealtime } from '@Main/lessons/hook/useRealtime';
+import { useUpdate } from '@Main/lessons/hook/useUpdate';
 // Components
 import { LessonStatusIcon } from '@Main/lessons/LessonStatusIcon';
 import { LessonAvatarProgress } from '@Main/lessons/LessonAvatarProgress';
@@ -13,16 +13,8 @@ import { LessonName } from '@Main/lessons/LessonName';
 import { LessonProgressBarStyle } from './styles/lessons';
 
 export const LessonProgressBar: FC<{ data: LessonDataProps }> = ({ data }) => {
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
-
   const lengthLessons = data.end - data.start;
-
-  useEffect(() => {
-    let timer = setInterval(() => setMinutes(new Date().getMinutes()), 1000);
-    return () => clearInterval(timer);
-  }, [minutes]);
-
-  const { position, currentTimeNum } = useRealtime(minutes);
+  const { position, currentTimeNum } = useUpdate();
 
   const { pos, status, lesson, timer } = learningProgress(
     data.start,

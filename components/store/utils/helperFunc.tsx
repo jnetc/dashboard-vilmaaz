@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react';
 // Types
 import { Schedule, LessonsType, Lesson } from '@types';
 
@@ -7,8 +8,8 @@ export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
 
 export const transform = (data: Array<Schedule>, set: boolean = true): any => {
   const date = new Date();
-  // const day = dateFormat({ weekday: 'long' }, date);
-  const day = 'perjantai';
+  const day = dateFormat({ weekday: 'long' }, date);
+  // const day = 'perjantai';
 
   //* Used Set constructor for remove duplicate from array
   const newTimelineSet: Set<string> = new Set();
@@ -105,4 +106,30 @@ export const staticValues = (timearr: Array<string>) => {
   let totalTime = endLessons - startLessons;
 
   return { startLessons, endLessons, totalTime };
+};
+
+export const transition = (
+  trigger: boolean,
+  element: MutableRefObject<HTMLElement | null>,
+  firstClass: string,
+  secondClass: string
+) => {
+  if (trigger) {
+    setTimeout(() => {
+      element.current?.classList.add(firstClass);
+    }, 0);
+    setTimeout(() => {
+      element.current?.classList.add(secondClass);
+      element.current?.classList.remove(firstClass);
+    }, 100);
+  }
+  if (!trigger) {
+    setTimeout(() => {
+      element.current?.classList.add(firstClass);
+      element.current?.classList.remove(secondClass);
+    }, 0);
+    setTimeout(() => {
+      element.current?.classList.remove(firstClass);
+    }, 100);
+  }
 };

@@ -1,6 +1,6 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 // Hook
-import { useRealtime } from '@Main/lessons/hook/useRealtime';
+import { useUpdate } from '@Main/lessons/hook/useUpdate';
 // Types
 import { Lesson, LessonsColor } from '@types';
 // Helper functions
@@ -12,17 +12,9 @@ export const ProgressLesson: FC<{ data: Lesson; color: LessonsColor }> = ({
   data,
   color,
 }) => {
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
-
-  useEffect(() => {
-    let timer = setInterval(() => setMinutes(new Date().getMinutes()), 1000);
-    return () => clearInterval(timer);
-  }, [minutes]);
-
-  const { currentTimeNum } = useRealtime(minutes);
+  const { currentTimeNum } = useUpdate();
   const startLesson = transformTimeToNum(data.time.start);
   const endLesson = transformTimeToNum(data.time.end);
-
   const flow = { process: 'wait' };
 
   if (startLesson <= currentTimeNum) {

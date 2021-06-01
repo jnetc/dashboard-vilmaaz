@@ -1,8 +1,8 @@
-import { FC, useState, useEffect } from 'react';
+import { FC } from 'react';
 // Types
 import { ProgressBarType } from '@types';
 // Hook
-import { useRealtime } from '@Main/lessons/hook/useRealtime';
+import { useUpdate } from '@Main/lessons/hook/useUpdate';
 // Component
 import { ProgressTime } from '@Main/lessons/right-side-panel/ProgressTime';
 // Helper functions
@@ -20,14 +20,7 @@ import {
 
 export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
   const { bar, line, ...time } = data;
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
-
-  useEffect(() => {
-    let timer = setInterval(() => setMinutes(new Date().getMinutes()), 1000);
-    return () => clearInterval(timer);
-  }, [minutes]);
-
-  const { currentTimeNum } = useRealtime(minutes);
+  const { currentTimeNum } = useUpdate();
   const radius = 100;
   const circumference = Math.round(2 * Math.PI * radius); //?  2 * (π = 3,14) * (r = 100)
   const startDrawPoint = transformTimeToNum(time.start);

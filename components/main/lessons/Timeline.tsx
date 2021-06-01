@@ -6,13 +6,14 @@ import { TimelinePoints } from '@Main/lessons/TimelinePoints';
 import { TimelineStep } from '@Main/lessons/TimelineStep';
 import { getTimePointPos } from '@Main/lessons/utils/timeline';
 // Types
-import { Element, Width, Lines } from '@types';
+import { Element, Width } from '@types';
 // Styles
 import { TimelineStyle } from './styles/lessons';
 
-const Timeline: FC<Width & Lines> = ({ width, lines }) => {
+const Timeline: FC<Width> = ({ width }) => {
   const { timepoints, timelineWidth, setTimelineWidth, timeline } =
     useMainStore();
+
   const [startEndTime, setStartEndTime] = useState<Array<string>>([]);
   const timelineEl = useRef<Element>(null);
 
@@ -35,13 +36,13 @@ const Timeline: FC<Width & Lines> = ({ width, lines }) => {
       return 1;
     })
     .map((point, idx) => {
-      return <TimelinePoints key={idx} data={point} lines={lines} />;
+      return <TimelinePoints key={idx} data={point} />;
     });
 
   return (
     <TimelineStyle id="timeline" ref={timelineEl}>
       {points}
-      <TimelineStep width={width} lines={lines} />
+      <TimelineStep width={width} />
     </TimelineStyle>
   );
 };

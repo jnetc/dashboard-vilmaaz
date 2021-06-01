@@ -16,15 +16,25 @@ export const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.white()};
   }
 
-  #__next {
+  body.right-side {
     overflow: hidden;
-    min-height: 100%;
+  }
+
+  #__next {
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     /* display: grid; */
     /* grid-template-columns: minmax(120px, 220px) 1fr; */
     /* grid-template-columns:  1fr; */
     position: relative;
     background-color: ${({ theme }) => theme.bg_main()};
+
+  }
+  @media (min-width: 1921px) {
+    #__next {
+      width: 100%;
+    }
   }
 
   a {

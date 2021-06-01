@@ -18,12 +18,18 @@ const ButtonStyle = styled.button<ButtonStyleType>`
   outline: none;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  ${props => handleThemeSwitcher(props.colorTheme, props.isFill, props.theme)}
+  ${({ colorTheme, isFill, theme }) =>
+    handleThemeSwitcher(colorTheme, isFill, theme)}
 `;
 
-export const Button: FC<ButtonProps> = ({ children, isFill, colorTheme }) => {
+export const Button: FC<ButtonProps> = ({
+  onClick,
+  children,
+  isFill,
+  colorTheme,
+}) => {
   return (
-    <ButtonStyle isFill={isFill} colorTheme={colorTheme}>
+    <ButtonStyle isFill={isFill} colorTheme={colorTheme} onClick={onClick}>
       {children}
     </ButtonStyle>
   );

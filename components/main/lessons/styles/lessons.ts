@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 // Types
-import { Position, Distance, Lines } from '@types';
+import { Position } from '@types';
+
+type LessonStyleType = {
+  distance: number;
+  primary: string;
+  position: number;
+};
 
 //* LESSON => component
-export const LessonStyle = styled.div<
-  Distance & { primary: string } & Position
->`
+export const LessonStyle = styled.div<LessonStyleType>`
   width: ${({ distance }) => distance}px;
   height: 70px;
   display: flex;
@@ -52,8 +56,8 @@ export const LessonAvatarProgressStyle = styled(AvatarAndIconCommonStyle)`
 export const LessonStatusIconStyle = styled(AvatarAndIconCommonStyle)`
   font-size: ${({ theme }) => theme.fontsize_16};
   right: 7px;
-  box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-    0px 10px 10px ${props => props.theme.bg_dark(0.3)};
+  box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
+    0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
   z-index: 13;
 `;
 
@@ -95,8 +99,8 @@ export const LessonProgressBarStyle = styled.div<{ primary: string }>`
   z-index: 11;
   .active {
     border-color: ${({ theme }) => theme.grey_middle()};
-    box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-      0px 10px 10px ${props => props.theme.bg_dark(0.3)};
+    box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
+      0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
   }
 `;
 
@@ -126,7 +130,7 @@ export const TimelineStyle = styled.div`
 `;
 
 //* TIMELINE POINTS => component
-export const TimelinePointsStyle = styled.div<Position & Lines>`
+export const TimelinePointsStyle = styled.div<Position>`
   width: 90px;
   height: 60px;
   display: flex;
@@ -146,7 +150,7 @@ export const TimelinePointsStyle = styled.div<Position & Lines>`
   &::after {
     content: '';
     width: 2px;
-    height: ${({ lines }) => lines}px;
+    height: 1000vh;
     position: absolute;
     top: 60px;
     left: 50%;
@@ -208,12 +212,48 @@ export const MainStyle = styled.main`
   border-radius: 30px 0 0 30px;
   position: relative;
   overflow: hidden;
-  background-color: ${props => props.theme.bg_middle()};
-  box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-    0px 10px 10px ${props => props.theme.bg_dark(0.3)};
+  background-color: ${({ theme }) => theme.bg_middle()};
+  box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
+    0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
+  &.opacity {
+    filter: opacity(40%);
+  }
 `;
 
 export const TimetableEmptyStyle = styled.h2`
   justify-self: center;
   align-self: center;
+`;
+
+//* UPDATE TIMETABLE => component
+export const UpdateTimetableStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: ${({ theme }) => theme.bg_dark(0.5)};
+  backdrop-filter: blur(2px);
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  user-select: none;
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 3rem 4rem;
+    border-radius: 1rem;
+    background-color: ${({ theme }) => theme.bg_light()};
+    box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
+      0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
+    z-index: 1001;
+  }
+  h3 {
+    padding-bottom: 2rem;
+  }
 `;

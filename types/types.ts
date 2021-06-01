@@ -120,7 +120,10 @@ type Styled = ({ isFill?: true } | { isFill: never }) &
     | { colorTheme: 'danger' }
   );
 
-export type ButtonProps = { children: React.ReactChild } & Styled;
+export type ButtonProps = {
+  children: React.ReactChild;
+  onClick: () => void;
+} & Styled;
 
 // TIMELINE
 
@@ -132,7 +135,7 @@ export type Distance = { distance: number };
 
 export type Color = { primary: string; secondary: string };
 
-export type Lines = { lines: number };
+// export type Lines = { lines: number };
 
 // export type Order = { order: number };
 

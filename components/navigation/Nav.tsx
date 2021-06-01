@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
 // Types
 import { NavLink } from '@types';
@@ -7,6 +7,7 @@ import AltLink from './Link';
 import { Logo } from '../icons/Logos';
 // Store
 import { useGlobalStore } from '@Store/GlobalStore';
+import { transition } from '@Store/utils/helperFunc';
 // Styles
 import { NavigationStyle } from './styles/navigation';
 
@@ -46,6 +47,12 @@ export const navigation: Array<NavLink> = [
 // COMPONENT
 const Navigation: FC = () => {
   const { openMenu } = useGlobalStore();
+  const navRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    // transition(openMenu, navRef, 'open', 'show');
+  }, [openMenu]);
+
   const links = navigation.map((link, idx) => {
     link.active = false;
     // Init sublink - /link/sublink
@@ -59,9 +66,11 @@ const Navigation: FC = () => {
   });
 
   return openMenu ? (
-    <NavigationStyle>
-      <Logo />
-      <ul>{links}</ul>
+    <NavigationStyle ref={navRef}>
+      <div>
+        <Logo />
+        <ul>{links}</ul>
+      </div>
     </NavigationStyle>
   ) : (
     <></>

@@ -134,7 +134,7 @@ export function getTransformStylePosition(el: Element) {
   return Math.abs(posX);
 }
 
-export const transition = (timetable: Element) => {
+export const cssAnimationHandler = (timetable: Element) => {
   timetable?.classList.add('animate');
   const timer = setTimeout(() => {
     timetable?.classList.remove('animate');

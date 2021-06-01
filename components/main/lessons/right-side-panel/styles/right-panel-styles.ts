@@ -21,24 +21,41 @@ export const DateStyle = styled.div`
 //* index => component
 export const RightSidePanelStyle = styled.section<{ open: boolean }>`
   min-width: 226px;
-  display: ${({ open }) => (open ? 'grid' : 'none')};
-  grid-template-rows: 48px 60px 300px 40px 1fr;
-  padding: 35px 30px;
-  position: absolute;
+  height: 100vh;
+  /* display: ${({ open }) => (open ? 'grid' : 'none')}; */
+  display: none;
+  position: fixed;
   top: 0;
-  bottom: 0;
+  /* bottom: 0; */
   right: 0;
-  overflow-y: auto;
+  /* padding: 35px 0; */
   backdrop-filter: blur(4px);
-  border-radius: 30px 0 0 30px;
+  /* border-radius: 30px 0 0 30px; */
   background-color: ${({ theme }) => theme.bg_regular(0.9)};
   box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
     0px 10px 10px ${props => props.theme.bg_dark(0.3)};
-  z-index: 100;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(300px);
   user-select: none;
+  z-index: 100;
+  > div {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 48px 60px 300px 40px 1fr;
+    padding: 35px 30px;
+    overflow-y: auto;
+  }
   h2 {
     grid-row: 2;
     align-self: flex-end;
+  }
+  &.open {
+    display: flex;
+  }
+  &.show {
+    display: flex;
+    transform: translateX(0);
   }
 `;
 
@@ -177,6 +194,7 @@ export const ProgressTimeStyle = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  /* display: none; */
   flex-direction: column;
   justify-content: center;
   align-items: center;

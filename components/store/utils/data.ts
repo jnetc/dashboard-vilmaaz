@@ -42,8 +42,33 @@ export const database: Array<Schedule> = [
           },
           {
             id: 'sdf54we64gjo4s784fsyt',
-            lesson: 'tietotekniikka',
+            lesson: 'oppilaanohjaus',
             time: { start: '13:15', end: '14:00' },
+          },
+          {
+            id: 'sdf54we64gj4fh784fs2t',
+            lesson: 'matemattikka',
+            time: { start: '14:00', end: '15:00' },
+          },
+          {
+            id: 'sdf54ftkojo4s784fsyu',
+            lesson: 'matemattikka',
+            time: { start: '15:00', end: '16:00' },
+          },
+          {
+            id: 'sdf54we64gjo4solfr04',
+            lesson: 'tietotekniikka',
+            time: { start: '16:00', end: '17:00' },
+          },
+          {
+            id: 'sdf54we64gjo4sosfr07',
+            lesson: 'liikunta',
+            time: { start: '17:00', end: '18:00' },
+          },
+          {
+            id: 'sdf54we64gjo4s78dadg',
+            lesson: 'liikunta',
+            time: { start: '18:00', end: '19:00' },
           },
         ],
       },
@@ -483,9 +508,29 @@ export const database: Array<Schedule> = [
             time: { start: '13:15', end: '14:00' },
           },
           {
-            id: 'sdf54wa38w5f4s5d4f36f',
+            id: 'sdf54wa38w5f43dfj4nmn',
             lesson: 'historia',
             time: { start: '14:15', end: '15:00' },
+          },
+          {
+            id: 'sdf54wa38wfsdjklhrwer',
+            lesson: 'historia',
+            time: { start: '15:00', end: '16:00' },
+          },
+          {
+            id: 'sdf54wa38w5f4er54fs1f',
+            lesson: 'historia',
+            time: { start: '16:00', end: '17:00' },
+          },
+          {
+            id: 'sdf54wa35sd4f6e4rsf4s',
+            lesson: 'historia',
+            time: { start: '17:00', end: '18:00' },
+          },
+          {
+            id: 'sdf5ds4f654er45df7464',
+            lesson: 'historia',
+            time: { start: '18:00', end: '19:00' },
           },
         ],
       },

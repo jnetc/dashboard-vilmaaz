@@ -1,12 +1,12 @@
 import { useRef, useState, useEffect, FC, createRef } from 'react';
-
+// Helpers
 import {
-  transition,
+  cssAnimationHandler,
   getTransformStylePosition,
 } from '@Main/lessons/utils/timeline';
+// Components
 import Timeline from '@Main/lessons/Timeline';
 import Timefield from '@Main/lessons/Timefield';
-
 import { LeftSidePanel } from '@Main/lessons/left-side-panel';
 // Stores
 import { useMainStore } from '@Store/MainStore';
@@ -29,7 +29,6 @@ export const Timetable: FC = () => {
   const [maxPositionElement, setMaxPositionElement] = useState<number>(0);
   const [startMove, setStartMove] = useState<boolean>(false);
   const [widthMainEl, setWidthMainEl] = useState(0);
-  const [timepoinsHeight, setTimepointsHeight] = useState(0);
 
   const mainEl = createRef<Div>();
   const timetableEl = useRef<Element>(null);
@@ -38,9 +37,8 @@ export const Timetable: FC = () => {
     if (mainEl.current && timetableEl.current) {
       setWidthMainEl(mainEl.current.offsetWidth);
       setTimetableEl(timetableEl.current);
-      setTimepointsHeight(timetableEl.current.offsetHeight);
     }
-  }, []);
+  }, [widthMainEl]);
 
   useEffect(() => {
     timetableEl.current?.classList.add('animate');
@@ -91,7 +89,7 @@ export const Timetable: FC = () => {
   const mouseUp = (ev: Event) => {
     ev.preventDefault();
 
-    transition(timetableEl.current);
+    cssAnimationHandler(timetableEl.current);
 
     if (!startMove ?? !timetableEl.current) return;
 
@@ -111,7 +109,7 @@ export const Timetable: FC = () => {
   const mouseLeave = (ev: Event) => {
     ev.preventDefault();
 
-    transition(timetableEl.current);
+    cssAnimationHandler(timetableEl.current);
 
     if (!startMove ?? !timetableEl.current) return;
 
@@ -133,8 +131,8 @@ export const Timetable: FC = () => {
         onMouseMove={ev => mouseMove(ev)}
         onMouseUp={ev => mouseUp(ev)}
         onMouseLeave={ev => mouseLeave(ev)}
-        onTransitionEnd={() => transition}>
-        <Timeline width={widthMainEl} lines={timepoinsHeight} />
+        onTransitionEnd={() => cssAnimationHandler}>
+        <Timeline width={widthMainEl} />
         <Timefield />
       </TimetableStyle>
     </MainStyle>

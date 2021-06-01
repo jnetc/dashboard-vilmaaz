@@ -15,10 +15,9 @@ const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
   const lengthLessons = data.end - data.start;
 
   const openDetail = () => {
-    setDetailLesson({
-      open: true,
-      data: data,
-    });
+    setDetailLesson({ open: true, data: data });
+    document.querySelector('body')?.classList.add('right-side');
+    document.querySelector('main')?.classList.add('opacity');
   };
 
   return (
