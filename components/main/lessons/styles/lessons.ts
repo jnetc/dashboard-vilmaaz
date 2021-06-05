@@ -6,9 +6,10 @@ type LessonStyleType = {
   distance: number;
   primary: string;
   position: number;
+  order?: number;
 };
 
-//* LESSON => component
+// LESSON
 export const LessonStyle = styled.div<LessonStyleType>`
   width: ${({ distance }) => distance}px;
   height: 70px;
@@ -20,6 +21,7 @@ export const LessonStyle = styled.div<LessonStyleType>`
   user-select: none;
   cursor: pointer;
   z-index: 10;
+  order: ${({ order }) => (order ? order : 0)};
   &:hover {
     .progress {
       border-color: ${({ theme }) => theme.grey_middle()};
@@ -32,7 +34,7 @@ export const LessonStyle = styled.div<LessonStyleType>`
   }
 `;
 
-//* LESSON AVATAR PROGRESS & LESSON STATUS ICON => component's
+// LESSON AVATAR PROGRESS & LESSON STATUS ICON's
 const AvatarAndIconCommonStyle = styled.div`
   width: 50px;
   height: 50px;
@@ -61,7 +63,7 @@ export const LessonStatusIconStyle = styled(AvatarAndIconCommonStyle)`
   z-index: 13;
 `;
 
-//* LESSON COMMON PROGRESS => component
+// LESSON COMMON PROGRESS
 export const LessonCommonProgressStyle = styled.svg<{ shade: string }>`
   position: absolute;
   top: 0;
@@ -73,8 +75,7 @@ export const LessonCommonProgressStyle = styled.svg<{ shade: string }>`
   transition: stroke 0.3s ease-in-out;
 `;
 
-//* LESSON NAME => component
-// TODO fix overflow text position
+// LESSON NAME
 export const ProgressNameStyle = styled.div`
   width: 100%;
   padding: 0 65px;
@@ -84,7 +85,7 @@ export const ProgressNameStyle = styled.div`
   color: ${({ theme }) => theme.grey_light()};
 `;
 
-//* LESSON PRORGESS BAR => component
+// LESSON PRORGESS BAR
 export const LessonProgressBarStyle = styled.div<{ primary: string }>`
   height: 70px;
   padding: 10px;
@@ -104,7 +105,7 @@ export const LessonProgressBarStyle = styled.div<{ primary: string }>`
   }
 `;
 
-//* TIMEFIELD => component
+// TIMEFIELD
 export const TimefieldStyle = styled.div`
   grid-row: 2;
   padding: 70px 0px 70px 46px;
@@ -112,10 +113,11 @@ export const TimefieldStyle = styled.div`
     display: flex;
     flex-direction: column;
     gap: 4em;
+    transition: all 0.3s ease-in-out;
   }
 `;
 
-//* TIMELINE => component
+// TIMELINE
 export const TimelineStyle = styled.div`
   width: 100%;
   grid-row: 1;
@@ -129,7 +131,7 @@ export const TimelineStyle = styled.div`
   }
 `;
 
-//* TIMELINE POINTS => component
+// TIMELINE POINTS
 export const TimelinePointsStyle = styled.div<Position>`
   width: 90px;
   height: 60px;
@@ -169,7 +171,7 @@ export const TimelinePointsStyle = styled.div<Position>`
   }
 `;
 
-//* TIMELINE STEP => component
+// TIMELINE STEP
 export const TimelineStepStyle = styled(TimelinePointsStyle)`
   position: absolute;
   transform: translate3d(${({ position }) => position}px, 0, 0);
@@ -185,7 +187,7 @@ export const TimelineStepStyle = styled(TimelinePointsStyle)`
   }
 `;
 
-//* TIMETABLE => component
+// TIMETABLE
 export const TimetableStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -225,7 +227,7 @@ export const TimetableEmptyStyle = styled.h2`
   align-self: center;
 `;
 
-//* UPDATE TIMETABLE => component
+// UPDATE TIMETABLE
 export const UpdateTimetableStyle = styled.div`
   width: 100%;
   height: 100%;

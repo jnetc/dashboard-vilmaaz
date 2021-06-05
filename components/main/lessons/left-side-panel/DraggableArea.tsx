@@ -9,43 +9,48 @@ import {
   DraggableElementStyle,
 } from './styles/left-panel-styles';
 
-// console.log(DraggableAreaStyle.toString());
-
 export const DraggableArea: FC = () => {
-  const { content } = useMainStore();
+  const { content, updateOrders, setUpdateOrders } = useMainStore();
   const [orders, setOrders] = useState<Array<Order>>([
     { id: '', name: '', order: 0 },
   ]);
   const [order, setOrder] = useState<Order>({ id: '', name: '', order: 0 });
 
+  // FIXME Сохраниение в локальное хранилище
   useEffect(() => {
-    // const checkOrders = window.localStorage.getItem('orders');
-    const orderArray: Array<Order> = [];
+    const isOrders = window.localStorage.getItem('orders');
+    if (isOrders) return setOrders(JSON.parse(isOrders));
 
-    for (const i in content) {
-      orderArray.push({
-        id: content[i].id,
-        name: content[i].name,
-        order: Number(i) + 1,
-      });
+    if (!isOrders) {
+      console.log('create new');
+      const orderArray: Array<Order> = [];
+
+      for (const i in content) {
+        orderArray.push({
+          id: content[i].id,
+          name: content[i].name,
+          order: Number(i) + 1,
+        });
+      }
+
+      setOrders(orderArray);
+      window.localStorage.setItem('orders', JSON.stringify(orderArray));
     }
-
-    setOrders(orderArray);
   }, []);
 
-  useEffect(() => {}, [orders]);
+  // useEffect(() => {}, [orders]);
 
-  //* START
+  // START
   const dragStart = (el: Order): void => {
     setOrder(el);
   };
 
-  //* MOVE
+  // MOVE
   const dragOver = (ev: DragEvent<HTMLDivElement>): void => {
     ev.preventDefault();
   };
 
-  //* ENTER
+  // ENTER
   const dragEnter = (ev: DragEvent<HTMLDivElement>, el: Order): void => {
     if (el.id === order.id) return;
 
@@ -54,14 +59,14 @@ export const DraggableArea: FC = () => {
     element.classList.add('hovered');
   };
 
-  //* LEAVE
+  // LEAVE
   const dragLeave = (ev: DragEvent<HTMLDivElement>): void => {
     ev.preventDefault();
     const element = ev.target as HTMLDivElement;
     element.classList.remove('hovered');
   };
 
-  //* END
+  // END
   const dragEnd = (ev: DragEvent<HTMLDivElement>): void => {
     ev.preventDefault();
     const element = ev.target as HTMLDivElement;
@@ -69,7 +74,7 @@ export const DraggableArea: FC = () => {
     element.removeAttribute('draggable');
   };
 
-  //* DROP
+  // DROP
   const dragDrop = (ev: DragEvent<HTMLDivElement>, el: Order): void => {
     ev.preventDefault();
 
@@ -92,6 +97,8 @@ export const DraggableArea: FC = () => {
     });
 
     setOrders(arr);
+    window.localStorage.setItem('orders', JSON.stringify(arr));
+    setUpdateOrders(!updateOrders);
   };
 
   const sortOrders = (a: Order, b: Order) => {

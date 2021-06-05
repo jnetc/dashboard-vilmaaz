@@ -14,6 +14,8 @@ const state: MainStoreProps = {
   setTimetableEl: el => el,
   timelineWidth: 0,
   setTimelineWidth: num => num,
+  updateOrders: true,
+  setUpdateOrders: b => b,
   content: [],
   timepoints: [],
   timeline: {
@@ -35,6 +37,7 @@ const MainStore: FC = ({ children }) => {
   const [timeline, setTimeline] = useState(state.timeline);
   const [timetableEl, setTimetableEl] = useState(state.timetableEl);
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
+  const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
 
   let content = transform(data, false);
   let timepoints = transform(data);
@@ -56,6 +59,8 @@ const MainStore: FC = ({ children }) => {
         setDetailLesson,
         timelineWidth,
         setTimelineWidth,
+        updateOrders,
+        setUpdateOrders,
         content,
         timepoints,
         timeline,

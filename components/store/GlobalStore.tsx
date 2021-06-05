@@ -23,7 +23,6 @@ export const useGlobalStore = () => {
 const GlobalStore: FC = ({ children }) => {
   const [openMenu, setOpenMenu] = useState(state.openMenu);
   const [mainPaddingLeft, setMainPaddingLeft] = useState(state.mainPaddingLeft);
-  console.log('GlobalStore');
 
   // let lesson = {
   //   id: 'sdf54we68w5f4s5d4fkjd',

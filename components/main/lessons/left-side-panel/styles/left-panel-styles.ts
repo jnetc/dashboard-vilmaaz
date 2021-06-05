@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-//* index => component
+// index
 export const LeftSidePanelStyle = styled.div`
   min-width: 140px;
   display: grid;
@@ -44,7 +44,7 @@ export const LeftSidePanelStyle = styled.div`
   }
 `;
 
-//* DRAGGABLE AREA => component
+// DRAGGABLE AREA
 export const DraggableAreaStyle = styled.div`
   grid-row: 2;
   display: flex;

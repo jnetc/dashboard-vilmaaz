@@ -27,8 +27,8 @@ export type Lesson = {
 };
 
 export type LessonsColor = {
-  accent: string; //? акцентирующий цвет
-  shade: string; //? оттенок цета, акцентный + чёрный
+  accent: string; // акцентирующий цвет
+  shade: string; // оттенок цета, акцентный + чёрный
 };
 
 export type SchoolDay = {
@@ -77,6 +77,8 @@ export type MainStoreProps = {
   setTimetableEl: (el: Element) => void;
   timelineWidth: number;
   setTimelineWidth: (el: number) => void;
+  updateOrders: boolean;
+  setUpdateOrders: (order: boolean) => void;
   content: Array<LessonsType>;
   timepoints: Array<string>;
   timeline: StaticValues;

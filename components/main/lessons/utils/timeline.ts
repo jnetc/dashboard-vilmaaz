@@ -14,7 +14,7 @@ export const transformTimeArr = (time: Array<string>) => {
   });
 };
 
-//* Create new array with time & position on the timeline
+// Create new array with time & position on the timeline
 export const timelinePositions = (time: TimeLine) => {
   return time.map(t => {
     const position = Math.round((t.position * trackWidth) / totalTime);
@@ -27,7 +27,7 @@ export const getTimePointPos = (
   track: number,
   timeline: StaticValues
 ) => {
-  //! Assign global values
+  // Assign global values
   startTime = timeline.startLessons;
   totalTime = timeline.totalTime;
   trackWidth = track;
@@ -92,7 +92,7 @@ export const learningProgress = (
   position: number,
   timeNumber: number
 ) => {
-  const startWidth = 70; //! default lesson width at start
+  const startWidth = 70; // default lesson width at start
 
   const startPosition = start + startWidth;
   const endPosition = start + length;
@@ -128,7 +128,7 @@ const getTimerAndName = (arr: Array<Lesson>, timeNumber: number) => {
     : { lesson: undefined, timer: undefined };
 };
 
-//* Get position from transform style
+// Get position from transform style
 export function getTransformStylePosition(el: Element) {
   let posX = Number(el?.style.transform.split('px')[0].split('(')[1]);
   return Math.abs(posX);

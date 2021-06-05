@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Types
-import { LessonDataProps } from '@types';
+import { LessonDataProps, Order } from '@types';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Components
@@ -9,7 +9,10 @@ import { LessonCommonProgress } from '@Main/lessons/LessonCommonProgress';
 // Styles
 import { LessonStyle } from './styles/lessons';
 
-const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
+const Lesson: FC<{ data: LessonDataProps; order: Order | undefined }> = ({
+  data,
+  order,
+}) => {
   const { setDetailLesson } = useMainStore();
 
   const lengthLessons = data.end - data.start;
@@ -25,6 +28,7 @@ const Lesson: FC<{ data: LessonDataProps }> = ({ data }) => {
       position={data.start}
       distance={lengthLessons}
       primary={data.colors.accent}
+      order={order?.order}
       className="timefield-lesson"
       onClick={openDetail}>
       <LessonProgressBar data={data} />

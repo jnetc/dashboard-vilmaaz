@@ -2,7 +2,7 @@ import styled, { keyframes, css } from 'styled-components';
 // Types
 import { ProgressLessonsDataStyle } from '@types';
 
-//* DayOfWeek => component
+// DayOfWeek
 export const DateStyle = styled.div`
   grid-column: 1;
   display: flex;
@@ -18,17 +18,16 @@ export const DateStyle = styled.div`
   }
 `;
 
-//* index => component
+// index
 export const RightSidePanelStyle = styled.section<{ open: boolean }>`
   min-width: 226px;
   height: 100vh;
   /* display: ${({ open }) => (open ? 'grid' : 'none')}; */
   display: none;
-  position: fixed;
+  position: absolute;
   top: 0;
-  /* bottom: 0; */
   right: 0;
-  /* padding: 35px 0; */
+  padding: 0px;
   backdrop-filter: blur(4px);
   /* border-radius: 30px 0 0 30px; */
   background-color: ${({ theme }) => theme.bg_regular(0.9)};
@@ -39,12 +38,12 @@ export const RightSidePanelStyle = styled.section<{ open: boolean }>`
   user-select: none;
   z-index: 100;
   > div {
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
     display: grid;
     grid-template-rows: 48px 60px 300px 40px 1fr;
-    padding: 35px 30px;
-    overflow-y: auto;
+    padding: 35px 30px 35px 30px;
+    overflow-y: scroll;
   }
   h2 {
     grid-row: 2;
@@ -65,7 +64,7 @@ export const RightSidePanelHeader = styled.div`
   justify-content: space-between;
 `;
 
-//* PROGRESS BAR => component
+// PROGRESS BAR
 export const ProgressBarStyle = styled.div`
   grid-row: 3;
   margin: auto;
@@ -101,7 +100,7 @@ export const ProgressStyle = styled.circle<{
   will-change: stroke-dashoffset stroke;
 `;
 
-//* PROGRESS LESSON => component
+// PROGRESS LESSON
 const markerPoint = keyframes`
 50% { transform: scale(0.5) }
 `;
@@ -172,12 +171,12 @@ export const ProgressLessonStyle = styled.div<ProgressLessonsDataStyle>`
   h4 {
     grid-column: 2;
     grid-row: 2;
-    color: ${({ theme }) => theme.white()}; // TODO смена цвета / логическое
+    color: ${({ theme }) => theme.white()};
     font-size: ${({ theme }) => theme.fontsize_16};
   }
 `;
 
-//* PROGRESS LESSONS => component
+// PROGRESS LESSONS
 export const ProgressLessonsStyle = styled.div`
   grid-row: 5;
   width: 100%;
@@ -189,7 +188,7 @@ export const ProgressLessonsStyle = styled.div`
   transition: all 0.3s ease-in-out;
 `;
 
-//* PROGRESS TIME => component
+// PROGRESS TIME
 export const ProgressTimeStyle = styled.div`
   width: 100%;
   height: 100%;

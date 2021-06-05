@@ -5,7 +5,7 @@ const impulse = (visible: string, hidden: string) => keyframes`
   100% {box-shadow: 0 0 0 10px ${hidden}}
 `;
 
-//* COUNTER => component
+// COUNTER
 
 export const CountStyle = styled.div`
   width: 30px;
@@ -29,7 +29,7 @@ export const CountStyle = styled.div`
   }
 `;
 
-//* LINK => component
+// LINK
 export const LinkStyle = styled.li`
   margin-bottom: 1.9rem;
   width: 7.5rem;
@@ -78,7 +78,7 @@ export const LinkStyle = styled.li`
   }
 `;
 
-//* NAV => component
+// NAV
 export const NavigationStyle = styled.nav`
   min-width: 220px;
   /* min-height: 100%; */

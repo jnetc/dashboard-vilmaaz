@@ -22,7 +22,7 @@ export const ProgressBar: FC<{ data: ProgressBarType }> = ({ data }) => {
   const { bar, line, ...time } = data;
   const { currentTimeNum } = useUpdate();
   const radius = 100;
-  const circumference = Math.round(2 * Math.PI * radius); //?  2 * (π = 3,14) * (r = 100)
+  const circumference = Math.round(2 * Math.PI * radius); // 2 * (π = 3,14) * (r = 100)
   const startDrawPoint = transformTimeToNum(time.start);
   const endDrawPoint = transformTimeToNum(time.end);
   const totalTime = endDrawPoint - startDrawPoint;
