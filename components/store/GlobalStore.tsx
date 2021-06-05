@@ -1,4 +1,11 @@
-import { StrictMode, FC, createContext, useContext, useState } from 'react';
+import {
+  StrictMode,
+  FC,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
 // Types
 import { GlobalStoreProps } from '@types';
 
@@ -23,6 +30,14 @@ export const useGlobalStore = () => {
 const GlobalStore: FC = ({ children }) => {
   const [openMenu, setOpenMenu] = useState(state.openMenu);
   const [mainPaddingLeft, setMainPaddingLeft] = useState(state.mainPaddingLeft);
+
+  useEffect(() => {
+    const isHidden = window.localStorage.getItem('nav-menu');
+    if (isHidden) return setOpenMenu(JSON.parse(isHidden));
+    if (!isHidden) {
+      return window.localStorage.setItem('nav-menu', JSON.stringify(openMenu));
+    }
+  }, []);
 
   // let lesson = {
   //   id: 'sdf54we68w5f4s5d4fkjd',

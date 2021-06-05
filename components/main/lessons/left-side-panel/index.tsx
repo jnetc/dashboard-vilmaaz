@@ -23,6 +23,7 @@ export const LeftSidePanel: FC = () => {
 
   const hidemenu = () => {
     setOpenMenu(!openMenu);
+    window.localStorage.setItem('nav-menu', JSON.stringify(!openMenu));
   };
 
   return (
