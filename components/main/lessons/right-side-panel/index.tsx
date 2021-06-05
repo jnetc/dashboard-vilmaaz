@@ -67,7 +67,7 @@ export const RightSidePanel: FC = () => {
   }, [open]);
 
   return (
-    <RightSidePanelStyle open={open} ref={lessonRef}>
+    <RightSidePanelStyle ref={lessonRef}>
       <div>
         <RightSidePanelHeader>
           <DayOfWeek />

@@ -665,7 +665,7 @@ export const database: Array<Schedule> = [
     },
     avatar: {
       img: 'url',
-      name: 'TE',
+      name: 'MI',
     },
     timetable: [
       {

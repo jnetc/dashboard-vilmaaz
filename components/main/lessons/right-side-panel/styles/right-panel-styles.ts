@@ -19,17 +19,14 @@ export const DateStyle = styled.div`
 `;
 
 // index
-export const RightSidePanelStyle = styled.section<{ open: boolean }>`
+export const RightSidePanelStyle = styled.section`
   min-width: 226px;
   height: 100vh;
-  /* display: ${({ open }) => (open ? 'grid' : 'none')}; */
   display: none;
   position: absolute;
   top: 0;
   right: 0;
-  padding: 0px;
   backdrop-filter: blur(4px);
-  /* border-radius: 30px 0 0 30px; */
   background-color: ${({ theme }) => theme.bg_regular(0.9)};
   box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
     0px 10px 10px ${props => props.theme.bg_dark(0.3)};
@@ -38,12 +35,11 @@ export const RightSidePanelStyle = styled.section<{ open: boolean }>`
   user-select: none;
   z-index: 100;
   > div {
-    /* width: 100%;
-    height: 100%; */
+    height: 100%;
     display: grid;
     grid-template-rows: 48px 60px 300px 40px 1fr;
     padding: 35px 30px 35px 30px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   h2 {
     grid-row: 2;
@@ -122,7 +118,6 @@ export const ProgressLessonStyle = styled.div<ProgressLessonsDataStyle>`
     align-items: center;
     position: relative;
     align-self: center;
-    /* margin: auto; */
     border-radius: 50%;
     border-style: solid;
     border-width: 2px;
@@ -193,7 +188,6 @@ export const ProgressTimeStyle = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  /* display: none; */
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -9,7 +9,7 @@ export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
 export const transform = (data: Array<Schedule>, set: boolean = true): any => {
   // const date = new Date();
   // const day = dateFormat({ weekday: 'long' }, date);
-  const day = 'perjantai';
+  const day = 'maanantai';
 
   // Used Set constructor for remove duplicate from array
   const newTimelineSet: Set<string> = new Set();

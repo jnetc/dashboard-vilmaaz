@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: Roboto, sans-serif;
     color: ${({ theme }) => theme.white()};
+    background-color: ${({ theme }) => theme.bg_main()}
   }
 
   body.right-side {
@@ -24,9 +25,6 @@ export const GlobalStyle = createGlobalStyle`
     width: 100%;
     min-height: 100vh;
     display: flex;
-    /* display: grid; */
-    /* grid-template-columns: minmax(120px, 220px) 1fr; */
-    /* grid-template-columns:  1fr; */
     position: relative;
     background-color: ${({ theme }) => theme.bg_main()};
 
@@ -63,7 +61,6 @@ export const GlobalStyle = createGlobalStyle`
   }
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.grey_dark()};
-    /* border-right: 1px solid green; */
     border-radius: 50px;
   }
 `;

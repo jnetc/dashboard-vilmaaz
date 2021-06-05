@@ -130,6 +130,7 @@ export const DraggableArea: FC = () => {
             onDrop={ev => dragDrop(ev, el)}
             key={el.id}>
             {el.order} {el.name.charAt(0)}
+            {el.name.charAt(1).toUpperCase()}
           </DraggableElementStyle>
         );
       })}

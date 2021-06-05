@@ -81,15 +81,10 @@ export const LinkStyle = styled.li`
 // NAV
 export const NavigationStyle = styled.nav`
   min-width: 220px;
-  /* min-height: 100%; */
   height: 100vh;
   display: flex;
-  /* overflow-y: auto; */
-  /* display: none; */
   top: 0px;
   position: sticky;
-  /* overflow: hidden; */
-  /* transform: translateX(220px); */
   transition: all 0.3s ease-in-out;
   z-index: 500;
   > div {

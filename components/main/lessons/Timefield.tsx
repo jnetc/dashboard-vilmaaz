@@ -31,15 +31,9 @@ const Timefield: FC = () => {
     return <Lesson key={data.id} data={data} order={currentLessonOrder} />;
   });
 
-  const updateOrdersCount = () => {
-    console.log('update!!!');
-  };
-
   return (
     <TimefieldStyle id="timefield">
-      <div id="field" onTransitionEnd={updateOrdersCount}>
-        {lessons}
-      </div>
+      <div id="field">{lessons}</div>
     </TimefieldStyle>
   );
 };

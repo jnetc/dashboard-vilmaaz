@@ -25,8 +25,6 @@ export const LessonStyle = styled.div<LessonStyleType>`
   &:hover {
     .progress {
       border-color: ${({ theme }) => theme.grey_middle()};
-      /* box-shadow: 0px 40px 40px ${props => props.theme.bg_dark(0.2)},
-        0px 10px 10px ${props => props.theme.bg_dark(0.3)}; */
     }
     > svg {
       stroke: var(--${({ primary }) => primary});
@@ -108,6 +106,7 @@ export const LessonProgressBarStyle = styled.div<{ primary: string }>`
 // TIMEFIELD
 export const TimefieldStyle = styled.div`
   grid-row: 2;
+  display: flex;
   padding: 70px 0px 70px 46px;
   #field {
     display: flex;
@@ -122,9 +121,6 @@ export const TimelineStyle = styled.div`
   width: 100%;
   grid-row: 1;
   position: relative;
-  /* user-select: none;
-  pointer-events: none; */
-  /* padding: 0 160px 0 2px; */
   cursor: default;
   div#track {
     position: relative;
@@ -165,8 +161,6 @@ export const TimelinePointsStyle = styled.div<Position>`
   &:hover {
     background-color: ${({ theme }) => theme.bg_regular(0.8)};
     border-color: ${({ theme }) => theme.grey_light()};
-    /* box-shadow: 0 10px 10px ${({ theme }) => theme.bg_dark(0.3)},
-      0 40px 40px ${({ theme }) => theme.bg_dark(0.2)}; */
     z-index: 2;
   }
 `;
@@ -189,8 +183,9 @@ export const TimelineStepStyle = styled(TimelinePointsStyle)`
 
 // TIMETABLE
 export const TimetableStyle = styled.div`
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  max-height: inherit;
+  min-height: calc(100vh - 35px);
   display: grid;
   position: relative;
   grid-template-rows: 60px 1fr;
@@ -198,6 +193,7 @@ export const TimetableStyle = styled.div`
   padding: 0 120px 0 2px;
   z-index: 1;
   user-select: none;
+  cursor: move;
   @media (max-width: 1920px) {
     width: 1920px;
   }
@@ -210,7 +206,6 @@ export const MainStyle = styled.main`
   width: 100%;
   min-height: 100%;
   padding: 35px 0 0 140px;
-  /* padding: 20px 0 0 70px; */
   border-radius: 30px 0 0 30px;
   position: relative;
   overflow: hidden;
@@ -234,7 +229,7 @@ export const UpdateTimetableStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   background-color: ${({ theme }) => theme.bg_dark(0.5)};

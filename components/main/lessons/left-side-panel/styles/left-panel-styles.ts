@@ -14,7 +14,6 @@ export const LeftSidePanelStyle = styled.div`
   background-color: ${({ theme }) => theme.bg_middle(0.8)};
   backdrop-filter: blur(4px);
   z-index: 100;
-  /* pointer-events: none; */
   &::after,
   &::before {
     content: '';
