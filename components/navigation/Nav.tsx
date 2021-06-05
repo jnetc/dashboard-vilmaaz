@@ -7,7 +7,6 @@ import AltLink from './Link';
 import { Logo } from '../icons/Logos';
 // Store
 import { useGlobalStore } from '@Store/GlobalStore';
-import { transition } from '@Store/utils/helperFunc';
 // Styles
 import { NavigationStyle } from './styles/navigation';
 

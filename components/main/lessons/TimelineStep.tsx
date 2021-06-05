@@ -7,11 +7,11 @@ import { useUpdate } from '@Main/lessons/hook/useUpdate';
 import { useMainStore } from '@Store/MainStore';
 import { useGlobalStore } from '@Store/GlobalStore';
 // Types
-import { Lines, Width } from '@types';
+import { Width } from '@types';
 // Styles
 import { TimelineStepStyle } from './styles/lessons';
 
-export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
+export const TimelineStep: FC<Width> = ({ width }) => {
   const { timetableEl, autoMovement } = useMainStore();
   const { mainPaddingLeft } = useGlobalStore();
   const { position, visible, currentTimeStr } = useUpdate();
@@ -27,7 +27,7 @@ export const TimelineStep: FC<Lines & Width> = ({ width, lines }) => {
   return (
     <>
       {visible && (
-        <TimelineStepStyle id="current-time" position={position} lines={lines}>
+        <TimelineStepStyle id="current-time" position={position}>
           {currentTimeStr}
         </TimelineStepStyle>
       )}
