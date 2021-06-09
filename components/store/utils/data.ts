@@ -50,26 +50,26 @@ export const database: Array<Schedule> = [
             lesson: 'matemattikka',
             time: { start: '14:00', end: '15:00' },
           },
-          {
-            id: 'sdf54ftkojo4s784fsyu',
-            lesson: 'matemattikka',
-            time: { start: '15:00', end: '16:00' },
-          },
-          {
-            id: 'sdf54we64gjo4solfr04',
-            lesson: 'tietotekniikka',
-            time: { start: '16:00', end: '17:00' },
-          },
-          {
-            id: 'sdf54we64gjo4sosfr07',
-            lesson: 'liikunta',
-            time: { start: '17:00', end: '18:00' },
-          },
-          {
-            id: 'sdf54we64gjo4s78dadg',
-            lesson: 'liikunta',
-            time: { start: '18:00', end: '19:00' },
-          },
+          // {
+          //   id: 'sdf54ftkojo4s784fsyu',
+          //   lesson: 'matemattikka',
+          //   time: { start: '15:00', end: '16:00' },
+          // },
+          // {
+          //   id: 'sdf54we64gjo4solfr04',
+          //   lesson: 'tietotekniikka',
+          //   time: { start: '16:00', end: '17:00' },
+          // },
+          // {
+          //   id: 'sdf54we64gjo4sosfr07',
+          //   lesson: 'liikunta',
+          //   time: { start: '17:00', end: '18:00' },
+          // },
+          // {
+          //   id: 'sdf54we64gjo4s78dadg',
+          //   lesson: 'liikunta',
+          //   time: { start: '18:00', end: '19:00' },
+          // },
         ],
       },
       {
