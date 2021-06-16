@@ -1,41 +1,48 @@
 // Types
-import { StaticValues, Element, LessonsType, TimeLine, Lesson } from '@types';
-import { transformTimeToNum } from '@Utils/helperFunc';
+import {
+  StaticValues,
+  Element,
+  LessonsType,
+  TimeLine,
+  LessonData,
+} from '@types';
+import { transformTimeToNum2 } from '@Utils/helperFunc';
 
 let startTime: number;
 let totalTime: number;
 let trackWidth: number;
 
 // Assign timepath
-export const transformTimeArr = (time: Array<string>) => {
-  return time.map(t => {
-    const timepoint = startTime - transformTimeToNum(t);
-    return { time: t, position: timepoint };
-  });
-};
+// export const transformTimeArr = (time: Array<string>) => {
+//   return time.map(t => {
+//     console.log('xxxxx', startTime, totalTime);
+//     const timepoint = startTime - transformTimeToNum2(t);
+//     return { time: t, position: timepoint };
+//   });
+// };
 
 // Create new array with time & position on the timeline
-export const timelinePositions = (time: TimeLine) => {
-  return time.map(t => {
-    const position = Math.round((t.position * trackWidth) / totalTime);
-    return { ...t, position };
-  });
-};
+// export const timelinePositions = (time: TimeLine) => {
+//   return time.map(t => {
+//     const position = Math.round((t.position * trackWidth) / totalTime);
+//     return { ...t, position };
+//   });
+// };
 
-export const getTimePointPos = (
-  arr: Array<string>,
-  track: number,
-  timeline: StaticValues
-) => {
-  // Assign global values
-  startTime = timeline.startLessons;
-  totalTime = timeline.totalTime;
-  trackWidth = track;
+// export const getTimePointPos = (
+//   arr: Array<string>,
+//   track: number,
+//   timeline: StaticValues
+// ) => {
+//   // Assign global values
+//   startTime = timeline.startLessons;
+//   totalTime = timeline.totalTime;
+//   trackWidth = track;
 
-  console.log('getTimePointPos', startTime, totalTime, trackWidth);
-  const transformToNum = transformTimeArr(arr);
-  return timelinePositions(transformToNum);
-};
+//   console.log('getTimePointPos', startTime, totalTime, trackWidth);
+//   const transformToNum = transformTimeArr(arr);
+//   return timelinePositions(transformToNum);
+// };
 
 export const movementTimeAndTimetable = (
   main: number,
@@ -60,39 +67,39 @@ export const movementTimeAndTimetable = (
   }
 
   if (currentTime > endLessons || stopAutoMovement <= currentTime) {
-    console.log('out of tracking');
+    // console.log('out of tracking');
     timetable.style.transform = `translate3d(-${outOfTrackLessons}px, 0, 0)`;
     return;
   }
 
-  console.log('move', timeMovement);
+  // console.log('move', timeMovement);
   timetable.style.transform = `translate3d(${timeMovement}px, 0, 0)`;
 };
 
-export const getLessonStartEndPoint = (arr: Array<LessonsType>) => {
-  const numArr = [];
+// export const getLessonStartEndPoint = (arr: Array<LessonsType>) => {
+//   const numArr = [];
 
-  for (const i of arr) {
-    const { end, start, ...data } = i;
+//   for (const i of arr) {
+//     const { end, start, ...data } = i;
 
-    const startNum = Math.abs(startTime - transformTimeToNum(start));
-    const endNum = Math.abs(startTime - transformTimeToNum(end));
-    const startPos = Math.round((startNum * trackWidth) / totalTime);
-    const endPos = Math.round((endNum * trackWidth) / totalTime);
+//     const startNum = Math.abs(startTime - transformTimeToNum(start));
+//     const endNum = Math.abs(startTime - transformTimeToNum(end));
+//     const startPos = Math.round((startNum * trackWidth) / totalTime);
+//     const endPos = Math.round((endNum * trackWidth) / totalTime);
 
-    numArr.push({
-      ...data,
-      start: startPos,
-      end: endPos,
-    });
-  }
+//     numArr.push({
+//       ...data,
+//       start: startPos,
+//       end: endPos,
+//     });
+//   }
 
-  return numArr;
-};
+//   return numArr;
+// };
 
 export const learningProgress = (
   start: number,
-  lessons: Array<Lesson>,
+  lessons: Array<LessonData>,
   length: number,
   position: number,
   timeNumber: number
@@ -115,12 +122,12 @@ export const learningProgress = (
   return { timer: timer, lesson: lesson, status: 'time', pos: initGrowing };
 };
 
-const getTimerAndName = (arr: Array<Lesson>, timeNumber: number) => {
+const getTimerAndName = (arr: Array<LessonData>, timeNumber: number) => {
   const timeAndName = [];
 
   for (const i of arr) {
-    const startLesson = transformTimeToNum(i.time.start);
-    const endLesson = transformTimeToNum(i.time.end);
+    const startLesson = transformTimeToNum2(i.start.time);
+    const endLesson = transformTimeToNum2(i.end.time);
 
     const currentLessonTime = endLesson - timeNumber;
     if (startLesson <= timeNumber && endLesson > timeNumber) {

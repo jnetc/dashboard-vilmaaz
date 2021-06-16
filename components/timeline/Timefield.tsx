@@ -1,39 +1,40 @@
 import { FC, useEffect, useState } from 'react';
 // Component
-import Lesson from '@Lessons/Lesson';
+import Lessons from '@Lessons/Lessons';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Utils
-import { getLessonStartEndPoint } from '@Utils/timeline';
+// import { getLessonStartEndPoint } from '@Utils/timeline';
 // Types
-import { LessonsType, Order } from '@types';
+import { Order } from '@types';
 // Styles
 import { TimefieldStyle } from '@styles/timeline';
 
 const Timefield: FC = () => {
   const { content, updateOrders } = useMainStore();
-  const [startEndLesson, setStartEndLesson] = useState<Array<LessonsType>>([]);
+  // const [startEndLesson, setStartEndLesson] = useState<Array<LessonsType>>([]);
   const [orders, setOrders] = useState<Array<Order>>([
     { id: '', name: '', order: 0 },
   ]);
 
   useEffect(() => {
-    setStartEndLesson(content);
+    // setStartEndLesson(content);
     const isOrders = window.localStorage.getItem('orders');
 
     if (isOrders) return setOrders(JSON.parse(isOrders));
   }, [updateOrders]);
 
-  const lessonData = getLessonStartEndPoint(startEndLesson);
+  // const lessonData = getLessonStartEndPoint(startEndLesson);
+  // console.log('timefield', content);
 
-  const lessons = lessonData.map(data => {
+  const lessons = content.map(data => {
     const currentLessonOrder = orders.find(o => o.id === data.id);
-    return <Lesson key={data.id} data={data} order={currentLessonOrder} />;
+    return <Lessons key={data.id} data={data} order={currentLessonOrder} />;
   });
 
   return (
     <TimefieldStyle id="timefield">
-      {/* <div id="field">{lessons}</div> */}
+      <div id="field">{lessons}</div>
     </TimefieldStyle>
   );
 };

@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 // Types
-import { Schedule, LessonsType, Lesson } from '@types';
+import { Schedule, LessonsType, LessonData } from '@types';
 
 export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
   return new Intl.DateTimeFormat('fi-FI', options).format(date);
@@ -22,16 +22,19 @@ export const transform = (data: Array<Schedule>, set: boolean = true): any => {
     if (!schoolday) return;
 
     const findEndOfArr = schoolday.lessons.length - 1;
-    const start = schoolday.lessons[0].time.start;
-    const end = schoolday.lessons[findEndOfArr].time.end;
+    const start = schoolday.lessons[0].start.time;
+    const end = schoolday.lessons[findEndOfArr].end.time;
+    const startPos = transformTimeToNum2(start);
+    const endPos = transformTimeToNum2(end);
     const timetableWithBreak = fillEmptySpace(schoolday.lessons);
+    // console.log(timetableWithBreak);
 
     if (!set) {
       newTimefieldArr.push({
         ...data,
         timetable: timetableWithBreak,
-        start,
-        end,
+        start: { time: start, position: startPos },
+        end: { time: end, position: endPos },
       });
     }
     if (set) {
@@ -40,51 +43,56 @@ export const transform = (data: Array<Schedule>, set: boolean = true): any => {
     }
   });
 
-  const newSetToArray = [...newTimelineSet];
-
   if (!set) return newTimefieldArr;
-  return newSetToArray;
+  return [...newTimelineSet]; // Set spread to Array
 };
 
 // define if of lesson have empty space in time or not
-const fillEmptySpace = (arr: Array<Lesson>) => {
-  const fillArray: Array<Lesson> = [];
-  let timeout = transformTimeToNum2(arr[0].time.start);
+const fillEmptySpace = (arr: Array<LessonData>) => {
+  const fillArray: Array<LessonData> = [];
+  let startBreakPosition = transformTimeToNum2(arr[0].start.time);
 
   for (const i of arr) {
-    const startLesson = transformTimeToNum2(i.time.start);
-    const endLesson = transformTimeToNum2(i.time.end);
-    const isEmptyTime = startLesson - timeout;
+    const startLesson = transformTimeToNum2(i.start.time);
+    const endLesson = transformTimeToNum2(i.end.time);
+    const isEmptyTime = startLesson - startBreakPosition;
 
     if (isEmptyTime === 0) {
+      // Push lessons before init first break
+      i.start.position = startLesson;
+      i.end.position = endLesson;
       fillArray.push(i);
     }
 
     if (isEmptyTime !== 0) {
-      const startTimeout = transformNumToTime(timeout);
-      const endTimeout = transformNumToTime(startLesson);
+      const startBreak = transformNumToTime2(startBreakPosition);
+      const endBreak = transformNumToTime2(startLesson);
 
       fillArray.push({
         id: i.id + 2,
         lesson: 'taukko',
-        time: { start: startTimeout, end: endTimeout },
+        start: { time: startBreak, position: startBreakPosition },
+        end: { time: endBreak, position: startLesson },
       });
+      // Push lessons after init first break
+      i.start.position = startLesson;
+      i.end.position = endLesson;
       fillArray.push(i);
     }
-    timeout = endLesson;
+    startBreakPosition = endLesson;
   }
   return fillArray;
 };
 
-export const transformTimeToNum = (time: string | number): number => {
-  if ('number' === typeof time) return time;
+// export const transformTimeToNum = (time: string | number): number => {
+//   if ('number' === typeof time) return time;
 
-  const minInHour = 60;
-  const hours = Number(time.split(':')[0]);
-  const minutes = Number(time.split(':')[1]);
+//   const minInHour = 60;
+//   const hours = Number(time.split(':')[0]);
+//   const minutes = Number(time.split(':')[1]);
 
-  return hours * minInHour + minutes;
-};
+//   return hours * minInHour + minutes;
+// };
 
 export const transformNumToTime = (num: number) => {
   const minInHour = 60;
@@ -100,7 +108,7 @@ export const staticValues = (timearr: Array<string>) => {
   for (const i of timearr) {
     arr.push(transformTimeToNum2(i));
   }
-
+  //TODO Добавить сюда переменную длины элемента #timeline
   let startLessons = Math.min(...arr);
   let endLessons = Math.max(...arr);
   let totalTime = endLessons - startLessons;
@@ -149,12 +157,11 @@ export const hourPositions = (hours: Array<string>) => {
 export const transformTimeToNum2 = (time: string | number): number => {
   if ('number' === typeof time) return time;
 
-  //* Length every hour
-  const step: number = 340;
-
   const hours = Number(time.split(':')[0]);
   const minutes = Number(time.split(':')[1]);
 
+  //* Length every hour
+  const step = 340;
   const amountOfTime = 60;
   const hoursToMinutes = hours * amountOfTime;
 
@@ -168,6 +175,21 @@ export const transformTimeToNum2 = (time: string | number): number => {
   // console.log('tranform', timeStep);
 
   return timeStep;
+};
+
+export const transformNumToTime2 = (num: number) => {
+  const step = 340;
+  const amountOfTime = 60;
+  const hourStepLength = step + amountOfTime;
+  const minuteStepLength = hourStepLength / amountOfTime;
+
+  const findMinutes = (num % hourStepLength) / minuteStepLength;
+  const hours = Math.floor(num / hourStepLength);
+  const minutes = findMinutes > 9 ? findMinutes : `0${findMinutes}`;
+
+  // console.log(minutes);
+
+  return `${hours}:${minutes}`;
 };
 
 export const transition = (

@@ -1,40 +1,21 @@
 import { FC } from 'react';
 // Types
-import { LessonDataProps, Order } from '@types';
-// Store
-import { useMainStore } from '@Store/MainStore';
-// Components
-import { LessonProgressBar } from './LessonProgressBar';
-import { LessonCommonProgress } from './LessonCommonProgress';
+import { LessonsColor, LessonData } from '@types';
 // Styles
 import { LessonStyle } from '@styles/lessons';
 
-const Lesson: FC<{ data: LessonDataProps; order: Order | undefined }> = ({
+export const Lesson: FC<{ data: LessonData; colors: LessonsColor }> = ({
   data,
-  order,
+  colors,
 }) => {
-  const { setDetailLesson } = useMainStore();
-
-  const lengthLessons = data.end - data.start;
-
-  const openDetail = () => {
-    setDetailLesson({ open: true, data: data });
-    document.querySelector('body')?.classList.add('right-side');
-    document.querySelector('main')?.classList.add('opacity');
-  };
+  let lessonBlockWidth: number;
+  if (!data.end.position || !data.start.position) {
+    lessonBlockWidth = 0;
+  } else {
+    lessonBlockWidth = data.end.position - data.start.position;
+  }
 
   return (
-    <LessonStyle
-      position={data.start}
-      distance={lengthLessons}
-      primary={data.colors.accent}
-      order={order?.order}
-      className="timefield-lesson"
-      onClick={openDetail}>
-      <LessonProgressBar data={data} />
-      <LessonCommonProgress length={lengthLessons} shade={data.colors.shade} />
-    </LessonStyle>
+    <LessonStyle lessonWidth={lessonBlockWidth}>{data.lesson}</LessonStyle>
   );
 };
-
-export default Lesson;

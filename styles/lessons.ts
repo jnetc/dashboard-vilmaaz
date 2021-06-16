@@ -7,8 +7,8 @@ type LessonStyleType = {
   order?: number;
 };
 
-// LESSON
-export const LessonStyle = styled.div<LessonStyleType>`
+// LESSONS
+export const LessonsStyle = styled.div<LessonStyleType>`
   width: ${({ distance }) => distance}px;
   height: 70px;
   display: flex;
@@ -17,6 +17,7 @@ export const LessonStyle = styled.div<LessonStyleType>`
   left: ${({ position }) => position}px;
   border-radius: 35px;
   user-select: none;
+  border: 2px solid red;
   cursor: pointer;
   z-index: 10;
   order: ${({ order }) => (order ? order : 0)};
@@ -28,6 +29,21 @@ export const LessonStyle = styled.div<LessonStyleType>`
       stroke: var(--${({ primary }) => primary});
     }
   }
+`;
+
+// LESSON
+export const LessonStyle = styled.div<{ lessonWidth: number }>`
+  width: ${({ lessonWidth }) => lessonWidth}px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 35px;
+  user-select: none;
+  /* background: white; */
+  border: 2px solid red;
+  cursor: pointer;
+  z-index: 10;
 `;
 
 // LESSON AVATAR PROGRESS & LESSON STATUS ICON's

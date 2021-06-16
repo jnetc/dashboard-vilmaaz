@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { ProgressNameStyle } from '@styles/lessons';
 
 //TODO fix overflow text position
-console.log('hello');
 
 export const LessonName: FC<{ name: string | undefined }> = ({ name }) => {
   return (

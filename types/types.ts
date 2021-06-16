@@ -10,56 +10,60 @@ export type StateNumber = Dispatch<SetStateAction<number>>;
 export type DispatchTime = Dispatch<SetStateAction<number | null>>;
 
 // STORE / CONTEXT
-export type StartEnd = {
-  start: string;
-  end: string;
-};
+export interface LessonTime {
+  time: string;
+  position?: number;
+}
+export interface LessonTimePosition {
+  position: number;
+}
 
-export type Avatar = {
+export interface Avatar {
   img: string;
   name: string;
-};
+}
 
-export type Lesson = {
+export interface LessonData {
   id: string;
   lesson: string;
-  time: StartEnd;
-};
+  start: LessonTime;
+  end: LessonTime;
+}
 
-export type LessonsColor = {
+export interface LessonsColor {
   accent: string; // акцентирующий цвет
   shade: string; // оттенок цета, акцентный + чёрный
-};
+}
 
-export type SchoolDay = {
+export interface SchoolDay {
   day: string;
-  lessons: Array<Lesson>;
-};
+  lessons: Array<LessonData>;
+}
 
-export type UserType = {
+export interface UserType {
   id: string;
   name: string;
   colors: LessonsColor;
   avatar: Avatar;
-};
+}
 
-export type UserDataType = {
-  timetable: Array<Lesson>;
-} & UserType;
+export interface UserDataType extends UserType {
+  timetable: Array<LessonData>;
+}
 
-export type Schedule = {
+export interface Schedule extends UserType {
   timetable: Array<SchoolDay>;
-} & UserType;
+}
 
-export type OpenAsideDetailLesson = {
+export interface OpenAsideDetailLesson {
   open: boolean;
-  data?: LessonDataProps;
-};
+  data?: LessonsType;
+}
 
-export type LessonDataProps = {
-  start: number;
-  end: number;
-} & UserDataType;
+// export type LessonDataProps = {
+//   start: number;
+//   end: number;
+// } & UserDataType;
 
 export type GlobalStoreProps = {
   openMenu: boolean;
@@ -93,36 +97,41 @@ export interface TimelineHours {
   position: number;
 }
 
-export type StaticValues = {
+export interface StaticValues {
   startLessons: number;
   endLessons: number;
   totalTime: number;
-};
+}
 
-export type LessonsType = {
-  start: string;
-  end: string;
-} & UserDataType;
+export interface InitPosition {
+  time: string;
+  position: number;
+}
+
+export interface LessonsType extends UserDataType {
+  start: InitPosition;
+  end: InitPosition;
+}
 
 // NAVIGATION
-export type NavLink = {
+export interface NavLink {
   href: string;
   path: string;
   active: boolean;
   counter: boolean;
-};
+}
 
-export type NavigationProps = {
+export interface NavigationProps {
   icon: JSX.Element;
   url: NavLink;
   index: number;
-};
+}
 
 // BOTTUNS
-export type ButtonStyleType = {
+export interface ButtonStyleType {
   isFill?: boolean;
   colorTheme: string;
-};
+}
 
 type Styled = ({ isFill?: true } | { isFill: never }) &
   (
@@ -164,7 +173,7 @@ export type ProgressBarType = {
 };
 
 export type ProgressLessonsData = {
-  lessons: Array<Lesson>;
+  lessons: Array<LessonData>;
 } & LessonsColor;
 
 export type ProgressLessonsDataStyle = {
