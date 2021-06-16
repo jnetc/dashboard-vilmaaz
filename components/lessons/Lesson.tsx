@@ -4,10 +4,10 @@ import { LessonDataProps, Order } from '@types';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Components
-import { LessonProgressBar } from '@Main/lessons/LessonProgressBar';
-import { LessonCommonProgress } from '@Main/lessons/LessonCommonProgress';
+import { LessonProgressBar } from './LessonProgressBar';
+import { LessonCommonProgress } from './LessonCommonProgress';
 // Styles
-import { LessonStyle } from './styles/lessons';
+import { LessonStyle } from '@styles/lessons';
 
 const Lesson: FC<{ data: LessonDataProps; order: Order | undefined }> = ({
   data,

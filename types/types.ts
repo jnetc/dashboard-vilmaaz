@@ -77,12 +77,21 @@ export type MainStoreProps = {
   setTimetableEl: (el: Element) => void;
   timelineWidth: number;
   setTimelineWidth: (el: number) => void;
+  timelineHours: Array<TimelineHours>;
+  setTimelineHours: (arr: Array<TimelineHours>) => void;
+  timetableWidth: number;
+  divHoursWidth: number;
   updateOrders: boolean;
   setUpdateOrders: (order: boolean) => void;
   content: Array<LessonsType>;
   timepoints: Array<string>;
   timeline: StaticValues;
 };
+
+export interface TimelineHours {
+  time: string;
+  position: number;
+}
 
 export type StaticValues = {
   startLessons: number;

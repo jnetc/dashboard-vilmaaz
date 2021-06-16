@@ -49,11 +49,11 @@ export const transform = (data: Array<Schedule>, set: boolean = true): any => {
 // define if of lesson have empty space in time or not
 const fillEmptySpace = (arr: Array<Lesson>) => {
   const fillArray: Array<Lesson> = [];
-  let timeout = transformTimeToNum(arr[0].time.start);
+  let timeout = transformTimeToNum2(arr[0].time.start);
 
   for (const i of arr) {
-    const startLesson = transformTimeToNum(i.time.start);
-    const endLesson = transformTimeToNum(i.time.end);
+    const startLesson = transformTimeToNum2(i.time.start);
+    const endLesson = transformTimeToNum2(i.time.end);
     const isEmptyTime = startLesson - timeout;
 
     if (isEmptyTime === 0) {
@@ -98,7 +98,7 @@ export const staticValues = (timearr: Array<string>) => {
   const arr: Array<number> = [];
 
   for (const i of timearr) {
-    arr.push(transformTimeToNum(i));
+    arr.push(transformTimeToNum2(i));
   }
 
   let startLessons = Math.min(...arr);
@@ -106,6 +106,68 @@ export const staticValues = (timearr: Array<string>) => {
   let totalTime = endLessons - startLessons;
 
   return { startLessons, endLessons, totalTime };
+};
+
+export const hours = [
+  '0:00',
+  '1:00',
+  '2:00',
+  '3:00',
+  '4:00',
+  '5:00',
+  '6:00',
+  '7:00',
+  '8:00',
+  '9:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+  '21:00',
+  '22:00',
+  '23:00',
+];
+
+export const hourPositions = (hours: Array<string>) => {
+  return hours.map(h => {
+    const timepoint = transformTimeToNum2(h);
+    if (timepoint === 0) {
+      return { time: h, position: timepoint };
+    }
+    return { time: h, position: timepoint };
+  });
+};
+
+//* New transform timetransform
+export const transformTimeToNum2 = (time: string | number): number => {
+  if ('number' === typeof time) return time;
+
+  //* Length every hour
+  const step: number = 340;
+
+  const hours = Number(time.split(':')[0]);
+  const minutes = Number(time.split(':')[1]);
+
+  const amountOfTime = 60;
+  const hoursToMinutes = hours * amountOfTime;
+
+  const hourStepLength = step + amountOfTime;
+  const minuteStepLength = hourStepLength / amountOfTime;
+
+  const minuteStep = minutes * minuteStepLength;
+  const hourStep = step * hours;
+  const timeStep = Math.round(hoursToMinutes + hourStep + minuteStep);
+
+  // console.log('tranform', timeStep);
+
+  return timeStep;
 };
 
 export const transition = (

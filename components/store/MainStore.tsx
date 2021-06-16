@@ -2,7 +2,12 @@ import { FC, createContext, useContext, useEffect, useState } from 'react';
 
 // Types
 import { Schedule, MainStoreProps } from '@types';
-import { transform, staticValues } from '@Store/utils/helperFunc';
+import {
+  transform,
+  staticValues,
+  hourPositions,
+  hours,
+} from '@Utils/helperFunc';
 import { database } from '@Store/utils/data';
 
 const state: MainStoreProps = {
@@ -14,6 +19,10 @@ const state: MainStoreProps = {
   setTimetableEl: el => el,
   timelineWidth: 0,
   setTimelineWidth: num => num,
+  timelineHours: [],
+  setTimelineHours: arr => arr,
+  timetableWidth: 0,
+  divHoursWidth: 90,
   updateOrders: true,
   setUpdateOrders: b => b,
   content: [],
@@ -24,11 +33,16 @@ const state: MainStoreProps = {
     totalTime: 0,
   },
 };
-const MainContext = createContext(state);
 
+export const MainContext = createContext(state);
+
+// //* Hook
 export const useMainStore = () => {
   return useContext(MainContext);
 };
+
+//* Length every hour
+export const timeStep: number = 340;
 
 const MainStore: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
@@ -37,16 +51,40 @@ const MainStore: FC = ({ children }) => {
   const [timeline, setTimeline] = useState(state.timeline);
   const [timetableEl, setTimetableEl] = useState(state.timetableEl);
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
+  const [timelineHours, setTimelineHours] = useState(state.timelineHours);
   const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
 
   let content = transform(data, false);
   let timepoints = transform(data);
 
-  useEffect(() => {
-    setData(database);
+  const timetableLenght = timelineHours.length - 1;
+  const timetableWidth = timelineHours[timetableLenght]?.position;
 
+  useEffect(() => {
+    const setHours = new Set([...hours, ...timepoints]);
+    const getHoursPoints = hourPositions([...setHours]);
+    // const getlessonsPoints = hourPositions(timepoints);
+
+    // console.log('MainStore', autoMovement);
+
+    setTimelineHours([...getHoursPoints]);
+
+    setData(database);
     setTimeline(staticValues(timepoints));
+    const el = document.querySelector('#timeline');
+    if (!el) return;
+    const x = el.getBoundingClientRect().width;
+    setTimelineWidth(x);
+    // console.log(x);
   }, []);
+
+  // const timePointPositions = timepoints.map(t => {
+  //   const position = transformTimeToNum2(t);
+  //   return { time: t, position };
+  // });
+
+  // console.log('MainStore', timeline, timelineWidth);
+  // console.log('MainStore', content);
 
   return (
     <MainContext.Provider
@@ -59,6 +97,10 @@ const MainStore: FC = ({ children }) => {
         setDetailLesson,
         timelineWidth,
         setTimelineWidth,
+        timelineHours,
+        setTimelineHours,
+        timetableWidth,
+        divHoursWidth: state.divHoursWidth,
         updateOrders,
         setUpdateOrders,
         content,

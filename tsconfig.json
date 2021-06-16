@@ -20,11 +20,15 @@
     "baseUrl": ".",
     "paths": {
       "@styles/*": ["./styles/*"],
-      "@Navigation": ["./components/navigation/Nav"],
+      // "@Navigation": ["./components/navigation/Nav"],
       "@Aside/*": ["./components/aside/*"],
-      "@Main/*": ["./components/main/*"],
+      "@Timeline/*": ["./components/timeline/*"],
+      "@Lessons/*": ["./components/lessons/*"],
       "@Store/*": ["./components/store/*"],
+      "@Hooks/*": ["./components/hooks/*"],
+      "@Utils/*": ["./components/utils/*"],
       "@Buttons/*": ["./components/buttons/*"],
+      "@Icons/*": ["./components/icons/*"],
       "@types": ["./types/types"]
     }
   },

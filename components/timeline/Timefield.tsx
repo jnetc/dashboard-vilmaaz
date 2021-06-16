@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 // Component
-import Lesson from '@Main/lessons/Lesson';
+import Lesson from '@Lessons/Lesson';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Utils
-import { getLessonStartEndPoint } from '@Main/lessons/utils/timeline';
+import { getLessonStartEndPoint } from '@Utils/timeline';
 // Types
 import { LessonsType, Order } from '@types';
 // Styles
-import { TimefieldStyle } from './styles/lessons';
+import { TimefieldStyle } from '@styles/timeline';
 
 const Timefield: FC = () => {
   const { content, updateOrders } = useMainStore();
@@ -33,7 +33,7 @@ const Timefield: FC = () => {
 
   return (
     <TimefieldStyle id="timefield">
-      <div id="field">{lessons}</div>
+      {/* <div id="field">{lessons}</div> */}
     </TimefieldStyle>
   );
 };

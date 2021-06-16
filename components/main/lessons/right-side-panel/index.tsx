@@ -2,13 +2,13 @@ import { FC, useEffect, useState, useRef } from 'react';
 // Store
 import { useMainStore } from '@Store/MainStore';
 // Components
-import { DayOfWeek } from '@Main/lessons/right-side-panel/DayOfWeek';
-import { ProgressBar } from '@Main/lessons/right-side-panel/ProgressBar';
-import { ProgressLessons } from '@Main/lessons/right-side-panel/ProgressLessons';
+import { DayOfWeek } from './DayOfWeek';
+import { ProgressBar } from './ProgressBar';
+import { ProgressLessons } from './ProgressLessons';
 import CtrlButton, { CloseButtonStyle } from '@Buttons/ctrl-button/CtrlButton';
 // Types
 import { ProgressBarType, ProgressLessonsData, Element } from '@types';
-import { transition } from '@Store/utils/helperFunc';
+import { transition } from '@Utils/helperFunc';
 // Styles
 import {
   RightSidePanelStyle,

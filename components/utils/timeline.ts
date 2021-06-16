@@ -1,6 +1,6 @@
 // Types
 import { StaticValues, Element, LessonsType, TimeLine, Lesson } from '@types';
-import { transformTimeToNum } from '@Store/utils/helperFunc';
+import { transformTimeToNum } from '@Utils/helperFunc';
 
 let startTime: number;
 let totalTime: number;
@@ -9,7 +9,7 @@ let trackWidth: number;
 // Assign timepath
 export const transformTimeArr = (time: Array<string>) => {
   return time.map(t => {
-    const timepoint = Math.abs(startTime - transformTimeToNum(t));
+    const timepoint = startTime - transformTimeToNum(t);
     return { time: t, position: timepoint };
   });
 };
@@ -32,6 +32,7 @@ export const getTimePointPos = (
   totalTime = timeline.totalTime;
   trackWidth = track;
 
+  console.log('getTimePointPos', startTime, totalTime, trackWidth);
   const transformToNum = transformTimeArr(arr);
   return timelinePositions(transformToNum);
 };
@@ -39,29 +40,33 @@ export const getTimePointPos = (
 export const movementTimeAndTimetable = (
   main: number,
   timetable: Element,
-  timepos: number,
+  currentTime: number,
   autoMovement: boolean,
-  mainPaddingLeft: number
+  timeline: StaticValues
 ) => {
   if (!timetable) return;
   if (!autoMovement) return;
 
-  const timetableWidth = timetable.offsetWidth + mainPaddingLeft;
-  const startPoint = Math.round(main / 2);
-  const endPoint = timetableWidth - startPoint;
-  const endPointTime = Math.abs(startPoint - endPoint);
+  const { startLessons, endLessons } = timeline;
 
-  if (startPoint > timepos) {
+  const startAutoMovement = startLessons + Math.round(main / 2);
+  const stopAutoMovement = endLessons - Math.round(main / 2) + 90;
+  const outOfTrackLessons = endLessons - main + 90;
+  const timeMovement = Math.round(main / 2) - currentTime;
+
+  if (startAutoMovement > currentTime || startLessons > currentTime) {
+    timetable.style.transform = `translate3d(-${startLessons}px, 0, 0)`;
     return;
   }
 
-  if (timepos > endPoint) {
-    timetable.style.transform = `translate3d(-${endPointTime}px, 0, 0)`;
+  if (currentTime > endLessons || stopAutoMovement <= currentTime) {
+    console.log('out of tracking');
+    timetable.style.transform = `translate3d(-${outOfTrackLessons}px, 0, 0)`;
     return;
   }
 
-  const position = startPoint - timepos;
-  timetable.style.transform = `translate3d(${position}px, 0, 0)`;
+  console.log('move', timeMovement);
+  timetable.style.transform = `translate3d(${timeMovement}px, 0, 0)`;
 };
 
 export const getLessonStartEndPoint = (arr: Array<LessonsType>) => {

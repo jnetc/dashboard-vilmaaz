@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 // Component
 import { Button } from '@Buttons/Button';
 // Styles
-import { UpdateTimetableStyle } from './styles/lessons';
+import { UpdateTimetableStyle } from '@styles/timeline';
 
 export const UpdateTimetable: FC = () => {
   const [resize, setResize] = useState(0);

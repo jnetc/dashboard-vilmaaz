@@ -27,7 +27,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
     position: relative;
     background-color: ${({ theme }) => theme.bg_main()};
-
+    overflow: hidden;
   }
   @media (min-width: 1921px) {
     #__next {

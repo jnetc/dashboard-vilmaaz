@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Helper function
-import { dateFormat } from '@Store/utils/helperFunc';
+import { dateFormat } from '@Utils/helperFunc';
 // Styles
 import { DateStyle } from './styles/right-panel-styles';
 

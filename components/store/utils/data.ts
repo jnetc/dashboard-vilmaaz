@@ -512,26 +512,26 @@ export const database: Array<Schedule> = [
             lesson: 'historia',
             time: { start: '14:15', end: '15:00' },
           },
-          {
-            id: 'sdf54wa38wfsdjklhrwer',
-            lesson: 'historia',
-            time: { start: '15:00', end: '16:00' },
-          },
-          {
-            id: 'sdf54wa38w5f4er54fs1f',
-            lesson: 'historia',
-            time: { start: '16:00', end: '17:00' },
-          },
-          {
-            id: 'sdf54wa35sd4f6e4rsf4s',
-            lesson: 'historia',
-            time: { start: '17:00', end: '18:00' },
-          },
-          {
-            id: 'sdf5ds4f654er45df7464',
-            lesson: 'historia',
-            time: { start: '18:00', end: '19:00' },
-          },
+          // {
+          //   id: 'sdf54wa38wfsdjklhrwer',
+          //   lesson: 'historia',
+          //   time: { start: '15:00', end: '16:00' },
+          // },
+          // {
+          //   id: 'sdf54wa38w5f4er54fs1f',
+          //   lesson: 'historia',
+          //   time: { start: '16:00', end: '17:00' },
+          // },
+          // {
+          //   id: 'sdf54wa35sd4f6e4rsf4s',
+          //   lesson: 'historia',
+          //   time: { start: '17:00', end: '18:00' },
+          // },
+          // {
+          //   id: 'sdf5ds4f654er45df7464',
+          //   lesson: 'historia',
+          //   time: { start: '18:00', end: '19:00' },
+          // },
         ],
       },
       {

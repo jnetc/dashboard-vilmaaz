@@ -1,7 +1,8 @@
 import Head from 'next/head';
-import { Timetable } from '@Main/lessons/Timetable';
-import { RightSidePanel } from '@Main/lessons/right-side-panel';
-import { UpdateTimetable } from '@Main/lessons/UpdateTimetable';
+import { Timetable } from '@Timeline/Timetable';
+// import { RightSidePanel } from '@Main/lessons/right-side-panel';
+import { UpdateTimetable } from '@Timeline/UpdateTimetable';
+import Aside from '@Aside/index';
 
 export default function Home() {
   return (
@@ -11,7 +12,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Timetable />
-      <RightSidePanel />
+      {/* <RightSidePanel /> */}
+      <Aside />
       <UpdateTimetable />
     </>
   );

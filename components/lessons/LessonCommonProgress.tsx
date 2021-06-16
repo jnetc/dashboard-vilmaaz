@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Styles
-import { LessonCommonProgressStyle } from './styles/lessons';
+import { LessonCommonProgressStyle } from '@styles/lessons';
 
 export const LessonCommonProgress: FC<{
   length: number;

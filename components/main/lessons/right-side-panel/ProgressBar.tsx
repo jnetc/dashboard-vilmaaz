@@ -2,14 +2,11 @@ import { FC } from 'react';
 // Types
 import { ProgressBarType } from '@types';
 // Hook
-import { useUpdate } from '@Main/lessons/hook/useUpdate';
+import { useUpdate } from '@Hooks/useUpdate';
 // Component
-import { ProgressTime } from '@Main/lessons/right-side-panel/ProgressTime';
+import { ProgressTime } from './ProgressTime';
 // Helper functions
-import {
-  transformTimeToNum,
-  transformNumToTime,
-} from '@Store/utils/helperFunc';
+import { transformTimeToNum, transformNumToTime } from '@Utils/helperFunc';
 // Styles
 import {
   BarStyle,

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 // Hook
-import { useUpdate } from '@Main/lessons/hook/useUpdate';
+import { useUpdate } from '@Hooks/useUpdate';
 // Types
 import { Lesson, LessonsColor } from '@types';
 // Helper functions
-import { transformTimeToNum } from '@Store/utils/helperFunc';
+import { transformTimeToNum } from '@Utils/helperFunc';
 // Styles
 import { ProgressLessonStyle } from './styles/right-panel-styles';
 

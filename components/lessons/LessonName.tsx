@@ -1,8 +1,9 @@
 import { FC } from 'react';
 // Styles
-import { ProgressNameStyle } from './styles/lessons';
+import { ProgressNameStyle } from '@styles/lessons';
 
-// TODO fix overflow text position
+//TODO fix overflow text position
+console.log('hello');
 
 export const LessonName: FC<{ name: string | undefined }> = ({ name }) => {
   return (

@@ -2,15 +2,15 @@ import { FC } from 'react';
 // Types
 import { LessonDataProps } from '@types';
 // Helper function
-import { learningProgress } from '@Main/lessons/utils/timeline';
+import { learningProgress } from '@Utils/timeline';
 // Hook
-import { useUpdate } from '@Main/lessons/hook/useUpdate';
+import { useUpdate } from '@Hooks/useUpdate';
 // Components
-import { LessonStatusIcon } from '@Main/lessons/LessonStatusIcon';
-import { LessonAvatarProgress } from '@Main/lessons/LessonAvatarProgress';
-import { LessonName } from '@Main/lessons/LessonName';
+import { LessonStatusIcon } from './LessonStatusIcon';
+import { LessonAvatarProgress } from './LessonAvatarProgress';
+import { LessonName } from './LessonName';
 // Styles
-import { LessonProgressBarStyle } from './styles/lessons';
+import { LessonProgressBarStyle } from '@styles/lessons';
 
 export const LessonProgressBar: FC<{ data: LessonDataProps }> = ({ data }) => {
   const lengthLessons = data.end - data.start;

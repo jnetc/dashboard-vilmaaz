@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Done, Wait } from '../../icons/Lesson';
+import { Done, Wait } from '@Icons/Lesson';
 // Styles
-import { LessonStatusIconStyle } from './styles/lessons';
+import { LessonStatusIconStyle } from '@styles/lessons';
 
 export const LessonStatusIcon: FC<{
   status: string;
