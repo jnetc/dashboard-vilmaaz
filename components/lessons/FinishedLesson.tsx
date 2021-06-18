@@ -2,25 +2,25 @@ import { FC } from 'react';
 // Types
 import { LessonComponent } from '@types';
 // Style
-import { FinishedLessonStyle } from '@styles/lessons';
+import { FinishedLessonStyle, BreakStyle } from '@styles/lessons';
 // Icons
 import { SmallTimeIcon, FinishedIcon } from '@Icons/Lesson';
 
 export const FinishedLesson: FC<LessonComponent> = ({
   width,
-  color,
+  colors,
   lesson,
   start,
   end,
 }) => {
   console.log('render finished');
 
-  return (
-    <FinishedLessonStyle lessonWidth={width} color={color}>
+  return lesson !== 'taukko' ? (
+    <FinishedLessonStyle lessonWidth={width} colors={colors}>
       <div className="lesson-duration">
         <SmallTimeIcon />
         <time>
-          {start} - {end}
+          {start.time} - {end.time}
         </time>
       </div>
       <p className="lesson-name">{lesson}</p>
@@ -31,5 +31,12 @@ export const FinishedLesson: FC<LessonComponent> = ({
         <FinishedIcon />
       </div>
     </FinishedLessonStyle>
+  ) : (
+    <BreakStyle lessonWidth={width} colors={colors}>
+      <svg width="56" height="56" viewBox="0 0 56 56">
+        <circle cx="28" cy="28" r="24" className="track"></circle>
+      </svg>
+      <FinishedIcon />
+    </BreakStyle>
   );
 };

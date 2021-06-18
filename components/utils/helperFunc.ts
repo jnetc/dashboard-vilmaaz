@@ -24,10 +24,9 @@ export const transform = (data: Array<Schedule>, set: boolean = true) => {
     const findEndOfArr = schoolday.lessons.length - 1;
     const start = schoolday.lessons[0].start.time;
     const end = schoolday.lessons[findEndOfArr].end.time;
-    const startPos = transformTimeToNum2(start);
-    const endPos = transformTimeToNum2(end);
+    const startPos = transformTimeToNum(start);
+    const endPos = transformTimeToNum(end);
     const timetableWithBreak = fillEmptySpace(schoolday.lessons);
-    // console.log(timetableWithBreak);
 
     if (!set) {
       newTimefieldArr.push({
@@ -50,11 +49,11 @@ export const transform = (data: Array<Schedule>, set: boolean = true) => {
 // define if of lesson have empty space in time or not
 const fillEmptySpace = (arr: Array<InitLesson>) => {
   const fillArray: Array<Lesson> = [];
-  let startBreakPosition = transformTimeToNum2(arr[0].start.time);
+  let startBreakPosition = transformTimeToNum(arr[0].start.time);
 
   for (let i of arr) {
-    const startLesson = transformTimeToNum2(i.start.time);
-    const endLesson = transformTimeToNum2(i.end.time);
+    const startLesson = transformTimeToNum(i.start.time);
+    const endLesson = transformTimeToNum(i.end.time);
     const isEmptyTime = startLesson - startBreakPosition;
 
     if (isEmptyTime === 0) {
@@ -64,8 +63,8 @@ const fillEmptySpace = (arr: Array<InitLesson>) => {
     }
 
     if (isEmptyTime !== 0) {
-      const startBreak = transformNumToTime2(startBreakPosition);
-      const endBreak = transformNumToTime2(startLesson);
+      const startBreak = transformNumToTime(startBreakPosition);
+      const endBreak = transformNumToTime(startLesson);
 
       fillArray.push({
         id: i.id + 2,
@@ -99,19 +98,19 @@ const addTimePosition = (obj: InitLesson, start: number, end: number) => {
 //   return hours * minInHour + minutes;
 // };
 
-export const transformNumToTime = (num: number) => {
-  const minInHour = 60;
-  const hours = Math.floor(num / minInHour);
-  const minutes = num % minInHour > 9 ? num % minInHour : `0${num % minInHour}`;
+// export const transformNumToTime = (num: number) => {
+//   const minInHour = 60;
+//   const hours = Math.floor(num / minInHour);
+//   const minutes = num % minInHour > 9 ? num % minInHour : `0${num % minInHour}`;
 
-  return `${hours}:${minutes}`;
-};
+//   return `${hours}:${minutes}`;
+// };
 
 export const staticValues = (timearr: Array<string>) => {
   const arr: Array<number> = [];
 
   for (const i of timearr) {
-    arr.push(transformTimeToNum2(i));
+    arr.push(transformTimeToNum(i));
   }
   //TODO Добавить сюда переменную длины элемента #timeline
   let startLessons = Math.min(...arr);
@@ -150,7 +149,7 @@ export const hours = [
 
 export const hourPositions = (hours: Array<string>) => {
   return hours.map(h => {
-    const timepoint = transformTimeToNum2(h);
+    const timepoint = transformTimeToNum(h);
     if (timepoint === 0) {
       return { time: h, position: timepoint };
     }
@@ -159,7 +158,7 @@ export const hourPositions = (hours: Array<string>) => {
 };
 
 //* New transform timetransform
-export const transformTimeToNum2 = (time: string | number): number => {
+export const transformTimeToNum = (time: string | number): number => {
   if ('number' === typeof time) return time;
 
   const hours = Number(time.split(':')[0]);
@@ -182,14 +181,14 @@ export const transformTimeToNum2 = (time: string | number): number => {
   return timeStep;
 };
 
-export const transformNumToTime2 = (num: number) => {
+export const transformNumToTime = (num: number) => {
   const step = 340;
   const amountOfTime = 60;
   const hourStepLength = step + amountOfTime;
   const minuteStepLength = hourStepLength / amountOfTime;
 
-  const findMinutes = (num % hourStepLength) / minuteStepLength;
-  const hours = Math.floor(num / hourStepLength);
+  const findMinutes = Math.round((num % hourStepLength) / minuteStepLength);
+  const hours = Math.round(num / hourStepLength);
   const minutes = findMinutes > 9 ? findMinutes : `0${findMinutes}`;
 
   // console.log(minutes);

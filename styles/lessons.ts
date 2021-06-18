@@ -33,7 +33,9 @@ export const LessonsStyle = styled.div<LessonStyleType>`
 
 // LESSON STYLES
 //TODO Сделать плавную анимацию перехода
-const LessonStyle = styled.div<{ lessonWidth: number } & { color: string }>`
+type LessonType = { lessonWidth: number; colors: string };
+
+const LessonStyle = styled.div<LessonType>`
   width: ${({ lessonWidth }) => lessonWidth}px;
   /* min-height: 70px; */
   display: grid;
@@ -45,9 +47,9 @@ const LessonStyle = styled.div<{ lessonWidth: number } & { color: string }>`
   position: relative;
   user-select: none;
   background: ${({ theme }) => theme.bg_middle()};
+  transition: all 0.3s ease-in-out;
   /* cursor: pointer; */
   z-index: 10;
-  transition: all 0.3s ease-in-out;
   & .lesson-duration {
     align-items: center;
     align-self: flex-end;
@@ -79,17 +81,7 @@ const LessonStyle = styled.div<{ lessonWidth: number } & { color: string }>`
       stroke: ${({ theme }) => theme.grey_dark()};
       stroke-width: 2;
     }
-    circle.progress {
-      fill: none;
-      stroke: var(--${({ color }) => color});
-      stroke-dasharray: 230; /*251 */
-      stroke-dashoffset: 100;
-      stroke-width: 4;
-      transform: rotate(-90deg);
-      transform-origin: center;
-      transition: all 1s ease-in-out;
-      will-change: stroke-dashoffset stroke;
-    }
+
     .expect-icon,
     .finished-icon {
       position: absolute;
@@ -98,13 +90,14 @@ const LessonStyle = styled.div<{ lessonWidth: number } & { color: string }>`
       transform: translate(-50%, -50%);
     }
     .expect-icon {
-      stroke: var(--${({ color }) => color});
+      stroke: var(--${({ colors }) => colors});
     }
     .finished-icon {
-      stroke: var(--${({ color }) => color});
+      stroke: var(--${({ colors }) => colors});
     }
   }
 `;
+
 export const FinishedLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
     color: ${({ theme }) => theme.grey_middle(0.7)};
@@ -116,6 +109,7 @@ export const FinishedLessonStyle = styled(LessonStyle)`
   & .lesson-status {
   }
 `;
+
 export const ExpectLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
     color: ${({ theme }) => theme.grey_middle()};
@@ -125,6 +119,7 @@ export const ExpectLessonStyle = styled(LessonStyle)`
     color: ${({ theme }) => theme.grey_middle()};
   }
 `;
+
 export const CurrentLessonStyle = styled(LessonStyle)`
   transform: translateY(-10px);
   background: ${({ theme }) => theme.bg_light()};
@@ -139,6 +134,8 @@ export const CurrentLessonStyle = styled(LessonStyle)`
     color: ${({ theme }) => theme.grey_light()};
   }
   & .lesson-status {
+    circle.progress {
+    }
     .timer {
       position: absolute;
       top: 50%;
@@ -148,6 +145,72 @@ export const CurrentLessonStyle = styled(LessonStyle)`
       transform: translate(-50%, -50%);
     }
   }
+`;
+
+export const BreakStyle = styled.div<LessonType>`
+  width: ${({ lessonWidth }) => lessonWidth}px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+  user-select: none;
+  /* background: ${({ theme }) => theme.bg_middle()}; */
+  background: repeating-linear-gradient(
+    -45deg,
+    ${({ theme }) => theme.bg_middle()},
+    ${({ theme }) => theme.bg_middle()} 10px,
+    ${({ theme }) => theme.bg_dark()} 10px,
+    ${({ theme }) => theme.bg_dark()} 20px
+  );
+  transition: all 0.3s ease-in-out;
+  z-index: 11;
+  circle.track {
+    fill: none;
+    stroke: ${({ theme }) => theme.grey_dark()};
+    stroke-width: 2;
+  }
+  .expect-icon,
+  .finished-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .expect-icon {
+    stroke: var(--${({ colors }) => colors});
+  }
+  .finished-icon {
+    stroke: var(--${({ colors }) => colors});
+  }
+  .timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: ${({ theme }) => theme.fontsize_16};
+    font-weight: 400;
+    transform: translate(-50%, -50%);
+  }
+`;
+
+export const CurrentBreakStyle = styled(BreakStyle)`
+  /* transform: translateY(-10px); */
+  /* background: ${({ theme }) => theme.bg_light()}; */
+  /* box-shadow: 0 20px 20px ${({ theme }) => theme.bg_dark()},
+    0 10px 10px ${({ theme }) => theme.bg_dark()}; */
+`;
+
+type ProgressLineType = { track: number; progress: number; colors: string };
+export const ProgressLine = styled.circle<ProgressLineType>`
+  fill: none;
+  stroke: var(--${({ colors }) => colors});
+  stroke-dasharray: ${({ track }) => track};
+  stroke-dashoffset: ${({ progress }) => progress};
+  stroke-width: 4;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: all 1s ease-in-out;
+  will-change: stroke-dashoffset stroke;
 `;
 
 // LESSON AVATAR PROGRESS & LESSON STATUS ICON's

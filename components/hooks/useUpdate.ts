@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { transformTimeToNum2 } from '@Utils/helperFunc';
+import { transformTimeToNum } from '@Utils/helperFunc';
 
 export const useUpdate = () => {
   const [hours, setHours] = useState<number>(new Date().getHours());
@@ -18,12 +18,12 @@ export const useUpdate = () => {
     setHours(new Date().getHours());
   }, [minutes]);
 
-  const stepTime = transformTimeToNum2(`${hours}:${minutes}`);
+  // const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
-  // const h = (new Date().getHours() - 6).toString();
-  // const m = (new Date().getMinutes() - 1).toString();
-  // const stepTime = transformTimeToNum2(`${h}:${m}`);
-  // const stepTime = transformTimeToNum2(`12:15`);
+  const h = (new Date().getHours() - 6).toString();
+  const m = (new Date().getMinutes() - 30).toString();
+  const stepTime = transformTimeToNum(`${h}:${m}`);
+  // const stepTime = transformTimeToNum(`9:50`);
 
   // console.log('hook', stepTime);
 

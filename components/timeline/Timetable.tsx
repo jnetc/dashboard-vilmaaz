@@ -7,10 +7,8 @@ import {
 // Components
 import Timeline from './Timeline';
 import Timefield from './Timefield';
-// import { LeftSidePanel } from '@Main/lessons/left-side-panel';
-
-// Stores
-import { useMainStore } from '@Store/MainStore';
+// Hook
+import { useStore } from '@Hooks/useStore';
 // Types
 import { Event, Element, Div, StaticValues } from '@types';
 // Styles
@@ -22,11 +20,10 @@ import {
 
 export const Timetable: FC = () => {
   const { setTimetableEl, setAutoMovement, content, timelineHours, timeline } =
-    useMainStore();
+    useStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
   let [mouseDownCursorPos, setMouseDownCursorPos] = useState<number>(0);
-  // const [maxPositionElement, setMaxPositionElement] = useState<number>(0);
   const [startMove, setStartMove] = useState<boolean>(false);
   const [widthMainEl, setWidthMainEl] = useState(0);
   const [timetableWidth, setTimetableWidth] = useState(0);
@@ -51,8 +48,6 @@ export const Timetable: FC = () => {
     };
   }, []);
 
-  // console.log('Timetable', timetableEl, timetableWidth);
-
   const mouseDown = (ev: Event) => {
     setAutoMovement(false);
     setStartMove(true);
@@ -63,12 +58,8 @@ export const Timetable: FC = () => {
 
     el.classList.remove('animate');
 
-    // const invisiblePartOftimetableEl =
-    //   el.offsetWidth - mainEl.current.offsetWidth;
-
     let transformStyle = getTransformStylePosition(el);
 
-    // setMaxPositionElement(invisiblePartOftimetableEl);
     setCurrentPosEl(transformStyle);
     setMouseDownCursorPos(ev.clientX);
   };
@@ -93,21 +84,6 @@ export const Timetable: FC = () => {
 
     if (!startMove ?? !el) return;
 
-    // let transformStyle = getTransformStylePosition(el);
-
-    //TODO Установить границы видимости активного сеанса
-    // endLesson - 100(main) - 300px(aside)
-    // const end = timeline.endLessons - widthMainEl + 90;
-    // console.log('end', end);
-    // console.log('end trans', transformStyle);
-
-    // if (end < transformStyle) {
-    //   el.style.transform = `translate3d(-${end}px, 0, 0)`;
-    // }
-
-    // if (timeline.startLessons > transformStyle) {
-    //   el.style.transform = `translate3d(-${timeline.startLessons}px, 0, 0)`;
-    // }
     timelineLimits(el, timeline, widthMainEl);
     setStartMove(false);
   };
@@ -120,14 +96,6 @@ export const Timetable: FC = () => {
 
     if (!startMove ?? !el) return;
 
-    // const end = timeline.endLessons - widthMainEl + 90;
-    // if (end < transformStyle) {
-    //   el.style.transform = `translate3d(-${end}px, 0, 0)`;
-    // }
-
-    // if (timeline.startLessons > transformStyle) {
-    //   el.style.transform = `translate3d(-${timeline.startLessons}px, 0, 0)`;
-    // }
     timelineLimits(el, timeline, widthMainEl);
     setStartMove(false);
   };
@@ -153,7 +121,6 @@ export const Timetable: FC = () => {
 
   return content.length > 0 ? (
     <MainStyle ref={mainEl}>
-      {/* <LeftSidePanel /> */}
       <TimetableStyle
         id="timetable"
         ref={timetableEl}

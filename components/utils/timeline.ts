@@ -1,48 +1,4 @@
-// Types
-import {
-  StaticValues,
-  Element,
-  // LessonsType,
-  // TimeLine,
-  // LessonData,
-} from '@types';
-// import { transformTimeToNum2 } from '@Utils/helperFunc';
-
-// let startTime: number;
-// let totalTime: number;
-// let trackWidth: number;
-
-// Assign timepath
-// export const transformTimeArr = (time: Array<string>) => {
-//   return time.map(t => {
-//     console.log('xxxxx', startTime, totalTime);
-//     const timepoint = startTime - transformTimeToNum2(t);
-//     return { time: t, position: timepoint };
-//   });
-// };
-
-// Create new array with time & position on the timeline
-// export const timelinePositions = (time: TimeLine) => {
-//   return time.map(t => {
-//     const position = Math.round((t.position * trackWidth) / totalTime);
-//     return { ...t, position };
-//   });
-// };
-
-// export const getTimePointPos = (
-//   arr: Array<string>,
-//   track: number,
-//   timeline: StaticValues
-// ) => {
-//   // Assign global values
-//   startTime = timeline.startLessons;
-//   totalTime = timeline.totalTime;
-//   trackWidth = track;
-
-//   console.log('getTimePointPos', startTime, totalTime, trackWidth);
-//   const transformToNum = transformTimeArr(arr);
-//   return timelinePositions(transformToNum);
-// };
+import { StaticValues, Element } from '@types';
 
 export const movementTimeAndTimetable = (
   main: number,
@@ -75,27 +31,6 @@ export const movementTimeAndTimetable = (
   // console.log('move', timeMovement);
   timetable.style.transform = `translate3d(${timeMovement}px, 0, 0)`;
 };
-
-// export const getLessonStartEndPoint = (arr: Array<LessonsType>) => {
-//   const numArr = [];
-
-//   for (const i of arr) {
-//     const { end, start, ...data } = i;
-
-//     const startNum = Math.abs(startTime - transformTimeToNum(start));
-//     const endNum = Math.abs(startTime - transformTimeToNum(end));
-//     const startPos = Math.round((startNum * trackWidth) / totalTime);
-//     const endPos = Math.round((endNum * trackWidth) / totalTime);
-
-//     numArr.push({
-//       ...data,
-//       start: startPos,
-//       end: endPos,
-//     });
-//   }
-
-//   return numArr;
-// };
 
 // Get position from transform style
 export function getTransformStylePosition(el: Element) {

@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { movementTimeAndTimetable } from '@Utils/timeline';
 // Hook
 import { useUpdate } from '@Hooks/useUpdate';
-// Store
-import { useMainStore } from '@Store/MainStore';
+// Hook
+import { useStore } from '@Hooks/useStore';
 
 // Styles
 import { TimelineStepStyle } from '@styles/timeline';
@@ -19,7 +19,7 @@ import { TimelineStepStyle } from '@styles/timeline';
 //  }))`width: 100%;`
 
 export const TimelineStep: FC<{ width: number }> = ({ width }) => {
-  const { timetableEl, autoMovement, timeline } = useMainStore();
+  const { timetableEl, autoMovement, timeline } = useStore();
   const { position, currentTimeStr } = useUpdate();
 
   movementTimeAndTimetable(

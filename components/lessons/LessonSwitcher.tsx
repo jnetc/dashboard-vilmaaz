@@ -32,6 +32,7 @@ export const LessonSwitcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
   };
 
   const lessonBlockWidth = end.position - start.position;
+
   const y = dayProgress(position, start.position, end.position);
 
   switch (y.status) {
@@ -39,30 +40,30 @@ export const LessonSwitcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
       return (
         <CurrentLesson
           width={lessonBlockWidth}
-          color={colors.accent}
+          colors={colors.accent}
           lesson={lesson}
-          start={start.time}
-          end={end.time}
+          start={start}
+          end={end}
         />
       );
     case 'finished':
       return (
         <FinishedLesson
           width={lessonBlockWidth}
-          color={colors.accent}
+          colors={colors.accent}
           lesson={lesson}
-          start={start.time}
-          end={end.time}
+          start={start}
+          end={end}
         />
       );
     default:
       return (
         <ExpectLesson
           width={lessonBlockWidth}
-          color={colors.accent}
+          colors={colors.accent}
           lesson={lesson}
-          start={start.time}
-          end={end.time}
+          start={start}
+          end={end}
         />
       );
   }

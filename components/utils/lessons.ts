@@ -1,4 +1,4 @@
-import { transformTimeToNum2 } from './helperFunc';
+import { transformTimeToNum } from './helperFunc';
 import { Lesson } from '@types';
 
 export const learningProgress = (
@@ -30,8 +30,8 @@ const getTimerAndName = (arr: Array<Lesson>, timeNumber: number) => {
   const timeAndName = [];
 
   for (const i of arr) {
-    const startLesson = transformTimeToNum2(i.start.time);
-    const endLesson = transformTimeToNum2(i.end.time);
+    const startLesson = transformTimeToNum(i.start.time);
+    const endLesson = transformTimeToNum(i.end.time);
 
     const currentLessonTime = endLesson - timeNumber;
     if (startLesson <= timeNumber && endLesson > timeNumber) {
@@ -73,8 +73,8 @@ const getTimerAndName2 = (arr: Array<Lesson>, timeNumber: number) => {
   const timeAndName = [];
 
   for (const i of arr) {
-    const startLesson = transformTimeToNum2(i.start.time);
-    const endLesson = transformTimeToNum2(i.end.time);
+    const startLesson = transformTimeToNum(i.start.time);
+    const endLesson = transformTimeToNum(i.end.time);
 
     const currentLessonTime = endLesson - timeNumber;
     if (startLesson <= timeNumber && endLesson > timeNumber) {

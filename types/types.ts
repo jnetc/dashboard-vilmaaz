@@ -5,7 +5,6 @@ export type Div = HTMLDivElement;
 export type Element = Div | null;
 export type Event = MouseEvent<Div>;
 // export type Touch = TouchEventHandler<Div>;
-// STORE / CONTEXT
 
 export interface Avatar {
   img: string;
@@ -67,10 +66,10 @@ export interface LessonsType extends UserDataType {
 
 export interface LessonComponent {
   width: number;
-  color: string;
+  colors: string;
   lesson: string;
-  start: string;
-  end: string;
+  start: TimePosition;
+  end: TimePosition;
 }
 
 export type Order = {
@@ -92,6 +91,7 @@ export type GlobalStoreProps = {
   setMainPaddingLeft: (num: number) => void;
 };
 
+// STORE / CONTEXT
 export type MainStoreProps = {
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;

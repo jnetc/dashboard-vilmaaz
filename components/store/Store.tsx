@@ -1,4 +1,4 @@
-import { FC, createContext, useContext, useEffect, useState } from 'react';
+import { FC, createContext, useEffect, useState } from 'react';
 
 // Types
 import { Schedule, MainStoreProps, LessonsType } from '@types';
@@ -13,8 +13,6 @@ import { database } from '@Store/utils/data';
 const state: MainStoreProps = {
   autoMovement: true,
   setAutoMovement: el => el,
-  // detailLesson: { open: false, data: undefined },
-  // setDetailLesson: obj => obj,
   timetableEl: null,
   setTimetableEl: el => el,
   timelineWidth: 0,
@@ -36,17 +34,11 @@ const state: MainStoreProps = {
 
 export const MainContext = createContext(state);
 
-// //* Hook
-export const useMainStore = () => {
-  return useContext(MainContext);
-};
-
 //* Length every hour
 export const timeStep: number = 340;
 
-const MainStore: FC = ({ children }) => {
+const Store: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
-  // const [detailLesson, setDetailLesson] = useState(state.detailLesson);
   const [timelineWidth, setTimelineWidth] = useState(state.timelineWidth);
   const [timeline, setTimeline] = useState(state.timeline);
   const [timetableEl, setTimetableEl] = useState(state.timetableEl);
@@ -57,17 +49,12 @@ const MainStore: FC = ({ children }) => {
   let content = transform(data, false) as LessonsType[];
   let timepoints = transform(data) as string[];
 
-  console.log(content);
-
   const timetableLenght = timelineHours.length - 1;
   const timetableWidth = timelineHours[timetableLenght]?.position;
 
   useEffect(() => {
     const setHours = new Set([...hours, ...timepoints]);
     const getHoursPoints = hourPositions([...setHours]);
-    // const getlessonsPoints = hourPositions(timepoints);
-
-    // console.log('MainStore', autoMovement);
 
     setTimelineHours([...getHoursPoints]);
 
@@ -80,11 +67,6 @@ const MainStore: FC = ({ children }) => {
     // console.log(x);
   }, []);
 
-  // const timePointPositions = timepoints.map(t => {
-  //   const position = transformTimeToNum2(t);
-  //   return { time: t, position };
-  // });
-
   // console.log('MainStore', timeline, timelineWidth);
   // console.log('MainStore', content);
 
@@ -95,8 +77,6 @@ const MainStore: FC = ({ children }) => {
         setAutoMovement,
         timetableEl,
         setTimetableEl,
-        // detailLesson,
-        // setDetailLesson,
         timelineWidth,
         setTimelineWidth,
         timelineHours,
@@ -114,4 +94,4 @@ const MainStore: FC = ({ children }) => {
   );
 };
 
-export default MainStore;
+export default Store;

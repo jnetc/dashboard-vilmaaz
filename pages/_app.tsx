@@ -2,8 +2,7 @@ import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 
 // import Header from '@Header';
-import GlobalStore from '@Store/GlobalStore';
-import MainStore from '@Store/MainStore';
+import Store from '@Store/Store';
 import '../styles/style.css';
 
 // THEME STYLES
@@ -14,14 +13,12 @@ import { GlobalStyle } from '@styles/global';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <GlobalStore>
+    <Store>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <MainStore>
-          <Component {...pageProps} />
-        </MainStore>
+        <Component {...pageProps} />
       </ThemeProvider>
-    </GlobalStore>
+    </Store>
   );
 }
 

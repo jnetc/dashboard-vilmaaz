@@ -7,8 +7,10 @@ import { LessonsType, Order } from '@types';
 // import { LessonProgressBar } from './LessonProgressBar';
 // import { LessonCommonProgress } from './LessonCommonProgress';
 import { LessonSwitcher } from './LessonSwitcher';
+// import { Break } from './Break';
 // Styles
 import { LessonsStyle } from '@styles/lessons';
+// import { FinishedLesson } from './FinishedLesson';
 
 const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
   data,
@@ -25,9 +27,10 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
   // };
 
   const lessons = data.timetable.map(l => {
-    return (
-      <LessonSwitcher key={l.id} data={l} colors={data.colors}></LessonSwitcher>
-    );
+    // console.log(l);
+    // if (l.lesson === 'taukko')
+    //   return <Break key={l.id} data={l} colors={data.colors} />;
+    return <LessonSwitcher key={l.id} data={l} colors={data.colors} />;
   });
 
   return (
@@ -39,6 +42,7 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
       className="timefield-lesson">
       {/* lessons */}
       {lessons}
+
       {/* <LessonProgressBar data={data} />
       <LessonCommonProgress length={lengthLessons} shade={data.colors.shade} /> */}
     </LessonsStyle>
