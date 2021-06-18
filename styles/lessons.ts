@@ -15,9 +15,9 @@ export const LessonsStyle = styled.div<LessonStyleType>`
   align-items: center;
   position: relative;
   left: ${({ position }) => position}px;
-  border-radius: 35px;
+  /* border-radius: 35px; */
   user-select: none;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   cursor: pointer;
   z-index: 10;
   order: ${({ order }) => (order ? order : 0)};
@@ -31,19 +31,123 @@ export const LessonsStyle = styled.div<LessonStyleType>`
   }
 `;
 
-// LESSON
-export const LessonStyle = styled.div<{ lessonWidth: number }>`
+// LESSON STYLES
+//TODO Сделать плавную анимацию перехода
+const LessonStyle = styled.div<{ lessonWidth: number } & { color: string }>`
   width: ${({ lessonWidth }) => lessonWidth}px;
-  height: 70px;
-  display: flex;
-  align-items: center;
+  /* min-height: 70px; */
+  display: grid;
+  grid-template-columns: 1fr 56px;
+  grid-template-rows: repeat(2, 25px);
+  gap: 5px;
+  place-self: center;
+  padding: 15px;
   position: relative;
-  border-radius: 35px;
   user-select: none;
-  /* background: white; */
-  border: 2px solid red;
-  cursor: pointer;
+  background: ${({ theme }) => theme.bg_middle()};
+  /* cursor: pointer; */
   z-index: 10;
+  transition: all 0.3s ease-in-out;
+  & .lesson-duration {
+    align-items: center;
+    align-self: flex-end;
+    display: flex;
+    grid-row: 1;
+    grid-column: 1;
+    gap: 0.5rem;
+    font-size: ${({ theme }) => theme.fontsize_14};
+    time {
+      font-weight: 400;
+    }
+  }
+  & .lesson-name {
+    grid-row: 2;
+    grid-column: 1;
+    font-weight: 600;
+    font-size: ${({ theme }) => theme.fontsize_16};
+  }
+  & .lesson-status {
+    grid-row: 1/ 3;
+    grid-column: 2;
+    position: relative;
+    /* align-self: center;
+    justify-self: center; */
+    /* display: flex; */
+
+    circle.track {
+      fill: none;
+      stroke: ${({ theme }) => theme.grey_dark()};
+      stroke-width: 2;
+    }
+    circle.progress {
+      fill: none;
+      stroke: var(--${({ color }) => color});
+      stroke-dasharray: 230; /*251 */
+      stroke-dashoffset: 100;
+      stroke-width: 4;
+      transform: rotate(-90deg);
+      transform-origin: center;
+      transition: all 1s ease-in-out;
+      will-change: stroke-dashoffset stroke;
+    }
+    .expect-icon,
+    .finished-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .expect-icon {
+      stroke: var(--${({ color }) => color});
+    }
+    .finished-icon {
+      stroke: var(--${({ color }) => color});
+    }
+  }
+`;
+export const FinishedLessonStyle = styled(LessonStyle)`
+  & .lesson-duration {
+    color: ${({ theme }) => theme.grey_middle(0.7)};
+    stroke: ${({ theme }) => theme.grey_middle(0.7)};
+  }
+  & .lesson-name {
+    color: ${({ theme }) => theme.grey_middle(0.7)};
+  }
+  & .lesson-status {
+  }
+`;
+export const ExpectLessonStyle = styled(LessonStyle)`
+  & .lesson-duration {
+    color: ${({ theme }) => theme.grey_middle()};
+    stroke: ${({ theme }) => theme.grey_middle()};
+  }
+  & .lesson-name {
+    color: ${({ theme }) => theme.grey_middle()};
+  }
+`;
+export const CurrentLessonStyle = styled(LessonStyle)`
+  transform: translateY(-10px);
+  background: ${({ theme }) => theme.bg_light()};
+  box-shadow: 0 20px 20px ${({ theme }) => theme.bg_dark()},
+    0 10px 10px ${({ theme }) => theme.bg_dark()};
+  z-index: 11;
+  & .lesson-duration {
+    color: ${({ theme }) => theme.grey_light()};
+    stroke: ${({ theme }) => theme.grey_middle()};
+  }
+  & .lesson-name {
+    color: ${({ theme }) => theme.grey_light()};
+  }
+  & .lesson-status {
+    .timer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: ${({ theme }) => theme.fontsize_16};
+      font-weight: 400;
+      transform: translate(-50%, -50%);
+    }
+  }
 `;
 
 // LESSON AVATAR PROGRESS & LESSON STATUS ICON's

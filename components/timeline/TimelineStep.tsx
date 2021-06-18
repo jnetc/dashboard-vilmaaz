@@ -5,8 +5,7 @@ import { movementTimeAndTimetable } from '@Utils/timeline';
 import { useUpdate } from '@Hooks/useUpdate';
 // Store
 import { useMainStore } from '@Store/MainStore';
-// Types
-import { Width } from '@types';
+
 // Styles
 import { TimelineStepStyle } from '@styles/timeline';
 
@@ -19,7 +18,7 @@ import { TimelineStepStyle } from '@styles/timeline';
 //    },
 //  }))`width: 100%;`
 
-export const TimelineStep: FC<Width> = ({ width }) => {
+export const TimelineStep: FC<{ width: number }> = ({ width }) => {
   const { timetableEl, autoMovement, timeline } = useMainStore();
   const { position, currentTimeStr } = useUpdate();
 

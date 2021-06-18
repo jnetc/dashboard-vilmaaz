@@ -10,6 +10,8 @@ declare module 'styled-components' {
     grey_light: typeof AlphaChanel;
     grey_middle: typeof AlphaChanel;
     grey_dark: typeof AlphaChanel;
+    grey_black: typeof AlphaChanel;
+    progress: typeof AlphaChanel;
     bg_light: typeof AlphaChanel;
     bg_regular: typeof AlphaChanel;
     bg_middle: typeof AlphaChanel;
@@ -41,14 +43,16 @@ declare module 'styled-components' {
 
 export const theme: DefaultTheme = {
   white: (alpha = 1) => `hsl(0 0% 97% / ${alpha})`, //'hsl(0, 0%, 97%)'
-  grey_light: (alpha = 1) => `hsl(0 0% 66% / ${alpha})`, //'hsl(0, 0%, 66%)'
-  grey_middle: (alpha = 1) => `hsl(0 0% 32% / ${alpha})`, //'hsl(0, 0%, 32%)'
-  grey_dark: (alpha = 1) => `hsl(240 10% 26% / ${alpha})`, //'hsl(240, 10%, 26%)'
-  bg_light: (alpha = 1) => `hsl(240 13% 23% / ${alpha})`, //'hsl(240, 10%, 23%)'
-  bg_regular: (alpha = 1) => `hsl(244 17% 19% / ${alpha})`, //'hsl(244, 15%, 19%)'
-  bg_middle: (alpha = 1) => `hsl(244 19% 17% / ${alpha})`, //'hsl(244, 16%, 17%)'
-  bg_main: (alpha = 1) => `hsl(244 23% 15% / ${alpha})`, //'hsl(244, 20%, 15%)'
-  bg_dark: (alpha = 1) => `hsl(244 26% 13% / ${alpha})`, //'hsl(244, 23%, 13%)'
+  grey_light: (alpha = 1) => `hsl(240 0% 70% / ${alpha})`, //'hsl(240, 10%, 70%)'
+  grey_middle: (alpha = 1) => `hsl(2400 0% 50% / ${alpha})`, //'hsl(240, 10%, 50%)'
+  grey_dark: (alpha = 1) => `hsl(240 10% 40% / ${alpha})`, //'hsl(240, 10%, 40%)'
+  grey_black: (alpha = 1) => `hsl(240 10% 25% / ${alpha})`, //'hsl(240, 10%, 25%)'
+  progress: (alpha = 1) => `hsl(240 15% 30% / ${alpha})`, //'hsl(240, 15%, 30%)'
+  bg_light: (alpha = 1) => `hsl(240 15% 25% / ${alpha})`, //'hsl(240, 15%, 25%)'
+  bg_regular: (alpha = 1) => `hsl(240 15% 22% / ${alpha})`, //'hsl(240, 15%, 22%)'
+  bg_middle: (alpha = 1) => `hsl(240 15% 20% / ${alpha})`, //'hsl(240, 15%, 20%)'
+  bg_main: (alpha = 1) => `hsl(240 15% 17% / ${alpha})`, //'hsl(240, 15%, 17%)'
+  bg_dark: (alpha = 1) => `hsl(244 15% 15% / ${alpha})`, //'hsl(244, 15%, 15%)'
   primary: (alpha = 1) => `hsl(127 28% 75% / ${alpha})`, // 'hsl(127, 28%, 75%)'
   primary_hover: (alpha = 1) => `hsl(127 28% 55% / ${alpha})`, //'hsl(127, 28%, 55%)'
   danger: (alpha = 1) => `hsl(346 90% 75% / ${alpha})`, //'hsl(346, 90%, 75%)'

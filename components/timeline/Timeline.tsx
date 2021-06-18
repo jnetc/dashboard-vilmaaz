@@ -5,13 +5,12 @@ import { useMainStore } from '@Store/MainStore';
 import { TimelinePoints } from './TimelinePoints';
 import { TimelineStep } from './TimelineStep';
 // import { getTimePointPos } from '@Main/lessons/utils/timeline';
-// Types
-import { Width } from '@types';
+
 // Styles
 import { TimelineStyle } from '@styles/timeline';
 // import { transformTimeToNum2 } from '@Utils/helperFunc';
 
-const Timeline: FC<Width> = ({ width }) => {
+const Timeline: FC<{ width: number }> = ({ width }) => {
   const {
     // timepoints,
     // timelineWidth,

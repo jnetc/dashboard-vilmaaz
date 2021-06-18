@@ -1,12 +1,12 @@
 import { MutableRefObject } from 'react';
 // Types
-import { Schedule, LessonsType, LessonData } from '@types';
+import { Schedule, LessonsType, Lesson, InitLesson } from '@types';
 
 export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
   return new Intl.DateTimeFormat('fi-FI', options).format(date);
 };
 
-export const transform = (data: Array<Schedule>, set: boolean = true): any => {
+export const transform = (data: Array<Schedule>, set: boolean = true) => {
   // const date = new Date();
   // const day = dateFormat({ weekday: 'long' }, date);
   const day = 'maanantai';
@@ -48,20 +48,19 @@ export const transform = (data: Array<Schedule>, set: boolean = true): any => {
 };
 
 // define if of lesson have empty space in time or not
-const fillEmptySpace = (arr: Array<LessonData>) => {
-  const fillArray: Array<LessonData> = [];
+const fillEmptySpace = (arr: Array<InitLesson>) => {
+  const fillArray: Array<Lesson> = [];
   let startBreakPosition = transformTimeToNum2(arr[0].start.time);
 
-  for (const i of arr) {
+  for (let i of arr) {
     const startLesson = transformTimeToNum2(i.start.time);
     const endLesson = transformTimeToNum2(i.end.time);
     const isEmptyTime = startLesson - startBreakPosition;
 
     if (isEmptyTime === 0) {
       // Push lessons before init first break
-      i.start.position = startLesson;
-      i.end.position = endLesson;
-      fillArray.push(i);
+      const z = addTimePosition(i, startLesson, endLesson);
+      fillArray.push(z);
     }
 
     if (isEmptyTime !== 0) {
@@ -75,15 +74,21 @@ const fillEmptySpace = (arr: Array<LessonData>) => {
         end: { time: endBreak, position: startLesson },
       });
       // Push lessons after init first break
-      i.start.position = startLesson;
-      i.end.position = endLesson;
-      fillArray.push(i);
+      const z = addTimePosition(i, startLesson, endLesson);
+      fillArray.push(z);
     }
     startBreakPosition = endLesson;
   }
   return fillArray;
 };
 
+const addTimePosition = (obj: InitLesson, start: number, end: number) => {
+  const startPos = { ...obj.start, position: start };
+  const endPos = { ...obj.end, position: end };
+  obj.start = startPos;
+  obj.end = endPos;
+  return Object.assign({}, obj) as Lesson;
+};
 // export const transformTimeToNum = (time: string | number): number => {
 //   if ('number' === typeof time) return time;
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Position } from '@types';
 
 // TIMEFIELD
 export const TimefieldStyle = styled.div`
@@ -26,7 +25,7 @@ export const TimelineStyle = styled.div`
 `;
 
 // TIMELINE POINTS
-export const TimelinePointsStyle = styled.div<Position>`
+export const TimelinePointsStyle = styled.div<{ position: number }>`
   width: 90px;
   height: 60px;
   display: flex;
@@ -38,8 +37,9 @@ export const TimelinePointsStyle = styled.div<Position>`
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
-  border-color: ${({ theme }) => theme.bg_middle()};
-  background-color: ${({ theme }) => theme.bg_middle(0.7)};
+  border-color: transparent;
+  /* border-color: ${({ theme }) => theme.bg_dark()}; */
+  background-color: ${({ theme }) => theme.bg_dark(0.7)};
   transition: all 0.3s ease-in-out;
   user-select: none;
   z-index: 0;
@@ -51,16 +51,15 @@ export const TimelinePointsStyle = styled.div<Position>`
     top: 60px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: ${({ theme }) => theme.grey_dark()};
-    opacity: 0.7;
-    z-index: -1;
+    background-color: ${({ theme }) => theme.grey_dark(0.5)};
     pointer-events: none;
+    z-index: -1;
   }
-  &:hover {
+  /* &:hover {
     background-color: ${({ theme }) => theme.bg_regular(0.8)};
     border-color: ${({ theme }) => theme.grey_light()};
     z-index: 2;
-  }
+  } */
 `;
 
 // TIMELINE STEP
@@ -68,14 +67,15 @@ export const TimelineStepStyle = styled(TimelinePointsStyle)`
   position: absolute;
   transform: translate3d(${({ position }) => position}px, 0, 0);
   transition: transform 0.3s ease-in-out;
-  color: ${({ theme }) => theme.primary()};
-  border-color: ${({ theme }) => theme.primary()};
-  box-shadow: 0 5px 5px ${({ theme }) => theme.primary(0.15)},
-    0 20px 20px ${({ theme }) => theme.primary(0.1)};
+  color: ${({ theme }) => theme.white()};
+  /* background-color: ${({ theme }) => theme.bg_light()}; */
+  border-color: ${({ theme }) => theme.grey_dark()};
+  box-shadow: 0 5px 5px ${({ theme }) => theme.bg_dark(0.15)},
+    0 20px 20px ${({ theme }) => theme.bg_dark(0.1)};
   z-index: 1;
   pointer-events: none;
   &::after {
-    background-color: ${({ theme }) => theme.primary(0.5)};
+    background-color: ${({ theme }) => theme.grey_dark()};
   }
 `;
 
@@ -106,7 +106,7 @@ export const MainStyle = styled.main`
   padding: 35px 0 0 0px;
   position: relative;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.bg_middle()};
+  /* background-color: ${({ theme }) => theme.bg_middle()}; */
   box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
     0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
   &.opacity {

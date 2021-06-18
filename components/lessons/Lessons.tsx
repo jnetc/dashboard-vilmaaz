@@ -2,11 +2,11 @@ import { FC } from 'react';
 // Types
 import { LessonsType, Order } from '@types';
 // Store
-import { useMainStore } from '@Store/MainStore';
+// import { useMainStore } from '@Store/MainStore';
 // Components
-import { LessonProgressBar } from './LessonProgressBar';
-import { LessonCommonProgress } from './LessonCommonProgress';
-import { Lesson } from './Lesson';
+// import { LessonProgressBar } from './LessonProgressBar';
+// import { LessonCommonProgress } from './LessonCommonProgress';
+import { LessonSwitcher } from './LessonSwitcher';
 // Styles
 import { LessonsStyle } from '@styles/lessons';
 
@@ -14,7 +14,7 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
   data,
   order,
 }) => {
-  const { setDetailLesson } = useMainStore();
+  // const { setDetailLesson } = useMainStore();
 
   const lengthLessons = data.end.position - data.start.position;
 
@@ -25,9 +25,10 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
   // };
 
   const lessons = data.timetable.map(l => {
-    return <Lesson key={l.id} data={l} colors={data.colors}></Lesson>;
+    return (
+      <LessonSwitcher key={l.id} data={l} colors={data.colors}></LessonSwitcher>
+    );
   });
-  console.log(lengthLessons, data.end.position, data.start.position);
 
   return (
     <LessonsStyle

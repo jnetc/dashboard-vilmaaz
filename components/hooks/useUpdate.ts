@@ -20,10 +20,10 @@ export const useUpdate = () => {
 
   const stepTime = transformTimeToNum2(`${hours}:${minutes}`);
   // Manual check timelne
-  // const h = (new Date().getHours() - 0).toString();
-  // const m = (new Date().getMinutes() - 59).toString();
+  // const h = (new Date().getHours() - 6).toString();
+  // const m = (new Date().getMinutes() - 1).toString();
   // const stepTime = transformTimeToNum2(`${h}:${m}`);
-  // const stepTime = transformTimeToNum2(`14:15`);
+  // const stepTime = transformTimeToNum2(`12:15`);
 
   // console.log('hook', stepTime);
 

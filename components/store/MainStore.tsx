@@ -1,7 +1,7 @@
 import { FC, createContext, useContext, useEffect, useState } from 'react';
 
 // Types
-import { Schedule, MainStoreProps } from '@types';
+import { Schedule, MainStoreProps, LessonsType } from '@types';
 import {
   transform,
   staticValues,
@@ -13,8 +13,8 @@ import { database } from '@Store/utils/data';
 const state: MainStoreProps = {
   autoMovement: true,
   setAutoMovement: el => el,
-  detailLesson: { open: false, data: undefined },
-  setDetailLesson: obj => obj,
+  // detailLesson: { open: false, data: undefined },
+  // setDetailLesson: obj => obj,
   timetableEl: null,
   setTimetableEl: el => el,
   timelineWidth: 0,
@@ -46,7 +46,7 @@ export const timeStep: number = 340;
 
 const MainStore: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
-  const [detailLesson, setDetailLesson] = useState(state.detailLesson);
+  // const [detailLesson, setDetailLesson] = useState(state.detailLesson);
   const [timelineWidth, setTimelineWidth] = useState(state.timelineWidth);
   const [timeline, setTimeline] = useState(state.timeline);
   const [timetableEl, setTimetableEl] = useState(state.timetableEl);
@@ -54,8 +54,10 @@ const MainStore: FC = ({ children }) => {
   const [timelineHours, setTimelineHours] = useState(state.timelineHours);
   const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
 
-  let content = transform(data, false);
-  let timepoints = transform(data);
+  let content = transform(data, false) as LessonsType[];
+  let timepoints = transform(data) as string[];
+
+  console.log(content);
 
   const timetableLenght = timelineHours.length - 1;
   const timetableWidth = timelineHours[timetableLenght]?.position;
@@ -93,8 +95,8 @@ const MainStore: FC = ({ children }) => {
         setAutoMovement,
         timetableEl,
         setTimetableEl,
-        detailLesson,
-        setDetailLesson,
+        // detailLesson,
+        // setDetailLesson,
         timelineWidth,
         setTimelineWidth,
         timelineHours,

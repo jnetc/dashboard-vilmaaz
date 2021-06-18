@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Types
-import { TimelinePointsType } from '@types';
+import { TimePosition } from '@types';
 // Styles
 import { TimelinePointsStyle } from '@styles/timeline';
 
@@ -12,7 +12,7 @@ import { TimelinePointsStyle } from '@styles/timeline';
 //    },
 //  }))`width: 100%;`
 
-export const TimelinePoints: FC<TimelinePointsType> = ({ data }) => {
+export const TimelinePoints: FC<{ data: TimePosition }> = ({ data }) => {
   return (
     <TimelinePointsStyle position={data.position}>
       {data.time}

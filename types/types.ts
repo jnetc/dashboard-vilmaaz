@@ -1,33 +1,15 @@
-import { MouseEvent, Dispatch, SetStateAction, TouchEventHandler } from 'react';
+import { MouseEvent } from 'react';
 
 // SIMPLE TYPES
 export type Div = HTMLDivElement;
 export type Element = Div | null;
 export type Event = MouseEvent<Div>;
-export type Touch = TouchEventHandler<Div>;
-export type StateBoolean = Dispatch<SetStateAction<boolean>>;
-export type StateNumber = Dispatch<SetStateAction<number>>;
-export type DispatchTime = Dispatch<SetStateAction<number | null>>;
-
+// export type Touch = TouchEventHandler<Div>;
 // STORE / CONTEXT
-export interface LessonTime {
-  time: string;
-  position?: number;
-}
-export interface LessonTimePosition {
-  position: number;
-}
 
 export interface Avatar {
   img: string;
   name: string;
-}
-
-export interface LessonData {
-  id: string;
-  lesson: string;
-  start: LessonTime;
-  end: LessonTime;
 }
 
 export interface LessonsColor {
@@ -35,35 +17,73 @@ export interface LessonsColor {
   shade: string; // оттенок цета, акцентный + чёрный
 }
 
-export interface SchoolDay {
-  day: string;
-  lessons: Array<LessonData>;
-}
-
-export interface UserType {
+export interface User {
   id: string;
   name: string;
   colors: LessonsColor;
   avatar: Avatar;
 }
 
-export interface UserDataType extends UserType {
-  timetable: Array<LessonData>;
+export interface Time {
+  time: string;
 }
 
-export interface Schedule extends UserType {
+export interface TimePosition {
+  time: string;
+  position: number;
+}
+
+export interface InitLesson {
+  id: string;
+  lesson: string;
+  start: Time;
+  end: Time;
+}
+
+export interface Lesson {
+  id: string;
+  lesson: string;
+  start: TimePosition;
+  end: TimePosition;
+}
+
+export interface SchoolDay {
+  day: string;
+  lessons: Array<InitLesson>;
+}
+
+export interface UserDataType extends User {
+  timetable: Array<Lesson>;
+}
+
+export interface Schedule extends User {
   timetable: Array<SchoolDay>;
 }
 
-export interface OpenAsideDetailLesson {
-  open: boolean;
-  data?: LessonsType;
+export interface LessonsType extends UserDataType {
+  start: TimePosition;
+  end: TimePosition;
 }
 
-// export type LessonDataProps = {
-//   start: number;
-//   end: number;
-// } & UserDataType;
+export interface LessonComponent {
+  width: number;
+  color: string;
+  lesson: string;
+  start: string;
+  end: string;
+}
+
+export type Order = {
+  id: string;
+  name: string;
+  order: number;
+};
+
+export interface StaticValues {
+  startLessons: number;
+  endLessons: number;
+  totalTime: number;
+}
 
 export type GlobalStoreProps = {
   openMenu: boolean;
@@ -75,14 +95,12 @@ export type GlobalStoreProps = {
 export type MainStoreProps = {
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
-  detailLesson: OpenAsideDetailLesson;
-  setDetailLesson: (data: OpenAsideDetailLesson) => void;
   timetableEl: Element;
   setTimetableEl: (el: Element) => void;
   timelineWidth: number;
   setTimelineWidth: (el: number) => void;
-  timelineHours: Array<TimelineHours>;
-  setTimelineHours: (arr: Array<TimelineHours>) => void;
+  timelineHours: Array<TimePosition>;
+  setTimelineHours: (arr: Array<TimePosition>) => void;
   timetableWidth: number;
   divHoursWidth: number;
   updateOrders: boolean;
@@ -91,41 +109,6 @@ export type MainStoreProps = {
   timepoints: Array<string>;
   timeline: StaticValues;
 };
-
-export interface TimelineHours {
-  time: string;
-  position: number;
-}
-
-export interface StaticValues {
-  startLessons: number;
-  endLessons: number;
-  totalTime: number;
-}
-
-export interface InitPosition {
-  time: string;
-  position: number;
-}
-
-export interface LessonsType extends UserDataType {
-  start: InitPosition;
-  end: InitPosition;
-}
-
-// NAVIGATION
-export interface NavLink {
-  href: string;
-  path: string;
-  active: boolean;
-  counter: boolean;
-}
-
-export interface NavigationProps {
-  icon: JSX.Element;
-  url: NavLink;
-  index: number;
-}
 
 // BOTTUNS
 export interface ButtonStyleType {
@@ -144,47 +127,3 @@ export type ButtonProps = {
   children: React.ReactChild;
   onClick: () => void;
 } & Styled;
-
-// TIMELINE
-
-export type Position = { position: number };
-
-export type Time = { time: string };
-
-export type Distance = { distance: number };
-
-export type Color = { primary: string; secondary: string };
-
-// export type Lines = { lines: number };
-
-// export type Order = { order: number };
-
-export type Width = { width: number };
-
-export type TimeLine = Array<Time & Position>;
-
-export type TimelinePointsType = { data: Time & Position };
-
-export type ProgressBarType = {
-  start: string;
-  end: string;
-  line: string;
-  bar: string;
-};
-
-export type ProgressLessonsData = {
-  lessons: Array<LessonData>;
-} & LessonsColor;
-
-export type ProgressLessonsDataStyle = {
-  colors: LessonsColor;
-  flow: {
-    process: string;
-  };
-};
-
-export type Order = {
-  id: string;
-  name: string;
-  order: number;
-};

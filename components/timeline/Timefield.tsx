@@ -27,6 +27,8 @@ const Timefield: FC = () => {
   // const lessonData = getLessonStartEndPoint(startEndLesson);
   // console.log('timefield', content);
 
+  console.log(content);
+
   const lessons = content.map(data => {
     const currentLessonOrder = orders.find(o => o.id === data.id);
     return <Lessons key={data.id} data={data} order={currentLessonOrder} />;

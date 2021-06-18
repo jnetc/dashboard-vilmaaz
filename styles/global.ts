@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: Roboto, sans-serif;
     color: ${({ theme }) => theme.white()};
-    background-color: ${({ theme }) => theme.bg_main()}
+    background-color: ${({ theme }) => theme.bg_dark()}
   }
 
   body.right-side {
@@ -26,7 +26,7 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     display: flex;
     position: relative;
-    background-color: ${({ theme }) => theme.bg_main()};
+    /* background-color: ${({ theme }) => theme.bg_dark()}; */
     overflow: hidden;
   }
   @media (min-width: 1921px) {
@@ -43,14 +43,14 @@ export const GlobalStyle = createGlobalStyle`
   ul, ol {
     list-style-type: none;
   }
-  h1, h2, h3, h4,h5, h6 {
+  h1, h2, h3, h4,h5, h6, p, time, span {
     font-weight: 400;
     line-height: 1;
   }
-  p, time, span {
+  /* p, time, span {
     font-weight: 300;
     line-height: 1;
-  }
+  } */
 
   /* SCROLLBAR */
   ::-webkit-scrollbar {
