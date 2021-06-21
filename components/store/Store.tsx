@@ -53,8 +53,11 @@ const Store: FC = ({ children }) => {
   const timetableWidth = timelineHours[timetableLenght]?.position;
 
   useEffect(() => {
-    const setHours = new Set([...hours, ...timepoints]);
-    const getHoursPoints = hourPositions([...setHours]);
+    // If necessary time points for lessons
+    // const setHours = new Set([...hours, ...timepoints]);
+    // const getHoursPoints = hourPositions([...setHours]);
+
+    const getHoursPoints = hourPositions(hours);
 
     setTimelineHours([...getHoursPoints]);
 

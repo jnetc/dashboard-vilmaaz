@@ -35,7 +35,7 @@ export const TimelinePointsStyle = styled.div<{ position: number }>`
   transform: translate3d(${({ position }) => position}px, 0, 0);
   color: ${({ theme }) => theme.grey_light()};
   border-radius: 15px;
-  border-width: 2px;
+  border-width: 1px;
   border-style: solid;
   border-color: transparent;
   /* border-color: ${({ theme }) => theme.bg_dark()}; */
@@ -64,16 +64,17 @@ export const TimelinePointsStyle = styled.div<{ position: number }>`
 
 // TIMELINE STEP
 export const TimelineStepStyle = styled(TimelinePointsStyle)`
-  position: absolute;
-  transform: translate3d(${({ position }) => position}px, 0, 0);
-  transition: transform 0.3s ease-in-out;
+  /* position: absolute; */
   color: ${({ theme }) => theme.white()};
-  /* background-color: ${({ theme }) => theme.bg_light()}; */
+  background-color: ${({ theme }) => theme.bg_dark(0.3)};
   border-color: ${({ theme }) => theme.grey_dark()};
+  backdrop-filter: blur(2px);
   box-shadow: 0 5px 5px ${({ theme }) => theme.bg_dark(0.15)},
     0 20px 20px ${({ theme }) => theme.bg_dark(0.1)};
-  z-index: 1;
+  transform: translate3d(${({ position }) => position}px, 0, 0);
+  transition: transform 0.3s ease-in-out;
   pointer-events: none;
+  z-index: 1;
   &::after {
     background-color: ${({ theme }) => theme.grey_dark()};
   }

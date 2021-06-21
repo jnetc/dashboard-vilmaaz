@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 // Types
-import { LessonComponent } from '@types';
+import { LessonComponent, Element } from '@types';
 // Style
 import { FinishedLessonStyle, BreakStyle } from '@styles/lessons';
 // Icons
@@ -13,10 +13,21 @@ export const FinishedLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  console.log('render finished');
+  const lessonRef = useRef<Element>(null);
+  const breakref = useRef<Element>(null);
+
+  useEffect(() => {
+    const transition = setTimeout(() => {
+      lessonRef.current?.classList.add('inactive');
+      breakref.current?.classList.add('inactive');
+    }, 0);
+    return () => {
+      clearTimeout(transition);
+    };
+  }, []);
 
   return lesson !== 'taukko' ? (
-    <FinishedLessonStyle lessonWidth={width} colors={colors}>
+    <FinishedLessonStyle lessonWidth={width} colors={colors} ref={lessonRef}>
       <div className="lesson-duration">
         <SmallTimeIcon />
         <time>
@@ -32,7 +43,7 @@ export const FinishedLesson: FC<LessonComponent> = ({
       </div>
     </FinishedLessonStyle>
   ) : (
-    <BreakStyle lessonWidth={width} colors={colors}>
+    <BreakStyle lessonWidth={width} colors={colors} ref={breakref}>
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r="24" className="track"></circle>
       </svg>

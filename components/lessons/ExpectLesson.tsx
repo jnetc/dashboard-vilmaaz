@@ -13,7 +13,6 @@ export const ExpectLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  console.log('render expect');
   return lesson !== 'taukko' ? (
     <ExpectLessonStyle lessonWidth={width} colors={colors}>
       <div className="lesson-duration">
@@ -28,6 +27,19 @@ export const ExpectLesson: FC<LessonComponent> = ({
           <circle cx="28" cy="28" r="24" className="track"></circle>
         </svg>
         <ExpectIcon />
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          className="expect-icon-animation">
+          <path
+            d="M2 1.98602H14L2 13.986H14"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </div>
     </ExpectLessonStyle>
   ) : (
@@ -36,6 +48,19 @@ export const ExpectLesson: FC<LessonComponent> = ({
         <circle cx="28" cy="28" r="24" className="track"></circle>
       </svg>
       <ExpectIcon />
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        className="expect-icon-animation">
+        <path
+          d="M2 1.98602H14L2 13.986H14"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </BreakStyle>
   );
 };

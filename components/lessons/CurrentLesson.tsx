@@ -1,12 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 // Types
-import { LessonComponent } from '@types';
+import { LessonComponent, Element } from '@types';
 // Style
-import {
-  CurrentLessonStyle,
-  ProgressLine,
-  CurrentBreakStyle,
-} from '@styles/lessons';
+import { CurrentLessonStyle, ProgressLine, BreakStyle } from '@styles/lessons';
 // Icons
 import { SmallTimeIcon } from '@Icons/Lesson';
 // Hook
@@ -21,8 +17,9 @@ export const CurrentLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  // console.log('render current');
   const { currentTimeNum } = useUpdate();
+  const lessonRef = useRef<Element>(null);
+  const breakRef = useRef<Element>(null);
   const radius = 24;
   const circumference = Math.round(2 * Math.PI * radius); // 2 * (π = 3,14) * (r = 100)
   const currentPosition = currentTimeNum - start.position;
@@ -33,8 +30,22 @@ export const CurrentLesson: FC<LessonComponent> = ({
   const step = circumference - calcStep;
   const showMeTime = transformNumToTime(calcTime).split(':')[1];
 
+  useEffect(() => {
+    const transition = setTimeout(() => {
+      lessonRef.current?.classList.add('active');
+      breakRef.current?.classList.add('active');
+    }, 100);
+    return () => clearTimeout(transition);
+  }, [currentTimeNum]);
+
+  // console.log(currentPosition);
+
   return lesson !== 'taukko' ? (
-    <CurrentLessonStyle lessonWidth={width} colors={colors}>
+    <CurrentLessonStyle
+      lessonWidth={width}
+      colors={colors}
+      position={currentPosition}
+      ref={lessonRef}>
       <div className="lesson-duration">
         <SmallTimeIcon />
         <time>
@@ -58,7 +69,11 @@ export const CurrentLesson: FC<LessonComponent> = ({
       </div>
     </CurrentLessonStyle>
   ) : (
-    <CurrentBreakStyle lessonWidth={width} colors={colors}>
+    <BreakStyle
+      lessonWidth={width}
+      colors={colors}
+      position={currentPosition}
+      ref={breakRef}>
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r={radius} className="track"></circle>
         <ProgressLine
@@ -71,6 +86,6 @@ export const CurrentLesson: FC<LessonComponent> = ({
           progress={step}></ProgressLine>
       </svg>
       <span className="timer">{showMeTime}m</span>
-    </CurrentBreakStyle>
+    </BreakStyle>
   );
 };
