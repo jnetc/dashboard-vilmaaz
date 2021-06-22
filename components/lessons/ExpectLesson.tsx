@@ -3,8 +3,6 @@ import { FC } from 'react';
 import { LessonComponent } from '@types';
 // Style
 import { ExpectLessonStyle, BreakStyle } from '@styles/lessons';
-// Icons
-import { SmallTimeIcon, ExpectIcon } from '@Icons/Lesson';
 
 export const ExpectLesson: FC<LessonComponent> = ({
   width,
@@ -16,7 +14,13 @@ export const ExpectLesson: FC<LessonComponent> = ({
   return lesson !== 'taukko' ? (
     <ExpectLessonStyle lessonWidth={width} colors={colors}>
       <div className="lesson-duration">
-        <SmallTimeIcon />
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+          <path
+            d="M8.4397 3.95419V8.96282L11.1287 11.0155M16.2372 8.48083C16.2372 12.623 12.8793 15.9808 8.73715 15.9808C4.59502 15.9808 1.23715 12.623 1.23715 8.48083C1.23715 4.3387 4.59502 0.980835 8.73715 0.980835C12.8793 0.980835 16.2372 4.3387 16.2372 8.48083Z"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+          />
+        </svg>
         <time>
           {start.time} - {end.time}
         </time>
@@ -26,7 +30,19 @@ export const ExpectLesson: FC<LessonComponent> = ({
         <svg width="56" height="56" viewBox="0 0 56 56">
           <circle cx="28" cy="28" r="24" className="track"></circle>
         </svg>
-        <ExpectIcon />
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          className="expect-icon">
+          <path
+            d="M2 1.98602H14L2 13.986H14"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
         <svg
           width="16"
           height="16"
@@ -47,7 +63,19 @@ export const ExpectLesson: FC<LessonComponent> = ({
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r="24" className="track"></circle>
       </svg>
-      <ExpectIcon />
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        className="expect-icon">
+        <path
+          d="M2 1.98602H14L2 13.986H14"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
       <svg
         width="16"
         height="16"

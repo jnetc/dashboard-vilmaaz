@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, FC, createRef } from 'react';
 import {
   cssAnimationHandler,
   getTransformStylePosition,
-} from '@Utils/timeline';
+} from '@Utils/helperFunc';
 // Components
 import Timeline from './Timeline';
 import Timefield from './Timefield';
@@ -36,17 +36,17 @@ export const Timetable: FC = () => {
       setWidthMainEl(mainEl.current.offsetWidth);
       setTimetableEl(timetableEl.current);
     }
+    const transition = setTimeout(() => {
+      timetableEl.current?.classList.add('animate');
+    }, 0);
     const timetableLenght = timelineHours.length - 1;
     setTimetableWidth(timelineHours[timetableLenght]?.position);
-  }, [widthMainEl, timetableEl]);
-
-  useEffect(() => {
-    timetableEl.current?.classList.add('animate');
     setAutoMovement(true);
     return () => {
       setAutoMovement(false);
+      clearTimeout(transition);
     };
-  }, []);
+  }, [widthMainEl, timetableEl]);
 
   const mouseDown = (ev: Event) => {
     setAutoMovement(false);
@@ -68,8 +68,6 @@ export const Timetable: FC = () => {
     ev.preventDefault();
     let el = timetableEl.current;
     if (!startMove ?? !el) return;
-
-    el.classList.remove('animate');
 
     let cursorMovement = mouseDownCursorPos - ev.clientX;
     el.style.transform = `translate3d(-${

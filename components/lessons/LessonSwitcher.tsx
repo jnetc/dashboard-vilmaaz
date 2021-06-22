@@ -7,6 +7,8 @@ import { useUpdate } from '@Hooks/useUpdate';
 import { FinishedLesson } from './FinishedLesson';
 import { ExpectLesson } from './ExpectLesson';
 import { CurrentLesson } from './CurrentLesson';
+// Helper
+import { lessonStatus } from '@Utils/helperFunc';
 
 export const LessonSwitcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
   data,
@@ -15,21 +17,10 @@ export const LessonSwitcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
   const { position } = useUpdate();
   const { end, start, lesson } = data;
 
-  const dayProgress = (position: number, start: number, end: number) => {
-    if (start <= position && position < end) {
-      return { status: 'current' };
-    }
-    if (position > start) {
-      return { status: 'finished' };
-    }
-    return { status: 'expect' };
-  };
-
   const lessonBlockWidth = end.position - start.position;
+  const ls = lessonStatus(position, start.position, end.position);
 
-  const y = dayProgress(position, start.position, end.position);
-
-  switch (y.status) {
+  switch (ls.status) {
     case 'current':
       return (
         <CurrentLesson

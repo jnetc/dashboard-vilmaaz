@@ -2,12 +2,8 @@ import { FC, createContext, useEffect, useState } from 'react';
 
 // Types
 import { Schedule, MainStoreProps, LessonsType } from '@types';
-import {
-  transform,
-  staticValues,
-  hourPositions,
-  hours,
-} from '@Utils/helperFunc';
+import { transform, staticValues, hourPositions } from '@Utils/helperFunc';
+import { hours } from './utils/hours';
 import { database } from '@Store/utils/data';
 
 const state: MainStoreProps = {

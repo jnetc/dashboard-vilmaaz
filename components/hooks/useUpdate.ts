@@ -20,9 +20,9 @@ export const useUpdate = () => {
   const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
   // const h = (new Date().getHours() - 0).toString();
-  // const m = (new Date().getMinutes() - 0).toString();
+  // const m = (new Date().getMinutes() - 31).toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
-  // const stepTime = transformTimeToNum(`9:40`);
+  // const stepTime = transformTimeToNum(`12:17`);
 
   // console.log('hook', stepTime);
 

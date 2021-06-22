@@ -1,6 +1,12 @@
-import { MutableRefObject } from 'react';
 // Types
-import { Schedule, LessonsType, Lesson, InitLesson } from '@types';
+import {
+  Schedule,
+  LessonsType,
+  Lesson,
+  InitLesson,
+  StaticValues,
+  Element,
+} from '@types';
 
 export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
   return new Intl.DateTimeFormat('fi-FI', options).format(date);
@@ -69,8 +75,8 @@ const fillEmptySpace = (arr: Array<InitLesson>) => {
       fillArray.push({
         id: i.id + 2,
         lesson: 'taukko',
-        start: { time: startBreak, position: startBreakPosition },
-        end: { time: endBreak, position: startLesson },
+        start: { time: startBreak.time, position: startBreakPosition },
+        end: { time: endBreak.time, position: startLesson },
       });
       // Push lessons after init first break
       const z = addTimePosition(i, startLesson, endLesson);
@@ -88,23 +94,6 @@ const addTimePosition = (obj: InitLesson, start: number, end: number) => {
   obj.end = endPos;
   return Object.assign({}, obj) as Lesson;
 };
-// export const transformTimeToNum = (time: string | number): number => {
-//   if ('number' === typeof time) return time;
-
-//   const minInHour = 60;
-//   const hours = Number(time.split(':')[0]);
-//   const minutes = Number(time.split(':')[1]);
-
-//   return hours * minInHour + minutes;
-// };
-
-// export const transformNumToTime = (num: number) => {
-//   const minInHour = 60;
-//   const hours = Math.floor(num / minInHour);
-//   const minutes = num % minInHour > 9 ? num % minInHour : `0${num % minInHour}`;
-
-//   return `${hours}:${minutes}`;
-// };
 
 export const staticValues = (timearr: Array<string>) => {
   const arr: Array<number> = [];
@@ -119,33 +108,6 @@ export const staticValues = (timearr: Array<string>) => {
 
   return { startLessons, endLessons, totalTime };
 };
-
-export const hours = [
-  '0:00',
-  '1:00',
-  '2:00',
-  '3:00',
-  '4:00',
-  '5:00',
-  '6:00',
-  '7:00',
-  '8:00',
-  '9:00',
-  '10:00',
-  '11:00',
-  '12:00',
-  '13:00',
-  '14:00',
-  '15:00',
-  '16:00',
-  '17:00',
-  '18:00',
-  '19:00',
-  '20:00',
-  '21:00',
-  '22:00',
-  '23:00',
-];
 
 export const hourPositions = (hours: Array<string>) => {
   return hours.map(h => {
@@ -174,7 +136,7 @@ export const transformTimeToNum = (time: string | number): number => {
 
   const minuteStep = minutes * minuteStepLength;
   const hourStep = step * hours;
-  const timeStep = Math.round(hoursToMinutes + hourStep + minuteStep);
+  const timeStep = Math.floor(hoursToMinutes + hourStep + minuteStep);
 
   // console.log('tranform', timeStep);
 
@@ -187,37 +149,63 @@ export const transformNumToTime = (num: number) => {
   const hourStepLength = step + amountOfTime;
   const minuteStepLength = hourStepLength / amountOfTime;
 
-  const findMinutes = Math.round((num % hourStepLength) / minuteStepLength);
-  const hours = Math.round(num / hourStepLength);
+  const findMinutes = Math.floor((num % hourStepLength) / minuteStepLength);
+  const hours = Math.floor(num / hourStepLength);
   const minutes = findMinutes > 9 ? findMinutes : `0${findMinutes}`;
 
-  // console.log(minutes);
-
-  return `${hours}:${minutes}`;
+  return { time: `${hours}:${minutes}`, minutes: findMinutes, hours };
 };
 
-export const transition = (
-  trigger: boolean,
-  element: MutableRefObject<HTMLElement | null>,
-  firstClass: string,
-  secondClass: string
+export const movementTimeAndTimetable = (
+  main: number,
+  timetable: Element,
+  currentTime: number,
+  autoMovement: boolean,
+  timeline: StaticValues
 ) => {
-  if (trigger) {
-    setTimeout(() => {
-      element.current?.classList.add(firstClass);
-    }, 0);
-    setTimeout(() => {
-      element.current?.classList.add(secondClass);
-      element.current?.classList.remove(firstClass);
-    }, 100);
+  if (!timetable) return;
+  if (!autoMovement) return;
+
+  const { startLessons, endLessons } = timeline;
+
+  const startAutoMovement = startLessons + Math.round(main / 2);
+  const stopAutoMovement = endLessons - Math.round(main / 2) + 90;
+  const outOfTrackLessons = endLessons - main + 90;
+  const timeMovement = Math.round(main / 2) - currentTime;
+
+  if (startAutoMovement > currentTime || startLessons > currentTime) {
+    timetable.style.transform = `translate3d(-${startLessons}px, 0, 0)`;
+    return;
   }
-  if (!trigger) {
-    setTimeout(() => {
-      element.current?.classList.add(firstClass);
-      element.current?.classList.remove(secondClass);
-    }, 0);
-    setTimeout(() => {
-      element.current?.classList.remove(firstClass);
-    }, 100);
+
+  if (currentTime > endLessons || stopAutoMovement <= currentTime) {
+    timetable.style.transform = `translate3d(-${outOfTrackLessons}px, 0, 0)`;
+    return;
   }
+
+  timetable.style.transform = `translate3d(${timeMovement}px, 0, 0)`;
+};
+
+// Get position from transform style
+export function getTransformStylePosition(el: Element) {
+  let posX = Number(el?.style.transform.split('px')[0].split('(')[1]);
+  return Math.abs(posX);
+}
+
+export const cssAnimationHandler = (timetable: Element) => {
+  timetable?.classList.add('animate');
+  const timer = setTimeout(() => {
+    timetable?.classList.remove('animate');
+  }, 3000);
+  clearTimeout(timer);
+};
+
+export const lessonStatus = (position: number, start: number, end: number) => {
+  if (start <= position && position < end) {
+    return { status: 'current' };
+  }
+  if (position > start) {
+    return { status: 'finished' };
+  }
+  return { status: 'expect' };
 };

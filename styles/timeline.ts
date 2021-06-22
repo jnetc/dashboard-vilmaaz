@@ -38,7 +38,6 @@ export const TimelinePointsStyle = styled.div<{ position: number }>`
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
-  /* border-color: ${({ theme }) => theme.bg_dark()}; */
   background-color: ${({ theme }) => theme.bg_dark(0.7)};
   transition: all 0.3s ease-in-out;
   user-select: none;
@@ -55,16 +54,10 @@ export const TimelinePointsStyle = styled.div<{ position: number }>`
     pointer-events: none;
     z-index: -1;
   }
-  /* &:hover {
-    background-color: ${({ theme }) => theme.bg_regular(0.8)};
-    border-color: ${({ theme }) => theme.grey_light()};
-    z-index: 2;
-  } */
 `;
 
 // TIMELINE STEP
 export const TimelineStepStyle = styled(TimelinePointsStyle)`
-  /* position: absolute; */
   color: ${({ theme }) => theme.white()};
   background-color: ${({ theme }) => theme.bg_dark(0.3)};
   border-color: ${({ theme }) => theme.grey_dark()};
@@ -93,9 +86,6 @@ export const TimetableStyle = styled.div<{ hours: number }>`
   z-index: 1;
   user-select: none;
   cursor: move;
-  /* @media (max-width: 1920px) {
-    width: 1920px;
-  } */
   &.animate {
     transition: transform 0.3s ease-in-out;
   }

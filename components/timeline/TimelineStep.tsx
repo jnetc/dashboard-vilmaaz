@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Components
-import { movementTimeAndTimetable } from '@Utils/timeline';
+import { movementTimeAndTimetable } from '@Utils/helperFunc';
 // Hook
 import { useUpdate } from '@Hooks/useUpdate';
 // Hook

@@ -20,18 +20,9 @@ export const LessonsStyle = styled.div<LessonStyleType>`
   cursor: default;
   z-index: 10;
   order: ${({ order }) => (order ? order : 0)};
-  &:hover {
-    /* .progress {
-      border-color: ${({ theme }) => theme.grey_middle()};
-    }
-    > svg {
-      stroke: var(--${({ primary }) => primary});
-    } */
-  }
 `;
 
 // LESSON STYLES
-//TODO Сделать плавную анимацию перехода
 interface LessonsDataType {
   lessonWidth: number;
   colors: string;
@@ -147,7 +138,7 @@ export const ExpectLessonStyle = styled(LessonStyle)`
   }
   & .lesson-status {
     .expect-icon-animation {
-      animation: ${sleepAnimation} 5s linear infinite;
+      animation: ${sleepAnimation} 3s linear infinite;
       /* transform: translate(50%, -150%) scale(0.7); */
     }
   }
@@ -220,6 +211,7 @@ export const BreakStyle = styled.div<LessonsDataType>`
   }
   /* toogle classes */
   &.active {
+    border-left: 2px solid var(--${({ colors }) => colors});
     background: repeating-linear-gradient(
       -45deg,
       ${({ theme }) => theme.bg_light()},
@@ -265,7 +257,7 @@ export const BreakStyle = styled.div<LessonsDataType>`
     stroke: var(--${({ colors }) => colors});
   }
   .expect-icon-animation {
-    animation: ${sleepAnimation} 5s linear infinite;
+    animation: ${sleepAnimation} 3s linear infinite;
     /* transform: translate(50%, -150%) scale(0.7); */
   }
   .finished-icon {
@@ -324,46 +316,4 @@ export const LessonStatusIconStyle = styled(AvatarAndIconCommonStyle)`
   box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
     0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
   z-index: 13;
-`;
-
-// LESSON COMMON PROGRESS
-export const LessonCommonProgressStyle = styled.svg<{ shade: string }>`
-  position: absolute;
-  top: 0;
-  left: 1px;
-  fill: ${({ theme }) => theme.bg_middle()};
-  stroke: var(--${({ shade }) => shade});
-  stroke-width: 2;
-  stroke-dasharray: 12;
-  transition: stroke 0.3s ease-in-out;
-`;
-
-// LESSON NAME
-export const ProgressNameStyle = styled.div`
-  width: 100%;
-  padding: 0 65px;
-  overflow: hidden;
-  display: flex;
-  justify-content: flex-end;
-  color: ${({ theme }) => theme.grey_light()};
-`;
-
-// LESSON PRORGESS BAR
-export const LessonProgressBarStyle = styled.div<{ primary: string }>`
-  height: 70px;
-  padding: 10px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  border-radius: inherit;
-  background-color: ${({ theme }) => theme.bg_middle()};
-  border: 2px outset var(--${({ primary }) => primary});
-  transition: all 0.3s ease-in-out;
-  z-index: 11;
-  .active {
-    border-color: ${({ theme }) => theme.grey_middle()};
-    box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
-      0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
-  }
 `;

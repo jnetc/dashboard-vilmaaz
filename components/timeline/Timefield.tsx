@@ -22,6 +22,7 @@ const Timefield: FC = () => {
 
   const lessons = content.map(data => {
     const currentLessonOrder = orders.find(o => o.id === data.id);
+
     return <Lessons key={data.id} data={data} order={currentLessonOrder} />;
   });
 
