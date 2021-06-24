@@ -42,8 +42,8 @@ declare module 'styled-components' {
 }
 
 export const theme: DefaultTheme = {
-  white: (alpha = 1) => `hsl(0 0% 97% / ${alpha})`, //'hsl(0, 0%, 97%)'
-  grey_light: (alpha = 1) => `hsl(240 0% 70% / ${alpha})`, //'hsl(240, 10%, 70%)'
+  white: (alpha = 1) => `hsl(0 0% 95% / ${alpha})`, //'hsl(0, 0%, 95%)'
+  grey_light: (alpha = 1) => `hsl(240 0% 80% / ${alpha})`, //'hsl(240, 10%, 80%)'
   grey_middle: (alpha = 1) => `hsl(2400 0% 50% / ${alpha})`, //'hsl(240, 10%, 50%)'
   grey_dark: (alpha = 1) => `hsl(240 10% 40% / ${alpha})`, //'hsl(240, 10%, 40%)'
   grey_black: (alpha = 1) => `hsl(240 10% 25% / ${alpha})`, //'hsl(240, 10%, 25%)'

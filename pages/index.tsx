@@ -1,19 +1,21 @@
 import Head from 'next/head';
 import { Timetable } from '@Timeline/Timetable';
-// import { RightSidePanel } from '@Main/lessons/right-side-panel';
 import { UpdateTimetable } from '@Timeline/UpdateTimetable';
-import Aside from '@Aside/index';
+import RightPanel from '@RightPanel/RightPanel';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>Tervetuloa Wilmaaz lukujärjestyksen</title>
+        <meta
+          name="description"
+          content="Tämä on aikataulu oppitunteja koko viikon ajan reaaliajassa."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Timetable />
-      {/* <RightSidePanel /> */}
-      <Aside />
+      <RightPanel />
       <UpdateTimetable />
     </>
   );

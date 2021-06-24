@@ -1,7 +1,11 @@
 module.exports = {
   poweredByHeader: false,
   reactStrictMode: true,
-  // future: {
-  //   webpack5: true,
-  // },
+  i18n: {
+    locales: ['fi-FI'],
+    defaultLocale: 'fi-FI',
+  },
+  images: {
+    domains: ['localhost'],
+  },
 };

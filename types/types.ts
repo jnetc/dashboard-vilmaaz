@@ -7,7 +7,7 @@ export type Event = MouseEvent<Div>;
 // export type Touch = TouchEventHandler<Div>;
 
 export interface Avatar {
-  img: string;
+  img?: string;
   name: string;
 }
 
@@ -82,6 +82,11 @@ export interface StaticValues {
   startLessons: number;
   endLessons: number;
   totalTime: number;
+}
+
+export interface PanelProfileType extends User {
+  start: TimePosition;
+  end: TimePosition;
 }
 
 export type GlobalStoreProps = {

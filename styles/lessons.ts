@@ -75,6 +75,7 @@ const LessonStyle = styled.div<LessonsDataType>`
     grid-row: 1;
     grid-column: 1;
     gap: 0.5rem;
+    color: ${({ theme }) => theme.grey_light(0.8)};
     font-size: ${({ theme }) => theme.fontsize_14};
     time {
       font-weight: 400;
@@ -84,6 +85,7 @@ const LessonStyle = styled.div<LessonsDataType>`
     grid-row: 2;
     grid-column: 1;
     font-weight: 600;
+    color: ${({ theme }) => theme.grey_light()};
     font-size: ${({ theme }) => theme.fontsize_16};
   }
   & .lesson-status {
@@ -115,11 +117,9 @@ const LessonStyle = styled.div<LessonsDataType>`
 
 export const FinishedLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
-    color: ${({ theme }) => theme.grey_middle(0.7)};
     stroke: ${({ theme }) => theme.grey_middle(0.7)};
   }
   & .lesson-name {
-    color: ${({ theme }) => theme.grey_middle(0.7)};
   }
   & .finished-icon {
     stroke-dasharray: 30;
@@ -130,11 +130,9 @@ export const FinishedLessonStyle = styled(LessonStyle)`
 
 export const ExpectLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
-    color: ${({ theme }) => theme.grey_middle()};
     stroke: ${({ theme }) => theme.grey_middle()};
   }
   & .lesson-name {
-    color: ${({ theme }) => theme.grey_middle()};
   }
   & .lesson-status {
     .expect-icon-animation {
@@ -161,11 +159,9 @@ export const CurrentLessonStyle = styled(LessonStyle)`
     z-index: -1;
   }
   & .lesson-duration {
-    color: ${({ theme }) => theme.grey_light()};
     stroke: ${({ theme }) => theme.grey_middle()};
   }
   & .lesson-name {
-    color: ${({ theme }) => theme.grey_light()};
   }
   & .timer {
     position: absolute;

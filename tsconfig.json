@@ -21,7 +21,7 @@
     "paths": {
       "@styles/*": ["./styles/*"],
       // "@Navigation": ["./components/navigation/Nav"],
-      "@Aside/*": ["./components/aside/*"],
+      "@RightPanel/*": ["components/right-panel/*"],
       "@Timeline/*": ["./components/timeline/*"],
       "@Lessons/*": ["./components/lessons/*"],
       "@Store/*": ["./components/store/*"],

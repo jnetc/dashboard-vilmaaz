@@ -8,7 +8,7 @@ export const database: Array<Schedule> = [
       shade: 'brown_shade',
     },
     avatar: {
-      img: 'url',
+      img: '/avatars/johannes.png',
       name: 'JO',
     },
     timetable: [
@@ -247,7 +247,6 @@ export const database: Array<Schedule> = [
       shade: 'green_shade',
     },
     avatar: {
-      img: 'url',
       name: 'AM',
     },
     timetable: [
@@ -448,7 +447,7 @@ export const database: Array<Schedule> = [
       shade: 'pink_shade',
     },
     avatar: {
-      img: 'url',
+      img: '/avatars/emilia.png',
       name: 'EM',
     },
     timetable: [
@@ -470,8 +469,8 @@ export const database: Array<Schedule> = [
           {
             id: 'sdf54we68w5f47dsf9874',
             lesson: 'englanti',
-            start: { time: '14:15' },
-            end: { time: '15:00' },
+            start: { time: '15:00' },
+            end: { time: '15:45' },
           },
         ],
       },
@@ -553,7 +552,6 @@ export const database: Array<Schedule> = [
       shade: 'magenta_shade',
     },
     avatar: {
-      img: 'url',
       name: 'OL',
     },
     timetable: [
@@ -762,7 +760,6 @@ export const database: Array<Schedule> = [
       shade: 'blue_shade',
     },
     avatar: {
-      img: 'url',
       name: 'MI',
     },
     timetable: [
