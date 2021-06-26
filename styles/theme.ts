@@ -13,10 +13,10 @@ declare module 'styled-components' {
     grey_black: typeof AlphaChanel;
     progress: typeof AlphaChanel;
     bg_light: typeof AlphaChanel;
-    bg_regular: typeof AlphaChanel;
+    bg_soft: typeof AlphaChanel;
     bg_middle: typeof AlphaChanel;
-    bg_main: typeof AlphaChanel;
     bg_dark: typeof AlphaChanel;
+    bg_black: typeof AlphaChanel;
     primary: typeof AlphaChanel;
     primary_hover: typeof AlphaChanel;
     danger: typeof AlphaChanel;
@@ -37,22 +37,23 @@ declare module 'styled-components' {
     fontsize_18: string;
     fontsize_16: string;
     fontsize_14: string;
-    timeline: string;
+    fontsize_13: string;
+    border_radius: string;
   }
 }
 
 export const theme: DefaultTheme = {
-  white: (alpha = 1) => `hsl(0 0% 95% / ${alpha})`, //'hsl(0, 0%, 95%)'
-  grey_light: (alpha = 1) => `hsl(240 0% 80% / ${alpha})`, //'hsl(240, 10%, 80%)'
-  grey_middle: (alpha = 1) => `hsl(2400 0% 50% / ${alpha})`, //'hsl(240, 10%, 50%)'
-  grey_dark: (alpha = 1) => `hsl(240 10% 40% / ${alpha})`, //'hsl(240, 10%, 40%)'
+  white: (alpha = 1) => `hsl(240 14% 97% / ${alpha})`, //'hsl(240, 14%, 97%)'
+  grey_light: (alpha = 1) => `hsl(210 7% 77% / ${alpha})`, //'hsl(210, 7%, 77%)'
+  grey_middle: (alpha = 1) => `hsl(213 6% 74% / ${alpha})`, //'hsl(213, 7%, 74%)'
+  grey_dark: (alpha = 1) => `hsl(216 8% 37% / ${alpha})`, //'hsl(216, 8%, 37%)'
   grey_black: (alpha = 1) => `hsl(240 10% 25% / ${alpha})`, //'hsl(240, 10%, 25%)'
-  progress: (alpha = 1) => `hsl(240 15% 27% / ${alpha})`, //'hsl(240, 15%, 27%)'
-  bg_light: (alpha = 1) => `hsl(240 15% 24% / ${alpha})`, //'hsl(240, 15%, 24%)'
-  bg_regular: (alpha = 1) => `hsl(240 15% 22% / ${alpha})`, //'hsl(240, 15%, 22%)'
-  bg_middle: (alpha = 1) => `hsl(240 15% 20% / ${alpha})`, //'hsl(240, 15%, 20%)'
-  bg_main: (alpha = 1) => `hsl(240 15% 17% / ${alpha})`, //'hsl(240, 15%, 17%)'
-  bg_dark: (alpha = 1) => `hsl(244 15% 15% / ${alpha})`, //'hsl(244, 15%, 15%)'
+  progress: (alpha = 1) => `hsl(215 15% 25% / ${alpha})`, //'hsl(215, 15%, 25%)'
+  bg_light: (alpha = 1) => `hsl(217 15% 24% / ${alpha})`, //'hsl(217, 15%, 24%)'
+  bg_soft: (alpha = 1) => `hsl(221 14% 22% / ${alpha})`, //'hsl(221, 14%, 22%)'
+  bg_middle: (alpha = 1) => `hsl(227 14% 20% / ${alpha})`, //'hsl(227, 14%, 20%)'
+  bg_dark: (alpha = 1) => `hsl(231 15% 17% / ${alpha})`, //'hsl(231, 15%, 17%)'
+  bg_black: (alpha = 1) => `hsl(244 15% 15% / ${alpha})`, //'hsl(244, 15%, 15%)'
   primary: (alpha = 1) => `hsl(127 28% 75% / ${alpha})`, // 'hsl(127, 28%, 75%)'
   primary_hover: (alpha = 1) => `hsl(127 28% 55% / ${alpha})`, //'hsl(127, 28%, 55%)'
   danger: (alpha = 1) => `hsl(346 90% 75% / ${alpha})`, //'hsl(346, 90%, 75%)'
@@ -67,11 +68,12 @@ export const theme: DefaultTheme = {
   brown_shade: (alpha = 1) => `hsl(8 20% 30% / ${alpha})`, //'hsl(8, 20%, 30%)'
   magenta: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
   magenta_shade: (alpha = 1) => `hsl(307 40% 30% / ${alpha})`, //'hsl(307, 40%, 30%)'
-  fontsize_48: '3rem',
-  fontsize_36: '2rem',
-  fontsize_24: '1.6rem',
-  fontsize_18: '1.3rem',
-  fontsize_16: '1rem',
-  fontsize_14: '.8rem',
-  timeline: '2000',
+  fontsize_48: '48px',
+  fontsize_36: '36px',
+  fontsize_24: '24px',
+  fontsize_18: '18px',
+  fontsize_16: '16px', // 16px
+  fontsize_14: '14px', // 14px
+  fontsize_13: '13px', // 13px
+  border_radius: '10px', //10px
 };

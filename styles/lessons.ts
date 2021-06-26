@@ -10,7 +10,7 @@ type LessonStyleType = {
 // LESSONS
 export const LessonsStyle = styled.div<LessonStyleType>`
   width: ${({ distance }) => distance}px;
-  height: 70px;
+  /* height: 70px; */
   display: flex;
   align-items: center;
   position: relative;
@@ -43,9 +43,9 @@ const LessonStyle = styled.div<LessonsDataType>`
   display: grid;
   grid-template-columns: 1fr 56px;
   grid-template-rows: repeat(2, 25px);
-  gap: 5px;
+  gap: 4px 5px;
   place-self: center;
-  padding: 15px;
+  padding: 13px;
   position: relative;
   overflow: hidden;
   user-select: none;
@@ -58,7 +58,7 @@ const LessonStyle = styled.div<LessonsDataType>`
   }
   /* toogle classes */
   &.active {
-    background: ${({ theme }) => theme.bg_light()};
+    background: ${({ theme }) => theme.bg_soft()};
   }
   &.inactive {
     background: ${({ theme }) => theme.bg_middle()};
@@ -77,14 +77,10 @@ const LessonStyle = styled.div<LessonsDataType>`
     gap: 0.5rem;
     color: ${({ theme }) => theme.grey_light(0.8)};
     font-size: ${({ theme }) => theme.fontsize_14};
-    time {
-      font-weight: 400;
-    }
   }
   & .lesson-name {
     grid-row: 2;
     grid-column: 1;
-    font-weight: 600;
     color: ${({ theme }) => theme.grey_light()};
     font-size: ${({ theme }) => theme.fontsize_16};
   }
@@ -143,6 +139,7 @@ export const ExpectLessonStyle = styled(LessonStyle)`
 `;
 
 export const CurrentLessonStyle = styled(LessonStyle)`
+  /* background: ${({ theme }) => theme.bg_middle()}; */
   border-left: 2px solid var(--${({ colors }) => colors});
   &:nth-of-type(1) {
     border-left: 2px solid var(--${({ colors }) => colors});
@@ -183,7 +180,7 @@ export const BreakStyle = styled.div<LessonsDataType>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 12px;
   position: relative;
   user-select: none;
   border-left: 2px solid ${({ theme }) => theme.bg_light()};
@@ -200,8 +197,8 @@ export const BreakStyle = styled.div<LessonsDataType>`
       -45deg,
       ${({ theme }) => theme.bg_middle()},
       ${({ theme }) => theme.bg_middle()} 10px,
-      ${({ theme }) => theme.bg_dark()} 10px,
-      ${({ theme }) => theme.bg_dark()} 20px
+      ${({ theme }) => theme.bg_black()} 10px,
+      ${({ theme }) => theme.bg_black()} 20px
     );
     z-index: -1;
   }
@@ -212,8 +209,8 @@ export const BreakStyle = styled.div<LessonsDataType>`
       -45deg,
       ${({ theme }) => theme.bg_light()},
       ${({ theme }) => theme.bg_light()} 10px,
-      ${({ theme }) => theme.bg_dark()} 10px,
-      ${({ theme }) => theme.bg_dark()} 20px
+      ${({ theme }) => theme.bg_black()} 10px,
+      ${({ theme }) => theme.bg_black()} 20px
     );
     &::before {
       width: calc(100% + 29px);
@@ -222,8 +219,8 @@ export const BreakStyle = styled.div<LessonsDataType>`
         -45deg,
         ${({ theme }) => theme.bg_light()},
         ${({ theme }) => theme.bg_light()} 10px,
-        ${({ theme }) => theme.bg_dark()} 10px,
-        ${({ theme }) => theme.bg_dark()} 20px
+        ${({ theme }) => theme.bg_black()} 10px,
+        ${({ theme }) => theme.bg_black()} 20px
       );
     }
   }
@@ -309,7 +306,7 @@ export const LessonAvatarProgressStyle = styled(AvatarAndIconCommonStyle)`
 export const LessonStatusIconStyle = styled(AvatarAndIconCommonStyle)`
   font-size: ${({ theme }) => theme.fontsize_16};
   right: 7px;
-  box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
-    0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
+  box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_black(0.2)},
+    0px 10px 10px ${({ theme }) => theme.bg_black(0.3)};
   z-index: 13;
 `;

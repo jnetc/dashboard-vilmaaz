@@ -1,9 +1,17 @@
-import { MouseEvent } from 'react';
+// import { MouseEvent, MouseEventHandler } from 'react';
 
 // SIMPLE TYPES
 export type Div = HTMLDivElement;
+export type Button = HTMLButtonElement;
 export type Element = Div | null;
-export type Event = MouseEvent<Div>;
+export type This = globalThis.MouseEvent;
+// export interface Event <T extends MouseEventHandler<T>> {
+//   readonly target: T;
+// }
+
+// export type Events<T, E> = (event: {target: <E>}) => void
+// export type EvDiv = MouseEvent<Div, This>;
+// export type EvButton = MouseEvent<Button>;
 // export type Touch = TouchEventHandler<Div>;
 
 export interface Avatar {
@@ -87,6 +95,7 @@ export interface StaticValues {
 export interface PanelProfileType extends User {
   start: TimePosition;
   end: TimePosition;
+  lessons: number;
 }
 
 export type GlobalStoreProps = {

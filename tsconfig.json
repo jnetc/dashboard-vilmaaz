@@ -21,6 +21,7 @@
     "paths": {
       "@styles/*": ["./styles/*"],
       // "@Navigation": ["./components/navigation/Nav"],
+      "@Header/*": ["components/header/*"],
       "@RightPanel/*": ["components/right-panel/*"],
       "@Timeline/*": ["./components/timeline/*"],
       "@Lessons/*": ["./components/lessons/*"],

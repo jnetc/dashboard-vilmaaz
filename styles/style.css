@@ -1,15 +1,15 @@
 :root {
-  --white: hsl(0, 14%, 97%);
-  --grey_light: hsl(0, 0%, 66%);
-  --grey_middle: hsl(0, 0%, 50%);
-  --grey_dark: hsl(240, 10%, 35%);
-  --grey_black: hsl(240, 10%, 26%);
-  --progress: hsl(240, 15%, 30%);
-  --bg_light: hsl(240, 15%, 25%);
-  --bg_regular: hsl(240, 15%, 22%);
-  --bg_middle: hsl(240, 15%, 20%);
-  --bg_main: hsl(240, 15%, 17%);
-  --bg_dark: hsl(244, 15%, 15%);
+  --white: hsl(240, 14%, 97%);
+  --grey_light: hsl(210, 7%, 77%);
+  --grey_middle: hsl(213, 7%, 74%);
+  --grey_dark: hsl(216, 8%, 37%);
+  --grey_black: hsl(240, 10%, 25%);
+  --progress: hsl(215, 15%, 25%);
+  --bg_light: hsl(217, 15%, 24%);
+  --bg_soft: hsl(221, 14%, 22%);
+  --bg_middle: hsl(227, 14%, 20%);
+  --bg_dark: hsl(231, 15%, 17%);
+  --bg_black: hsl(244, 15%, 15%);
   --primary: hsl(127, 28%, 75%);
   --primary_hover: hsl(127, 28%, 55%);
   --danger: hsl(346, 90%, 75%);

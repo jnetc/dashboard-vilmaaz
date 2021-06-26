@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { transformTimeToNum } from '@Utils/helperFunc';
 
+const mountHours = new Date().getHours();
+const mountMinutes = new Date().getMinutes();
+
 export const useUpdate = () => {
-  const [hours, setHours] = useState<number>(new Date().getHours());
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
+  const [hours, setHours] = useState<number>(mountHours);
+  const [minutes, setMinutes] = useState<number>(mountMinutes);
 
   useEffect(() => {
     const counter = setInterval(
@@ -20,7 +23,7 @@ export const useUpdate = () => {
 
   const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
-  // const h = (new Date().getHours() - 6).toString();
+  // const h = (new Date().getHours() - 2).toString();
   // const m = (new Date().getMinutes() - 31).toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
   // const stepTime = transformTimeToNum(`12:17`);

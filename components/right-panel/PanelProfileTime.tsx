@@ -15,7 +15,9 @@ export const PanelProfileTime: FC<{ endtime: number }> = ({ endtime }) => {
       {minutes >= 0 ? `Koulu päätty` : 'Koulu loppu'}
       {minutes >= 0 ? (
         <time>
-          {hours}:{minutes}
+          {hours}
+          <b>:</b>
+          {minutes > 9 ? minutes : `0${minutes}`}
         </time>
       ) : (
         <></>

@@ -48,7 +48,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
   }
 
   // console.log(minutes, hours, time);
-
+  //TODO Пересмотреть компонент, такой подход передобавляет класс каждую минуту!!!
   useEffect(() => {
     const transition = setTimeout(() => {
       lessonRef.current?.classList.add('active');

@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-family: Roboto, sans-serif;
     color: ${({ theme }) => theme.white()};
-    background-color: ${({ theme }) => theme.bg_dark()}
+    background-color: ${({ theme }) => theme.bg_black()}
   }
 
   body.right-side {
@@ -24,9 +24,11 @@ export const GlobalStyle = createGlobalStyle`
   #__next {
     width: 100%;
     min-height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 115px 1fr;
     position: relative;
-    /* background-color: ${({ theme }) => theme.bg_dark()}; */
+    /* background-color: ${({ theme }) => theme.bg_black()}; */
     overflow: hidden;
   }
   @media (min-width: 1921px) {
@@ -57,10 +59,10 @@ export const GlobalStyle = createGlobalStyle`
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.bg_regular()};
+    background: ${({ theme }) => theme.bg_soft()};
   }
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.grey_dark()};
+    background: ${({ theme }) => theme.grey_black()};
     border-radius: 50px;
   }
 `;

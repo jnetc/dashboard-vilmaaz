@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, FC, createRef } from 'react';
+import { useRef, useState, useEffect, FC, createRef, MouseEvent } from 'react';
 // Helpers
 import {
   cssAnimationHandler,
@@ -10,7 +10,7 @@ import Timefield from './Timefield';
 // Hook
 import { useStore } from '@Hooks/useStore';
 // Types
-import { Event, Element, Div, StaticValues } from '@types';
+import { This, Element, Div, StaticValues } from '@types';
 // Styles
 import {
   MainStyle,
@@ -18,7 +18,7 @@ import {
   TimetableEmptyStyle,
 } from '@styles/timeline';
 
-export const Timetable: FC = () => {
+const Timetable: FC = () => {
   const { setTimetableEl, setAutoMovement, content, timelineHours, timeline } =
     useStore();
 
@@ -48,7 +48,7 @@ export const Timetable: FC = () => {
     };
   }, [widthMainEl, timetableEl]);
 
-  const mouseDown = (ev: Event) => {
+  const mouseDown = (ev: MouseEvent<Div, This>) => {
     setAutoMovement(false);
     setStartMove(true);
     let el = timetableEl.current;
@@ -64,7 +64,7 @@ export const Timetable: FC = () => {
     setMouseDownCursorPos(ev.clientX);
   };
 
-  const mouseMove = (ev: Event) => {
+  const mouseMove = (ev: MouseEvent<Div, This>) => {
     ev.preventDefault();
     let el = timetableEl.current;
     if (!startMove ?? !el) return;
@@ -75,7 +75,7 @@ export const Timetable: FC = () => {
     }px, 0, 0)`;
   };
 
-  const mouseUp = (ev: Event) => {
+  const mouseUp = (ev: MouseEvent<Div, This>) => {
     ev.preventDefault();
     let el = timetableEl.current;
     cssAnimationHandler(el);
@@ -86,7 +86,7 @@ export const Timetable: FC = () => {
     setStartMove(false);
   };
 
-  const mouseLeave = (ev: Event) => {
+  const mouseLeave = (ev: MouseEvent<Div, This>) => {
     ev.preventDefault();
     let el = timetableEl.current;
 
@@ -136,3 +136,5 @@ export const Timetable: FC = () => {
     <TimetableEmptyStyle>Viikonloppu</TimetableEmptyStyle>
   );
 };
+
+export default Timetable;

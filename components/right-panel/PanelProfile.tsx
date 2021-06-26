@@ -7,25 +7,28 @@ import { PanelProfileType } from '@types';
 import { PanelProfileTime } from './PanelProfileTime';
 
 export const PanelProfile: FC<{ data: PanelProfileType }> = ({ data }) => {
-  console.log(data);
+  const { avatar, name, end, lessons } = data;
 
   return (
     <PanelProfileStyle>
       <figure>
-        {data.avatar.img ? (
+        {avatar.img ? (
           <Image
-            src={data.avatar.img}
-            alt={data.name}
+            src={avatar.img}
+            alt={name}
             width={60}
             height={60}
             layout="fixed"
           />
         ) : (
-          <figcaption>{data.avatar.name}</figcaption>
+          <figcaption>{avatar.name}</figcaption>
         )}
       </figure>
-      <h4>{data.name}</h4>
-      <PanelProfileTime endtime={data.end.position} />
+      <h4>{name}</h4>
+      <PanelProfileTime endtime={end.position} />
+      <p className="amount">
+        Oppitunnit <b>{lessons}</b>
+      </p>
       <button>•</button>
     </PanelProfileStyle>
   );

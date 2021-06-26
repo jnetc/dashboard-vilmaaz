@@ -8,7 +8,7 @@ export const TimefieldStyle = styled.div`
   #field {
     display: flex;
     flex-direction: column;
-    gap: 4em;
+    gap: ${({ theme }) => theme.fontsize_48};
     transition: all 0.3s ease-in-out;
   }
 `;
@@ -34,11 +34,11 @@ export const TimelinePointsStyle = styled.div<{ position: number }>`
   position: absolute;
   transform: translate3d(${({ position }) => position}px, 0, 0);
   color: ${({ theme }) => theme.grey_light()};
-  border-radius: 15px;
+  border-radius: ${({ theme }) => theme.border_radius};
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
-  background-color: ${({ theme }) => theme.bg_dark(0.7)};
+  background-color: ${({ theme }) => theme.bg_black(0.7)};
   transition: all 0.3s ease-in-out;
   user-select: none;
   z-index: 0;
@@ -59,11 +59,11 @@ export const TimelinePointsStyle = styled.div<{ position: number }>`
 // TIMELINE STEP
 export const TimelineStepStyle = styled(TimelinePointsStyle)`
   color: ${({ theme }) => theme.white()};
-  background-color: ${({ theme }) => theme.bg_dark(0.3)};
-  border-color: ${({ theme }) => theme.grey_dark()};
+  background-color: ${({ theme }) => theme.bg_middle(0.5)};
+  /* border-color: ${({ theme }) => theme.grey_dark()}; */
   backdrop-filter: blur(2px);
-  box-shadow: 0 5px 5px ${({ theme }) => theme.bg_dark(0.15)},
-    0 20px 20px ${({ theme }) => theme.bg_dark(0.1)};
+  box-shadow: 0 5px 5px ${({ theme }) => theme.bg_black(0.15)},
+    0 20px 20px ${({ theme }) => theme.bg_black(0.1)};
   transform: translate3d(${({ position }) => position}px, 0, 0);
   transition: transform 0.3s ease-in-out;
   pointer-events: none;
@@ -77,7 +77,7 @@ export const TimelineStepStyle = styled(TimelinePointsStyle)`
 export const TimetableStyle = styled.div<{ hours: number }>`
   width: calc(${({ hours }) => hours}px + 300px);
   max-height: inherit;
-  min-height: calc(100vh - 35px);
+  min-height: calc(100vh - 115px);
   display: grid;
   position: relative;
   grid-template-rows: 60px 1fr;
@@ -92,14 +92,16 @@ export const TimetableStyle = styled.div<{ hours: number }>`
 `;
 
 export const MainStyle = styled.main`
+  grid-column: 1;
+  grid-row: 2;
   width: 100%;
   min-height: 100%;
-  padding: 35px 0 0 0px;
+  /* padding: 35px 0 0 0px; */
   position: relative;
   overflow: hidden;
   /* background-color: ${({ theme }) => theme.bg_middle()}; */
-  box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
-    0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
+  box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_black(0.2)},
+    0px 10px 10px ${({ theme }) => theme.bg_black(0.3)};
   &.opacity {
     filter: opacity(40%);
   }
@@ -120,7 +122,7 @@ export const UpdateTimetableStyle = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  background-color: ${({ theme }) => theme.bg_dark(0.5)};
+  background-color: ${({ theme }) => theme.bg_black(0.5)};
   backdrop-filter: blur(2px);
   transform: translate(-50%, -50%);
   z-index: 1000;
@@ -134,8 +136,8 @@ export const UpdateTimetableStyle = styled.div`
     padding: 3rem 4rem;
     border-radius: 1rem;
     background-color: ${({ theme }) => theme.bg_light()};
-    box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_dark(0.2)},
-      0px 10px 10px ${({ theme }) => theme.bg_dark(0.3)};
+    box-shadow: 0px 40px 40px ${({ theme }) => theme.bg_black(0.2)},
+      0px 10px 10px ${({ theme }) => theme.bg_black(0.3)};
     z-index: 1001;
   }
   h3 {

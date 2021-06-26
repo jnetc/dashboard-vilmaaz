@@ -271,6 +271,12 @@ export const database: Array<Schedule> = [
             start: { time: '10:00' },
             end: { time: '10:45' },
           },
+          {
+            id: 'sdf54we64gjo4s5d4fs45',
+            lesson: 'biologia',
+            start: { time: '10:45' },
+            end: { time: '11:30' },
+          },
         ],
       },
       {
