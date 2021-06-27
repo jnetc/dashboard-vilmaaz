@@ -7,50 +7,55 @@ import { DaysOfWeekStyle } from '@styles/header';
 import { DayOfWeek } from './DayOfWeek';
 // Type
 import { Element } from '@types';
+// Hook
+import { useStore } from '@Hooks/useStore';
 
 export const DaysOfWeek: FC = () => {
+  const { setDayOfWeek } = useStore();
   const ref = useRef<Element | null>(null);
   const children = ref.current?.querySelectorAll('button');
 
   let date: Date = new Date();
-  const day = dateFormat({ weekday: 'short' }, date);
-  const currentDayOfWeek = day.replace(day[0], day[0].toUpperCase());
+  const today = dateFormat({ weekday: 'long' }, date);
 
   // Day Of the week
   const daysOfWeek = [
-    'Maanantai',
-    'Tiistai',
-    'Keskiviikko',
-    'Torstai',
-    'Perjantai',
-    'Lauantai',
-    'Sunnuntai',
+    'maanantai',
+    'tiistai',
+    'keskiviikko',
+    'torstai',
+    'perjantai',
+    'lauantai',
+    'sunnuntai',
   ];
 
   const getDaySchedule: MouseEventHandler<Element> = ev => {
     const event = ev.target as Element;
-    const isTarget = event?.textContent;
+    const isTarget = event?.dataset.day;
 
     children?.forEach(btn => {
-      const isEqual = btn?.textContent;
+      const isEqual = btn.dataset.day;
 
       if (isTarget === isEqual) {
         btn.classList.add('active');
+        console.log(isEqual);
+
+        isEqual && setDayOfWeek(isEqual);
       }
       if (isTarget !== isEqual) {
         btn.classList.remove('active');
       }
-      if (currentDayOfWeek === isEqual) {
+      if (today === isEqual) {
         btn.classList.add('current');
       }
-      if (currentDayOfWeek === isEqual && isTarget === isEqual) {
+      if (today === isEqual && isTarget === isEqual) {
         btn.classList.remove('current');
       }
     });
   };
 
   const days = daysOfWeek.map(d => {
-    return <DayOfWeek key={d} day={d} today={currentDayOfWeek} />;
+    return <DayOfWeek key={d} day={d} today={today} />;
   });
 
   return (

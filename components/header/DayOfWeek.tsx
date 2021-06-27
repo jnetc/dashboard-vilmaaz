@@ -1,25 +1,22 @@
 import { FC, useState, useEffect } from 'react';
-
 // Styles
 import { DayOfWeekStyle } from '@styles/header';
-// Type
-// import { Button } from '@types';
 
 export const DayOfWeek: FC<{ day: string; today: string }> = ({
   day,
   today,
 }) => {
   const [activeDay, setActiveDay] = useState(false);
-
-  const btnName = day.substring(0, 2);
+  const short = day.substring(0, 2);
+  const name = short.replace(short[0], short[0].toUpperCase());
 
   useEffect(() => {
-    if (btnName === today) setActiveDay(true);
+    if (short === today.substring(0, 2)) setActiveDay(true);
   }, []);
 
   return (
-    <DayOfWeekStyle className={activeDay ? `active` : ''}>
-      {btnName}
+    <DayOfWeekStyle className={activeDay ? `active` : ''} data-day={day}>
+      {name}
     </DayOfWeekStyle>
   );
 };

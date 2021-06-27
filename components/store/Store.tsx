@@ -9,6 +9,8 @@ import { database } from '@Store/utils/data';
 const state: MainStoreProps = {
   autoMovement: true,
   setAutoMovement: el => el,
+  dayOfWeek: '',
+  setDayOfWeek: day => day,
   timetableEl: null,
   setTimetableEl: el => el,
   timelineWidth: 0,
@@ -41,6 +43,7 @@ const Store: FC = ({ children }) => {
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
   const [timelineHours, setTimelineHours] = useState(state.timelineHours);
   const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
+  const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
 
   let content = transform(data, false) as LessonsType[];
   let timepoints = transform(data) as string[];
@@ -74,6 +77,8 @@ const Store: FC = ({ children }) => {
       value={{
         autoMovement,
         setAutoMovement,
+        dayOfWeek,
+        setDayOfWeek,
         timetableEl,
         setTimetableEl,
         timelineWidth,

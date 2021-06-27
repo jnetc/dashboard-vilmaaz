@@ -109,6 +109,8 @@ export type GlobalStoreProps = {
 export type MainStoreProps = {
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
+  dayOfWeek: string;
+  setDayOfWeek: (day: string) => void;
   timetableEl: Element;
   setTimetableEl: (el: Element) => void;
   timelineWidth: number;
