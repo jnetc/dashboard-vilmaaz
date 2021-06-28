@@ -108,8 +108,9 @@ export const MainStyle = styled.main`
 `;
 
 export const TimetableEmptyStyle = styled.h2`
-  justify-self: center;
-  align-self: center;
+  grid-column: 1;
+  grid-row: 2;
+  place-self: center;
 `;
 
 // UPDATE TIMETABLE

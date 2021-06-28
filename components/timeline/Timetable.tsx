@@ -1,8 +1,9 @@
-import { useRef, useState, useEffect, FC, createRef, MouseEvent } from 'react';
+import { useState, useEffect, MouseEvent, createContext, useRef } from 'react';
 // Helpers
 import {
   cssAnimationHandler,
   getTransformStylePosition,
+  timelineLimits,
 } from '@Utils/helperFunc';
 // Components
 import Timeline from './Timeline';
@@ -10,7 +11,7 @@ import Timefield from './Timefield';
 // Hook
 import { useStore } from '@Hooks/useStore';
 // Types
-import { This, Element, Div, StaticValues } from '@types';
+import { This, Div, Element } from '@types';
 // Styles
 import {
   MainStyle,
@@ -18,47 +19,68 @@ import {
   TimetableEmptyStyle,
 } from '@styles/timeline';
 
-const Timetable: FC = () => {
-  const { setTimetableEl, setAutoMovement, content, timelineHours, timeline } =
-    useStore();
+type State = {
+  mainWidth: number;
+  timetableEl: Element;
+  hourDivWidth: number;
+};
+
+const state: State = {
+  mainWidth: 0,
+  timetableEl: null,
+  hourDivWidth: 90, // watch is styles to
+};
+
+export const timetableStore = createContext(state);
+
+const Timetable = () => {
+  const {
+    // timetableEl,
+    // mainWidth,
+    setAutoMovement,
+    // content,
+    timeline,
+    timetableWidth,
+    // dayOfWeek,
+    activeDays,
+  } = useStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
   let [mouseDownCursorPos, setMouseDownCursorPos] = useState<number>(0);
   const [startMove, setStartMove] = useState<boolean>(false);
-  const [widthMainEl, setWidthMainEl] = useState(0);
-  const [timetableWidth, setTimetableWidth] = useState(0);
+  const [timetable, setTimetable] = useState<Element>(state.timetableEl);
+  const [mainWidth, setMainWidth] = useState(state.mainWidth);
+  // const [timetableWidth, setTimetableWidth] = useState(0);
+  const [animateClass, setAnimateClass] = useState(true);
 
-  const mainEl = createRef<Div>();
+  const mainEl = useRef<Div>(null);
   const timetableEl = useRef<Element>(null);
 
   useEffect(() => {
     if (mainEl.current && timetableEl.current) {
-      setWidthMainEl(mainEl.current.offsetWidth);
-      setTimetableEl(timetableEl.current);
+      setMainWidth(mainEl.current.offsetWidth);
+      setTimetable(timetableEl.current);
     }
-    const transition = setTimeout(() => {
-      timetableEl.current?.classList.add('animate');
-    }, 0);
-    const timetableLenght = timelineHours.length - 1;
-    setTimetableWidth(timelineHours[timetableLenght]?.position);
+
     setAutoMovement(true);
     return () => {
       setAutoMovement(false);
-      clearTimeout(transition);
     };
-  }, [widthMainEl, timetableEl]);
+  }, [activeDays]);
+  // useEffect(() => {
+  //   console.log('timetable', activeDays);
+  // }, []);
 
   const mouseDown = (ev: MouseEvent<Div, This>) => {
     setAutoMovement(false);
     setStartMove(true);
-    let el = timetableEl.current;
-    if (ev.type !== 'mousedown' ?? !el ?? !mainEl.current) {
+
+    if (ev.type !== 'mousedown' ?? !timetable) {
       return;
     }
+    setAnimateClass(false);
 
-    el.classList.remove('animate');
-
-    let transformStyle = getTransformStylePosition(el);
+    let transformStyle = getTransformStylePosition(timetable);
 
     setCurrentPosEl(transformStyle);
     setMouseDownCursorPos(ev.clientX);
@@ -66,74 +88,65 @@ const Timetable: FC = () => {
 
   const mouseMove = (ev: MouseEvent<Div, This>) => {
     ev.preventDefault();
-    let el = timetableEl.current;
-    if (!startMove ?? !el) return;
+
+    if (!startMove ?? !timetable) return;
 
     let cursorMovement = mouseDownCursorPos - ev.clientX;
-    el.style.transform = `translate3d(-${
+    timetable.style.transform = `translate3d(-${
       cursorMovement + currentPosEl
     }px, 0, 0)`;
   };
 
   const mouseUp = (ev: MouseEvent<Div, This>) => {
     ev.preventDefault();
-    let el = timetableEl.current;
-    cssAnimationHandler(el);
 
-    if (!startMove ?? !el) return;
+    if (!startMove ?? !timetable) return;
 
-    timelineLimits(el, timeline, widthMainEl);
+    cssAnimationHandler(timetable);
+
+    setAnimateClass(true);
+    timelineLimits(timetable, timeline, mainWidth, state.hourDivWidth);
     setStartMove(false);
   };
 
   const mouseLeave = (ev: MouseEvent<Div, This>) => {
     ev.preventDefault();
-    let el = timetableEl.current;
 
-    cssAnimationHandler(el);
+    if (!startMove ?? !timetable) return;
 
-    if (!startMove ?? !el) return;
+    cssAnimationHandler(timetable);
 
-    timelineLimits(el, timeline, widthMainEl);
+    timelineLimits(timetable, timeline, mainWidth, state.hourDivWidth);
     setStartMove(false);
   };
 
-  const timelineLimits = (
-    el: HTMLDivElement,
-    timeline: StaticValues,
-    main: number
-  ) => {
-    let transformStyle = getTransformStylePosition(el);
-    const divPointWidth = 90;
-
-    const end = timeline.endLessons - main + divPointWidth;
-
-    if (end < transformStyle) {
-      el.style.transform = `translate3d(-${end}px, 0, 0)`;
-    }
-
-    if (timeline.startLessons > transformStyle) {
-      el.style.transform = `translate3d(-${timeline.startLessons}px, 0, 0)`;
-    }
-  };
-
-  return content.length > 0 ? (
-    <MainStyle ref={mainEl}>
-      <TimetableStyle
-        id="timetable"
-        ref={timetableEl}
-        onMouseDown={mouseDown}
-        onMouseMove={mouseMove}
-        onMouseUp={mouseUp}
-        onMouseLeave={mouseLeave}
-        onTransitionEnd={() => cssAnimationHandler}
-        hours={timetableWidth}>
-        <Timeline width={widthMainEl} />
-        <Timefield />
-      </TimetableStyle>
-    </MainStyle>
-  ) : (
-    <TimetableEmptyStyle>Viikonloppu</TimetableEmptyStyle>
+  return (
+    <timetableStore.Provider
+      value={{
+        hourDivWidth: state.hourDivWidth,
+        mainWidth,
+        timetableEl: timetable,
+      }}>
+      {activeDays ? (
+        <MainStyle id="schedule" ref={mainEl}>
+          <TimetableStyle
+            id="timetable"
+            ref={timetableEl}
+            className={animateClass ? 'animate' : ''}
+            onMouseDown={mouseDown}
+            onMouseMove={mouseMove}
+            onMouseUp={mouseUp}
+            onMouseLeave={mouseLeave}
+            onTransitionEnd={() => cssAnimationHandler}
+            hours={timetableWidth}>
+            <Timeline width={mainWidth} />
+            <Timefield />
+          </TimetableStyle>
+        </MainStyle>
+      ) : (
+        <TimetableEmptyStyle>Viikonloppu</TimetableEmptyStyle>
+      )}
+    </timetableStore.Provider>
   );
 };
 

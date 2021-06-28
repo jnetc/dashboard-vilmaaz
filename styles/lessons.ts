@@ -60,13 +60,13 @@ const LessonStyle = styled.div<LessonsDataType>`
   &.active {
     background: ${({ theme }) => theme.bg_soft()};
   }
-  &.inactive {
+  /* &.inactive {
     background: ${({ theme }) => theme.bg_middle()};
     & .finished-icon {
       stroke-dasharray: 40;
       stroke-dashoffset: 90;
     }
-  }
+  } */
   /* ---- */
   & .lesson-duration {
     align-items: center;
@@ -118,7 +118,9 @@ export const FinishedLessonStyle = styled(LessonStyle)`
   & .lesson-name {
   }
   & .finished-icon {
-    stroke-dasharray: 30;
+    /* stroke-dasharray: 30;
+    stroke-dashoffset: 90; */
+    stroke-dasharray: 40;
     stroke-dashoffset: 90;
     transition: all 0.5s ease-in-out;
   }
@@ -182,9 +184,12 @@ export const BreakStyle = styled.div<LessonsDataType>`
   align-items: center;
   padding: 12px;
   position: relative;
-  user-select: none;
-  border-left: 2px solid ${({ theme }) => theme.bg_light()};
   overflow: hidden;
+  border-left: 2px solid ${({ theme }) => theme.bg_light()};
+  perspective: 1000;
+  transform-style: preserve-3d;
+
+  user-select: none;
   z-index: 11;
   &::before {
     content: '';
@@ -224,12 +229,12 @@ export const BreakStyle = styled.div<LessonsDataType>`
       );
     }
   }
-  &.inactive {
+  /* &.inactive {
     & .finished-icon {
       stroke-dasharray: 40;
       stroke-dashoffset: 90;
     }
-  }
+  } */
   /* ------ */
   circle.track {
     fill: ${({ theme }) => theme.bg_middle()};
@@ -243,7 +248,6 @@ export const BreakStyle = styled.div<LessonsDataType>`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: all 0.3s ease-in-out;
   }
   .expect-icon,
   .expect-icon-animation {
@@ -254,9 +258,14 @@ export const BreakStyle = styled.div<LessonsDataType>`
     /* transform: translate(50%, -150%) scale(0.7); */
   }
   .finished-icon {
-    stroke-dasharray: 30;
+    /* stroke-dasharray: 30;
+    stroke-dashoffset: 90; */
+    stroke-dasharray: 40;
     stroke-dashoffset: 90;
     transition: all 0.5s ease-in-out;
+    /* transform-origin: bottom center;
+    transform: translate(-50%, -50%) skewX(15deg) scale(1.3); */
+    /* transform: translate(-50%, -50%) rotateY(30deg) scale(1.3); */
     stroke: var(--${({ colors }) => colors});
   }
   .timer {

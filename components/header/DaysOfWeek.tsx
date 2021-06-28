@@ -15,8 +15,7 @@ export const DaysOfWeek: FC = () => {
   const ref = useRef<Element | null>(null);
   const children = ref.current?.querySelectorAll('button');
 
-  let date: Date = new Date();
-  const today = dateFormat({ weekday: 'long' }, date);
+  const today = dateFormat({ weekday: 'long' });
 
   // Day Of the week
   const daysOfWeek = [

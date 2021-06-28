@@ -60,7 +60,7 @@ export interface SchoolDay {
 }
 
 export interface UserDataType extends User {
-  timetable: Array<Lesson>;
+  timetable?: Array<Lesson>;
 }
 
 export interface Schedule extends User {
@@ -95,7 +95,7 @@ export interface StaticValues {
 export interface PanelProfileType extends User {
   start: TimePosition;
   end: TimePosition;
-  lessons: number;
+  lessons?: number;
 }
 
 export type GlobalStoreProps = {
@@ -111,14 +111,14 @@ export type MainStoreProps = {
   setAutoMovement: (el: boolean) => void;
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
-  timetableEl: Element;
-  setTimetableEl: (el: Element) => void;
-  timelineWidth: number;
-  setTimelineWidth: (el: number) => void;
+  activeDays: boolean;
+  // timetableEl: Element;
+  // setTimetableEl: (el: Element) => void;
+  // mainWidth: number;
+  // setTimelineWidth: (el: number) => void;
   timelineHours: Array<TimePosition>;
-  setTimelineHours: (arr: Array<TimePosition>) => void;
+  // setTimelineHours: (arr: Array<TimePosition>) => void;
   timetableWidth: number;
-  divHoursWidth: number;
   updateOrders: boolean;
   setUpdateOrders: (order: boolean) => void;
   content: Array<LessonsType>;

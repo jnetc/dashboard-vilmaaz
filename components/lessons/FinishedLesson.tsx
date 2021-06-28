@@ -1,6 +1,6 @@
-import { FC, useRef, useEffect } from 'react';
+import { FC } from 'react';
 // Types
-import { LessonComponent, Element } from '@types';
+import { LessonComponent } from '@types';
 // Style
 import { FinishedLessonStyle, BreakStyle } from '@styles/lessons';
 
@@ -11,21 +11,21 @@ export const FinishedLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  const lessonRef = useRef<Element>(null);
-  const breakref = useRef<Element>(null);
+  // const lessonRef = useRef<Element>(null);
+  // const breakref = useRef<Element>(null);
 
-  useEffect(() => {
-    const transition = setTimeout(() => {
-      lessonRef.current?.classList.add('inactive');
-      breakref.current?.classList.add('inactive');
-    }, 500);
-    return () => {
-      clearTimeout(transition);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const transition = setTimeout(() => {
+  //     lessonRef.current?.classList.add('inactive');
+  //     breakref.current?.classList.add('inactive');
+  //   }, 500);
+  //   return () => {
+  //     clearTimeout(transition);
+  //   };
+  // }, []);
 
   return lesson !== 'taukko' ? (
-    <FinishedLessonStyle lessonWidth={width} colors={colors} ref={lessonRef}>
+    <FinishedLessonStyle lessonWidth={width} colors={colors}>
       <div className="lesson-duration">
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
           <path
@@ -59,7 +59,7 @@ export const FinishedLesson: FC<LessonComponent> = ({
       </div>
     </FinishedLessonStyle>
   ) : (
-    <BreakStyle lessonWidth={width} colors={colors} ref={breakref}>
+    <BreakStyle lessonWidth={width} colors={colors}>
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r="24" className="track"></circle>
       </svg>

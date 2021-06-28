@@ -9,7 +9,7 @@ import { Order } from '@types';
 import { TimefieldStyle } from '@styles/timeline';
 
 const Timefield: FC = () => {
-  const { content, updateOrders } = useStore();
+  const { content, updateOrders, dayOfWeek } = useStore();
   const [orders, setOrders] = useState<Array<Order>>([
     { id: '', name: '', order: 0 },
   ]);
@@ -18,7 +18,7 @@ const Timefield: FC = () => {
     const isOrders = window.localStorage.getItem('orders');
 
     if (isOrders) return setOrders(JSON.parse(isOrders));
-  }, [updateOrders]);
+  }, [updateOrders, dayOfWeek]);
 
   const lessons = content.map(data => {
     const currentLessonOrder = orders.find(o => o.id === data.id);

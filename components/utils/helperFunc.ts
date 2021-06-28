@@ -8,14 +8,22 @@ import {
   Element,
 } from '@types';
 
-export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
+// export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
+//   return new Intl.DateTimeFormat('fi-FI', options).format(date);
+// };
+export const dateFormat = (options: Intl.DateTimeFormatOptions) => {
+  const date = new Date();
   return new Intl.DateTimeFormat('fi-FI', options).format(date);
 };
 
-export const transform = (data: Array<Schedule>, set: boolean = true) => {
+export const transform = (
+  data: Array<Schedule>,
+  day: string,
+  set: boolean = true
+) => {
   // const date = new Date();
   // const day = dateFormat({ weekday: 'long' }, date);
-  const day = 'maanantai';
+  // const day = 'maanantai';
 
   // Used Set constructor for remove duplicate from array
   const newTimelineSet: Set<string> = new Set();
@@ -25,7 +33,16 @@ export const transform = (data: Array<Schedule>, set: boolean = true) => {
     const { timetable, ...data } = tb;
 
     const schoolday = timetable.find(l => l.day === day && l.lessons);
+
     if (!schoolday) return;
+    if (schoolday.lessons.length === 0) {
+      newTimefieldArr.push({
+        ...data,
+        start: { time: '', position: 0 },
+        end: { time: '', position: 0 },
+      });
+      return;
+    }
 
     const findEndOfArr = schoolday.lessons.length - 1;
     const start = schoolday.lessons[0].start.time;
@@ -161,7 +178,8 @@ export const movementTimeAndTimetable = (
   timetable: Element,
   currentTime: number,
   autoMovement: boolean,
-  timeline: StaticValues
+  timeline: StaticValues,
+  hourDivWidth: number
 ) => {
   if (!timetable) return;
   if (!autoMovement) return;
@@ -169,8 +187,8 @@ export const movementTimeAndTimetable = (
   const { startLessons, endLessons } = timeline;
 
   const startAutoMovement = startLessons + Math.round(main / 2);
-  const stopAutoMovement = endLessons - Math.round(main / 2) + 90;
-  const outOfTrackLessons = endLessons - main + 90;
+  const stopAutoMovement = endLessons - Math.round(main / 2) + hourDivWidth;
+  const outOfTrackLessons = endLessons - main + hourDivWidth;
   const timeMovement = Math.round(main / 2) - currentTime;
 
   if (startAutoMovement > currentTime || startLessons > currentTime) {
@@ -208,4 +226,21 @@ export const lessonStatus = (position: number, start: number, end: number) => {
     return { status: 'finished' };
   }
   return { status: 'expect' };
+};
+
+export const timelineLimits = (
+  el: HTMLDivElement,
+  timeline: StaticValues,
+  main: number,
+  hourDivWidth: number
+) => {
+  let transformStyle = getTransformStylePosition(el);
+  const end = timeline.endLessons - main + hourDivWidth;
+
+  if (end < transformStyle) {
+    el.style.transform = `translate3d(-${end}px, 0, 0)`;
+  }
+  if (timeline.startLessons > transformStyle) {
+    el.style.transform = `translate3d(-${timeline.startLessons}px, 0, 0)`;
+  }
 };

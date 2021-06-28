@@ -53,7 +53,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
     const transition = setTimeout(() => {
       lessonRef.current?.classList.add('active');
       breakRef.current?.classList.add('active');
-    }, 500);
+    }, 0);
     return () => clearTimeout(transition);
   }, [currentTimeNum]);
 

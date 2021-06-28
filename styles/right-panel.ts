@@ -32,7 +32,6 @@ export const RightPanelStyle = styled.aside`
     display: flex;
     flex-direction: column;
     gap: 18px;
-    /* padding-top: 30px; */
   }
 `;
 
@@ -40,18 +39,19 @@ export const PanelProfileStyle = styled.div`
   display: grid;
   grid-template-columns: 60px 1fr 30px;
   grid-template-rows: 30px 25px 21px;
-  /* align-items: center; */
-  /* border: 1px solid red; */
   padding: 10px;
   gap: 7px 15px;
   background: ${({ theme }) => theme.bg_middle()};
   border-radius: ${({ theme }) => theme.border_radius};
   box-shadow: 0 10px 20px ${({ theme }) => theme.bg_black(0.2)},
     0 5px 5px ${({ theme }) => theme.bg_black(0.3)};
+  transition: background 0.3s ease-in-out;
+  &:hover {
+    background: ${({ theme }) => theme.bg_soft()};
+  }
   figure {
     grid-column: 1;
     grid-row: 1 /-1;
-    /* justify-self: center; */
     width: 60px;
     height: 60px;
     display: flex;

@@ -11,7 +11,7 @@ const RightPanel = () => {
 
   const profiles = content.map(prof => {
     const { id, avatar, colors, name, start, end } = prof;
-    const lessons = prof.timetable.filter(l => l.lesson !== 'taukko').length;
+    const lessons = prof.timetable?.filter(l => l.lesson !== 'taukko').length;
     const dataProfile = { id, avatar, colors, name, start, end, lessons };
 
     return <PanelProfile key={id} data={dataProfile} />;

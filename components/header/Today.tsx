@@ -5,29 +5,21 @@ import { dateFormat } from '@Utils/helperFunc';
 import { TodayStyle } from '@styles/header';
 
 export const Today: FC = () => {
-  let date: Date = new Date();
-
   // Day Of the week
-  const day = dateFormat({ weekday: 'long' }, date);
+  const day = dateFormat({ weekday: 'long' });
   const currentDayOfWeek = day.replace(day[0], day[0].toUpperCase());
   // Full date
-  const fullDate = dateFormat(
-    {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    },
-    date
-  );
+  const fullDate = dateFormat({
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
   // For dateTime attribute
-  const dateTime = dateFormat(
-    {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    },
-    date
-  )
+  const dateTime = dateFormat({
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  })
     .split('.')
     .join('-');
 

@@ -2,7 +2,12 @@ import { FC, createContext, useEffect, useState } from 'react';
 
 // Types
 import { Schedule, MainStoreProps, LessonsType } from '@types';
-import { transform, staticValues, hourPositions } from '@Utils/helperFunc';
+import {
+  transform,
+  staticValues,
+  hourPositions,
+  dateFormat,
+} from '@Utils/helperFunc';
 import { hours } from './utils/hours';
 import { database } from '@Store/utils/data';
 
@@ -11,14 +16,9 @@ const state: MainStoreProps = {
   setAutoMovement: el => el,
   dayOfWeek: '',
   setDayOfWeek: day => day,
-  timetableEl: null,
-  setTimetableEl: el => el,
-  timelineWidth: 0,
-  setTimelineWidth: num => num,
+  activeDays: false,
   timelineHours: [],
-  setTimelineHours: arr => arr,
   timetableWidth: 0,
-  divHoursWidth: 90,
   updateOrders: true,
   setUpdateOrders: b => b,
   content: [],
@@ -37,16 +37,20 @@ export const timeStep: number = 340;
 
 const Store: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
-  const [timelineWidth, setTimelineWidth] = useState(state.timelineWidth);
   const [timeline, setTimeline] = useState(state.timeline);
-  const [timetableEl, setTimetableEl] = useState(state.timetableEl);
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
   const [timelineHours, setTimelineHours] = useState(state.timelineHours);
   const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
   const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
+  // const [activeDays, setActiveDays] = useState(state.activeDays);
 
-  let content = transform(data, false) as LessonsType[];
-  let timepoints = transform(data) as string[];
+  // let day = 'maanantai';
+  const day = dayOfWeek;
+  const content = transform(data, day, false) as LessonsType[];
+  const timepoints = transform(data, day) as string[];
+  const isActiveDay = timepoints.length !== 0;
+  // console.log(content, timepoints);
+  console.log(isActiveDay, data);
 
   const timetableLenght = timelineHours.length - 1;
   const timetableWidth = timelineHours[timetableLenght]?.position;
@@ -55,22 +59,31 @@ const Store: FC = ({ children }) => {
     // If necessary time points for lessons
     // const setHours = new Set([...hours, ...timepoints]);
     // const getHoursPoints = hourPositions([...setHours]);
+    // setActiveDays(isActiveDay);
+    setData(database);
 
-    const getHoursPoints = hourPositions(hours);
+    const getHoursPoints = timepoints.length !== 0 ? hourPositions(hours) : [];
 
     setTimelineHours([...getHoursPoints]);
-
-    setData(database);
     setTimeline(staticValues(timepoints));
-    const el = document.querySelector('#timeline');
-    if (!el) return;
-    const x = el.getBoundingClientRect().width;
-    setTimelineWidth(x);
+
+    // const el = document.getElementById('#timeline');
+    // if (!el) return;
+    // const x = el.getBoundingClientRect().width;
+    // setTimelineWidth(
+    //   document.getElementById('#timeline')?.offsetWidth as number
+    // );
     // console.log(x);
+    // setMainWidth(document.getElementById('schedule')?.offsetWidth as number);
+    // setTimetableEl(document.getElementById('timetable') as Div);
+  }, [dayOfWeek]);
+
+  useEffect(() => {
+    const day = dateFormat({ weekday: 'long' });
+    setDayOfWeek(day);
   }, []);
 
-  // console.log('MainStore', timeline, timelineWidth);
-  // console.log('MainStore', content);
+  // console.log('MainStore', timelineHours);
 
   return (
     <MainContext.Provider
@@ -79,14 +92,14 @@ const Store: FC = ({ children }) => {
         setAutoMovement,
         dayOfWeek,
         setDayOfWeek,
-        timetableEl,
-        setTimetableEl,
-        timelineWidth,
-        setTimelineWidth,
+        activeDays: isActiveDay,
+        // timetableEl,
+        // setTimetableEl,
+        // mainWidth,
+        // setTimelineWidth,
         timelineHours,
-        setTimelineHours,
+        // setTimelineHours,
         timetableWidth,
-        divHoursWidth: state.divHoursWidth,
         updateOrders,
         setUpdateOrders,
         content,

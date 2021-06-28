@@ -237,6 +237,14 @@ export const database: Array<Schedule> = [
           },
         ],
       },
+      {
+        day: 'lauantai',
+        lessons: [],
+      },
+      {
+        day: 'sunnuntai',
+        lessons: [],
+      },
     ],
   },
   {
@@ -443,6 +451,14 @@ export const database: Array<Schedule> = [
           },
         ],
       },
+      {
+        day: 'lauantai',
+        lessons: [],
+      },
+      {
+        day: 'sunnuntai',
+        lessons: [],
+      },
     ],
   },
   {
@@ -547,6 +563,14 @@ export const database: Array<Schedule> = [
             end: { time: '9:45' },
           },
         ],
+      },
+      {
+        day: 'lauantai',
+        lessons: [],
+      },
+      {
+        day: 'sunnuntai',
+        lessons: [],
       },
     ],
   },
@@ -756,6 +780,14 @@ export const database: Array<Schedule> = [
           },
         ],
       },
+      {
+        day: 'lauantai',
+        lessons: [],
+      },
+      {
+        day: 'sunnuntai',
+        lessons: [],
+      },
     ],
   },
   {
@@ -913,6 +945,14 @@ export const database: Array<Schedule> = [
             end: { time: '13:15' },
           },
         ],
+      },
+      {
+        day: 'lauantai',
+        lessons: [],
+      },
+      {
+        day: 'sunnuntai',
+        lessons: [],
       },
     ],
   },

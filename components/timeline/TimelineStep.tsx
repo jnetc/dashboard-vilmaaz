@@ -4,7 +4,7 @@ import { movementTimeAndTimetable } from '@Utils/helperFunc';
 // Hook
 import { useUpdate } from '@Hooks/useUpdate';
 // Hook
-import { useStore } from '@Hooks/useStore';
+import { useStore, useTimelineStore } from '@Hooks/useStore';
 
 // Styles
 import { TimelineStepStyle } from '@styles/timeline';
@@ -19,15 +19,19 @@ import { TimelineStepStyle } from '@styles/timeline';
 //  }))`width: 100%;`
 
 export const TimelineStep: FC<{ width: number }> = ({ width }) => {
-  const { timetableEl, autoMovement, timeline } = useStore();
-  const { position, currentTimeStr } = useUpdate();
+  const { autoMovement, timeline } = useStore();
+  const { timetableEl, hourDivWidth } = useTimelineStore();
+  let { position, currentTimeStr } = useUpdate();
+
+  // position = 3250;
 
   movementTimeAndTimetable(
     width,
     timetableEl,
     position,
     autoMovement,
-    timeline
+    timeline,
+    hourDivWidth
   );
 
   return (

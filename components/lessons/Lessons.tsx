@@ -11,7 +11,7 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
   order,
 }) => {
   const lengthLessons = data.end.position - data.start.position;
-  const lessons = data.timetable.map(l => {
+  const lessons = data.timetable?.map(l => {
     return <LessonSwitcher key={l.id} data={l} colors={data.colors} />;
   });
 
