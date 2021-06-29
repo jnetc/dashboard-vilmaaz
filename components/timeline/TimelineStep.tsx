@@ -23,9 +23,7 @@ export const TimelineStep: FC<{ width: number }> = ({ width }) => {
   const { timetableEl } = useTimelineStore();
   let { position, currentTimeStr } = useUpdate();
 
-  // position = 3250;
   const currentTime = today ? position : timeline.startLessons;
-  console.log(today, currentTime);
 
   movementTimeAndTimetable(
     width,

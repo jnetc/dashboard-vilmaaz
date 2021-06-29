@@ -24,7 +24,6 @@ export const PanelProfileTime: FC<{ data: PanelProfileTimeType }> = ({
     position
   );
 
-  console.log(status);
   switch (status) {
     case 'pending':
       return <PanelProfileTimeStyle>Odotettaessa</PanelProfileTimeStyle>;
