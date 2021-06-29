@@ -18,12 +18,12 @@ export const useUpdate = () => {
     setHours(new Date().getHours());
   }, [minutes]);
 
-  const stepTime = transformTimeToNum(`${hours}:${minutes}`);
+  // const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
   // const h = (new Date().getHours() - 6).toString();
   // const m = (new Date().getMinutes() - 31).toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
-  // const stepTime = transformTimeToNum(`12:17`);
+  const stepTime = transformTimeToNum(`10:15`);
 
   // console.log('hook', stepTime);
 

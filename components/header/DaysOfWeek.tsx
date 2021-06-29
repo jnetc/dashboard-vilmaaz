@@ -10,23 +10,14 @@ import { Element } from '@types';
 // Hook
 import { useStore } from '@Hooks/useStore';
 
+import { daysOfWeek } from '@Store/daysOfWeek';
+
 export const DaysOfWeek: FC = () => {
   const { setDayOfWeek } = useStore();
   const ref = useRef<Element | null>(null);
   const children = ref.current?.querySelectorAll('button');
 
   const today = dateFormat({ weekday: 'long' });
-
-  // Day Of the week
-  const daysOfWeek = [
-    'maanantai',
-    'tiistai',
-    'keskiviikko',
-    'torstai',
-    'perjantai',
-    'lauantai',
-    'sunnuntai',
-  ];
 
   const getDaySchedule: MouseEventHandler<Element> = ev => {
     const event = ev.target as Element;
@@ -37,8 +28,6 @@ export const DaysOfWeek: FC = () => {
 
       if (isTarget === isEqual) {
         btn.classList.add('active');
-        console.log(isEqual);
-
         isEqual && setDayOfWeek(isEqual);
       }
       if (isTarget !== isEqual) {

@@ -92,10 +92,19 @@ export interface StaticValues {
   totalTime: number;
 }
 
-export interface PanelProfileType extends User {
+export interface DaysType {
+  today: boolean;
+  activeDay: boolean;
+}
+
+export interface PanelProfileType extends User, DaysType {
   start: TimePosition;
   end: TimePosition;
   lessons?: number;
+}
+export interface PanelProfileTimeType extends DaysType {
+  starttime: number;
+  endtime: number;
 }
 
 export type GlobalStoreProps = {
@@ -106,25 +115,19 @@ export type GlobalStoreProps = {
 };
 
 // STORE / CONTEXT
-export type MainStoreProps = {
+export interface MainStoreProps extends DaysType {
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
-  activeDays: boolean;
-  // timetableEl: Element;
-  // setTimetableEl: (el: Element) => void;
-  // mainWidth: number;
-  // setTimelineWidth: (el: number) => void;
   timelineHours: Array<TimePosition>;
-  // setTimelineHours: (arr: Array<TimePosition>) => void;
   timetableWidth: number;
   updateOrders: boolean;
   setUpdateOrders: (order: boolean) => void;
   content: Array<LessonsType>;
   timepoints: Array<string>;
   timeline: StaticValues;
-};
+}
 
 // BOTTUNS
 export interface ButtonStyleType {

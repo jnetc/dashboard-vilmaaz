@@ -9,7 +9,7 @@ import { TimelineStep } from './TimelineStep';
 import { TimelineStyle } from '@styles/timeline';
 
 const Timeline: FC<{ width: number }> = ({ width }) => {
-  const { timelineHours, activeDays } = useStore();
+  const { timelineHours, activeDay } = useStore();
 
   const points = timelineHours
     .sort((a, b) => {
@@ -20,7 +20,7 @@ const Timeline: FC<{ width: number }> = ({ width }) => {
       return <TimelinePoints key={idx} data={point} />;
     });
 
-  return activeDays ? (
+  return activeDay ? (
     <TimelineStyle id="timeline">
       {points}
       <TimelineStep width={width} />

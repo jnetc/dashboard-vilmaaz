@@ -28,13 +28,13 @@ export const SmallTimeIcon = () => (
   </svg>
 );
 
-export const ExpectIcon = () => (
+export const PendingIcon = () => (
   <svg
     width="16"
     height="16"
     viewBox="0 0 16 16"
     fill="none"
-    className="expect-icon">
+    className="pending-icon">
     <path
       d="M2 1.98602H14L2 13.986H14"
       strokeWidth="3"

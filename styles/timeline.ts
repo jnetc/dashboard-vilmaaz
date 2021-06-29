@@ -25,8 +25,12 @@ export const TimelineStyle = styled.div`
 `;
 
 // TIMELINE POINTS
-export const TimelinePointsStyle = styled.div<{ position: number }>`
-  width: 90px;
+interface TimelinePointsType {
+  position: number;
+  w?: number;
+}
+export const TimelinePointsStyle = styled.div<TimelinePointsType>`
+  width: ${({ w }) => w}px;
   height: 60px;
   display: flex;
   justify-content: center;

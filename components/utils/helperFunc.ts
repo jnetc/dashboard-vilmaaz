@@ -8,6 +8,12 @@ import {
   Element,
 } from '@types';
 
+import {
+  step,
+  hourDistance,
+  minuteDistance,
+  minutesInHour,
+} from '@Store/Store';
 // export const dateFormat = (options: Intl.DateTimeFormatOptions, date: Date) => {
 //   return new Intl.DateTimeFormat('fi-FI', options).format(date);
 // };
@@ -66,7 +72,7 @@ export const transform = (
   });
 
   if (!set) return newTimefieldArr;
-  return [...newTimelineSet]; // Set spread to Array
+  return [...newTimelineSet];
 };
 
 // define if of lesson have empty space in time or not
@@ -136,43 +142,32 @@ export const hourPositions = (hours: Array<string>) => {
   });
 };
 
-//* New transform timetransform
 export const transformTimeToNum = (time: string | number): number => {
   if ('number' === typeof time) return time;
 
   const hours = Number(time.split(':')[0]);
   const minutes = Number(time.split(':')[1]);
 
-  //* Length every hour
-  const step = 340;
-  const amountOfTime = 60;
-  const hoursToMinutes = hours * amountOfTime;
+  const hoursToMinutes = hours * minutesInHour;
 
-  const hourStepLength = step + amountOfTime;
-  const minuteStepLength = hourStepLength / amountOfTime;
-
-  const minuteStep = minutes * minuteStepLength;
+  const minuteStep = minutes * minuteDistance;
   const hourStep = step * hours;
   const timeStep = Math.floor(hoursToMinutes + hourStep + minuteStep);
-
-  // console.log('tranform', timeStep);
 
   return timeStep;
 };
 
 export const transformNumToTime = (num: number) => {
-  const step = 340;
-  const amountOfTime = 60;
-  const hourStepLength = step + amountOfTime;
-  const minuteStepLength = hourStepLength / amountOfTime;
-
-  const findMinutes = Math.floor((num % hourStepLength) / minuteStepLength);
-  const hours = Math.floor(num / hourStepLength);
+  const findMinutes = Math.floor((num % hourDistance) / minuteDistance);
+  const hours = Math.floor(num / hourDistance);
   const minutes = findMinutes > 9 ? findMinutes : `0${findMinutes}`;
 
   return { time: `${hours}:${minutes}`, minutes: findMinutes, hours };
 };
 
+// Automatic movement of each minute
+// And point of start  if app is loaded
+// Today or another active days
 export const movementTimeAndTimetable = (
   main: number,
   timetable: Element,
@@ -210,6 +205,7 @@ export function getTransformStylePosition(el: Element) {
   return Math.abs(posX);
 }
 
+// Smooth motion on the timeline
 export const cssAnimationHandler = (timetable: Element) => {
   timetable?.classList.add('animate');
   const timer = setTimeout(() => {
@@ -218,6 +214,7 @@ export const cssAnimationHandler = (timetable: Element) => {
   clearTimeout(timer);
 };
 
+// Create statuses for lesson switcher
 export const lessonStatus = (position: number, start: number, end: number) => {
   if (start <= position && position < end) {
     return { status: 'current' };
@@ -225,9 +222,10 @@ export const lessonStatus = (position: number, start: number, end: number) => {
   if (position > start) {
     return { status: 'finished' };
   }
-  return { status: 'expect' };
+  return { status: 'pending' };
 };
 
+// Assign endpoints for time limit
 export const timelineLimits = (
   el: HTMLDivElement,
   timeline: StaticValues,
@@ -243,4 +241,32 @@ export const timelineLimits = (
   if (timeline.startLessons > transformStyle) {
     el.style.transform = `translate3d(-${timeline.startLessons}px, 0, 0)`;
   }
+};
+
+// Right panel profiles status
+// Today is pending
+// Today in progress
+// Today is finished
+// Busy day
+// Day off
+export const profileStatus = (
+  today: boolean,
+  activeDay: boolean,
+  ...arg: number[]
+) => {
+  const [start, end, time] = arg;
+
+  if (start > time && today) {
+    return { status: 'pending' };
+  }
+  if (end > time && today) {
+    return { status: 'current' };
+  }
+  if (end <= time && today) {
+    return { status: 'finished' };
+  }
+  if (activeDay) {
+    return { status: 'active day' };
+  }
+  return { status: 'day off' };
 };

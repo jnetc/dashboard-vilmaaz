@@ -8,15 +8,17 @@ import {
   hourPositions,
   dateFormat,
 } from '@Utils/helperFunc';
-import { hours } from './utils/hours';
-import { database } from '@Store/utils/data';
+
+import { hours } from './hours';
+import { database } from './data';
 
 const state: MainStoreProps = {
   autoMovement: true,
   setAutoMovement: el => el,
   dayOfWeek: '',
   setDayOfWeek: day => day,
-  activeDays: false,
+  today: true,
+  activeDay: false,
   timelineHours: [],
   timetableWidth: 0,
   updateOrders: true,
@@ -29,11 +31,15 @@ const state: MainStoreProps = {
     totalTime: 0,
   },
 };
-
+// Global context
 export const MainContext = createContext(state);
 
-//* Length every hour
-export const timeStep: number = 340;
+// Global constants
+export const minutesInHour: number = 60;
+export const step: number = 340; // Length every hour
+export const hourDistance = step + minutesInHour; // The distance between the every hour
+export const minuteDistance = hourDistance / minutesInHour; // The distance between the every minute
+export const hourDivWidth: number = 90;
 
 const Store: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
@@ -42,15 +48,18 @@ const Store: FC = ({ children }) => {
   const [timelineHours, setTimelineHours] = useState(state.timelineHours);
   const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
   const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
-  // const [activeDays, setActiveDays] = useState(state.activeDays);
 
+  const today = dateFormat({ weekday: 'long' });
+  // Manual check day
   // let day = 'maanantai';
   const day = dayOfWeek;
+
   const content = transform(data, day, false) as LessonsType[];
   const timepoints = transform(data, day) as string[];
   const isActiveDay = timepoints.length !== 0;
-  // console.log(content, timepoints);
-  console.log(isActiveDay, data);
+  const isToday = today === dayOfWeek;
+
+  // console.log(isActiveDay, dayOfWeek, isToday);
 
   const timetableLenght = timelineHours.length - 1;
   const timetableWidth = timelineHours[timetableLenght]?.position;
@@ -59,31 +68,18 @@ const Store: FC = ({ children }) => {
     // If necessary time points for lessons
     // const setHours = new Set([...hours, ...timepoints]);
     // const getHoursPoints = hourPositions([...setHours]);
-    // setActiveDays(isActiveDay);
+
     setData(database);
 
     const getHoursPoints = timepoints.length !== 0 ? hourPositions(hours) : [];
 
     setTimelineHours([...getHoursPoints]);
     setTimeline(staticValues(timepoints));
-
-    // const el = document.getElementById('#timeline');
-    // if (!el) return;
-    // const x = el.getBoundingClientRect().width;
-    // setTimelineWidth(
-    //   document.getElementById('#timeline')?.offsetWidth as number
-    // );
-    // console.log(x);
-    // setMainWidth(document.getElementById('schedule')?.offsetWidth as number);
-    // setTimetableEl(document.getElementById('timetable') as Div);
   }, [dayOfWeek]);
 
   useEffect(() => {
-    const day = dateFormat({ weekday: 'long' });
-    setDayOfWeek(day);
+    setDayOfWeek(today);
   }, []);
-
-  // console.log('MainStore', timelineHours);
 
   return (
     <MainContext.Provider
@@ -92,13 +88,9 @@ const Store: FC = ({ children }) => {
         setAutoMovement,
         dayOfWeek,
         setDayOfWeek,
-        activeDays: isActiveDay,
-        // timetableEl,
-        // setTimetableEl,
-        // mainWidth,
-        // setTimelineWidth,
+        today: isToday,
+        activeDay: isActiveDay,
         timelineHours,
-        // setTimelineHours,
         timetableWidth,
         updateOrders,
         setUpdateOrders,

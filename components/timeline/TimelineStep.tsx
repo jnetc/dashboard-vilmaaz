@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { movementTimeAndTimetable } from '@Utils/helperFunc';
 // Hook
 import { useUpdate } from '@Hooks/useUpdate';
-// Hook
 import { useStore, useTimelineStore } from '@Hooks/useStore';
-
+// Global const
+import { hourDivWidth } from '@Store/Store';
 // Styles
 import { TimelineStepStyle } from '@styles/timeline';
 
@@ -19,24 +19,28 @@ import { TimelineStepStyle } from '@styles/timeline';
 //  }))`width: 100%;`
 
 export const TimelineStep: FC<{ width: number }> = ({ width }) => {
-  const { autoMovement, timeline } = useStore();
-  const { timetableEl, hourDivWidth } = useTimelineStore();
+  const { autoMovement, timeline, today } = useStore();
+  const { timetableEl } = useTimelineStore();
   let { position, currentTimeStr } = useUpdate();
 
   // position = 3250;
+  const currentTime = today ? position : timeline.startLessons;
+  console.log(today, currentTime);
 
   movementTimeAndTimetable(
     width,
     timetableEl,
-    position,
+    currentTime,
     autoMovement,
     timeline,
     hourDivWidth
   );
 
-  return (
-    <TimelineStepStyle id="current-time" position={position}>
+  return today ? (
+    <TimelineStepStyle id="current-time" position={position} w={hourDivWidth}>
       {currentTimeStr}
     </TimelineStepStyle>
+  ) : (
+    <></>
   );
 };

@@ -10,6 +10,8 @@ import Timeline from './Timeline';
 import Timefield from './Timefield';
 // Hook
 import { useStore } from '@Hooks/useStore';
+// Global const
+import { hourDivWidth } from '@Store/Store';
 // Types
 import { This, Div, Element } from '@types';
 // Styles
@@ -22,13 +24,11 @@ import {
 type State = {
   mainWidth: number;
   timetableEl: Element;
-  hourDivWidth: number;
 };
 
 const state: State = {
   mainWidth: 0,
   timetableEl: null,
-  hourDivWidth: 90, // watch is styles to
 };
 
 export const timetableStore = createContext(state);
@@ -42,7 +42,7 @@ const Timetable = () => {
     timeline,
     timetableWidth,
     // dayOfWeek,
-    activeDays,
+    activeDay,
   } = useStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
@@ -66,10 +66,7 @@ const Timetable = () => {
     return () => {
       setAutoMovement(false);
     };
-  }, [activeDays]);
-  // useEffect(() => {
-  //   console.log('timetable', activeDays);
-  // }, []);
+  }, [activeDay]);
 
   const mouseDown = (ev: MouseEvent<Div, This>) => {
     setAutoMovement(false);
@@ -105,7 +102,7 @@ const Timetable = () => {
     cssAnimationHandler(timetable);
 
     setAnimateClass(true);
-    timelineLimits(timetable, timeline, mainWidth, state.hourDivWidth);
+    timelineLimits(timetable, timeline, mainWidth, hourDivWidth);
     setStartMove(false);
   };
 
@@ -116,18 +113,17 @@ const Timetable = () => {
 
     cssAnimationHandler(timetable);
 
-    timelineLimits(timetable, timeline, mainWidth, state.hourDivWidth);
+    timelineLimits(timetable, timeline, mainWidth, hourDivWidth);
     setStartMove(false);
   };
 
   return (
     <timetableStore.Provider
       value={{
-        hourDivWidth: state.hourDivWidth,
         mainWidth,
         timetableEl: timetable,
       }}>
-      {activeDays ? (
+      {activeDay ? (
         <MainStyle id="schedule" ref={mainEl}>
           <TimetableStyle
             id="timetable"

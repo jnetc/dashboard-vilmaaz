@@ -7,12 +7,22 @@ import { PanelProfile } from './PanelProfile';
 import { Logotip } from '@Icons/Logos';
 
 const RightPanel = () => {
-  const { content } = useStore();
+  const { content, today, activeDay } = useStore();
 
   const profiles = content.map(prof => {
-    const { id, avatar, colors, name, start, end } = prof;
+    const { id, avatar, colors, name, end, start } = prof;
     const lessons = prof.timetable?.filter(l => l.lesson !== 'taukko').length;
-    const dataProfile = { id, avatar, colors, name, start, end, lessons };
+    const dataProfile = {
+      id,
+      avatar,
+      colors,
+      name,
+      start,
+      end,
+      today,
+      activeDay,
+      lessons,
+    };
 
     return <PanelProfile key={id} data={dataProfile} />;
   });

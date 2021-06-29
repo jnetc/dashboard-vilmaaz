@@ -93,16 +93,16 @@ const LessonStyle = styled.div<LessonsDataType>`
       stroke: ${({ theme }) => theme.grey_dark()};
       stroke-width: 2;
     }
-    .expect-icon,
-    .expect-icon-animation,
+    .pending-icon,
+    .pending-icon-animation,
     .finished-icon {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    .expect-icon,
-    .expect-icon-animation {
+    .pending-icon,
+    .pending-icon-animation {
       stroke: var(--${({ colors }) => colors});
     }
     .finished-icon {
@@ -113,7 +113,7 @@ const LessonStyle = styled.div<LessonsDataType>`
 
 export const FinishedLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
-    stroke: ${({ theme }) => theme.grey_middle(0.7)};
+    stroke: ${({ theme }) => theme.grey_middle(0.5)};
   }
   & .lesson-name {
   }
@@ -126,14 +126,14 @@ export const FinishedLessonStyle = styled(LessonStyle)`
   }
 `;
 
-export const ExpectLessonStyle = styled(LessonStyle)`
+export const PendingLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
-    stroke: ${({ theme }) => theme.grey_middle()};
+    stroke: ${({ theme }) => theme.grey_middle(0.5)};
   }
   & .lesson-name {
   }
   & .lesson-status {
-    .expect-icon-animation {
+    .pending-icon-animation {
       animation: ${sleepAnimation} 3s linear infinite;
       /* transform: translate(50%, -150%) scale(0.7); */
     }
@@ -241,19 +241,19 @@ export const BreakStyle = styled.div<LessonsDataType>`
     stroke: ${({ theme }) => theme.grey_dark()};
     stroke-width: 2;
   }
-  .expect-icon,
-  .expect-icon-animation,
+  .pending-icon,
+  .pending-icon-animation,
   .finished-icon {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  .expect-icon,
-  .expect-icon-animation {
+  .pending-icon,
+  .pending-icon-animation {
     stroke: var(--${({ colors }) => colors});
   }
-  .expect-icon-animation {
+  .pending-icon-animation {
     animation: ${sleepAnimation} 3s linear infinite;
     /* transform: translate(50%, -150%) scale(0.7); */
   }

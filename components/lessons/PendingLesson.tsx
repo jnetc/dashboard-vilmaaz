@@ -2,9 +2,9 @@ import { FC } from 'react';
 // Types
 import { LessonComponent } from '@types';
 // Style
-import { ExpectLessonStyle, BreakStyle } from '@styles/lessons';
+import { PendingLessonStyle, BreakStyle } from '@styles/lessons';
 
-export const ExpectLesson: FC<LessonComponent> = ({
+export const PendingLesson: FC<LessonComponent> = ({
   width,
   colors,
   lesson,
@@ -12,7 +12,7 @@ export const ExpectLesson: FC<LessonComponent> = ({
   end,
 }) => {
   return lesson !== 'taukko' ? (
-    <ExpectLessonStyle lessonWidth={width} colors={colors}>
+    <PendingLessonStyle lessonWidth={width} colors={colors}>
       <div className="lesson-duration">
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
           <path
@@ -35,7 +35,7 @@ export const ExpectLesson: FC<LessonComponent> = ({
           height="16"
           viewBox="0 0 16 16"
           fill="none"
-          className="expect-icon">
+          className="pending-icon">
           <path
             d="M2 1.98602H14L2 13.986H14"
             strokeWidth="3"
@@ -48,7 +48,7 @@ export const ExpectLesson: FC<LessonComponent> = ({
           height="16"
           viewBox="0 0 16 16"
           fill="none"
-          className="expect-icon-animation">
+          className="pending-icon-animation">
           <path
             d="M2 1.98602H14L2 13.986H14"
             strokeWidth="3"
@@ -57,7 +57,7 @@ export const ExpectLesson: FC<LessonComponent> = ({
           />
         </svg>
       </div>
-    </ExpectLessonStyle>
+    </PendingLessonStyle>
   ) : (
     <BreakStyle lessonWidth={width} colors={colors}>
       <svg width="56" height="56" viewBox="0 0 56 56">
@@ -68,7 +68,7 @@ export const ExpectLesson: FC<LessonComponent> = ({
         height="16"
         viewBox="0 0 16 16"
         fill="none"
-        className="expect-icon">
+        className="pending-icon">
         <path
           d="M2 1.98602H14L2 13.986H14"
           strokeWidth="3"
@@ -81,7 +81,7 @@ export const ExpectLesson: FC<LessonComponent> = ({
         height="16"
         viewBox="0 0 16 16"
         fill="none"
-        className="expect-icon-animation">
+        className="pending-icon-animation">
         <path
           d="M2 1.98602H14L2 13.986H14"
           strokeWidth="3"

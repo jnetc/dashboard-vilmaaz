@@ -7,7 +7,13 @@ import { PanelProfileType } from '@types';
 import { PanelProfileTime } from './PanelProfileTime';
 
 export const PanelProfile: FC<{ data: PanelProfileType }> = ({ data }) => {
-  const { avatar, name, end, lessons } = data;
+  const { avatar, name, end, start, lessons, today, activeDay } = data;
+  const timedata = {
+    endtime: end.position,
+    starttime: start.position,
+    today,
+    activeDay,
+  };
 
   return (
     <PanelProfileStyle>
@@ -25,9 +31,9 @@ export const PanelProfile: FC<{ data: PanelProfileType }> = ({ data }) => {
         )}
       </figure>
       <h4>{name}</h4>
-      <PanelProfileTime endtime={end.position} />
+      <PanelProfileTime data={timedata} />
       <p className="amount">
-        Oppitunnit <b>{lessons}</b>
+        Oppitunnit <b>{activeDay ? lessons : 0}</b>
       </p>
       <button>•</button>
     </PanelProfileStyle>
