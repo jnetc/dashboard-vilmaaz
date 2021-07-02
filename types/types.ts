@@ -97,12 +97,12 @@ export interface DaysType {
   activeDay: boolean;
 }
 
-export interface PanelProfileType extends User, DaysType {
+export interface ProfilesType extends User, DaysType {
   start: TimePosition;
   end: TimePosition;
   lessons?: number;
 }
-export interface PanelProfileTimeType extends DaysType {
+export interface ProfilesTimeType extends DaysType {
   starttime: number;
   endtime: number;
 }
@@ -121,7 +121,7 @@ export interface MainStoreProps extends DaysType {
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
   timelineHours: Array<TimePosition>;
-  timetableWidth: number;
+  timelineWidth: number;
   updateOrders: boolean;
   setUpdateOrders: (order: boolean) => void;
   content: Array<LessonsType>;

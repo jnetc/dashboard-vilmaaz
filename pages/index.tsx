@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import Header from '@Header/Header';
-import Timetable from '@Timeline/Timetable';
-import RightPanel from '@RightPanel/RightPanel';
-import { UpdateTimetable } from '@Timeline/UpdateTimetable';
+import Timetable from 'components/timeline/Timeline';
+import RightPanel from 'components/right-profile-panel/ProfilePanel';
+// import { UpdateTimetable } from '@Timeline/UpdateTimetable';
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
       <Header />
       <Timetable />
       <RightPanel />
-      <UpdateTimetable />
+      {/* <UpdateTimetable /> */}
     </>
   );
 }

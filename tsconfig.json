@@ -20,19 +20,19 @@
     "baseUrl": ".",
     "paths": {
       "@styles/*": ["./styles/*"],
-      // "@Navigation": ["./components/navigation/Nav"],
-      "@Header/*": ["components/header/*"],
-      "@RightPanel/*": ["components/right-panel/*"],
-      "@Timeline/*": ["./components/timeline/*"],
-      "@Lessons/*": ["./components/lessons/*"],
-      "@Store/*": ["./components/store/*"],
-      "@Hooks/*": ["./components/hooks/*"],
-      "@Utils/*": ["./components/utils/*"],
       "@Buttons/*": ["./components/buttons/*"],
+      "@Header/*": ["components/header/*"],
       "@Icons/*": ["./components/icons/*"],
-      "@types": ["./types/types"]
+      "@Lessons/*": ["./components/lessons/*"],
+      "@RightProfilePanel/*": ["components/right-profile-panel/*"],
+      "@Timeline/*": ["components/timeline/*"],
+      "@Store": ["./store/Store"],
+      "@Hooks/*": ["./hooks/*"],
+      "@Const/*": ["./utils/constants/*"],
+      "@Helpers": ["./utils/helpers/helperFunc"],
+      "@Types": ["./types/types"]
     }
   },
-  "exclude": ["node_modules"],
-  "include": ["components", "pages", "styles"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

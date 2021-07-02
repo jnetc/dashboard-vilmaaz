@@ -1,12 +1,12 @@
-import { HeaderStyle } from '@styles/header';
+import { HeaderStyle } from './Header.style';
 // Component
-import { Today } from './Today';
-import { DaysOfWeek } from './DaysOfWeek';
+import { DateToday } from '@Header/date-today/DateToday';
+import { DaysOfWeek } from '@Header/days-of-week/DaysOfWeek';
 
 const Header = () => {
   return (
     <HeaderStyle>
-      <Today />
+      <DateToday />
       <DaysOfWeek />
     </HeaderStyle>
   );

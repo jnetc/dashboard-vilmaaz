@@ -10,8 +10,6 @@ declare module 'styled-components' {
     grey_light: typeof AlphaChanel;
     grey_middle: typeof AlphaChanel;
     grey_dark: typeof AlphaChanel;
-    grey_black: typeof AlphaChanel;
-    progress: typeof AlphaChanel;
     bg_light: typeof AlphaChanel;
     bg_soft: typeof AlphaChanel;
     bg_middle: typeof AlphaChanel;
@@ -22,15 +20,10 @@ declare module 'styled-components' {
     danger: typeof AlphaChanel;
     danger_hover: typeof AlphaChanel;
     pink: typeof AlphaChanel;
-    pink_shade: typeof AlphaChanel;
     green: typeof AlphaChanel;
-    green_shade: typeof AlphaChanel;
     blue: typeof AlphaChanel;
-    blue_shade: typeof AlphaChanel;
     brown: typeof AlphaChanel;
-    brown_shade: typeof AlphaChanel;
     magenta: typeof AlphaChanel;
-    magenta_shade: typeof AlphaChanel;
     fontsize_48: string;
     fontsize_36: string;
     fontsize_24: string;
@@ -44,11 +37,9 @@ declare module 'styled-components' {
 
 export const theme: DefaultTheme = {
   white: (alpha = 1) => `hsl(240 14% 97% / ${alpha})`, //'hsl(240, 14%, 97%)'
-  grey_light: (alpha = 1) => `hsl(210 7% 77% / ${alpha})`, //'hsl(210, 7%, 77%)'
-  grey_middle: (alpha = 1) => `hsl(213 6% 74% / ${alpha})`, //'hsl(213, 7%, 74%)'
+  grey_light: (alpha = 1) => `hsl(218 6% 74% / ${alpha})`, //'hsl(218, 6%, 74%)'
+  grey_middle: (alpha = 1) => `hsl(217 8% 68% / ${alpha})`, //'hsl(217, 8%, 68%)'
   grey_dark: (alpha = 1) => `hsl(216 8% 37% / ${alpha})`, //'hsl(216, 8%, 37%)'
-  grey_black: (alpha = 1) => `hsl(240 10% 25% / ${alpha})`, //'hsl(240, 10%, 25%)'
-  progress: (alpha = 1) => `hsl(215 15% 25% / ${alpha})`, //'hsl(215, 15%, 25%)'
   bg_light: (alpha = 1) => `hsl(217 15% 24% / ${alpha})`, //'hsl(217, 15%, 24%)'
   bg_soft: (alpha = 1) => `hsl(221 14% 22% / ${alpha})`, //'hsl(221, 14%, 22%)'
   bg_middle: (alpha = 1) => `hsl(227 14% 20% / ${alpha})`, //'hsl(227, 14%, 20%)'
@@ -58,16 +49,16 @@ export const theme: DefaultTheme = {
   primary_hover: (alpha = 1) => `hsl(127 28% 55% / ${alpha})`, //'hsl(127, 28%, 55%)'
   danger: (alpha = 1) => `hsl(346 90% 75% / ${alpha})`, //'hsl(346, 90%, 75%)'
   danger_hover: (alpha = 1) => `hsl(346 90% 55% / ${alpha})`, //'hsl(346, 90%, 55%)'
-  pink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'
-  pink_shade: (alpha = 1) => `hsl(346 50% 30% / ${alpha})`, //'hsl(346, 50%, 30%)'
-  green: (alpha = 1) => `hsl(157 25% 60% / ${alpha})`, //'hsl(157, 25%, 60%)'
-  green_shade: (alpha = 1) => `hsl(157 5% 30% / ${alpha})`, //'hsl(157, 5%, 30%)'
-  blue: (alpha = 1) => `hsl(207 55% 65% / ${alpha})`, //'hsl(207, 55%, 65%)'
-  blue_shade: (alpha = 1) => `hsl(207 35% 25% / ${alpha})`, //'hsl(207, 35%, 25%)'
-  brown: (alpha = 1) => `hsl(8 40% 70% / ${alpha})`, //'hsl(8, 40%, 70%)'
-  brown_shade: (alpha = 1) => `hsl(8 20% 30% / ${alpha})`, //'hsl(8, 20%, 30%)'
-  magenta: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
-  magenta_shade: (alpha = 1) => `hsl(307 40% 30% / ${alpha})`, //'hsl(307, 40%, 30%)'
+  pink: (alpha = 1) => `hsl(330 35% 65%/ ${alpha})`, //'hsl(330, 35%, 65%)'
+  green: (alpha = 1) => `hsl(155 55% 65% / ${alpha})`, //'hsl(155, 35%, 65%)'
+  blue: (alpha = 1) => `hsl(226 35% 65% / ${alpha})`, //'hsl(216, 35%, 65%)'
+  brown: (alpha = 1) => `hsl(20 55% 65% / ${alpha})`, //'hsl(20, 35%, 65%)'
+  magenta: (alpha = 1) => `hsl(265 35% 65% / ${alpha})`, //'hsl(265, 35%, 65%)'
+  // pink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'
+  // green: (alpha = 1) => `hsl(157 25% 60% / ${alpha})`, //'hsl(157, 25%, 60%)'
+  // blue: (alpha = 1) => `hsl(207 55% 65% / ${alpha})`, //'hsl(207, 55%, 65%)'
+  // brown: (alpha = 1) => `hsl(8 40% 70% / ${alpha})`, //'hsl(8, 40%, 70%)'
+  // magenta: (alpha = 1) => `hsl(307 60% 60% / ${alpha})`, //'hsl(307, 60%, 60%)'
   fontsize_48: '48px',
   fontsize_36: '36px',
   fontsize_24: '24px',

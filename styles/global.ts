@@ -62,7 +62,7 @@ export const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => theme.bg_soft()};
   }
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.grey_black()};
+    background: ${({ theme }) => theme.grey_dark()};
     border-radius: 50px;
   }
 `;

@@ -1,35 +1,22 @@
 :root {
   --white: hsl(240, 14%, 97%);
-  --grey_light: hsl(210, 7%, 77%);
-  --grey_middle: hsl(213, 7%, 74%);
+  --grey_light: hsl(218, 6%, 74%);
+  --grey_middle: hsl(217, 8%, 68%);
   --grey_dark: hsl(216, 8%, 37%);
-  --grey_black: hsl(240, 10%, 25%);
-  --progress: hsl(215, 15%, 25%);
+
   --bg_light: hsl(217, 15%, 24%);
   --bg_soft: hsl(221, 14%, 22%);
   --bg_middle: hsl(227, 14%, 20%);
   --bg_dark: hsl(231, 15%, 17%);
   --bg_black: hsl(244, 15%, 15%);
-  --primary: hsl(127, 28%, 75%);
+  --primary: hsl(111, 28%, 75%);
   --primary_hover: hsl(127, 28%, 55%);
   --danger: hsl(346, 90%, 75%);
   --danger_hover: hsl(346, 90%, 55%);
 
-  --brown: hsl(8, 40%, 70%);
-  --brown_shade: hsl(8, 20%, 30%);
-  --green: hsl(157, 10%, 60%);
-  --green_shade: hsl(157, 5%, 30%);
-  --pink: hsl(346, 75%, 75%);
-  --pink_shade: hsl(346, 50%, 30%);
-  --magenta: hsl(307, 40%, 60%);
-  --magenta_shade: hsl(307, 40%, 30%);
-  --blue: hsl(207, 40%, 65%);
-  --blue_shade: hsl(207, 35%, 25%);
-
-  --alpha-02: 0.2;
-  --alpha-015: 0.15;
-  --shadow: '240, 19%, 5%';
-  /* --shadow: hsla(var(--hsl) / var(--alpha)); */
+  --brown: hsl(20, 35%, 65%);
+  --green: hsl(155, 35%, 65%);
+  --pink: hsl(330, 35%, 65%);
+  --magenta: hsl(265, 35%, 65%);
+  --blue: hsl(216, 35%, 65%);
 }
-
-/* @import url('./lesson.css'); */

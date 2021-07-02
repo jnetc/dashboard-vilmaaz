@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 // Types
-import { ButtonStyleType, ButtonProps } from '@types';
+import { ButtonStyleType, ButtonProps } from '@Types';
 
 import { handleThemeSwitcher } from './ColorTheme';
 
