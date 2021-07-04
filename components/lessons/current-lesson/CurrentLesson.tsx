@@ -51,7 +51,6 @@ export const CurrentLesson: FC<LessonComponent> = ({
     }
   }
 
-  // console.log(minutes, hours, time);
   //TODO Пересмотреть компонент, такой подход передобавляет класс каждую минуту!!!
   useEffect(() => {
     const transition = setTimeout(() => {
@@ -60,8 +59,6 @@ export const CurrentLesson: FC<LessonComponent> = ({
     }, 0);
     return () => clearTimeout(transition);
   }, [currentTimeNum]);
-
-  // console.log(currentPosition);
 
   return lesson !== 'taukko' ? (
     <CurrentLessonStyle

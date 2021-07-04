@@ -8,3 +8,13 @@ export const HeaderStyle = styled.header`
   align-items: center;
   padding: 0 35px;
 `;
+
+export const SwitcherWrapper = styled.div`
+  grid-column: 3;
+  justify-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: ${({ theme }) => theme.grey_middle()};
+  font-size: ${({ theme }) => theme.fontsize_14};
+`;

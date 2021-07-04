@@ -180,7 +180,7 @@ export const movementTimeAndTimetable = (
   const startAutoMovement = startLessons + Math.round(main / 2);
   const stopAutoMovement = endLessons - Math.round(main / 2) + hourDivWidth;
   const outOfTrackLessons = endLessons - main + hourDivWidth;
-  const timeMovement = Math.round(main / 2) - currentTime;
+  const timeMovement = Math.round(main / 2) - currentTime - hourDivWidth;
 
   if (
     (startAutoMovement > currentTime || startLessons > currentTime) &&

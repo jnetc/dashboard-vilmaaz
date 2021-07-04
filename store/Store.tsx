@@ -47,8 +47,8 @@ const Store: FC = ({ children }) => {
 
   const today = dateFormat({ weekday: 'long' });
   // Manual check day
-  // let day = 'perjantai';
-  const day = dayOfWeek;
+  let day = 'maanantai';
+  // const day = dayOfWeek;
 
   const content = transform(data, day, false) as LessonsType[];
   const timepoints = transform(data, day) as string[];

@@ -7,7 +7,6 @@ type LessonStyleType = {
   order?: number;
 };
 
-// LESSONS
 export const LessonsStyle = styled.div<LessonStyleType>`
   width: ${({ distance }) => distance}px;
   display: flex;

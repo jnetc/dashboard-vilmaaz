@@ -33,18 +33,9 @@ export const LessonStyle = styled.div<LessonsDataType>`
   &:nth-of-type(1) {
     border-left: 2px solid ${({ theme }) => theme.bg_middle()};
   }
-  /* toogle classes */
   &.active {
     background: ${({ theme }) => theme.bg_soft()};
   }
-  /* &.inactive {
-    background: ${({ theme }) => theme.bg_middle()};
-    & .finished-icon {
-      stroke-dasharray: 40;
-      stroke-dashoffset: 90;
-    }
-  } */
-  /* ---- */
   & .lesson-duration {
     align-items: center;
     align-self: flex-end;
@@ -114,15 +105,6 @@ export const BreakStyle = styled.div<LessonsDataType>`
     );
     z-index: -1;
   }
-  /* toogle classes */
-
-  /* &.inactive {
-    & .finished-icon {
-      stroke-dasharray: 40;
-      stroke-dashoffset: 90;
-    }
-  } */
-  /* ------ */
   circle.track {
     fill: ${({ theme }) => theme.bg_middle()};
     stroke: ${({ theme }) => theme.grey_dark()};
@@ -142,17 +124,11 @@ export const BreakStyle = styled.div<LessonsDataType>`
   }
   .pending-icon-animation {
     animation: ${sleepAnimation} 3s linear infinite;
-    /* transform: translate(50%, -150%) scale(0.7); */
   }
   .finished-icon {
-    /* stroke-dasharray: 30;
-    stroke-dashoffset: 90; */
     stroke-dasharray: 40;
     stroke-dashoffset: 90;
     transition: all 0.5s ease-in-out;
-    /* transform-origin: bottom center;
-    transform: translate(-50%, -50%) skewX(15deg) scale(1.3); */
-    /* transform: translate(-50%, -50%) rotateY(30deg) scale(1.3); */
     stroke: var(--${({ colors }) => colors});
   }
 `;

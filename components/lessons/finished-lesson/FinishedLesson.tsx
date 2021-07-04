@@ -12,19 +12,6 @@ export const FinishedLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  // const lessonRef = useRef<Element>(null);
-  // const breakref = useRef<Element>(null);
-
-  // useEffect(() => {
-  //   const transition = setTimeout(() => {
-  //     lessonRef.current?.classList.add('inactive');
-  //     breakref.current?.classList.add('inactive');
-  //   }, 500);
-  //   return () => {
-  //     clearTimeout(transition);
-  //   };
-  // }, []);
-
   return lesson !== 'taukko' ? (
     <FinishedLessonStyle lessonWidth={width} colors={colors}>
       <div className="lesson-duration">

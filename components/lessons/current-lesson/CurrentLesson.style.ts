@@ -2,7 +2,6 @@ import styled, { keyframes } from 'styled-components';
 import { BreakStyle, LessonStyle } from '@Lessons/Lesson.style';
 
 export const CurrentLessonStyle = styled(LessonStyle)`
-  /* background: ${({ theme }) => theme.bg_middle()}; */
   border-left: 2px solid var(--${({ colors }) => colors});
   &:nth-of-type(1) {
     border-left: 2px solid var(--${({ colors }) => colors});
@@ -11,7 +10,6 @@ export const CurrentLessonStyle = styled(LessonStyle)`
   &::after {
     content: '';
     width: 50px;
-    /* width: ${({ position }) => position}px; */
     position: absolute;
     top: 0;
     left: 0;
@@ -28,8 +26,6 @@ export const CurrentLessonStyle = styled(LessonStyle)`
   }
   & .lesson-duration {
     stroke: ${({ theme }) => theme.grey_middle()};
-  }
-  & .lesson-name {
   }
   & .timer {
     position: absolute;
@@ -50,7 +46,6 @@ export const BreakCurrentStyle = styled(BreakStyle)`
   &::after {
     content: '';
     width: 50px;
-    /* width: ${({ position }) => position}px; */
     position: absolute;
     top: 0;
     left: 0;

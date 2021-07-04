@@ -15,8 +15,6 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
     return <Switcher key={l.id} data={l} colors={data.colors} />;
   });
 
-  console.log(lengthLessons);
-
   return lengthLessons !== 0 ? (
     <LessonsStyle
       position={data.start.position}

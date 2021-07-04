@@ -14,12 +14,9 @@ export const PendingLessonStyle = styled(LessonStyle)`
   & .lesson-duration {
     stroke: ${({ theme }) => theme.grey_middle(0.5)};
   }
-  & .lesson-name {
-  }
   & .lesson-status {
     .pending-icon-animation {
       animation: ${sleepAnimation} 3s linear infinite;
-      /* transform: translate(50%, -150%) scale(0.7); */
     }
   }
 `;

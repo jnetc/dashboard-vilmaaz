@@ -28,7 +28,7 @@ export const ProfilesTime: FC<{ data: ProfilesTimeType }> = ({ data }) => {
     case 'current':
       return (
         <ProfilesTimeStyle>
-          Päätty
+          Aika jäljellä
           <time>
             {hours}
             <b>:</b>

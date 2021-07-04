@@ -12,13 +12,13 @@ import { TimeField } from '@Timeline/time-field/TimeField';
 import { useGlobalStore } from '@Hooks/useStores';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
 // Types
-import { This, Div, Element } from '@Types';
+import { This, Div, Element, TimelineStore } from '@Types';
 // Styles
 import { MainStyle, TimelineStyle, TimelineEmptyStyle } from './Timeline.style';
 
 // Timetable Context
-type State = { mainWidth: number; timetableEl: Element };
-const state: State = { mainWidth: 0, timetableEl: null };
+
+const state: TimelineStore = { mainWidth: 0, timetableEl: null };
 export const timetableStore = createContext(state);
 
 const Timeline = () => {
@@ -43,9 +43,6 @@ const Timeline = () => {
     }
 
     setAutoMovement(true);
-    return () => {
-      setAutoMovement(false);
-    };
   }, [activeDay, width]);
 
   const mouseDown = (ev: MouseEvent<Div, This>) => {

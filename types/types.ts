@@ -1,18 +1,8 @@
-// import { MouseEvent, MouseEventHandler } from 'react';
-
 // SIMPLE TYPES
 export type Div = HTMLDivElement;
 export type Button = HTMLButtonElement;
 export type Element = Div | null;
 export type This = globalThis.MouseEvent;
-// export interface Event <T extends MouseEventHandler<T>> {
-//   readonly target: T;
-// }
-
-// export type Events<T, E> = (event: {target: <E>}) => void
-// export type EvDiv = MouseEvent<Div, This>;
-// export type EvButton = MouseEvent<Button>;
-// export type Touch = TouchEventHandler<Div>;
 
 export interface Avatar {
   img?: string;
@@ -107,14 +97,7 @@ export interface ProfilesTimeType extends DaysType {
   endtime: number;
 }
 
-export type GlobalStoreProps = {
-  openMenu: boolean;
-  setOpenMenu: (el: boolean) => void;
-  mainPaddingLeft: number;
-  setMainPaddingLeft: (num: number) => void;
-};
-
-// STORE / CONTEXT
+// STORES / CONTEXTS
 export interface MainStoreProps extends DaysType {
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
@@ -127,6 +110,11 @@ export interface MainStoreProps extends DaysType {
   content: Array<LessonsType>;
   timepoints: Array<string>;
   timeline: StaticValues;
+}
+
+export interface TimelineStore {
+  mainWidth: number;
+  timetableEl: Element;
 }
 
 // BOTTUNS
