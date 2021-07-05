@@ -4,10 +4,8 @@ import { useGlobalStore } from '@Hooks/useStores';
 
 export const Switcher = () => {
   const { autoMovement, setAutoMovement } = useGlobalStore();
-  const automovement = () => {
-    setAutoMovement(!autoMovement);
-  };
-  console.log('switcher', autoMovement);
+
+  const automovement = () => setAutoMovement(!autoMovement);
 
   return (
     <SwitcherStyle htmlFor="switcher">

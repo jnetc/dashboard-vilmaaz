@@ -1,6 +1,8 @@
 // SIMPLE TYPES
 export type Div = HTMLDivElement;
 export type Button = HTMLButtonElement;
+export type Input = HTMLInputElement;
+export type Form = HTMLFormElement;
 export type Element = Div | null;
 export type This = globalThis.MouseEvent;
 
@@ -17,7 +19,7 @@ export interface LessonsColor {
 export interface User {
   id: string;
   name: string;
-  colors: LessonsColor;
+  color: string;
   avatar: Avatar;
 }
 
@@ -64,7 +66,7 @@ export interface LessonsType extends UserDataType {
 
 export interface LessonComponent {
   width: number;
-  colors: string;
+  color: string;
   lesson: string;
   start: TimePosition;
   end: TimePosition;
@@ -99,6 +101,8 @@ export interface ProfilesTimeType extends DaysType {
 
 // STORES / CONTEXTS
 export interface MainStoreProps extends DaysType {
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
   dayOfWeek: string;

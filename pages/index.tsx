@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Header from '@Header/Header';
 import Timetable from 'components/timeline/Timeline';
 import RightPanel from 'components/right-profile-panel/ProfilePanel';
-// import { UpdateTimetable } from '@Timeline/UpdateTimetable';
+import CreateProfile from '@Modals/create-profile/CreateProfile';
 
 export default function Home() {
   return (
@@ -15,10 +15,10 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CreateProfile />
       <Header />
       <Timetable />
       <RightPanel />
-      {/* <UpdateTimetable /> */}
     </>
   );
 }

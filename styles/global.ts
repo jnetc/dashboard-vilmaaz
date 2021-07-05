@@ -49,10 +49,10 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     line-height: 1;
   }
-  /* p, time, span {
-    font-weight: 300;
-    line-height: 1;
-  } */
+  button {
+    border: none;
+    background: transparent;
+  }
 
   /* SCROLLBAR */
   ::-webkit-scrollbar {
@@ -64,5 +64,9 @@ export const GlobalStyle = createGlobalStyle`
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.grey_dark()};
     border-radius: 50px;
+  }
+/*  Selection input text */
+  ::selection {
+    background: ${({ theme }) => theme.grey_dark()};
   }
 `;

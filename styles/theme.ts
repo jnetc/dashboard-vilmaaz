@@ -23,7 +23,7 @@ declare module 'styled-components' {
     green: typeof AlphaChanel;
     blue: typeof AlphaChanel;
     brown: typeof AlphaChanel;
-    magenta: typeof AlphaChanel;
+    violet: typeof AlphaChanel;
     fontsize_48: string;
     fontsize_36: string;
     fontsize_24: string;
@@ -53,7 +53,7 @@ export const theme: DefaultTheme = {
   green: (alpha = 1) => `hsl(155 55% 65% / ${alpha})`, //'hsl(155, 35%, 65%)'
   blue: (alpha = 1) => `hsl(226 35% 65% / ${alpha})`, //'hsl(216, 35%, 65%)'
   brown: (alpha = 1) => `hsl(20 55% 65% / ${alpha})`, //'hsl(20, 35%, 65%)'
-  magenta: (alpha = 1) => `hsl(265 35% 65% / ${alpha})`, //'hsl(265, 35%, 65%)'
+  violet: (alpha = 1) => `hsl(265 35% 65% / ${alpha})`, //'hsl(265, 35%, 65%)'
   // pink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'
   // green: (alpha = 1) => `hsl(157 25% 60% / ${alpha})`, //'hsl(157, 25%, 60%)'
   // blue: (alpha = 1) => `hsl(207 55% 65% / ${alpha})`, //'hsl(207, 55%, 65%)'

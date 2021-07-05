@@ -3,10 +3,7 @@ export const database: Array<Schedule> = [
   {
     id: '4a5s45d2as1d45we5',
     name: 'Johannes',
-    colors: {
-      accent: 'brown',
-      shade: 'brown_shade',
-    },
+    color: 'brown',
     avatar: {
       img: '/avatars/johannes.png',
       name: 'JO',
@@ -250,10 +247,7 @@ export const database: Array<Schedule> = [
   {
     id: '4a5s45d2as1d45whf',
     name: 'Amanda',
-    colors: {
-      accent: 'green',
-      shade: 'green_shade',
-    },
+    color: 'green',
     avatar: {
       name: 'AM',
     },
@@ -464,10 +458,7 @@ export const database: Array<Schedule> = [
   {
     id: '4a5s45d2as1d455hj',
     name: 'Emilia',
-    colors: {
-      accent: 'pink',
-      shade: 'pink_shade',
-    },
+    color: 'pink',
     avatar: {
       img: '/avatars/emilia.png',
       name: 'EM',
@@ -577,10 +568,7 @@ export const database: Array<Schedule> = [
   {
     id: '4a5s45d2as1d45rhb',
     name: 'Olivia',
-    colors: {
-      accent: 'magenta',
-      shade: 'magenta_shade',
-    },
+    color: 'violet',
     avatar: {
       name: 'OL',
     },
@@ -793,10 +781,7 @@ export const database: Array<Schedule> = [
   {
     id: '4a5s45d2as1d45nvh',
     name: 'Mikael',
-    colors: {
-      accent: 'blue',
-      shade: 'blue_shade',
-    },
+    color: 'blue',
     avatar: {
       name: 'MI',
     },

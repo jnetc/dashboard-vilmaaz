@@ -8,6 +8,8 @@ import { hours } from '@Const/hours';
 import { database } from './data';
 
 const state: MainStoreProps = {
+  openModal: false,
+  setOpenModal: open => open,
   autoMovement: true,
   setAutoMovement: el => el,
   dayOfWeek: '',
@@ -39,7 +41,7 @@ export const rightPanelWidth = 300;
 
 const Store: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
-  // const [timeline, setTimeline] = useState(state.timeline);
+  const [openModal, setOpenModal] = useState(state.openModal);
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
   const [timelineHours, setTimelineHours] = useState(state.timelineHours);
   const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
@@ -47,8 +49,8 @@ const Store: FC = ({ children }) => {
 
   const today = dateFormat({ weekday: 'long' });
   // Manual check day
-  let day = 'maanantai';
-  // const day = dayOfWeek;
+  // let day = 'maanantai';
+  const day = dayOfWeek;
 
   const content = transform(data, day, false) as LessonsType[];
   const timepoints = transform(data, day) as string[];
@@ -81,6 +83,8 @@ const Store: FC = ({ children }) => {
   return (
     <MainContext.Provider
       value={{
+        openModal,
+        setOpenModal,
         autoMovement,
         setAutoMovement,
         dayOfWeek,

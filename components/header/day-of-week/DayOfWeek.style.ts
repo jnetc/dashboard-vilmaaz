@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const DayOfWeekStyle = styled.button`
   width: 60px;
   height: 40px;
-  border: 2px solid transparent;
-  background: none;
   position: relative;
   color: ${({ theme }) => theme.grey_middle()};
   font-size: ${({ theme }) => theme.fontsize_16};

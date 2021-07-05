@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 interface LessonsDataType {
   lessonWidth: number;
-  colors: string;
+  color: string;
   position?: number;
 }
 
@@ -71,10 +71,10 @@ export const LessonStyle = styled.div<LessonsDataType>`
     }
     .pending-icon,
     .pending-icon-animation {
-      stroke: var(--${({ colors }) => colors});
+      stroke: var(--${({ color }) => color});
     }
     .finished-icon {
-      stroke: var(--${({ colors }) => colors});
+      stroke: var(--${({ color }) => color});
     }
   }
 `;
@@ -120,7 +120,7 @@ export const BreakStyle = styled.div<LessonsDataType>`
   }
   .pending-icon,
   .pending-icon-animation {
-    stroke: var(--${({ colors }) => colors});
+    stroke: var(--${({ color }) => color});
   }
   .pending-icon-animation {
     animation: ${sleepAnimation} 3s linear infinite;
@@ -129,6 +129,6 @@ export const BreakStyle = styled.div<LessonsDataType>`
     stroke-dasharray: 40;
     stroke-dashoffset: 90;
     transition: all 0.5s ease-in-out;
-    stroke: var(--${({ colors }) => colors});
+    stroke: var(--${({ color }) => color});
   }
 `;

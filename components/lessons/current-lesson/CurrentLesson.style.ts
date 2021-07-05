@@ -2,9 +2,9 @@ import styled, { keyframes } from 'styled-components';
 import { BreakStyle, LessonStyle } from '@Lessons/Lesson.style';
 
 export const CurrentLessonStyle = styled(LessonStyle)`
-  border-left: 2px solid var(--${({ colors }) => colors});
+  border-left: 2px solid var(--${({ color }) => color});
   &:nth-of-type(1) {
-    border-left: 2px solid var(--${({ colors }) => colors});
+    border-left: 2px solid var(--${({ color }) => color});
   }
   z-index: 11;
   &::after {
@@ -17,7 +17,7 @@ export const CurrentLessonStyle = styled(LessonStyle)`
     background: linear-gradient(
       to right,
       transparent 0%,
-      var(--${({ colors }) => colors}) 100%
+      var(--${({ color }) => color}) 100%
     );
     transform: translateX(calc(${({ position }) => position}px - 50px));
     transition: all 0.3s ease-in-out;
@@ -53,7 +53,7 @@ export const BreakCurrentStyle = styled(BreakStyle)`
     background: linear-gradient(
       to right,
       transparent 0%,
-      var(--${({ colors }) => colors}) 100%
+      var(--${({ color }) => color}) 100%
     );
     transform: translateX(calc(${({ position }) => position}px - 50px));
     transition: all 0.3s ease-in-out;
@@ -61,7 +61,7 @@ export const BreakCurrentStyle = styled(BreakStyle)`
     z-index: -1;
   }
   &.active {
-    border-left: 2px solid var(--${({ colors }) => colors});
+    border-left: 2px solid var(--${({ color }) => color});
     &::before {
       width: calc(100% + 29px);
       animation: ${breakAnimation} 3s linear infinite;
@@ -77,10 +77,10 @@ export const BreakCurrentStyle = styled(BreakStyle)`
   }
 `;
 
-type ProgressLineType = { track: number; progress: number; colors: string };
+type ProgressLineType = { track: number; progress: number; color: string };
 export const ProgressLine = styled.circle<ProgressLineType>`
   fill: none;
-  stroke: var(--${({ colors }) => colors});
+  stroke: var(--${({ color }) => color});
   stroke-dasharray: ${({ track }) => track};
   stroke-dashoffset: ${({ progress }) => progress};
   stroke-width: 4;

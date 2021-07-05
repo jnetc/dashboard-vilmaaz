@@ -14,7 +14,7 @@ import { transformNumToTime } from '@Helpers';
 
 export const CurrentLesson: FC<LessonComponent> = ({
   width,
-  colors,
+  color,
   lesson,
   start,
   end,
@@ -63,7 +63,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
   return lesson !== 'taukko' ? (
     <CurrentLessonStyle
       lessonWidth={width}
-      colors={colors}
+      color={color}
       position={currentPosition}
       ref={lessonRef}>
       <div className="lesson-duration">
@@ -87,7 +87,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
             cy="28"
             r={radius}
             className="progress"
-            colors={colors}
+            color={color}
             track={circumference}
             progress={step}></ProgressLine>
         </svg>
@@ -97,7 +97,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
   ) : (
     <BreakCurrentStyle
       lessonWidth={width}
-      colors={colors}
+      color={color}
       position={currentPosition}
       ref={breakRef}>
       <svg width="56" height="56" viewBox="0 0 56 56">
@@ -107,7 +107,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
           cy="28"
           r={radius}
           className="progress"
-          colors={colors}
+          color={color}
           track={circumference}
           progress={step}></ProgressLine>
       </svg>

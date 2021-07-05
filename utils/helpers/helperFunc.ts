@@ -14,6 +14,7 @@ import {
   minuteDistance,
   minutesInHour,
   hourDivWidth,
+  rightPanelWidth,
 } from '@Store';
 
 export const dateFormat = (options: Intl.DateTimeFormatOptions) => {
@@ -177,9 +178,9 @@ export const movementTimeAndTimetable = (
 
   const { startLessons, endLessons } = timeline;
 
-  const startAutoMovement = startLessons + Math.round(main / 2);
+  const startAutoMovement = startLessons + Math.round(main / 2) - hourDivWidth;
   const stopAutoMovement = endLessons - Math.round(main / 2) + hourDivWidth;
-  const outOfTrackLessons = endLessons - main + hourDivWidth;
+  const outOfTrackLessons = endLessons - main + hourDivWidth + rightPanelWidth;
   const timeMovement = Math.round(main / 2) - currentTime - hourDivWidth;
 
   if (

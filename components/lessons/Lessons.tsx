@@ -12,14 +12,14 @@ const Lessons: FC<{ data: LessonsType; order: Order | undefined }> = ({
 }) => {
   const lengthLessons = data.end.position - data.start.position;
   const lessons = data.timetable?.map(l => {
-    return <Switcher key={l.id} data={l} colors={data.colors} />;
+    return <Switcher key={l.id} data={l} color={data.color} />;
   });
 
   return lengthLessons !== 0 ? (
     <LessonsStyle
       position={data.start.position}
       distance={lengthLessons}
-      primary={data.colors.accent}
+      primary={data.color}
       order={order?.order}
       className="timefield-lesson">
       {lessons}

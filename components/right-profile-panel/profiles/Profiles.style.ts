@@ -51,8 +51,6 @@ export const ProfilesStyle = styled.div`
     grid-row: 1 /-1;
     width: 30px;
     height: 40px;
-    border: none;
-    background: transparent;
     color: ${({ theme }) => theme.grey_light()};
     font-size: 1rem;
     position: relative;

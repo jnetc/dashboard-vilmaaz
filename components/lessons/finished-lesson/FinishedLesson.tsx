@@ -7,13 +7,13 @@ import { BreakStyle } from '@Lessons/Lesson.style';
 
 export const FinishedLesson: FC<LessonComponent> = ({
   width,
-  colors,
+  color,
   lesson,
   start,
   end,
 }) => {
   return lesson !== 'taukko' ? (
-    <FinishedLessonStyle lessonWidth={width} colors={colors}>
+    <FinishedLessonStyle lessonWidth={width} color={color}>
       <div className="lesson-duration">
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
           <path
@@ -47,7 +47,7 @@ export const FinishedLesson: FC<LessonComponent> = ({
       </div>
     </FinishedLessonStyle>
   ) : (
-    <BreakStyle lessonWidth={width} colors={colors}>
+    <BreakStyle lessonWidth={width} color={color}>
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r="24" className="track"></circle>
       </svg>

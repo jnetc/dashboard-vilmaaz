@@ -21,7 +21,7 @@ export const useUpdateTime = () => {
   const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
   // const h = (new Date().getHours() - 0).toString();
-  // const m = (new Date().getMinutes() + 15).toString();
+  // const m = (new Date().getMinutes() - 17).toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
   // const stepTime = transformTimeToNum(`12:10`);
 

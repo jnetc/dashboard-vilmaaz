@@ -3,6 +3,7 @@ import { ProfilePanelStyle } from './ProfilePanel.style';
 import { useGlobalStore } from '@Hooks/useStores';
 // Component
 import { Profiles } from '@RightProfilePanel/profiles/Profiles';
+import { AddProfileButton } from '@RightProfilePanel/add-profile-button/AddProfileButton';
 // Logo
 import { Logotip } from '@Icons/Logos';
 
@@ -32,6 +33,7 @@ const ProfilePanel = () => {
       <Logotip />
       <h3>Profiilit</h3>
       <div className="profiles">{profiles}</div>
+      <AddProfileButton />
     </ProfilePanelStyle>
   );
 };

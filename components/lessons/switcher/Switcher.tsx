@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Types
-import { LessonsColor, Lesson } from '@Types';
+import { Lesson } from '@Types';
 // Hook
 import { useUpdateTime } from '@Hooks/useUpdateTime';
 import { useGlobalStore } from '@Hooks/useStores';
@@ -11,9 +11,9 @@ import { CurrentLesson } from '@Lessons/current-lesson/CurrentLesson';
 // Helper
 import { lessonStatus } from '@Helpers';
 
-export const Switcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
+export const Switcher: FC<{ data: Lesson; color: string }> = ({
   data,
-  colors,
+  color,
 }) => {
   const { position } = useUpdateTime();
   const { today } = useGlobalStore();
@@ -28,7 +28,7 @@ export const Switcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
       return (
         <CurrentLesson
           width={lessonBlockWidth}
-          colors={colors.accent}
+          color={color}
           lesson={lesson}
           start={start}
           end={end}
@@ -38,7 +38,7 @@ export const Switcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
       return (
         <FinishedLesson
           width={lessonBlockWidth}
-          colors={colors.accent}
+          color={color}
           lesson={lesson}
           start={start}
           end={end}
@@ -48,7 +48,7 @@ export const Switcher: FC<{ data: Lesson; colors: LessonsColor }> = ({
       return (
         <PendingLesson
           width={lessonBlockWidth}
-          colors={colors.accent}
+          color={color}
           lesson={lesson}
           start={start}
           end={end}

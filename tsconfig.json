@@ -24,6 +24,7 @@
       "@Header/*": ["components/header/*"],
       "@Icons/*": ["./components/icons/*"],
       "@Lessons/*": ["./components/lessons/*"],
+      "@Modals/*": ["./components/modals/*"],
       "@RightProfilePanel/*": ["components/right-profile-panel/*"],
       "@Timeline/*": ["components/timeline/*"],
       "@Store": ["./store/Store"],
