@@ -12,14 +12,14 @@ import { TimeField } from '@Timeline/time-field/TimeField';
 import { useGlobalStore } from '@Hooks/useStores';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
 // Types
-import { This, Div, Element, TimelineStore } from '@Types';
+import { This, Div, Element, TimelineStoreProps } from '@Types';
 // Styles
 import { MainStyle, TimelineStyle, TimelineEmptyStyle } from './Timeline.style';
 
 // Timetable Context
 
-const state: TimelineStore = { mainWidth: 0, timetableEl: null };
-export const timetableStore = createContext(state);
+const state: TimelineStoreProps = { mainWidth: 0, timetableEl: null };
+export const TimelineStore = createContext(state);
 
 const Timeline = () => {
   const { setAutoMovement, timeline, timelineWidth, activeDay } =
@@ -95,7 +95,7 @@ const Timeline = () => {
   };
 
   return (
-    <timetableStore.Provider
+    <TimelineStore.Provider
       value={{
         mainWidth,
         timetableEl: timetable,
@@ -119,7 +119,7 @@ const Timeline = () => {
       ) : (
         <TimelineEmptyStyle>Viikonloppu</TimelineEmptyStyle>
       )}
-    </timetableStore.Provider>
+    </TimelineStore.Provider>
   );
 };
 

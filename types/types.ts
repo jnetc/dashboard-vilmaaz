@@ -3,6 +3,7 @@ export type Div = HTMLDivElement;
 export type Button = HTMLButtonElement;
 export type Input = HTMLInputElement;
 export type Form = HTMLFormElement;
+export type FieldSet = HTMLFieldSetElement;
 export type Element = Div | null;
 export type This = globalThis.MouseEvent;
 
@@ -94,6 +95,7 @@ export interface ProfilesType extends User, DaysType {
   end: TimePosition;
   lessons?: number;
 }
+
 export interface ProfilesTimeType extends DaysType {
   starttime: number;
   endtime: number;
@@ -116,9 +118,16 @@ export interface MainStoreProps extends DaysType {
   timeline: StaticValues;
 }
 
-export interface TimelineStore {
+export interface TimelineStoreProps {
   mainWidth: number;
   timetableEl: Element;
+}
+
+export interface CreateProfileStoreProps extends User {
+  setUsername: (str: string) => void;
+  setColor: (str: string) => void;
+  setAvatar: (str: string | undefined) => void;
+  reset: boolean;
 }
 
 // BOTTUNS

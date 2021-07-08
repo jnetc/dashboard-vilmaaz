@@ -1,87 +1,91 @@
-import { FC, useState, MouseEvent, ChangeEvent } from 'react';
+import { FC, useState, MouseEvent, createContext } from 'react';
 
-import {
-  CreateProfileStyle,
-  ProfileAvatarStyle,
-  UploadAvatarStyle,
-  ColorPickerStyle,
-} from './CreateProfile.style';
+import { CreateProfileStyle } from './CreateProfile.style';
 // HOC
 import Modal from '@Modals/Modal';
 // Types
-import { Input, Form } from '@Types';
+import { Form, UserDataType, CreateProfileStoreProps } from '@Types';
+// Components
+import { ProfileAvatar } from '@Modals/profile-avatar/ProfileAvatar';
+import { ProfileName } from '@Modals/profile-name/ProfileName';
+import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
+import { ProfileButton } from '@Modals/profile-button/ProfileButton';
+
+const state: CreateProfileStoreProps = {
+  id: `${Math.round(Math.random() * 1000000000)}`,
+  name: '',
+  setUsername: name => name,
+  color: 'brown',
+  setColor: color => color,
+  avatar: { name: '' },
+  setAvatar: str => str,
+  reset: false,
+};
+
+export const CreateProfileStore = createContext(state);
 
 const CreateProfile: FC = () => {
-  const [username, setUsername] = useState('');
-  // const [avatar, setAvatar] = useState('');
+  const [username, setUsername] = useState<string>(state.name);
+  const [image, setAvatar] = useState<string | undefined>(state.avatar.img);
+  const [color, setColor] = useState<string>(state.color);
+  const [reset, setReset] = useState(state.reset);
 
-  const avatarStr = username.substring(0, 2).toUpperCase();
-
-  const getUsername = (ev: ChangeEvent<Input>) => {
-    const el = ev.target as Input;
-    console.log(el.value);
-    setUsername(el.value);
-  };
+  const avatarStr = username.substring(0, 2);
 
   const create = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
-    const el = ev.target as Form;
-    const fieldsetEl = el.querySelectorAll('input');
 
-    fieldsetEl.forEach(e => {
-      console.log(e.type);
-    });
+    if (username.length < 2 || username === '') return;
 
-    // const username = el.getElementById('username')?.value
-    const data = {
-      id: '4a5s45d2as1d45510',
+    const data: UserDataType = {
+      id: `${Math.round(Math.random() * 1000000000)}`,
       name: username,
-      color: '',
+      color: color,
       avatar: {
         name: avatarStr,
+        img: image,
       },
-      timetable: [],
     };
-    console.log(ev.target, data);
+    console.log('Created', data);
+  };
+
+  const clear = () => {
+    setReset(!reset);
   };
 
   return (
     <Modal>
-      <CreateProfileStyle onSubmit={create} name="user">
-        <UploadAvatarStyle>
-          <ProfileAvatarStyle>
-            {/* <img src="//" alt="//" /> */}
-            <figcaption>{avatarStr}</figcaption>
-          </ProfileAvatarStyle>
-          <span>Liitä kuva</span>
-          <input
-            type="file"
-            name="avatar"
-            accept=".png, .jpg, .jpeg, .webp, .svg"
-          />
-        </UploadAvatarStyle>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="username"
-          onChange={getUsername}
-        />
-        <ColorPickerStyle>
-          <legend>Valitse väri</legend>
-          <input type="radio" name="color" id="brown" />
-          <label data-color="brown" htmlFor="brown"></label>
-          <input type="radio" name="color" id="green" />
-          <label data-color="green" htmlFor="green"></label>
-          <input type="radio" name="color" id="pink" />
-          <label data-color="pink" htmlFor="pink"></label>
-          <input type="radio" name="color" id="violet" />
-          <label data-color="violet" htmlFor="violet"></label>
-          <input type="radio" name="color" id="blue" />
-          <label data-color="blue" htmlFor="blue"></label>
-        </ColorPickerStyle>
-        <button type="submit">Tallentaa</button>
-      </CreateProfileStyle>
+      <CreateProfileStore.Provider
+        value={{
+          id: state.id,
+          name: username,
+          setUsername,
+          color,
+          setColor,
+          avatar: {
+            name: avatarStr,
+            img: image,
+          },
+          setAvatar,
+          reset,
+        }}>
+        <CreateProfileStyle onSubmit={create} name="user">
+          <ProfileAvatar />
+          <ProfileName />
+          <ProfileColorPicker />
+          <ProfileButton
+            ButtonStyle="cancel"
+            onClick={clear}
+            aria-label="reset by default">
+            Tyhjätä
+          </ProfileButton>
+          <ProfileButton
+            ButtonStyle="confirm"
+            aria-label="go next to fill schedule">
+            Seuraava
+          </ProfileButton>
+        </CreateProfileStyle>
+      </CreateProfileStore.Provider>
     </Modal>
   );
 };

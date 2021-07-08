@@ -280,3 +280,7 @@ export const profileStatus = (
   }
   return { status: 'day off' };
 };
+
+export const firstUpperCase = (name: string) => {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+};
