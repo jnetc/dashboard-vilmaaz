@@ -13,7 +13,7 @@ export const ProfilesTimeStyle = styled.p`
   time {
     padding-left: 5px;
     font-weight: bold;
-    color: ${({ theme }) => theme.white()};
+    color: ${({ theme }) => theme.white_soft()};
     b {
       opacity: 0;
       padding: 0 0.8px;

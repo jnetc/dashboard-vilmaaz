@@ -1,4 +1,4 @@
-import { FC, useEffect, ChangeEvent } from 'react';
+import { FC, useEffect, ChangeEvent, KeyboardEvent } from 'react';
 // Style
 import { ProfileColorPickerStyle } from './ProfileColorPicker.style';
 // Global const
@@ -18,6 +18,12 @@ export const ProfileColorPicker: FC = () => {
     setColor(ev.currentTarget.dataset.color);
   };
 
+  const pressEnter = (ev: KeyboardEvent<Input>) => {
+    if (ev.key !== 'Enter') return;
+    if (!ev.currentTarget.dataset.color) return;
+    setColor(ev.currentTarget.dataset.color);
+  };
+
   useEffect(() => {
     setColor('brown');
   }, [reset]);
@@ -28,6 +34,7 @@ export const ProfileColorPicker: FC = () => {
         key={clr}
         clr={clr}
         onChange={getColor}
+        onKeyPress={pressEnter}
         checked={clr === color}
       />
     );

@@ -2,11 +2,12 @@ import { FC } from 'react';
 // Style
 import {
   ProfileButtonConfirmStyle,
-  ProfileButtonCancelStyle,
+  ProfileButtonResetStyle,
   ProfileButtonUpdateStyle,
+  ProfileButtonDisableStyle,
 } from './ProfileButton.style';
 
-type ButtonStyle = 'confirm' | 'cancel' | 'update';
+type ButtonStyle = 'confirm' | 'reset' | 'update' | 'disable';
 interface ProfileButtonType {
   ButtonStyle: ButtonStyle;
   onClick?: () => void;
@@ -18,17 +19,23 @@ export const ProfileButton: FC<ProfileButtonType> = ({
   onClick,
 }) => {
   switch (ButtonStyle) {
-    case 'cancel':
+    case 'reset':
       return (
-        <ProfileButtonCancelStyle type="button" onClick={onClick}>
+        <ProfileButtonResetStyle type="button" onClick={onClick}>
           {children}
-        </ProfileButtonCancelStyle>
+        </ProfileButtonResetStyle>
       );
     case 'update':
       return (
         <ProfileButtonUpdateStyle type="submit">
           {children}
         </ProfileButtonUpdateStyle>
+      );
+    case 'disable':
+      return (
+        <ProfileButtonDisableStyle type="button" disabled>
+          {children}
+        </ProfileButtonDisableStyle>
       );
     default:
       return (

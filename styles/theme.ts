@@ -7,6 +7,7 @@ declare function AlphaChanel(alpha?: number): string;
 declare module 'styled-components' {
   export interface DefaultTheme {
     white: typeof AlphaChanel;
+    white_soft: typeof AlphaChanel;
     grey_light: typeof AlphaChanel;
     grey_middle: typeof AlphaChanel;
     grey_dark: typeof AlphaChanel;
@@ -36,7 +37,8 @@ declare module 'styled-components' {
 }
 
 export const theme: DefaultTheme = {
-  white: (alpha = 1) => `hsl(240 14% 97% / ${alpha})`, //'hsl(240, 14%, 97%)'
+  white: (alpha = 1) => `hsl(0 0% 100% / ${alpha})`, //'hsl(0, 0%, 100%)'
+  white_soft: (alpha = 1) => `hsl(240 14% 97% / ${alpha})`, //'hsl(240, 14%, 97%)'
   grey_light: (alpha = 1) => `hsl(218 6% 74% / ${alpha})`, //'hsl(218, 6%, 74%)'
   grey_middle: (alpha = 1) => `hsl(217 8% 68% / ${alpha})`, //'hsl(217, 8%, 68%)'
   grey_dark: (alpha = 1) => `hsl(216 8% 37% / ${alpha})`, //'hsl(216, 8%, 37%)'

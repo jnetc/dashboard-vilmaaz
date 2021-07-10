@@ -31,11 +31,12 @@ const CreateProfile: FC = () => {
   const [reset, setReset] = useState(state.reset);
 
   const avatarStr = username.substring(0, 2);
+  const isInputAcepted = username.length >= 2;
 
   const create = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
 
-    if (username.length < 2 || username === '') return;
+    if (!isInputAcepted) return;
 
     const data: UserDataType = {
       id: `${Math.round(Math.random() * 1000000000)}`,
@@ -74,16 +75,22 @@ const CreateProfile: FC = () => {
           <ProfileName />
           <ProfileColorPicker />
           <ProfileButton
-            ButtonStyle="cancel"
+            ButtonStyle="reset"
             onClick={clear}
             aria-label="reset by default">
             Tyhjätä
           </ProfileButton>
-          <ProfileButton
-            ButtonStyle="confirm"
-            aria-label="go next to fill schedule">
-            Seuraava
-          </ProfileButton>
+          {isInputAcepted ? (
+            <ProfileButton
+              ButtonStyle="confirm"
+              aria-label="go next to fill schedule">
+              Seuraava
+            </ProfileButton>
+          ) : (
+            <ProfileButton ButtonStyle="disable" aria-label="fill username">
+              Seuraava
+            </ProfileButton>
+          )}
         </CreateProfileStyle>
       </CreateProfileStore.Provider>
     </Modal>

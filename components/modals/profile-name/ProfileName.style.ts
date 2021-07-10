@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
   grid-column: 1 / -1;
   grid-row: 2;
+  align-self: flex-start;
   width: 100%;
   height: 100%;
   display: inline-flex;
@@ -14,17 +15,17 @@ export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
     ${({ styleErr, theme }) => (styleErr ? theme.danger() : theme.bg_light())};
 
   legend {
-    padding: 5px 10px;
+    padding: 0 10px;
     font-size: ${({ theme }) => theme.fontsize_16};
     color: ${({ theme }) => theme.grey_middle()};
     background: transparent;
   }
   input {
     width: 100%;
-    padding: 8px 13px;
-    margin-bottom: 10px;
+    padding: 8px 10px;
+    margin-bottom: 7px;
     border-radius: 8px;
-    color: ${({ theme }) => theme.white()};
+    color: ${({ theme }) => theme.white_soft()};
     font-size: ${({ theme }) => theme.fontsize_24};
     background: transparent;
     border: none;

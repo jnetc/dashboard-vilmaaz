@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   html, body {
     height: 100%;
     font-family: Roboto, sans-serif;
-    color: ${({ theme }) => theme.white()};
+    color: ${({ theme }) => theme.white_soft()};
     background-color: ${({ theme }) => theme.bg_black()}
   }
 
@@ -38,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme.white()};
+    color: ${({ theme }) => theme.white_soft()};
     text-decoration: none;
   }
 

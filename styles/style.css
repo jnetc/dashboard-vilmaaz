@@ -1,5 +1,6 @@
 :root {
-  --white: hsl(240, 14%, 97%);
+  --white: hsl(0, 0%, 100%);
+  --white_soft: hsl(240, 14%, 97%);
   --grey_light: hsl(218, 6%, 74%);
   --grey_middle: hsl(217, 8%, 68%);
   --grey_dark: hsl(216, 8%, 37%);

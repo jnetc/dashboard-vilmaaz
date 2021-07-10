@@ -7,7 +7,11 @@ import {
   MouseEvent,
 } from 'react';
 // Style
-import { ProfileAvatarStyle, UploadAvatarStyle } from './ProfileAvatar.style';
+import {
+  ProfileAvatarStyle,
+  UploadAvatarStyle,
+  UploadInputAvatarStyle,
+} from './ProfileAvatar.style';
 // Types
 import { Input } from '@Types';
 // Hook
@@ -35,6 +39,8 @@ export const ProfileAvatar: FC = () => {
   // onChange can't clear target value. Use it!
   const resetAvatar = (ev: MouseEvent<Input>) => {
     const el = ev.target as Input;
+    console.log(el);
+
     el.value = '';
   };
 
@@ -58,28 +64,30 @@ export const ProfileAvatar: FC = () => {
   }, [reset]);
 
   return (
-    <UploadAvatarStyle
-      aria-label={error ? 'Kuva saa olla enintään 300kt' : 'Laata kuva'}
-      styleErr={error}>
-      {/* {image ? (
-        <button aria-label="remove image" onClick={removeAvatar} />
-      ) : (
-        <></>
-      )} */}
-      <ProfileAvatarStyle>
-        {image ? (
-          <img src={image} alt={file?.name} />
-        ) : (
-          <figcaption>{avatar.name}</figcaption>
-        )}
-      </ProfileAvatarStyle>
-      <input
+    <>
+      <UploadInputAvatarStyle
         type="file"
         name="avatar"
+        id="upload-avatar"
         accept=".png, .jpg, .jpeg, .webp, .svg"
+        tabIndex={0}
+        styleErr={error}
         onChange={getAvatar}
         onClick={resetAvatar}
       />
-    </UploadAvatarStyle>
+      <UploadAvatarStyle
+        aria-label="● Tiedostojen enimmäiskoko on 300 kt"
+        styleErr={error}
+        htmlFor="upload-avatar">
+        <ProfileAvatarStyle aria-label="● Voit ladata webp- png-, svg- tai jpg-tiedostoja">
+          {image ? (
+            <img src={image} alt={file?.name} />
+          ) : (
+            <figcaption>{avatar.name}</figcaption>
+          )}
+        </ProfileAvatarStyle>
+        <p id="upload-warning"></p>
+      </UploadAvatarStyle>
+    </>
   );
 };

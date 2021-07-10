@@ -20,9 +20,9 @@ export const DayOfWeekStyle = styled.button`
     left: 50%;
     opacity: 0;
     border-radius: 10px;
-    background: ${({ theme }) => theme.white()};
-    box-shadow: 0 4px 10px ${({ theme }) => theme.white(0.6)},
-      0 10px 15px ${({ theme }) => theme.white(0.4)};
+    background: ${({ theme }) => theme.white_soft()};
+    box-shadow: 0 4px 10px ${({ theme }) => theme.white_soft(0.6)},
+      0 10px 15px ${({ theme }) => theme.white_soft(0.4)};
     transform: translate(-50%, -10px) scale(0.5);
     transition: all 0.3s ease-in-out;
   }
@@ -35,13 +35,13 @@ export const DayOfWeekStyle = styled.button`
     right: 10px;
     opacity: 0;
     border-radius: 50%;
-    background: ${({ theme }) => theme.white()};
+    background: ${({ theme }) => theme.white_soft()};
     transition: all 0.3s ease-in-out;
     transform: scale(0);
   }
   &.active,
   &:hover {
-    color: ${({ theme }) => theme.white()};
+    color: ${({ theme }) => theme.white_soft()};
     transform: scale(1);
     &::after {
       opacity: 1;

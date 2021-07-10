@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const AddProfileButtonStyle = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -30,7 +30,7 @@ export const AddProfileButtonStyle = styled.button`
   &:hover {
     &::before,
     &::after {
-      background: ${({ theme }) => theme.white()};
+      background: ${({ theme }) => theme.white_soft()};
     }
     &::after {
       transform: translate(-50%, -50%) rotate(90deg);

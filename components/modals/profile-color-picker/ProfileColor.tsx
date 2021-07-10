@@ -1,4 +1,4 @@
-import { FC, ChangeEvent } from 'react';
+import { FC, ChangeEvent, KeyboardEvent } from 'react';
 // Style
 import {
   ProfileColorLabelStyle,
@@ -11,12 +11,14 @@ export interface ProfileColorType {
   clr: string;
   checked?: boolean;
   onChange: (ev: ChangeEvent<Input>) => void;
+  onKeyPress: (ev: KeyboardEvent<Input>) => void;
 }
 
 export const ProfileColor: FC<ProfileColorType> = ({
   clr,
   checked,
   onChange,
+  onKeyPress,
 }) => (
   <>
     <ProfileColorInputStyle
@@ -26,6 +28,8 @@ export const ProfileColor: FC<ProfileColorType> = ({
       id={clr}
       data-color={clr}
       onChange={onChange}
+      onKeyPress={onKeyPress}
+      tabIndex={0}
     />
     <ProfileColorLabelStyle
       htmlFor={clr}

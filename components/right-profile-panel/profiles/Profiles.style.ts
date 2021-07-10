@@ -43,7 +43,7 @@ export const ProfilesStyle = styled.div`
     font-size: ${({ theme }) => theme.fontsize_13};
     b {
       padding-left: 5px;
-      color: ${({ theme }) => theme.white()};
+      color: ${({ theme }) => theme.white_soft()};
     }
   }
   button {

@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export const ProfileColorInputStyle = styled.input`
   opacity: 0;
-  visibility: hidden;
   position: absolute;
-
+  &:focus + label {
+    transform: scale(1.2);
+  }
   &:checked + label::after {
     transform: translate(-50%, -50%) scale(0.5);
     opacity: 1;
@@ -12,10 +13,12 @@ export const ProfileColorInputStyle = styled.input`
 `;
 
 export const ProfileColorLabelStyle = styled.label`
-  width: 31px;
-  height: 31px;
+  width: 32px;
+  height: 32px;
+  margin: 6px 10px 0;
   position: relative;
   border-radius: 50%;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
   &::after {
     content: '';
@@ -30,12 +33,12 @@ export const ProfileColorLabelStyle = styled.label`
     background: ${({ theme }) => theme.bg_middle()};
     transition: all 0.5s cubic-bezier(0, 2, 0.5, 0.9);
   }
-
   &[for='brown'] {
     background: ${({ theme }) => theme.brown()};
     box-shadow: 0 5px 10px ${({ theme }) => theme.brown(0.2)},
       0 10px 20px ${({ theme }) => theme.brown(0.15)};
   }
+
   &[for='green'] {
     background: ${({ theme }) => theme.green()};
     box-shadow: 0 5px 10px ${({ theme }) => theme.green(0.2)},

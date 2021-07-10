@@ -8,8 +8,8 @@ export const ModalStyle = styled.section<{ open: boolean }>`
   overflow: hidden;
   z-index: 1000;
   button#close-modal {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     position: absolute;
     top: 30px;
     right: 30px;
@@ -35,7 +35,7 @@ export const ModalStyle = styled.section<{ open: boolean }>`
     &:hover {
       &::before,
       &::after {
-        background: ${({ theme }) => theme.white()};
+        background: ${({ theme }) => theme.white_soft()};
       }
       &::before {
         transform: translate(-50%, -50%) rotate(135deg);

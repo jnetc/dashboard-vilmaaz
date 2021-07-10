@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { TimelinePointsStyle } from '@Timeline/timeline-points/TimelinePoints.style';
 
 export const TimelineStepStyle = styled(TimelinePointsStyle)`
-  color: ${({ theme }) => theme.white()};
+  color: ${({ theme }) => theme.white_soft()};
   background-color: ${({ theme }) => theme.bg_middle(0.5)};
   backdrop-filter: blur(2px);
   box-shadow: 0 5px 5px ${({ theme }) => theme.bg_black(0.15)},
