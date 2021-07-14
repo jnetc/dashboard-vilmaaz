@@ -5,6 +5,8 @@ import {
   useCallback,
   ChangeEvent,
   MouseEvent,
+  Dispatch,
+  SetStateAction,
 } from 'react';
 // Style
 import {
@@ -15,36 +17,48 @@ import {
 // Types
 import { Input } from '@Types';
 // Hook
-import { useCreateProfileStore } from '@Hooks/useStores';
+import { useStepsStore } from '@Hooks/useStores';
 
-export const ProfileAvatar: FC = () => {
-  const { setAvatar, avatar, reset } = useCreateProfileStore();
+interface GetProfileAvatar {
+  getAvatar: Dispatch<SetStateAction<string>>;
+  avatar: string;
+  avatarStr: string;
+}
+
+interface ErrorHandler {
+  isError: boolean;
+  message?: string;
+}
+
+export const ProfileAvatar: FC<GetProfileAvatar> = ({
+  getAvatar,
+  avatar,
+  avatarStr,
+}) => {
+  const { setHasError } = useStepsStore();
+  const [error, setError] = useState<ErrorHandler>({ isError: false });
   const [file, setFile] = useState<File | undefined>();
-  const [image, setImage] = useState<string | undefined>(avatar.img);
-  const [error, setError] = useState(false);
+  const [image, setImage] = useState<string>('');
 
-  const getAvatar = useCallback((ev: ChangeEvent<Input>) => {
+  const getFile = useCallback((ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;
 
     if (!el.files || !el.files[0]) return setFile(undefined);
     if (el.files[0].size > 300000) {
-      setError(true);
+      setError({
+        isError: true,
+        message: 'Tiedostojen enimmäiskoko on 300 kt',
+      });
+      setHasError(true);
       return;
     }
 
-    setError(false);
+    setError({ isError: false });
+    setHasError(false);
     setFile(el.files[0]);
   }, []);
 
-  // onChange can't clear target value. Use it!
-  const resetAvatar = (ev: MouseEvent<Input>) => {
-    const el = ev.target as Input;
-    console.log(el);
-
-    el.value = '';
-  };
-
-  // Need for render image of view
+  // API fileReader & get string image
   useEffect(() => {
     if (!file) return;
     const reader = new FileReader();
@@ -52,16 +66,19 @@ export const ProfileAvatar: FC = () => {
     reader.readAsDataURL(file);
   }, [file]);
 
-  // Get image string, when image will mounted
+  // Update FC for show avatar
   useEffect(() => {
-    setAvatar(image);
+    if (!image) return;
+    // Save image to LS for backward step
+    window.localStorage.setItem('avatar', image);
+    getAvatar(image);
   }, [image]);
 
-  useEffect(() => {
-    setImage(undefined);
-    setFile(undefined);
-    setAvatar(undefined);
-  }, [reset]);
+  // onChange event can't clear target value. Use it!
+  const resetAvatar = (ev: MouseEvent<Input>) => {
+    const el = ev.target as Input;
+    el.value = '';
+  };
 
   return (
     <>
@@ -71,19 +88,19 @@ export const ProfileAvatar: FC = () => {
         id="upload-avatar"
         accept=".png, .jpg, .jpeg, .webp, .svg"
         tabIndex={0}
-        styleErr={error}
-        onChange={getAvatar}
+        styleErr={error.isError}
+        onChange={getFile}
         onClick={resetAvatar}
       />
       <UploadAvatarStyle
         aria-label="● Tiedostojen enimmäiskoko on 300 kt"
-        styleErr={error}
+        styleErr={error.isError}
         htmlFor="upload-avatar">
         <ProfileAvatarStyle aria-label="● Voit ladata webp- png-, svg- tai jpg-tiedostoja">
-          {image ? (
-            <img src={image} alt={file?.name} />
+          {avatar ? (
+            <img src={avatar} alt={file?.name} />
           ) : (
-            <figcaption>{avatar.name}</figcaption>
+            <figcaption>{avatarStr}</figcaption>
           )}
         </ProfileAvatarStyle>
         <p id="upload-warning"></p>

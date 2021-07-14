@@ -3,6 +3,9 @@ import Header from '@Header/Header';
 import Timetable from 'components/timeline/Timeline';
 import RightPanel from 'components/right-profile-panel/ProfilePanel';
 import CreateProfile from '@Modals/create-profile/CreateProfile';
+import { Steps } from '@Modals/steps/Steps';
+// Hook
+import { useGlobalStore } from '@Hooks/useStores';
 
 export default function Home() {
   return (
@@ -15,7 +18,8 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <CreateProfile />
+      {/* <CreateProfile /> */}
+      <Steps />
       <Header />
       <Timetable />
       <RightPanel />

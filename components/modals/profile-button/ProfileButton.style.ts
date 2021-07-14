@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
-export const ProfileButtonStyle = styled.button`
-  grid-row: 4;
+interface Pos {
+  row: number;
+  col: number;
+}
+
+export const ProfileButtonStyle = styled.button<{ pos: Pos }>`
+  grid-row: ${({ pos }) => pos.row};
   align-self: flex-start;
   width: 100%;
   padding: 15px 30px;

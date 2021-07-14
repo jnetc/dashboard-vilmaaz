@@ -1,4 +1,12 @@
-import { FC, useEffect, ChangeEvent, KeyboardEvent } from 'react';
+import {
+  FC,
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from 'react';
 // Style
 import { ProfileColorPickerStyle } from './ProfileColorPicker.style';
 // Global const
@@ -7,42 +15,53 @@ import { colors } from '@Const/colors';
 import { ProfileColor } from '@Modals/profile-color-picker/ProfileColor';
 //Types
 import { Input } from '@Types';
-// Hook
-import { useCreateProfileStore } from '@Hooks/useStores';
 
-export const ProfileColorPicker: FC = () => {
-  const { setColor, color, reset } = useCreateProfileStore();
+interface GetProfileColor {
+  getColor: Dispatch<SetStateAction<string>>;
+  color: string;
+}
 
-  const getColor = (ev: ChangeEvent<Input>) => {
-    if (!ev.currentTarget.dataset.color) return;
-    setColor(ev.currentTarget.dataset.color);
-  };
+export const ProfileColorPicker: FC<GetProfileColor> = ({
+  getColor,
+  color,
+}) => {
+  const pickColor = useCallback((ev: ChangeEvent<Input>) => {
+    const colorStr = ev.currentTarget.dataset.color;
+    if (!colorStr) return;
 
-  const pressEnter = (ev: KeyboardEvent<Input>) => {
+    getColor(colorStr);
+    window.localStorage.setItem('color', colorStr);
+  }, []);
+
+  const pressEnter = useCallback((ev: KeyboardEvent<Input>) => {
     if (ev.key !== 'Enter') return;
-    if (!ev.currentTarget.dataset.color) return;
-    setColor(ev.currentTarget.dataset.color);
-  };
+
+    const colorStr = ev.currentTarget.dataset.color;
+    if (!colorStr) return;
+
+    getColor(colorStr);
+    window.localStorage.setItem('color', colorStr);
+  }, []);
 
   useEffect(() => {
-    setColor('brown');
-  }, [reset]);
+    console.log('mount color');
+  }, []);
 
   const radioBtns = colors.map(clr => {
     return (
       <ProfileColor
-        key={clr}
+        key={clr.en}
         clr={clr}
-        onChange={getColor}
+        onChange={pickColor}
         onKeyPress={pressEnter}
-        checked={clr === color}
+        checked={clr.en === color}
       />
     );
   });
 
   return (
     <ProfileColorPickerStyle>
-      <legend>Valitse väri</legend>
+      <legend>Valitse tilin elementit väri</legend>
       {radioBtns}
     </ProfileColorPickerStyle>
   );

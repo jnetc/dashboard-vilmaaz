@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
   grid-column: 1 / -1;
-  grid-row: 1;
+  grid-row: 2;
   width: 100%;
   height: 100%;
   display: flex;
@@ -34,13 +34,13 @@ export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
 `;
 
 export const UploadInputAvatarStyle = styled.input<{ styleErr: boolean }>`
-  grid-column: 1 / -1;
-  grid-row: 1 / 2;
-  min-width: inherit;
+  /* grid-column: 1 / -1;
+  grid-row: 2; */
+  /* min-width: inherit; */
   opacity: 0;
   position: absolute;
-  inset: 0;
-  border-radius: 15px;
+  /* inset: 0; */
+  /* border-radius: 15px; */
   z-index: -1;
   &:focus {
     outline: none;

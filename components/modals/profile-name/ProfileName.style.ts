@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
   grid-column: 1 / -1;
-  grid-row: 2;
+  grid-row: 3;
   align-self: flex-start;
   width: 100%;
-  height: 100%;
   display: inline-flex;
   justify-content: space-around;
   position: relative;
@@ -16,8 +15,9 @@ export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
 
   legend {
     padding: 0 10px;
-    font-size: ${({ theme }) => theme.fontsize_16};
-    color: ${({ theme }) => theme.grey_middle()};
+    font-size: ${({ theme }) => theme.fontsize_14};
+    color: ${({ styleErr, theme }) =>
+      styleErr ? theme.danger() : theme.grey_middle()};
     background: transparent;
   }
   input {

@@ -7,6 +7,9 @@ export const ModalStyle = styled.section<{ open: boolean }>`
   background: ${({ theme }) => theme.bg_black()};
   overflow: hidden;
   z-index: 1000;
+
+  flex-direction: column;
+
   button#close-modal {
     width: 48px;
     height: 48px;
@@ -47,5 +50,16 @@ export const ModalStyle = styled.section<{ open: boolean }>`
   }
   & .wrapper {
     margin: auto;
+  }
+  div.btns {
+    display: flex;
+    justify-content: space-around;
+    button.controls {
+      width: 30%;
+      display: block;
+      background: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
   }
 `;
