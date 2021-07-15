@@ -10,7 +10,7 @@ import { useStepsStore } from '@Hooks/useStores';
 import { Form } from '@Types';
 
 const CreateSchedule: FC = () => {
-  let { step, setStep, color } = useStepsStore();
+  let { step, setStep } = useStepsStore();
 
   const getSchedule = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
@@ -24,7 +24,7 @@ const CreateSchedule: FC = () => {
     setStep(step);
   };
 
-  console.log('from select-days ', color);
+  console.log('from select-days ');
   return (
     <CreateScheduleStyle onSubmit={getSchedule} name="schedule">
       <ModalTitle>Lukujärjestys</ModalTitle>

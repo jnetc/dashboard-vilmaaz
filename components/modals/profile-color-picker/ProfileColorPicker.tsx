@@ -5,7 +5,6 @@ import {
   useCallback,
   Dispatch,
   SetStateAction,
-  useEffect,
 } from 'react';
 // Style
 import { ProfileColorPickerStyle } from './ProfileColorPicker.style';
@@ -41,10 +40,6 @@ export const ProfileColorPicker: FC<GetProfileColor> = ({
 
     getColor(colorStr);
     window.localStorage.setItem('color', colorStr);
-  }, []);
-
-  useEffect(() => {
-    console.log('mount color');
   }, []);
 
   const radioBtns = colors.map(clr => {
