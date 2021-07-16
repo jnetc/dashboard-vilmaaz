@@ -1,11 +1,4 @@
-import {
-  FC,
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import { FC, ChangeEvent, useState, useEffect } from 'react';
 // Style
 import { ProfileColorPickerStyle } from './ProfileColorPicker.style';
 // Global const
@@ -14,33 +7,28 @@ import { colors } from '@Const/colors';
 import { ProfileColor } from '@Modals/profile-color-picker/ProfileColor';
 //Types
 import { Input } from '@Types';
+// Hook
+import { useStepsStore } from '@Hooks/useStores';
 
-interface GetProfileColor {
-  getColor: Dispatch<SetStateAction<string>>;
-  color: string;
-}
+export const ProfileColorPicker: FC = () => {
+  const { profile, setProfile, reset } = useStepsStore();
+  const [color, setColor] = useState(profile.color);
 
-export const ProfileColorPicker: FC<GetProfileColor> = ({
-  getColor,
-  color,
-}) => {
-  const pickColor = useCallback((ev: ChangeEvent<Input>) => {
+  const pickColor = (ev: ChangeEvent<Input>) => {
     const colorStr = ev.currentTarget.dataset.color;
     if (!colorStr) return;
+    setColor(colorStr);
+  };
 
-    getColor(colorStr);
-    window.localStorage.setItem('color', colorStr);
-  }, []);
+  useEffect(() => {
+    profile.color = color;
+    setProfile(profile);
+  }, [color]);
 
-  const pressEnter = useCallback((ev: KeyboardEvent<Input>) => {
-    if (ev.key !== 'Enter') return;
-
-    const colorStr = ev.currentTarget.dataset.color;
-    if (!colorStr) return;
-
-    getColor(colorStr);
-    window.localStorage.setItem('color', colorStr);
-  }, []);
+  // Reset to default
+  useEffect(() => {
+    if (profile.color === colors[0].en) setColor(colors[0].en);
+  }, [reset]);
 
   const radioBtns = colors.map(clr => {
     return (
@@ -48,7 +36,6 @@ export const ProfileColorPicker: FC<GetProfileColor> = ({
         key={clr.en}
         clr={clr}
         onChange={pickColor}
-        onKeyPress={pressEnter}
         checked={clr.en === color}
       />
     );

@@ -10,8 +10,7 @@ export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
   align-items: center;
   position: relative;
   border-radius: 15px;
-  border: 3px dashed
-    ${({ styleErr, theme }) => (styleErr ? theme.danger() : theme.bg_light())};
+  border: 3px dashed ${({ theme }) => theme.bg_light()};
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   z-index: 10;
@@ -25,8 +24,7 @@ export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
     background: ${({ theme }) => theme.bg_black()};
   }
   &:hover {
-    border-color: ${({ styleErr, theme }) =>
-      styleErr ? theme.danger() : theme.grey_dark()};
+    border-color: ${({ theme }) => theme.grey_dark()};
   }
   &:focus {
     border-color: ${({ theme }) => theme.grey_dark()};
@@ -34,20 +32,14 @@ export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
 `;
 
 export const UploadInputAvatarStyle = styled.input<{ styleErr: boolean }>`
-  /* grid-column: 1 / -1;
-  grid-row: 2; */
-  /* min-width: inherit; */
   opacity: 0;
   position: absolute;
-  /* inset: 0; */
-  /* border-radius: 15px; */
   z-index: -1;
   &:focus {
     outline: none;
   }
   &:focus ~ label {
-    border-color: ${({ styleErr, theme }) =>
-      styleErr ? theme.danger() : theme.grey_dark()};
+    border-color: ${({ theme }) => theme.grey_dark()};
   }
 `;
 

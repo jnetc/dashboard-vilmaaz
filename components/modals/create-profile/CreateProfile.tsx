@@ -1,10 +1,10 @@
-import { FC, MouseEvent, useState, useEffect } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 //Style
 import { CreateProfileStyle } from './CreateProfile.style';
 // Hook
 import { useStepsStore } from '@Hooks/useStores';
 // Types
-import { Form, UserDataType } from '@Types';
+import { Form } from '@Types';
 // Components
 import { ModalTitle } from '@Modals/modal-title/ModalTitle';
 import { ProfileAvatar } from '@Modals/profile-avatar/ProfileAvatar';
@@ -15,69 +15,58 @@ import { ProfileButton } from '@Modals/profile-button/ProfileButton';
 import { colors } from '@Const/colors';
 
 const CreateProfile: FC = () => {
-  let { step, setStep, hasError } = useStepsStore();
-  const [name, setName] = useState<string>('');
-  const [avatarImage, setAvatarImage] = useState('');
-  const [color, setColor] = useState<string>('');
+  let { step, setStep, profile, setProfile, reset, setReset } = useStepsStore();
 
-  const avatarStr = name?.substring(0, 2);
-  const isAcepted = name.length >= 2 && !hasError;
+  const [hasError, setHasError] = useState({
+    nameErr: false,
+    avatarErr: false,
+  });
 
-  useEffect(() => {
-    const lsAvatar = window.localStorage.getItem('avatar');
-    const lsName = window.localStorage.getItem('name');
-    const lsColor = window.localStorage.getItem('color');
+  const nameErrHandler = (err: boolean) => {
+    hasError.nameErr = err;
+    setHasError(prev => {
+      hasError.nameErr = err;
+      return { ...prev, ...hasError };
+    });
+  };
 
-    if (lsAvatar) setAvatarImage(lsAvatar);
-    if (lsName) setName(lsName);
-    if (lsColor) setColor(lsColor);
-    if (!lsColor) setColor(colors[0].en);
-  }, []);
+  const avatarErrHandler = (err: boolean) => {
+    setHasError(prev => {
+      hasError.avatarErr = err;
+      return { ...prev, ...hasError };
+    });
+  };
 
   const create = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
 
-    if (!isAcepted) return;
-
-    //! Здесь нужна проверка
-    //! Создавать или обновлять?
-    const data: UserDataType = {
-      id: `${Math.round(Math.random() * 1000000000)}`,
-      name,
-      color,
-      avatar: {
-        name: avatarStr,
-        img: avatarImage,
-      },
-    };
+    if (hasError.nameErr ?? hasError.avatarErr) return;
 
     step += 1;
     setStep(step);
 
-    console.log('Created', data);
+    console.log('Created profile', profile);
   };
 
-  // Clear LS & set to default state
+  // Set to default state
   const clear = () => {
-    window.localStorage.removeItem('avatar');
-    window.localStorage.removeItem('name');
-    window.localStorage.removeItem('color');
-    setAvatarImage('');
-    setName('');
-    setColor(colors[0].en);
+    setReset(!reset);
+    setProfile({
+      id: `${Math.random()}`,
+      name: '',
+      color: colors[0].en,
+      avatar: { name: '', img: '' },
+    });
+    console.log('reset profile', profile);
   };
 
   return (
     <>
       <CreateProfileStyle onSubmit={create} name="user">
         <ModalTitle>Lou uusi tili</ModalTitle>
-        <ProfileAvatar
-          getAvatar={setAvatarImage}
-          avatar={avatarImage}
-          avatarStr={avatarStr}
-        />
-        <ProfileName getName={setName} name={name} />
-        <ProfileColorPicker getColor={setColor} color={color} />
+        <ProfileAvatar profileErrHandler={avatarErrHandler} />
+        <ProfileName profileErrHandler={nameErrHandler} />
+        <ProfileColorPicker />
         <ProfileButton
           ButtonStyle="reset"
           row={5}
@@ -86,9 +75,9 @@ const CreateProfile: FC = () => {
           aria-label="reset by default">
           Tyhjätä
         </ProfileButton>
-        {isAcepted ? (
+        {hasError.nameErr ?? hasError.avatarErr ? (
           <ProfileButton
-            ButtonStyle="confirm"
+            ButtonStyle="disable"
             row={5}
             col={2}
             aria-label="go to next">
@@ -96,7 +85,7 @@ const CreateProfile: FC = () => {
           </ProfileButton>
         ) : (
           <ProfileButton
-            ButtonStyle="disable"
+            ButtonStyle="confirm"
             row={5}
             col={2}
             aria-label="go to next">

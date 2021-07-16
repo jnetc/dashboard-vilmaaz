@@ -1,75 +1,93 @@
-import {
-  FC,
-  ChangeEvent,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-  useState,
-} from 'react';
+import { FC, ChangeEvent, useEffect, useState } from 'react';
 // Style
 import { ProfileNameStyle } from './ProfileName.style';
 // Types
-import { Input } from '@Types';
+import { Input, User } from '@Types';
 // Helper
 import { firstUpperCase } from '@Helpers';
 // Hook
 import { useStepsStore } from '@Hooks/useStores';
-
-interface GetProfileName {
-  getName: Dispatch<SetStateAction<string>>;
-  name: string;
-}
 
 interface ErrorHandler {
   isError: boolean;
   message?: string;
 }
 
-export const ProfileName: FC<GetProfileName> = ({ getName, name }) => {
-  const { setHasError } = useStepsStore();
-  const [error, setError] = useState<ErrorHandler>({ isError: false });
+interface PropsErrHandler {
+  profileErrHandler: (err: boolean) => void;
+}
 
-  const getOnChange = useCallback((ev: ChangeEvent<Input>) => {
+const changeProfile = (profile: User, typing: string) => {
+  profile.name = typing;
+  profile.avatar.name = typing.substring(0, 2);
+  return profile;
+};
+
+export const ProfileName: FC<PropsErrHandler> = ({ profileErrHandler }) => {
+  const { profile, setProfile, reset } = useStepsStore();
+  const [typing, setTyping] = useState(profile.name);
+  const [profileNameError, setProfileNameError] = useState<ErrorHandler>({
+    isError: false,
+  });
+
+  const getOnChange = (ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;
     const string = el.value.toLowerCase().trim();
     const name = firstUpperCase(string);
-    const typingCheck = name.match(RegExp(/[a-яA-Я0-9]/gmu))?.join('');
+    setTyping(name);
+  };
 
-    if (typingCheck !== name && name.length > 0) {
-      getName(name);
-      setError({
+  useEffect(() => {
+    const typingCheck = typing.match(RegExp(/[a-яA-Я0-9]/gmu))?.join('');
+
+    if (typingCheck !== typing && typing.length > 0) {
+      setProfile(changeProfile(profile, typing));
+      setProfileNameError({
         isError: true,
         message: 'Käytä vain numeroita tai kirjaimia',
       });
-      setHasError(true);
+
+      profileErrHandler(true);
       return;
     }
-    if (name.length === 1) {
-      getName(name);
-      setError({
+
+    if (typing.length === 1) {
+      setProfile(changeProfile(profile, typing));
+      setProfileNameError({
         isError: true,
         message: 'Pitäisi sisältää 2 ja yli kirjainta',
       });
-      setHasError(true);
+      profileErrHandler(true);
       return;
     }
 
-    getName(name);
-    window.localStorage.setItem('name', name);
-    setHasError(false);
-    setError({ isError: false });
-  }, []);
+    if (typing.length <= 1) {
+      profileErrHandler(true);
+    } else {
+      profileErrHandler(false);
+    }
+
+    setProfile(changeProfile(profile, typing));
+    setProfileNameError({ isError: false });
+  }, [typing]);
+
+  // Reset to default
+  useEffect(() => {
+    if (profile.name === '') setTyping('');
+  }, [reset]);
 
   return (
-    <ProfileNameStyle styleErr={error.isError}>
-      <legend>{error.isError ? error.message : 'Keksiä nimesi'}</legend>
+    <ProfileNameStyle styleErr={profileNameError.isError}>
+      <legend>
+        {profileNameError.isError ? profileNameError.message : 'Keksiä nimesi'}
+      </legend>
 
       <input
         type="text"
         name="username"
         id="username"
         placeholder="Tilin nimi"
-        value={name}
+        value={profile.name}
         onChange={getOnChange}
       />
     </ProfileNameStyle>

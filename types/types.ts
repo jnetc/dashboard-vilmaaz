@@ -8,7 +8,7 @@ export type Element = Div | null;
 export type This = globalThis.MouseEvent;
 
 export interface Avatar {
-  img?: string;
+  img: string;
   name: string;
 }
 
