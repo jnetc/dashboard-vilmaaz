@@ -250,6 +250,7 @@ export const database: Array<Schedule> = [
     color: 'green',
     avatar: {
       name: 'AM',
+      img: '',
     },
     timetable: [
       {
@@ -571,6 +572,7 @@ export const database: Array<Schedule> = [
     color: 'violet',
     avatar: {
       name: 'OL',
+      img: '',
     },
     timetable: [
       {
@@ -784,6 +786,7 @@ export const database: Array<Schedule> = [
     color: 'blue',
     avatar: {
       name: 'MI',
+      img: '',
     },
     timetable: [
       {
@@ -905,30 +908,30 @@ export const database: Array<Schedule> = [
       {
         day: 'perjantai',
         lessons: [
-          // {
-          //   id: 'sdf54we68w5f4s5dsor7y',
-          //   lesson: 'liikunta',
-          //   start: { time: '9:00' },
-          //   end: { time: '9:45' },
-          // },
-          // {
-          //   id: 'sdf54weln68f475d4fhj7',
-          //   lesson: 'äidinkieli',
-          //   start: { time: '10:00' },
-          //   end: { time: '10:45' },
-          // },
-          // {
-          //   id: 'sdf54we68w5f4s25dmjjd',
-          //   lesson: 'äidinkieli',
-          //   start: { time: '10:45' },
-          //   end: { time: '11:30' },
-          // },
-          {
-            id: 'sdf54we665mk!s5d4fkjd',
-            lesson: 'matemattikka',
-            start: { time: '12:30' },
-            end: { time: '13:15' },
-          },
+          //   {
+          //     id: 'sdf54we68w5f4s5dsor7y',
+          //     lesson: 'liikunta',
+          //     start: { time: '9:00' },
+          //     end: { time: '9:45' },
+          //   },
+          //   {
+          //     id: 'sdf54weln68f475d4fhj7',
+          //     lesson: 'äidinkieli',
+          //     start: { time: '10:00' },
+          //     end: { time: '10:45' },
+          //   },
+          //   {
+          //     id: 'sdf54we68w5f4s25dmjjd',
+          //     lesson: 'äidinkieli',
+          //     start: { time: '10:45' },
+          //     end: { time: '11:30' },
+          //   },
+          //   {
+          //     id: 'sdf54we665mk!s5d4fkjd',
+          //     lesson: 'matemattikka',
+          //     start: { time: '12:30' },
+          //     end: { time: '13:15' },
+          //   },
         ],
       },
       {

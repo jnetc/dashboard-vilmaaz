@@ -34,6 +34,8 @@ export const transform = (
   data.forEach(tb => {
     const { timetable, ...data } = tb;
 
+    //! Проверить, если убрать полность массив с уроками
+    //!
     const schoolday = timetable.find(l => l.day === day && l.lessons);
 
     if (!schoolday) return;

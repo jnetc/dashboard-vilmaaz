@@ -13,23 +13,21 @@ import { Form, Input } from '@Types';
 import { daysOfWeek } from '@Const/daysOfWeek';
 
 const SelectDays: FC = () => {
-  let { step, setStep } = useStepsStore();
-  const [daysArr, setDayArr] = useState<Array<string>>([]);
-  const pickArr: Set<string> = new Set(daysArr);
+  let { step, setStep, days, setDays } = useStepsStore();
+  const [isSelectedAny, setIsSelectedAny] = useState(false);
+  const pickArr: Set<string> = new Set(days);
 
   const pickDay = (ev: ChangeEvent<Input>) => {
     const getDayStr = ev.currentTarget.id;
 
     if (pickArr.has(getDayStr)) {
       pickArr.delete(getDayStr);
-      setDayArr([...pickArr]);
-      window.localStorage.setItem('days', JSON.stringify([...pickArr]));
+      setDays([...pickArr]);
       return;
     }
 
     pickArr.add(getDayStr);
-    setDayArr([...pickArr]);
-    window.localStorage.setItem('days', JSON.stringify([...pickArr]));
+    setDays([...pickArr]);
   };
 
   const getSelectedDays = (ev: MouseEvent<Form>) => {
@@ -38,7 +36,7 @@ const SelectDays: FC = () => {
     step += 1;
     setStep(step);
 
-    console.log('Selected');
+    console.log('Selected days', days);
   };
 
   const prev = () => {
@@ -47,16 +45,11 @@ const SelectDays: FC = () => {
   };
 
   useEffect(() => {
-    const lsDays = window.localStorage.getItem('days');
-    if (!lsDays) return;
+    if (days.length === 0) return setIsSelectedAny(false);
+    setIsSelectedAny(true);
+  }, [days]);
 
-    const days = JSON.parse(lsDays) as Array<string>;
-    setDayArr(days);
-  }, []);
-
-  const isDaySelect = true;
-
-  const days = daysOfWeek.map(day => {
+  const dayslist = daysOfWeek.map(day => {
     return (
       <SelectDay
         key={day}
@@ -70,7 +63,7 @@ const SelectDays: FC = () => {
   return (
     <SelectDaysStyle onSubmit={getSelectedDays} name="days">
       <ModalTitle>Valitse päivät</ModalTitle>
-      <SelectDaysGroupStyle>{days}</SelectDaysGroupStyle>
+      <SelectDaysGroupStyle>{dayslist}</SelectDaysGroupStyle>
       <ProfileButton
         ButtonStyle="reset"
         onClick={prev}
@@ -79,7 +72,7 @@ const SelectDays: FC = () => {
         aria-label="reset by default">
         Takaisin
       </ProfileButton>
-      {isDaySelect ? (
+      {isSelectedAny ? (
         <ProfileButton
           ButtonStyle="confirm"
           row={3}

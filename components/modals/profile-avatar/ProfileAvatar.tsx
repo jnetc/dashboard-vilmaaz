@@ -11,11 +11,15 @@ import { Input } from '@Types';
 import { useStepsStore } from '@Hooks/useStores';
 
 interface PropsErrHandler {
+  reset: boolean;
   profileErrHandler: (err: boolean) => void;
 }
 
-export const ProfileAvatar: FC<PropsErrHandler> = ({ profileErrHandler }) => {
-  const { profile, setProfile, reset } = useStepsStore();
+export const ProfileAvatar: FC<PropsErrHandler> = ({
+  reset,
+  profileErrHandler,
+}) => {
+  const { profile, setProfile } = useStepsStore();
   const [avatarError, setAvatarError] = useState(false);
   const [file, setFile] = useState<File | undefined>();
   const [image, setImage] = useState<string>(profile.avatar.img);
@@ -53,7 +57,10 @@ export const ProfileAvatar: FC<PropsErrHandler> = ({ profileErrHandler }) => {
 
   // Reset to default
   useEffect(() => {
-    if (profile.avatar.img === '') setImage('');
+    if (profile.avatar.img === '') {
+      setAvatarError(false);
+      setImage('');
+    }
   }, [reset]);
 
   // onChange event can't clear target value. Use it!

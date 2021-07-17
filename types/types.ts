@@ -52,6 +52,19 @@ export interface SchoolDay {
   lessons: Array<InitLesson>;
 }
 
+//!=== STEPS
+export interface Timetable {
+  day: string;
+  lessons: Array<Lesson>;
+}
+export interface ProfileTimetable {
+  timetable: Array<Timetable>;
+}
+export interface ProfileStore extends User {
+  timetable: Array<ProfileTimetable>;
+}
+//!===
+
 export interface UserDataType extends User {
   timetable?: Array<Lesson>;
 }

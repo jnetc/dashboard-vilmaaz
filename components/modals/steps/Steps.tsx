@@ -6,15 +6,17 @@ import { SwitchStep } from './SwitchStep';
 // Global const
 import { colors } from '@Const/colors';
 // Types
-import { User } from '@Types';
+import { User, Timetable } from '@Types';
 
 interface StepsType {
   step: number;
   setStep: (num: number) => void;
   profile: User;
   setProfile: (obj: User) => void;
-  reset: boolean;
-  setReset: (res: boolean) => void;
+  days: Array<string>;
+  setDays: (arr: Array<string>) => void;
+  timetable: Array<Timetable>;
+  setTimetable: (arr: Array<Timetable>) => void;
 }
 
 export const state: StepsType = {
@@ -27,8 +29,10 @@ export const state: StepsType = {
     avatar: { name: '', img: '' },
   },
   setProfile: obj => obj,
-  reset: false,
-  setReset: res => res,
+  days: [],
+  setDays: arr => arr,
+  timetable: [{ day: '', lessons: [] }],
+  setTimetable: arr => arr,
 };
 
 export const CreateStepsStore = createContext(state);
@@ -36,17 +40,20 @@ export const CreateStepsStore = createContext(state);
 export const Steps: FC = () => {
   const [step, setStep] = useState(state.step);
   const [profile, setProfile] = useState(state.profile);
-  const [reset, setReset] = useState(state.reset);
+  const [days, setDays] = useState(state.days);
+  const [timetable, setTimetable] = useState(state.timetable);
 
   return (
     <CreateStepsStore.Provider
       value={{
         step,
-        reset,
         profile,
+        days,
+        timetable,
         setStep,
         setProfile,
-        setReset,
+        setDays,
+        setTimetable,
       }}>
       <Modal>
         <SwitchStep />

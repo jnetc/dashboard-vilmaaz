@@ -14,6 +14,7 @@ interface ErrorHandler {
 }
 
 interface PropsErrHandler {
+  reset: boolean;
   profileErrHandler: (err: boolean) => void;
 }
 
@@ -23,8 +24,11 @@ const changeProfile = (profile: User, typing: string) => {
   return profile;
 };
 
-export const ProfileName: FC<PropsErrHandler> = ({ profileErrHandler }) => {
-  const { profile, setProfile, reset } = useStepsStore();
+export const ProfileName: FC<PropsErrHandler> = ({
+  reset,
+  profileErrHandler,
+}) => {
+  const { profile, setProfile } = useStepsStore();
   const [typing, setTyping] = useState(profile.name);
   const [profileNameError, setProfileNameError] = useState<ErrorHandler>({
     isError: false,
