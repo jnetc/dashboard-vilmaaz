@@ -5,9 +5,13 @@ import { ProfilesStyle } from './Profiles.style';
 import { ProfilesType } from '@Types';
 // Component
 import { ProfilesTime } from '@RightProfilePanel/profiles-time/ProfilesTime';
+// Hook
+import { useMainStore } from '@Hooks/useStores';
 
 export const Profiles: FC<{ data: ProfilesType }> = ({ data }) => {
-  const { avatar, name, end, start, lessons, today, activeDay } = data;
+  const { setProfileLine } = useMainStore();
+  const { avatar, name, end, start, lessons, today, activeDay, id, color } =
+    data;
   const timedata = {
     endtime: end.position,
     starttime: start.position,
@@ -15,8 +19,12 @@ export const Profiles: FC<{ data: ProfilesType }> = ({ data }) => {
     activeDay,
   };
 
+  const noticeLine = () => {
+    setProfileLine({ id, color });
+  };
+
   return (
-    <ProfilesStyle>
+    <ProfilesStyle onMouseEnter={noticeLine}>
       <figure>
         {avatar.img ? (
           <Image

@@ -1,9 +1,9 @@
 import { SwitcherStyle } from './Switcher.style';
 // Hook
-import { useGlobalStore } from '@Hooks/useStores';
+import { useMainStore } from '@Hooks/useStores';
 
 export const Switcher = () => {
-  const { autoMovement, setAutoMovement } = useGlobalStore();
+  const { autoMovement, setAutoMovement } = useMainStore();
 
   const automovement = () => setAutoMovement(!autoMovement);
 

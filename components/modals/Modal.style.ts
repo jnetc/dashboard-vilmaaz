@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const ModalStyle = styled.section<{ open: boolean }>`
-  display: ${({ open }) => (open ? 'flex' : 'none')};
+export const ModalStyle = styled.section`
+  display: flex;
   position: fixed;
   inset: 0;
   background: ${({ theme }) => theme.bg_black()};

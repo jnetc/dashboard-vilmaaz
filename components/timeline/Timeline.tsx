@@ -9,7 +9,7 @@ import {
 import { TimeScale } from '@Timeline/time-scale/TimeScale';
 import { TimeField } from '@Timeline/time-field/TimeField';
 // Hook
-import { useGlobalStore } from '@Hooks/useStores';
+import { useGlobalStore, useMainStore } from '@Hooks/useStores';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
 // Types
 import { This, Div, Element, TimelineStoreProps } from '@Types';
@@ -22,8 +22,8 @@ const state: TimelineStoreProps = { mainWidth: 0, timetableEl: null };
 export const TimelineStore = createContext(state);
 
 const Timeline = () => {
-  const { setAutoMovement, timeline, timelineWidth, activeDay } =
-    useGlobalStore();
+  const { timeline, timelineWidth, activeDay } = useGlobalStore();
+  const { setAutoMovement } = useMainStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
   const [mouseDownCursorPos, setMouseDownCursorPos] = useState<number>(0);

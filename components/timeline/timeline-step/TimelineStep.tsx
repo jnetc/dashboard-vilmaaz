@@ -4,7 +4,11 @@ import { movementTimeAndTimetable } from '@Helpers';
 // Hook
 import { useUpdateTime } from '@Hooks/useUpdateTime';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
-import { useGlobalStore, useTimelineStore } from '@Hooks/useStores';
+import {
+  useGlobalStore,
+  useTimelineStore,
+  useMainStore,
+} from '@Hooks/useStores';
 // Global const
 import { hourDivWidth } from '@Store';
 // Styles
@@ -20,7 +24,8 @@ import { TimelineStepStyle } from './TimelineStep.style';
 //  }))`width: 100%;`
 
 export const TimelineStep: FC = () => {
-  const { autoMovement, timeline, today, activeDay } = useGlobalStore();
+  const { timeline, today, activeDay } = useGlobalStore();
+  const { autoMovement } = useMainStore();
   const { timetableEl, mainWidth } = useTimelineStore();
   const { width, isOut, center } = useResizeTimetable(timeline, mainWidth);
   const { position, currentTimeStr } = useUpdateTime();

@@ -1,29 +1,34 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 // Component
 import Lessons from '@Lessons/Lessons';
 // Hook
-import { useGlobalStore } from '@Hooks/useStores';
-// Types
-import { Order } from '@Types';
+import { useGlobalStore, useMainStore } from '@Hooks/useStores';
+
 // Styles
 import { TimeFieldStyle } from './TimeField.style';
 
 export const TimeField: FC = () => {
-  const { content, updateOrders, dayOfWeek } = useGlobalStore();
-  const [orders, setOrders] = useState<Array<Order>>([
-    { id: '', name: '', order: 0 },
-  ]);
+  const { content } = useGlobalStore();
+  const { profileLine } = useMainStore();
+  // const [orders, setOrders] = useState<Array<Order>>([
+  //   { id: '', name: '', order: 0 },
+  // ]);
 
-  useEffect(() => {
-    const isOrders = window.localStorage.getItem('orders');
+  // useEffect(() => {
+  //   const isOrders = window.localStorage.getItem('orders');
 
-    if (isOrders) return setOrders(JSON.parse(isOrders));
-  }, [updateOrders, dayOfWeek]);
+  //   if (isOrders) return setOrders(JSON.parse(isOrders));
+  // }, [updateOrders, dayOfWeek]);
 
   const lessons = content.map(data => {
-    const currentLessonOrder = orders.find(o => o.id === data.id);
+    if (profileLine.id === data.id) {
+      console.log(profileLine);
 
-    return <Lessons key={data.id} data={data} order={currentLessonOrder} />;
+      return (
+        <Lessons key={data.id} data={data} lineColor={profileLine.color} />
+      );
+    }
+    return <Lessons key={data.id} data={data} />;
   });
 
   return <TimeFieldStyle id="time-field">{lessons}</TimeFieldStyle>;

@@ -1,25 +1,19 @@
 import { FC, createContext, useEffect, useState } from 'react';
 
 // Types
-import { Schedule, MainStoreProps, LessonsType } from '@Types';
+import { Schedule, StoreCtxProps, LessonsType } from '@Types';
 import { transform, staticValues, hourPositions, dateFormat } from '@Helpers';
 
 import { hours } from '@Const/hours';
 import { database } from './data';
 
-const state: MainStoreProps = {
-  openModal: false,
-  setOpenModal: open => open,
-  autoMovement: true,
-  setAutoMovement: el => el,
+const state: StoreCtxProps = {
   dayOfWeek: '',
   setDayOfWeek: day => day,
   today: true,
   activeDay: false,
   timelineHours: [],
   timelineWidth: 0,
-  updateOrders: true,
-  setUpdateOrders: b => b,
   content: [],
   timepoints: [],
   timeline: {
@@ -29,7 +23,7 @@ const state: MainStoreProps = {
   },
 };
 // Global context
-export const MainContext = createContext(state);
+export const StoreContext = createContext(state);
 
 // Global constants
 export const minutesInHour: number = 60;
@@ -41,10 +35,7 @@ export const rightPanelWidth = 300;
 
 const Store: FC = ({ children }) => {
   const [data, setData] = useState<Array<Schedule>>(database);
-  const [openModal, setOpenModal] = useState(state.openModal);
-  const [autoMovement, setAutoMovement] = useState(state.autoMovement);
   const [timelineHours, setTimelineHours] = useState(state.timelineHours);
-  const [updateOrders, setUpdateOrders] = useState(state.updateOrders);
   const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
 
   const today = dateFormat({ weekday: 'long' });
@@ -80,27 +71,23 @@ const Store: FC = ({ children }) => {
     setDayOfWeek(today);
   }, []);
 
+  console.log(content);
+
   return (
-    <MainContext.Provider
+    <StoreContext.Provider
       value={{
-        openModal,
-        setOpenModal,
-        autoMovement,
-        setAutoMovement,
         dayOfWeek,
         setDayOfWeek,
         today: isToday,
         activeDay: isActiveDay,
         timelineHours,
         timelineWidth,
-        updateOrders,
-        setUpdateOrders,
         content,
         timepoints,
         timeline,
       }}>
       {children}
-    </MainContext.Provider>
+    </StoreContext.Provider>
   );
 };
 

@@ -11,12 +11,12 @@ const ProfilePanel = () => {
   const { content, today, activeDay } = useGlobalStore();
 
   const profiles = content.map(prof => {
-    const { id, avatar, colors, name, end, start } = prof;
+    const { id, avatar, color, name, end, start } = prof;
     const lessons = prof.timetable?.filter(l => l.lesson !== 'taukko').length;
     const dataProfile = {
       id,
       avatar,
-      colors,
+      color,
       name,
       start,
       end,

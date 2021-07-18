@@ -115,20 +115,23 @@ export interface ProfilesTimeType extends DaysType {
 }
 
 // STORES / CONTEXTS
-export interface MainStoreProps extends DaysType {
-  openModal: boolean;
-  setOpenModal: (open: boolean) => void;
-  autoMovement: boolean;
-  setAutoMovement: (el: boolean) => void;
+export interface StoreCtxProps extends DaysType {
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
   timelineHours: Array<TimePosition>;
   timelineWidth: number;
-  updateOrders: boolean;
-  setUpdateOrders: (order: boolean) => void;
   content: Array<LessonsType>;
   timepoints: Array<string>;
   timeline: StaticValues;
+}
+
+export interface MainCtxProps {
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
+  autoMovement: boolean;
+  setAutoMovement: (el: boolean) => void;
+  profileLine: { id: string; color: string };
+  setProfileLine: (obj: { id: string; color: string }) => void;
 }
 
 export interface TimelineStoreProps {
@@ -143,7 +146,7 @@ export interface CreateProfileStoreProps extends User {
   reset: boolean;
 }
 
-// BOTTUNS
+// BUTTONS
 export interface ButtonStyleType {
   isFill?: boolean;
   colorTheme: string;

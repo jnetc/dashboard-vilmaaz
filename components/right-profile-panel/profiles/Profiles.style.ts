@@ -11,6 +11,7 @@ export const ProfilesStyle = styled.div`
   box-shadow: 0 10px 20px ${({ theme }) => theme.bg_black(0.2)},
     0 5px 5px ${({ theme }) => theme.bg_black(0.3)};
   transition: all 0.3s ease-in-out;
+  user-select: none;
   &:hover {
     background: ${({ theme }) => theme.bg_soft()};
     box-shadow: 0 20px 20px ${({ theme }) => theme.bg_black(0.3)},
@@ -55,19 +56,18 @@ export const ProfilesStyle = styled.div`
     font-size: 1rem;
     position: relative;
     cursor: pointer;
-    &::before {
-      content: '•';
-      position: absolute;
-      top: 0px;
-      left: 12px;
-      color: ${({ theme }) => theme.grey_light()};
-    }
+    &::before,
     &::after {
       content: '•';
       position: absolute;
-      bottom: 0px;
       left: 12px;
       color: ${({ theme }) => theme.grey_light()};
+    }
+    &::before {
+      top: 3px;
+    }
+    &::after {
+      bottom: 3px;
     }
   }
 `;

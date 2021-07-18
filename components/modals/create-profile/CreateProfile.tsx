@@ -11,8 +11,8 @@ import { ProfileAvatar } from '@Modals/profile-avatar/ProfileAvatar';
 import { ProfileName } from '@Modals/profile-name/ProfileName';
 import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
 import { ProfileButton } from '@Modals/profile-button/ProfileButton';
-// Default state
-import { state } from '@Modals/steps/Steps';
+// Global const
+import { colors } from '@Const/colors';
 
 const CreateProfile: FC = () => {
   let { step, setStep, profile, setProfile } = useStepsStore();
@@ -48,7 +48,12 @@ const CreateProfile: FC = () => {
   // Set to default state
   const clear = () => {
     setReset(!reset);
-    setProfile(state.profile);
+    setProfile({
+      id: profile.id,
+      name: '',
+      color: colors[0].en,
+      avatar: { name: '', img: '' },
+    });
     console.log('reset profile', profile);
   };
 

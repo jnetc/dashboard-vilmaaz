@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { AddProfileButtonStyle } from './AddProfileButton.style';
 // Hook
-import { useGlobalStore } from '@Hooks/useStores';
+import { useMainStore } from '@Hooks/useStores';
 
 export const AddProfileButton: FC = () => {
-  const { openModal, setOpenModal } = useGlobalStore();
+  const { openModal, setOpenModal } = useMainStore();
   const open = () => {
     setOpenModal(!openModal);
   };
