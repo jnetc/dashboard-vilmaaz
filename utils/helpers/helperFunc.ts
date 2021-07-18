@@ -143,8 +143,10 @@ export const hourPositions = (hours: Array<string>) => {
 export const transformTimeToNum = (time: string | number): number => {
   if ('number' === typeof time) return time;
 
-  const hours = Number(time.split(':')[0]);
-  const minutes = Number(time.split(':')[1]);
+  // const hours = Number(time.split(':')[0]);
+  // const minutes = Number(time.split(':')[1]);
+  const hours = +time.split(':')[0];
+  const minutes = +time.split(':')[1];
 
   const hoursToMinutes = hours * minutesInHour;
 

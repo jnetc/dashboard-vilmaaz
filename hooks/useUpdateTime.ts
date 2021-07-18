@@ -2,15 +2,11 @@ import { useState, useEffect } from 'react';
 import { transformTimeToNum } from '@Helpers';
 
 export const useUpdateTime = () => {
-  const [hours, setHours] = useState<number>(new Date().getHours());
-  const [minutes, setMinutes] = useState<number>(new Date().getMinutes());
+  const [hours, setHours] = useState(new Date().getHours());
+  const [minutes, setMinutes] = useState(new Date().getMinutes());
 
   useEffect(() => {
-    const counter = setInterval(
-      () => setMinutes(new Date().getMinutes()),
-      1000
-    );
-
+    const counter = setInterval(() => setMinutes(new Date().getMinutes()), 0);
     return () => clearInterval(counter);
   }, []);
 
@@ -20,12 +16,10 @@ export const useUpdateTime = () => {
 
   const stepTime = transformTimeToNum(`${hours}:${minutes}`);
   // Manual check timelne
-  // const h = (new Date().getHours() - 0).toString();
+  // const h = (new Date().getHours() - 5).toString();
   // const m = (new Date().getMinutes() - 17).toString();
   // const stepTime = transformTimeToNum(`${h}:${m}`);
   // const stepTime = transformTimeToNum(`12:10`);
-
-  // console.log('hook', stepTime);
 
   return {
     position: stepTime,
