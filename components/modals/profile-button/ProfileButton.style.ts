@@ -8,7 +8,8 @@ interface Pos {
 export const ProfileButtonStyle = styled.button<{ pos: Pos }>`
   grid-row: ${({ pos }) => pos.row};
   align-self: flex-start;
-  width: 100%;
+  justify-self: flex-start;
+  min-width: 235px;
   padding: 15px 30px;
   border-radius: 8px;
   border: 2px solid transparent;
@@ -25,6 +26,7 @@ export const ProfileButtonDisableStyle = styled(ProfileButtonStyle)`
 `;
 
 export const ProfileButtonResetStyle = styled(ProfileButtonStyle)`
+  justify-self: flex-end;
   color: ${({ theme }) => theme.grey_light()};
   background: ${({ theme }) => theme.bg_light()};
   &:hover {

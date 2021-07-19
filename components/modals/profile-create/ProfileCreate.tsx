@@ -1,6 +1,6 @@
 import { FC, MouseEvent, useState } from 'react';
 //Style
-import { CreateProfileStyle } from './CreateProfile.style';
+import { ProfileCreateStyle } from './ProfileCreate.style';
 // Hook
 import { useStepsStore } from '@Hooks/useStores';
 // Types
@@ -59,7 +59,7 @@ const CreateProfile: FC = () => {
 
   return (
     <>
-      <CreateProfileStyle onSubmit={create} name="user">
+      <ProfileCreateStyle onSubmit={create} name="user">
         <ModalTitle>Lou uusi tili</ModalTitle>
         <ProfileAvatar profileErrHandler={avatarErrHandler} reset={reset} />
         <ProfileName profileErrHandler={nameErrHandler} reset={reset} />
@@ -89,7 +89,7 @@ const CreateProfile: FC = () => {
             Seuraava
           </ProfileButton>
         )}
-      </CreateProfileStyle>
+      </ProfileCreateStyle>
     </>
   );
 };

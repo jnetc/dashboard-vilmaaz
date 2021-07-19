@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CreateProfileStyle = styled.form`
+export const ProfileCreateStyle = styled.form`
   min-width: 500px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

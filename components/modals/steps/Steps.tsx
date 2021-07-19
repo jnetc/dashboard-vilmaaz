@@ -13,8 +13,6 @@ interface StepsType {
   setStep: (num: number) => void;
   profile: User;
   setProfile: (obj: User) => void;
-  days: Array<string>;
-  setDays: (arr: Array<string>) => void;
   timetable: Array<Timetable>;
   setTimetable: (arr: Array<Timetable>) => void;
 }
@@ -29,9 +27,7 @@ export const state: StepsType = {
     avatar: { name: '', img: '' },
   },
   setProfile: obj => obj,
-  days: [],
-  setDays: arr => arr,
-  timetable: [{ day: '', lessons: [] }],
+  timetable: [],
   setTimetable: arr => arr,
 };
 
@@ -40,7 +36,6 @@ export const CreateStepsStore = createContext(state);
 export const Steps: FC = () => {
   const [step, setStep] = useState(state.step);
   const [profile, setProfile] = useState(state.profile);
-  const [days, setDays] = useState(state.days);
   const [timetable, setTimetable] = useState(state.timetable);
 
   return (
@@ -48,11 +43,9 @@ export const Steps: FC = () => {
       value={{
         step,
         profile,
-        days,
         timetable,
         setStep,
         setProfile,
-        setDays,
         setTimetable,
       }}>
       <Modal>

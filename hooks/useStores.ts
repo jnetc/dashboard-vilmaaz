@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { StoreContext } from '@Store';
 import { MainContext } from '@Main';
 import { TimelineStore } from '@Timeline/Timeline';
-// import { CreateProfileStore } from '@Modals/create-profile/CreateProfile';
 import { CreateStepsStore } from '@Modals/steps/Steps';
 
 export const useGlobalStore = () => {

@@ -22,7 +22,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
   const { currentTimeNum } = useUpdateTime();
   const lessonRef = useRef<Element>(null);
   const breakRef = useRef<Element>(null);
-  let showMeTime;
+  let showMeTime = '';
   const radius = 24;
   const circumference = Math.round(2 * Math.PI * radius); // 2 * (π = 3,14) * (r = 100)
   const currentPosition = currentTimeNum - start.position;

@@ -1,16 +1,19 @@
 import { FC, MouseEvent } from 'react';
 // Style
-import { CreateScheduleStyle } from './CreateSchedule.style';
+import { ScheduleCreateStyle } from './ScheduleCreate.style';
 // Component
-import { ProfileButton } from '@Modals/profile-button/ProfileButton';
 import { ModalTitle } from '@Modals/modal-title/ModalTitle';
+import { ScheduleTable } from '@Modals/schedule-table/ScheduleTable';
+import { ProfileButton } from '@Modals/profile-button/ProfileButton';
 // Hook
 import { useStepsStore } from '@Hooks/useStores';
 // Types
 import { Form } from '@Types';
 
-const CreateSchedule: FC = () => {
-  let { step, setStep } = useStepsStore();
+const ScheduleCreate: FC = () => {
+  let { step, setStep, timetable } = useStepsStore();
+
+  console.log(timetable);
 
   const getSchedule = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
@@ -26,12 +29,13 @@ const CreateSchedule: FC = () => {
 
   console.log('from select-days ');
   return (
-    <CreateScheduleStyle onSubmit={getSchedule} name="schedule">
+    <ScheduleCreateStyle onSubmit={getSchedule} name="schedule">
       <ModalTitle>Lukujärjestys</ModalTitle>
+      <ScheduleTable />
       <ProfileButton
         ButtonStyle="reset"
         onClick={prev}
-        row={2}
+        row={3}
         col={1}
         aria-label="reset by default">
         Takaisin
@@ -39,7 +43,7 @@ const CreateSchedule: FC = () => {
       {isDaySelect ? (
         <ProfileButton
           ButtonStyle="confirm"
-          row={2}
+          row={3}
           col={2}
           aria-label="save your profile & schedule">
           Tallentaa
@@ -47,14 +51,14 @@ const CreateSchedule: FC = () => {
       ) : (
         <ProfileButton
           ButtonStyle="disable"
-          row={2}
+          row={3}
           col={2}
           aria-label="save your profile & schedule">
           Tallentaa
         </ProfileButton>
       )}
-    </CreateScheduleStyle>
+    </ScheduleCreateStyle>
   );
 };
 
-export default CreateSchedule;
+export default ScheduleCreate;

@@ -1,19 +1,19 @@
 import { FC } from 'react';
 import { useStepsStore } from '@Hooks/useStores';
 // Components
-import CreateProfile from '@Modals/create-profile/CreateProfile';
+import ProfileCreate from '@Modals/profile-create/ProfileCreate';
 import SelectDays from '@Modals/select-days/SelectDays';
-import CreateSchedule from '@Modals/create-schedule/CreateSchedule';
+import ScheduleCreate from '@Modals/schedule-create/ScheduleCreate';
 
 export const SwitchStep: FC = () => {
   const { step } = useStepsStore();
 
   switch (step) {
     case 1:
-      return <CreateProfile />;
+      return <ProfileCreate />;
     case 2:
       return <SelectDays />;
     default:
-      return <CreateSchedule />;
+      return <ScheduleCreate />;
   }
 };

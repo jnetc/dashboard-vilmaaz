@@ -27,7 +27,7 @@ export const ProfileColorPicker: FC<{ reset: boolean }> = ({ reset }) => {
 
   // Reset to default
   useEffect(() => {
-    if (profile.color === colors[0].en) setColor(colors[0].en);
+    if (profile.color.includes(colors[0].en)) setColor(colors[0].en);
   }, [reset]);
 
   const radioBtns = colors.map(clr => {
@@ -36,7 +36,7 @@ export const ProfileColorPicker: FC<{ reset: boolean }> = ({ reset }) => {
         key={clr.en}
         clr={clr}
         onChange={pickColor}
-        checked={clr.en === color}
+        checked={clr.en.includes(color)}
       />
     );
   });
