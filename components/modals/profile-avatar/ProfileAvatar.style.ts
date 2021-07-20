@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
   grid-column: 1 / -1;
-  grid-row: 2;
+  grid-row: 1;
   width: 100%;
   height: 100%;
   display: flex;
@@ -26,20 +26,15 @@ export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
   &:hover {
     border-color: ${({ theme }) => theme.grey_dark()};
   }
-  &:focus {
-    border-color: ${({ theme }) => theme.grey_dark()};
-  }
 `;
 
 export const UploadInputAvatarStyle = styled.input<{ styleErr: boolean }>`
   opacity: 0;
   position: absolute;
   z-index: -1;
-  &:focus {
-    outline: none;
-  }
   &:focus ~ label {
-    border-color: ${({ theme }) => theme.grey_dark()};
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
   }
 `;
 

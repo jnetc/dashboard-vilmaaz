@@ -8,9 +8,10 @@ import { colors } from '@Const/colors';
 // Types
 import { User, Timetable } from '@Types';
 
+type Steps = 'profile' | 'days' | 'schedule';
 interface StepsType {
-  step: number;
-  setStep: (num: number) => void;
+  step: Steps;
+  setStep: (step: Steps) => void;
   profile: User;
   setProfile: (obj: User) => void;
   timetable: Array<Timetable>;
@@ -18,8 +19,8 @@ interface StepsType {
 }
 
 export const state: StepsType = {
-  step: 1,
-  setStep: num => num,
+  step: 'profile',
+  setStep: step => step,
   profile: {
     id: `${Math.random()}`,
     name: '',

@@ -4,7 +4,7 @@ export const SelectDayInputStyle = styled.input`
   opacity: 0;
   position: absolute;
   &:focus + label {
-    border-color: ${({ theme }) => theme.white()};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
   }
   &:checked + label {
     border-color: ${({ theme }) => theme.grey_light()};
@@ -20,7 +20,6 @@ export const SelectDayInputStyle = styled.input`
 `;
 
 export const SelectDayLabelStyle = styled.label`
-  width: 100%;
   display: flex;
   padding: 16px 50px;
   position: relative;

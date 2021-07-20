@@ -6,6 +6,7 @@ import {
   InitLesson,
   StaticValues,
   Element,
+  Timetable,
 } from '@Types';
 
 import {
@@ -287,4 +288,19 @@ export const profileStatus = (
 
 export const firstUpperCase = (name: string) => {
   return name.charAt(0).toUpperCase() + name.slice(1);
+};
+
+export const addDayToTheSchedule = (currDay: string, days: Timetable[]) => {
+  const checkDay = days.find(d => d.day.includes(currDay));
+  if (!checkDay) {
+    days.push({ day: currDay, lessons: [] });
+    return days;
+  }
+  return days;
+};
+
+export const removeDayFromSchedule = (currDay: string, days: Timetable[]) => {
+  const checkDay = days.filter(d => !d.day.includes(currDay));
+  if (checkDay.length === 0) return [];
+  return checkDay;
 };

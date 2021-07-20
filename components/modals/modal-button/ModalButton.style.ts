@@ -5,7 +5,7 @@ interface Pos {
   col: number;
 }
 
-export const ProfileButtonStyle = styled.button<{ pos: Pos }>`
+export const ModalButtonStyle = styled.button<{ pos: Pos }>`
   grid-row: ${({ pos }) => pos.row};
   align-self: flex-start;
   justify-self: flex-start;
@@ -17,15 +17,19 @@ export const ProfileButtonStyle = styled.button<{ pos: Pos }>`
   font-weight: bold;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
+  }
 `;
 
-export const ProfileButtonDisableStyle = styled(ProfileButtonStyle)`
+export const ModalButtonDisableStyle = styled(ModalButtonStyle)`
   color: ${({ theme }) => theme.grey_dark()};
   border-color: ${({ theme }) => theme.grey_dark()};
   cursor: default;
 `;
 
-export const ProfileButtonResetStyle = styled(ProfileButtonStyle)`
+export const ModalButtonResetStyle = styled(ModalButtonStyle)`
   justify-self: flex-end;
   color: ${({ theme }) => theme.grey_light()};
   background: ${({ theme }) => theme.bg_light()};
@@ -34,7 +38,7 @@ export const ProfileButtonResetStyle = styled(ProfileButtonStyle)`
   }
 `;
 
-export const ProfileButtonUpdateStyle = styled(ProfileButtonStyle)`
+export const ModalButtonUpdateStyle = styled(ModalButtonStyle)`
   color: ${({ theme }) => theme.bg_dark()};
   background: ${({ theme }) => theme.white_soft()};
   &:hover {
@@ -42,7 +46,7 @@ export const ProfileButtonUpdateStyle = styled(ProfileButtonStyle)`
   }
 `;
 
-export const ProfileButtonConfirmStyle = styled(ProfileButtonStyle)`
+export const ModalButtonConfirmStyle = styled(ModalButtonStyle)`
   color: ${({ theme }) => theme.bg_dark()};
   background: ${({ theme }) => theme.white_soft()};
   &:hover {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
   grid-column: 1 / -1;
-  grid-row: 3;
+  grid-row: 2;
   align-self: flex-start;
   width: 100%;
   display: inline-flex;
@@ -29,7 +29,10 @@ export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
     font-size: ${({ theme }) => theme.fontsize_24};
     background: transparent;
     border: none;
-    outline: none;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
+    }
   }
   small {
     position: absolute;

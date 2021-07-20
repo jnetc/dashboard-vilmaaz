@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const ProfileColorInputStyle = styled.input`
   opacity: 0;
   position: absolute;
-  &:focus + label p {
-    text-decoration: underline;
+  &:focus + label {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
   }
   &:checked + label::after {
     transform: translate(-50%, -50%) scale(0.5);

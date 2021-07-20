@@ -39,4 +39,8 @@ export const AddProfileButtonStyle = styled.button`
       transform: translate(-50%, -50%) rotate(180deg);
     }
   }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
+  }
 `;

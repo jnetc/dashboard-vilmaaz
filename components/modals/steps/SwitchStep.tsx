@@ -9,11 +9,13 @@ export const SwitchStep: FC = () => {
   const { step } = useStepsStore();
 
   switch (step) {
-    case 1:
+    case 'profile':
       return <ProfileCreate />;
-    case 2:
+    case 'days':
       return <SelectDays />;
-    default:
+    case 'schedule':
       return <ScheduleCreate />;
+    default:
+      return null;
   }
 };

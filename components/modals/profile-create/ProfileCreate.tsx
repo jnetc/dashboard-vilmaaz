@@ -10,12 +10,12 @@ import { ModalTitle } from '@Modals/modal-title/ModalTitle';
 import { ProfileAvatar } from '@Modals/profile-avatar/ProfileAvatar';
 import { ProfileName } from '@Modals/profile-name/ProfileName';
 import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
-import { ProfileButton } from '@Modals/profile-button/ProfileButton';
+import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
 import { colors } from '@Const/colors';
 
 const CreateProfile: FC = () => {
-  let { step, setStep, profile, setProfile } = useStepsStore();
+  let { setStep, profile, setProfile } = useStepsStore();
   const [hasError, setHasError] = useState({
     nameErr: false,
     avatarErr: false,
@@ -36,12 +36,11 @@ const CreateProfile: FC = () => {
     });
   };
 
-  const create = (ev: MouseEvent<Form>) => {
+  const next = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
     if (hasError.nameErr ?? hasError.avatarErr) return;
 
-    step += 1;
-    setStep(step);
+    setStep('days');
     console.log('Created profile', profile);
   };
 
@@ -59,35 +58,37 @@ const CreateProfile: FC = () => {
 
   return (
     <>
-      <ProfileCreateStyle onSubmit={create} name="user">
+      <ProfileCreateStyle onSubmit={next} name="user">
         <ModalTitle>Lou uusi tili</ModalTitle>
-        <ProfileAvatar profileErrHandler={avatarErrHandler} reset={reset} />
-        <ProfileName profileErrHandler={nameErrHandler} reset={reset} />
-        <ProfileColorPicker reset={reset} />
-        <ProfileButton
+        <section id="modal-profile">
+          <ProfileAvatar profileErrHandler={avatarErrHandler} reset={reset} />
+          <ProfileName profileErrHandler={nameErrHandler} reset={reset} />
+          <ProfileColorPicker reset={reset} />
+        </section>
+        <ModalButton
           ButtonStyle="reset"
-          row={5}
+          row={3}
           col={1}
           onClick={clear}
           aria-label="reset by default">
           Tyhjätä
-        </ProfileButton>
+        </ModalButton>
         {hasError.nameErr ?? hasError.avatarErr ? (
-          <ProfileButton
+          <ModalButton
             ButtonStyle="disable"
-            row={5}
+            row={3}
             col={2}
             aria-label="go to next">
             Seuraava
-          </ProfileButton>
+          </ModalButton>
         ) : (
-          <ProfileButton
+          <ModalButton
             ButtonStyle="confirm"
-            row={5}
+            row={3}
             col={2}
             aria-label="go to next">
             Seuraava
-          </ProfileButton>
+          </ModalButton>
         )}
       </ProfileCreateStyle>
     </>

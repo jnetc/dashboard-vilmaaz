@@ -2,17 +2,14 @@ import { ReactNode } from 'react';
 import { ModalStyle } from './Modal.style';
 // Hook
 import { useMainStore } from '@Hooks/useStores';
+import { ModalCloseBtn } from '@Modals/modal-button/ModalCloseBtn';
 
 const Modal = ({ children }: { children: ReactNode }) => {
   const { openModal, setOpenModal } = useMainStore();
 
   return openModal ? (
     <ModalStyle>
-      <button
-        id="close-modal"
-        aria-label="close modal"
-        onClick={() => setOpenModal(false)}
-      />
+      <ModalCloseBtn setOpenModal={setOpenModal} />
       <div className="wrapper">{children}</div>
     </ModalStyle>
   ) : null;

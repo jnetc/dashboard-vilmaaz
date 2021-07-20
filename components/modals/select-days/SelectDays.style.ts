@@ -5,15 +5,14 @@ export const SelectDaysStyle = styled.form`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 50px 1fr 54px;
-  gap: 30px;
+  column-gap: 30px;
+  row-gap: 45px;
   user-select: none;
-`;
-
-export const SelectDaysGroupStyle = styled.fieldset`
-  grid-column: 1 /-1;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  border: none;
+  section#modal-days {
+    grid-column: 1 /-1;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: repeat(6, 64px);
+    gap: 25px;
+  }
 `;

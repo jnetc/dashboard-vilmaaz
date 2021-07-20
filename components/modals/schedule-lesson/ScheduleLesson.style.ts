@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ScheduleLessonStyle = styled.form`
+export const ScheduleLessonStyle = styled.fieldset`
   min-width: 500px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
