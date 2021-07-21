@@ -12,7 +12,7 @@ import { ProfileName } from '@Modals/profile-name/ProfileName';
 import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
-import { colors } from '@Const/colors';
+import { colors } from '@Constants';
 
 const CreateProfile: FC = () => {
   let { setStep, profile, setProfile } = useStepsStore();

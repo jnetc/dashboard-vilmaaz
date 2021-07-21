@@ -10,9 +10,12 @@ import { useStepsStore } from '@Hooks/useStores';
 // Types
 import { Form, Input } from '@Types';
 // Helper func
-import { addDayToTheSchedule, removeDayFromSchedule } from '@Helpers';
+import {
+  addDayToTheSchedule,
+  removeDayFromSchedule,
+} from 'utils/helperFunctions';
 // Global const
-import { daysOfWeek } from '@Const/daysOfWeek';
+import { daysOfWeek } from '@Constants';
 
 const SelectDays: FC = () => {
   let { setStep, timetable, setTimetable } = useStepsStore();

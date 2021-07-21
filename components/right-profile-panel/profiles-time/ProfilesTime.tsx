@@ -3,7 +3,7 @@ import { ProfilesTimeStyle } from './ProfilesTime.style';
 // Hook
 import { useUpdateTime } from '@Hooks/useUpdateTime';
 // Helper func
-import { transformNumToTime, profileStatus } from '@Helpers';
+import { transformNumToTime, profileStatus } from 'utils/helperFunctions';
 // Type
 import { ProfilesTimeType } from '@Types';
 

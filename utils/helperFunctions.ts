@@ -18,6 +18,8 @@ import {
   rightPanelWidth,
 } from '@Store';
 
+import { defaultLesson } from '@Constants';
+
 export const dateFormat = (options: Intl.DateTimeFormatOptions) => {
   const date = new Date();
   return new Intl.DateTimeFormat('fi-FI', options).format(date);
@@ -293,7 +295,7 @@ export const firstUpperCase = (name: string) => {
 export const addDayToTheSchedule = (currDay: string, days: Timetable[]) => {
   const checkDay = days.find(d => d.day.includes(currDay));
   if (!checkDay) {
-    days.push({ day: currDay, lessons: [] });
+    days.push({ day: currDay, lessons: [defaultLesson] });
     return days;
   }
   return days;

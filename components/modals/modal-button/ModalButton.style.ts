@@ -17,10 +17,6 @@ export const ModalButtonStyle = styled.button<{ pos: Pos }>`
   font-weight: bold;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
-  }
 `;
 
 export const ModalButtonDisableStyle = styled(ModalButtonStyle)`

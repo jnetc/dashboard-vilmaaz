@@ -2,7 +2,7 @@ import { FC, ChangeEvent } from 'react';
 // Style
 import { SelectDayLabelStyle, SelectDayInputStyle } from './SelectDay.style';
 // Helper func
-import { firstUpperCase } from '@Helpers';
+import { firstUpperCase } from 'utils/helperFunctions';
 //Types
 import { Input } from '@Types';
 

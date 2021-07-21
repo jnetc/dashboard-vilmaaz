@@ -2,7 +2,7 @@ import { FC, ChangeEvent, useState, useEffect } from 'react';
 // Style
 import { ProfileColorPickerStyle } from './ProfileColorPicker.style';
 // Global const
-import { colors } from '@Const/colors';
+import { colors } from '@Constants';
 // Component
 import { ProfileColor } from '@Modals/profile-color-picker/ProfileColor';
 //Types

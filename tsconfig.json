@@ -30,8 +30,8 @@
       "@Timeline/*": ["components/timeline/*"],
       "@Store": ["./store/Store"],
       "@Hooks/*": ["./hooks/*"],
-      "@Const/*": ["./utils/constants/*"],
-      "@Helpers": ["./utils/helpers/helperFunc"],
+      "@Constants": ["./utils/globalConstants"],
+      "@Helpers": ["./utils/helperFunctions"],
       "@Types": ["./types/types"]
     }
   },

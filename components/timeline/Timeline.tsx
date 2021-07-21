@@ -4,7 +4,7 @@ import {
   cssAnimationHandler,
   getTransformStylePosition,
   timelineLimits,
-} from '@Helpers';
+} from 'utils/helperFunctions';
 // Components
 import { TimeScale } from '@Timeline/time-scale/TimeScale';
 import { TimeField } from '@Timeline/time-field/TimeField';

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { TimePosition } from '@Types';
 // Styles
 import { TimelinePointsStyle } from './TimelinePoints.style';
-// Global const
+// Store const
 import { hourDivWidth } from '@Store';
 
 // TODO Over 200 classes were generated for component styled.div with the id of "sc-1y7h4wd-9"

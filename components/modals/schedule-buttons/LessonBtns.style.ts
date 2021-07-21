@@ -10,10 +10,6 @@ export const LessonBtnsStyle = styled.div`
   transition: all 0.3s ease-in-out;
   user-select: none;
   cursor: pointer;
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
-  }
 `;
 
 export const LessonAdd = styled(LessonBtnsStyle)`

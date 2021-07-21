@@ -4,7 +4,7 @@ import Modal from '@Modals/Modal';
 // Component
 import { SwitchStep } from './SwitchStep';
 // Global const
-import { colors } from '@Const/colors';
+import { colors } from '@Constants';
 // Types
 import { User, Timetable } from '@Types';
 

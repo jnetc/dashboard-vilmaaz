@@ -10,7 +10,7 @@ import {
 // Hook
 import { useUpdateTime } from '@Hooks/useUpdateTime';
 // Helpers
-import { transformNumToTime } from '@Helpers';
+import { transformNumToTime } from 'utils/helperFunctions';
 
 export const CurrentLesson: FC<LessonComponent> = ({
   width,

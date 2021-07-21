@@ -4,7 +4,6 @@ import { useGlobalStore } from '@Hooks/useStores';
 // Components
 import { TimelinePoints } from '@Timeline/timeline-points/TimelinePoints';
 import { TimelineStep } from '@Timeline/timeline-step/TimelineStep';
-
 // Styles
 import { TimeScaleStyle } from './TimeScale.style';
 

@@ -12,7 +12,6 @@ export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
   padding: 0px 5px;
   border: 2px solid
     ${({ styleErr, theme }) => (styleErr ? theme.danger() : theme.bg_light())};
-
   legend {
     padding: 0 10px;
     font-size: ${({ theme }) => theme.fontsize_14};
@@ -24,15 +23,11 @@ export const ProfileNameStyle = styled.fieldset<{ styleErr: boolean }>`
     width: 100%;
     padding: 8px 10px;
     margin-bottom: 7px;
-    border-radius: 8px;
+    border-radius: 3px;
     color: ${({ theme }) => theme.white_soft()};
     font-size: ${({ theme }) => theme.fontsize_24};
     background: transparent;
     border: none;
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
-    }
   }
   small {
     position: absolute;

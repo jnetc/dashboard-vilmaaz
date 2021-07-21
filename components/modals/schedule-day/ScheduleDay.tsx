@@ -8,9 +8,10 @@ import {
 // Type
 import { Timetable, Input } from '@Types';
 // Helper func
-import { firstUpperCase } from '@Helpers';
+import { firstUpperCase } from 'utils/helperFunctions';
 // Components
 import { LessonBtns } from '@Modals/schedule-buttons/LessonBtns';
+import { ScheduleLesson } from '@Modals/schedule-lesson/ScheduleLesson';
 
 export interface SelectDayType {
   data: Timetable;
@@ -25,7 +26,11 @@ export const ScheduleDay: FC<SelectDayType> = ({
 }) => {
   let { day, lessons } = data;
   const dayStr = firstUpperCase(day);
-  console.log(day);
+  console.log(lessons);
+
+  const lessonsArr = lessons.map(l => {
+    return <ScheduleLesson key={l.id} data={l} />;
+  });
 
   return (
     <ScheduleDayStyle>
@@ -37,12 +42,7 @@ export const ScheduleDay: FC<SelectDayType> = ({
         tabIndex={0}
       />
       <SelectDayLabelStyle htmlFor={day}>{dayStr}</SelectDayLabelStyle>
-      <ul>
-        <li>input</li>
-        <li>input</li>
-        <li>input</li>
-        <li>input</li>
-      </ul>
+      <ul>{lessonsArr}</ul>
       <LessonBtns style="add">Luo uusi tunti</LessonBtns>
       {/* <LessonBtns style="clear">Poista kaikki</LessonBtns> */}
     </ScheduleDayStyle>

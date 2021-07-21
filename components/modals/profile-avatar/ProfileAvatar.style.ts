@@ -32,10 +32,6 @@ export const UploadInputAvatarStyle = styled.input<{ styleErr: boolean }>`
   opacity: 0;
   position: absolute;
   z-index: -1;
-  &:focus ~ label {
-    outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
-  }
 `;
 
 export const ProfileAvatarStyle = styled.figure`

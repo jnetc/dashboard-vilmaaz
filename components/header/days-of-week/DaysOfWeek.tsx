@@ -1,6 +1,6 @@
 import { FC, useRef, MouseEventHandler } from 'react';
 // Helper function
-import { dateFormat } from '@Helpers';
+import { dateFormat } from 'utils/helperFunctions';
 // Styles
 import { DaysOfWeekStyle } from './DaysOfWeek.style';
 // Component
@@ -10,7 +10,7 @@ import { Element } from '@Types';
 // Hook
 import { useGlobalStore } from '@Hooks/useStores';
 
-import { daysOfWeek } from '@Const/daysOfWeek';
+import { daysOfWeek } from '@Constants';
 
 export const DaysOfWeek: FC = () => {
   const { setDayOfWeek } = useGlobalStore();

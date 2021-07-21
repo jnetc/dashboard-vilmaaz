@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { transformTimeToNum } from '@Helpers';
+import { transformTimeToNum } from 'utils/helperFunctions';
 
 export const useUpdateTime = () => {
   const [hours, setHours] = useState(new Date().getHours());

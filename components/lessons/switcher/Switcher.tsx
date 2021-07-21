@@ -9,7 +9,7 @@ import { FinishedLesson } from '@Lessons/finished-lesson/FinishedLesson';
 import { PendingLesson } from '@Lessons/pending-lesson/PendingLesson';
 import { CurrentLesson } from '@Lessons/current-lesson/CurrentLesson';
 // Helper
-import { lessonStatus } from '@Helpers';
+import { lessonStatus } from 'utils/helperFunctions';
 
 export const Switcher: FC<{ data: Lesson; color: string }> = ({
   data,

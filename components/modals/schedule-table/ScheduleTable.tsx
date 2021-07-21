@@ -6,7 +6,7 @@ import { ScheduleDay } from '@Modals/schedule-day/ScheduleDay';
 // Hook
 import { useStepsStore } from '@Hooks/useStores';
 // Helper func
-import { removeDayFromSchedule } from '@Helpers';
+import { removeDayFromSchedule } from 'utils/helperFunctions';
 // Type
 import { Input } from '@Types';
 

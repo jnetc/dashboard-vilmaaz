@@ -5,7 +5,7 @@ export const ScheduleCreateStyle = styled.form`
   min-height: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 50px 1fr 54px;
+  grid-template-rows: 50px max-content 54px;
   column-gap: 30px;
   row-gap: 45px;
   padding: 0px 100px;

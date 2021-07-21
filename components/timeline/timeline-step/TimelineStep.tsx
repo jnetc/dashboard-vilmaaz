@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 // Components
-import { movementTimeAndTimetable } from '@Helpers';
+import { movementTimeAndTimetable } from 'utils/helperFunctions';
 // Hook
 import { useUpdateTime } from '@Hooks/useUpdateTime';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
@@ -9,7 +9,7 @@ import {
   useTimelineStore,
   useMainStore,
 } from '@Hooks/useStores';
-// Global const
+// Store const
 import { hourDivWidth } from '@Store';
 // Styles
 import { TimelineStepStyle } from './TimelineStep.style';

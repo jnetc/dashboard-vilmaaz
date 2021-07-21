@@ -2,9 +2,14 @@ import { FC, createContext, useEffect, useState } from 'react';
 
 // Types
 import { Schedule, StoreCtxProps, LessonsType } from '@Types';
-import { transform, staticValues, hourPositions, dateFormat } from '@Helpers';
+import {
+  transform,
+  staticValues,
+  hourPositions,
+  dateFormat,
+} from 'utils/helperFunctions';
 
-import { hours } from '@Const/hours';
+import { hours } from '@Constants';
 import { database } from './data';
 
 const state: StoreCtxProps = {

@@ -4,7 +4,7 @@ import { ProfileNameStyle } from './ProfileName.style';
 // Types
 import { Input, User } from '@Types';
 // Helper
-import { firstUpperCase } from '@Helpers';
+import { firstUpperCase } from 'utils/helperFunctions';
 // Hook
 import { useStepsStore } from '@Hooks/useStores';
 
@@ -93,6 +93,7 @@ export const ProfileName: FC<PropsErrHandler> = ({
         placeholder="Tilin nimi"
         value={profile.name}
         onChange={getOnChange}
+        required
       />
     </ProfileNameStyle>
   );

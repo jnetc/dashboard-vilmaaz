@@ -3,9 +3,6 @@ import styled from 'styled-components';
 export const SelectDayInputStyle = styled.input`
   opacity: 0;
   position: absolute;
-  &:focus + label {
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.white()};
-  }
   &:checked + label {
     border-color: ${({ theme }) => theme.grey_light()};
     background: ${({ theme }) => theme.white_soft(0.15)};

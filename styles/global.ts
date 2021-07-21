@@ -54,6 +54,29 @@ export const GlobalStyle = createGlobalStyle`
     background: transparent;
   }
 
+
+  /* Focus */
+  :focus,
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  :focus-visible {
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.bg_black()},
+    0 0 0 4px ${({ theme }) => theme.white()};
+  }
+  :focus-visible + label {
+    box-shadow:  0 0 0 2px ${({ theme }) => theme.bg_black()},
+    0 0 0 4px ${({ theme }) => theme.white()};
+  }
+
+  input[type="text"]:focus-visible {
+    box-shadow: inset 0 0 0 2px ${({ theme }) => theme.bg_black()},
+    inset 0 0 0 4px ${({ theme }) => theme.white()};
+  }
+
+
+
   /* SCROLLBAR */
   ::-webkit-scrollbar {
     width: 8px;

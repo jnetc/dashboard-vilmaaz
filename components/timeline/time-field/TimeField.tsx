@@ -3,7 +3,6 @@ import { FC } from 'react';
 import Lessons from '@Lessons/Lessons';
 // Hook
 import { useGlobalStore, useMainStore } from '@Hooks/useStores';
-
 // Styles
 import { TimeFieldStyle } from './TimeField.style';
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 // Helper function
-import { dateFormat } from '@Helpers';
+import { dateFormat } from 'utils/helperFunctions';
 // Styles
 import { DateTodayStyle } from './DateToday.style';
 
