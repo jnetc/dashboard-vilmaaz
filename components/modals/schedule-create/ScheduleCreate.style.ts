@@ -9,8 +9,6 @@ export const ScheduleCreateStyle = styled.form`
   column-gap: 30px;
   row-gap: 45px;
   padding: 0px 100px;
-  /* margin-bottom: 50px; */
-  /* user-select: none; */
   div#wrapper-timetable {
     grid-column: 1 / -1;
     grid-row: 2;

@@ -5,6 +5,6 @@ export const ScheduleTableStyle = styled.section`
   grid-row: 2;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, auto));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 30px;
 `;

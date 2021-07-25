@@ -11,7 +11,7 @@ import { removeDayFromSchedule } from 'utils/helperFunctions';
 import { Input } from '@Types';
 
 export const ScheduleTable: FC = () => {
-  const { timetable, setTimetable } = useStepsStore();
+  const { timetable, setTimetable, setStep } = useStepsStore();
   const selectedDays = timetable.map(d => d.day);
   const [days, setDays] = useState<Array<string>>(selectedDays);
 
@@ -24,12 +24,12 @@ export const ScheduleTable: FC = () => {
 
       const remove = removeDayFromSchedule(getDayStr, timetable);
 
+      if (days.length === 0) setStep('days');
       setTimetable(remove);
       return setDays(days);
     }
   };
 
-  console.log(timetable);
   const scheduleDays = timetable.map(d => {
     return (
       <ScheduleDay

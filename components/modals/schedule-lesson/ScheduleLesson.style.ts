@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const ScheduleLessonStyle = styled.li<{ styleErr: boolean }>`
-  width: 100%;
-  /* display: grid;
-  grid-column: 2rem 5px 2rem 5px 2rem 5px 2rem 1fr repeat(3, 25px); */
-  display: inline-flex;
+  display: grid;
+  grid-template-columns:
+    repeat(3, min-content) 1fr
+    repeat(2, min-content);
   align-items: center;
+  gap: 10px;
   position: relative;
   padding: 0px 14px;
   border-radius: 8px;
@@ -18,22 +19,29 @@ export const ScheduleLessonStyle = styled.li<{ styleErr: boolean }>`
     background: transparent;
     border: none;
     z-index: 1;
+  }
+  input:nth-of-type(1) {
+    grid-column: 1;
+  }
+  span.separator {
+    grid-column: 2;
+  }
+  input:nth-of-type(2) {
+    grid-column: 3;
+  }
+  input:nth-of-type(1)::-webkit-calendar-picker-indicator,
+  input:nth-of-type(2)::-webkit-calendar-picker-indicator {
+    padding: 0 0 0 4px;
+    margin: 0;
+    filter: invert(50%);
+  }
+  input:nth-of-type(3) {
+    grid-column: 4;
+    padding: 8px;
     &::placeholder {
       color: ${({ theme }) => theme.grey_dark()};
       font-size: inherit;
     }
-  }
-  input:nth-of-type(1),
-  input:nth-of-type(2),
-  input:nth-of-type(3),
-  input:nth-of-type(4) {
-    padding: 8px 0px 8px 6px;
-    width: 2rem;
-  }
-  input:nth-of-type(5) {
-    flex-grow: 1;
-    padding: 8px;
-    margin-right: 14px;
   }
 
   span.error-type {

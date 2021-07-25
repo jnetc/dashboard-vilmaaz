@@ -11,18 +11,15 @@ import { useStepsStore } from '@Hooks/useStores';
 import { Form } from '@Types';
 
 const ScheduleCreate: FC = () => {
-  let { setStep, timetable } = useStepsStore();
-
-  console.log(timetable);
+  let { setStep, error } = useStepsStore();
 
   const getSchedule = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
 
     console.log('Created Schedule');
   };
-  const prev = () => setStep('days');
 
-  const isDaySelect = false;
+  const prev = () => setStep('days');
 
   return (
     <ScheduleCreateStyle onSubmit={getSchedule} name="schedule">
@@ -36,7 +33,7 @@ const ScheduleCreate: FC = () => {
         aria-label="reset by default">
         Takaisin
       </ModalButton>
-      {isDaySelect ? (
+      {!error.isError ? (
         <ModalButton
           ButtonStyle="confirm"
           row={3}

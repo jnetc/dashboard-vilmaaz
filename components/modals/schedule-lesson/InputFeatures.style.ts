@@ -6,13 +6,31 @@ export const InputFeaturesStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 1;
   position: relative;
   user-select: none;
   z-index: 15;
+  span {
+    width: max-content;
+    padding: 5px 10px;
+    position: absolute;
+    top: -27px;
+    left: 50%;
+    opacity: 0;
+    border-radius: 3px;
+    color: ${({ theme }) => theme.white_soft()};
+    font-size: ${({ theme }) => theme.fontsize_14};
+    background: ${({ theme }) => theme.bg_light()};
+    transform: translateX(-50%);
+    transition: all 0.3s ease-in-out;
+  }
+  &:hover span {
+    opacity: 1;
+  }
 `;
 
 export const Alert = styled(InputFeaturesStyle)`
-  margin-right: 16px;
+  grid-column: 5;
   border-radius: 5px;
   box-shadow: inset 0 0 0 2px ${({ theme }) => theme.danger()};
   &::after {
@@ -26,8 +44,9 @@ export const Alert = styled(InputFeaturesStyle)`
 `;
 
 export const Copy = styled(InputFeaturesStyle)<{ copy: boolean }>`
-  margin-right: 16px;
+  grid-column: 5;
   position: relative;
+  /* margin: 0 5px; */
   cursor: pointer;
   &::before,
   &::after {
@@ -51,26 +70,10 @@ export const Copy = styled(InputFeaturesStyle)<{ copy: boolean }>`
     left: 2px;
     border: 2px solid ${({ theme }) => theme.grey_middle()};
   }
-  span {
-    padding: 5px 10px;
-    position: absolute;
-    top: -27px;
-    left: 50%;
-    opacity: 0;
-    border-radius: 3px;
-    color: ${({ theme }) => theme.white_soft()};
-    font-size: ${({ theme }) => theme.fontsize_14};
-    background: ${({ theme }) => theme.bg_light()};
-    transform: translateX(-50%);
-    transition: all 0.3s ease-in-out;
-  }
-  &:hover span {
-    opacity: 1;
-  }
 `;
 
 export const Delete = styled(InputFeaturesStyle)`
-  /* border: 1px solid white; */
+  grid-column: 6;
   cursor: pointer;
   &::before,
   &::after {

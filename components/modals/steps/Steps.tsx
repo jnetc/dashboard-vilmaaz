@@ -1,4 +1,11 @@
-import { FC, createContext, useState } from 'react';
+import {
+  FC,
+  createContext,
+  useState,
+  useReducer,
+  Dispatch,
+  useEffect,
+} from 'react';
 // HOC
 import Modal from '@Modals/Modal';
 // Component
@@ -10,6 +17,8 @@ import { User, Timetable } from '@Types';
 
 type Steps = 'profile' | 'days' | 'schedule';
 interface StepsType {
+  error: Error;
+  dispatch: Dispatch<Action>;
   step: Steps;
   setStep: (step: Steps) => void;
   profile: User;
@@ -19,6 +28,8 @@ interface StepsType {
 }
 
 export const state: StepsType = {
+  error: { isError: false },
+  dispatch: obj => obj,
   step: 'profile',
   setStep: step => step,
   profile: {
@@ -34,14 +45,55 @@ export const state: StepsType = {
 
 export const CreateStepsStore = createContext(state);
 
+export interface Error {
+  isError: boolean;
+  message?: string;
+  id?: string;
+}
+type ErrorActionType =
+  | 'numbers-and-letters'
+  | 'file-size-limit'
+  | 'empty-days'
+  | 'no-errors';
+
+interface Action {
+  type?: ErrorActionType;
+  payload: Error;
+}
+
+const reducer = (error: Error, action: Action) => {
+  console.log(action.payload);
+
+  switch (action.type) {
+    case 'numbers-and-letters':
+      return action.payload;
+    case 'file-size-limit':
+      return action.payload;
+    case 'empty-days':
+      return action.payload;
+    case 'no-errors':
+      return action.payload;
+    default:
+      return error;
+  }
+};
+
 export const Steps: FC = () => {
+  const [error, dispatch] = useReducer(reducer, state.error);
   const [step, setStep] = useState(state.step);
   const [profile, setProfile] = useState(state.profile);
   const [timetable, setTimetable] = useState(state.timetable);
 
+  // console.log(timetable);
+  useEffect(() => {
+    console.log(timetable);
+  }, [timetable]);
+
   return (
     <CreateStepsStore.Provider
       value={{
+        error,
+        dispatch,
         step,
         profile,
         timetable,

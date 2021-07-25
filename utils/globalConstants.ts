@@ -16,13 +16,6 @@ export const daysOfWeek = [
   'sunnuntai',
 ];
 
-export const defaultLesson = {
-  id: `${Math.random()}`,
-  lesson: '',
-  start: { time: '', position: 0 },
-  end: { time: '', position: 0 },
-};
-
 export const hours = [
   '0:00',
   '1:00',

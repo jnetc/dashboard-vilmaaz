@@ -59,6 +59,11 @@ export const ProfileAvatarStyle = styled.figure`
     height: inherit;
     object-fit: cover;
     border-radius: inherit;
+    isolation: isolate;
+    /* background-color: green; */
+
+    mix-blend-mode: color;
+    filter: hue-rotate(100deg) brightness(0.5);
   }
   figcaption {
     font-size: ${({ theme }) => theme.fontsize_48};
