@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 export const InputFeaturesStyle = styled.div`
   width: 25px;
@@ -20,6 +20,7 @@ export const InputFeaturesStyle = styled.div`
     border-radius: 3px;
     color: ${({ theme }) => theme.white_soft()};
     font-size: ${({ theme }) => theme.fontsize_14};
+    font-weight: bold;
     background: ${({ theme }) => theme.bg_light()};
     transform: translateX(-50%);
     transition: all 0.3s ease-in-out;
@@ -43,10 +44,17 @@ export const Alert = styled(InputFeaturesStyle)`
   }
 `;
 
-export const Copy = styled(InputFeaturesStyle)<{ copy: boolean }>`
+const animaSpan = keyframes`
+0% {transform: translate(-50%, 0); }
+25% {transform: translate(-53%, 0); }
+50% {transform: translate(-47%, 0); }
+75% {transform: translate(-53%, 0); }
+100%{transform: translate(-50%, 0 );}
+`;
+
+export const Copy = styled(InputFeaturesStyle)<{ copy: boolean | undefined }>`
   grid-column: 5;
   position: relative;
-  /* margin: 0 5px; */
   cursor: pointer;
   &::before,
   &::after {
@@ -61,14 +69,21 @@ export const Copy = styled(InputFeaturesStyle)<{ copy: boolean }>`
     top: 2px;
     right: 2px;
     border: 2px solid ${({ theme }) => theme.white_soft()};
-    background: ${({ copy, theme }) =>
-      copy ? theme.white_soft() : 'transparent'};
     z-index: 5;
   }
   &::after {
     bottom: 2px;
     left: 2px;
     border: 2px solid ${({ theme }) => theme.grey_middle()};
+  }
+  span {
+    background: ${({ copy, theme }) => copy && theme.white_soft()};
+    color: ${({ copy, theme }) => copy && theme.bg_black()};
+    ${({ copy }) =>
+      copy &&
+      css`
+        animation: ${animaSpan} 0.5s ease-out forwards;
+      `};
   }
 `;
 

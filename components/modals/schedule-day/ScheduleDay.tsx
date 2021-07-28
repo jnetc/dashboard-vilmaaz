@@ -39,10 +39,6 @@ export const ScheduleDay: FC<SelectDayType> = ({
     setRows(rows);
   };
 
-  const copyRow = (data: Lesson) => {
-    console.log(data);
-  };
-
   const removeRow = (id: string) => {
     const filtered = rows.filter(r => r.id !== id);
     setRows(filtered);
@@ -54,7 +50,6 @@ export const ScheduleDay: FC<SelectDayType> = ({
         key={l.id}
         data={l}
         getRows={getRows}
-        copyRow={copyRow}
         removeRow={removeRow}
         hasError={l.id === error.id ? error : { isError: false }}
       />

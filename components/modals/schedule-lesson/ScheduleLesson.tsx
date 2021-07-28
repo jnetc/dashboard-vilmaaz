@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ChangeEvent, useState, useEffect } from 'react';
+import { FC, ChangeEvent, useState, useEffect, useRef } from 'react';
 // Style
 import { ScheduleLessonStyle } from './ScheduleLesson.style';
 import { Lesson } from '@Types';
@@ -10,7 +10,6 @@ import { useStepsStore } from '@Hooks/useStores';
 interface LessonPropType {
   data: Lesson;
   getRows: (data: Lesson) => void;
-  copyRow: (data: Lesson) => void;
   removeRow: (id: string) => void;
   hasError: {
     isError: boolean;
@@ -22,15 +21,19 @@ interface LessonPropType {
 export const ScheduleLesson: FC<LessonPropType> = ({
   data,
   getRows,
-  copyRow,
   removeRow,
   hasError,
 }) => {
   const { dispatch } = useStepsStore();
   const [lessonState, setLessonState] = useState(data);
+  const [isCopy, setIsCopy] = useState(false);
+  const ref = useRef<HTMLInputElement | null>(null);
 
-  const copy = (ev: MouseEvent<HTMLDivElement>) => {
-    console.log(lessonState);
+  const copy = () => {
+    if (!ref.current) return;
+    if (ref.current.value === '') return;
+    navigator.clipboard.writeText(ref.current.value);
+    setIsCopy(true);
   };
 
   const remove = () => removeRow(lessonState.id);
@@ -55,6 +58,11 @@ export const ScheduleLesson: FC<LessonPropType> = ({
       return { ...prev, ...lessonState };
     });
   };
+
+  useEffect(() => {
+    const clear = setTimeout(() => setIsCopy(false), 1000);
+    return () => clearTimeout(clear);
+  }, [isCopy]);
 
   useEffect(() => {
     const typingCheck =
@@ -102,10 +110,11 @@ export const ScheduleLesson: FC<LessonPropType> = ({
         placeholder="matematiikka"
         autoComplete="off"
         onChange={getValue}
+        ref={ref}
         value={lessonState.lesson}
         required
       />
-      <InputFeatures type="copy" onClick={copy} />
+      <InputFeatures type="copy" onClick={copy} isCopy={isCopy} />
       <InputFeatures type="delete" onClick={remove} />
     </ScheduleLessonStyle>
   );

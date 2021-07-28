@@ -4,11 +4,11 @@ import { Alert, Copy, Delete } from './InputFeatures.style';
 type InputFeatureName = 'alert' | 'copy' | 'delete';
 interface Props {
   type: InputFeatureName;
+  isCopy?: boolean;
   onClick: (ev: MouseEvent<HTMLDivElement>) => void;
 }
 
-export const InputFeatures: FC<Props> = ({ type, onClick }) => {
-  const copy = false;
+export const InputFeatures: FC<Props> = ({ type, onClick, isCopy }) => {
   switch (type) {
     case 'copy':
       return (
@@ -16,8 +16,8 @@ export const InputFeatures: FC<Props> = ({ type, onClick }) => {
           role="button"
           onClick={ev => onClick(ev)}
           tabIndex={0}
-          copy={copy}>
-          <span>Kopioi</span>
+          copy={isCopy}>
+          <span>{isCopy ? 'Kopioitu' : 'Kopioi'}</span>
         </Copy>
       );
     case 'delete':

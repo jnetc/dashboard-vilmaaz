@@ -62,8 +62,6 @@ interface Action {
 }
 
 const reducer = (error: Error, action: Action) => {
-  console.log(action.payload);
-
   switch (action.type) {
     case 'numbers-and-letters':
       return action.payload;
@@ -84,7 +82,6 @@ export const Steps: FC = () => {
   const [profile, setProfile] = useState(state.profile);
   const [timetable, setTimetable] = useState(state.timetable);
 
-  // console.log(timetable);
   useEffect(() => {
     console.log(timetable);
   }, [timetable]);
