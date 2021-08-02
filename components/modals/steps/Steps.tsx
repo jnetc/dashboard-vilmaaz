@@ -11,7 +11,7 @@ import Modal from '@Modals/Modal';
 // Component
 import { SwitchStep } from './SwitchStep';
 // Global const
-import { colors } from '@Constants';
+import { colors, newProfile } from '@Constants';
 // Types
 import { User, Timetable } from '@Types';
 
@@ -21,7 +21,7 @@ interface StepsType {
   dispatch: Dispatch<Action>;
   step: Steps;
   setStep: (step: Steps) => void;
-  profile: User;
+  profile: User | null;
   setProfile: (obj: User) => void;
   timetable: Array<Timetable>;
   setTimetable: (arr: Array<Timetable>) => void;
@@ -32,12 +32,7 @@ export const state: StepsType = {
   dispatch: obj => obj,
   step: 'profile',
   setStep: step => step,
-  profile: {
-    id: `${Math.random()}`,
-    name: '',
-    color: colors[0].en,
-    avatar: { name: '', img: '' },
-  },
+  profile: null,
   setProfile: obj => obj,
   timetable: [],
   setTimetable: arr => arr,
@@ -79,12 +74,18 @@ const reducer = (error: Error, action: Action) => {
 export const Steps: FC = () => {
   const [error, dispatch] = useReducer(reducer, state.error);
   const [step, setStep] = useState(state.step);
-  const [profile, setProfile] = useState(state.profile);
+  const [profile, setProfile] = useState({
+    id: `${Math.random()}`,
+    name: '',
+    color: colors[0].en,
+    avatar: { name: '', img: '' },
+  });
   const [timetable, setTimetable] = useState(state.timetable);
 
   useEffect(() => {
-    console.log(timetable);
-  }, [timetable]);
+    console.log(state.profile, profile, timetable);
+    setProfile(profile);
+  }, [profile]);
 
   return (
     <CreateStepsStore.Provider

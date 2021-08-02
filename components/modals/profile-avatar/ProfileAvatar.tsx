@@ -20,14 +20,15 @@ export const ProfileAvatar: FC<PropsErrHandler> = ({
   profileErrHandler,
 }) => {
   const { profile, setProfile } = useStepsStore();
+  if (!profile) return null;
   const [avatarError, setAvatarError] = useState(false);
-  const [file, setFile] = useState<File | undefined>();
+  const [file, setFile] = useState<File | null>();
   const [image, setImage] = useState<string>(profile.avatar.img);
 
   const getFile = (ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;
 
-    if (!el.files || !el.files[0]) return setFile(undefined);
+    if (!el.files || !el.files[0]) return setFile(null);
     if (el.files[0].size > 300000) {
       setAvatarError(true);
       profileErrHandler(true);

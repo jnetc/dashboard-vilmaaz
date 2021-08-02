@@ -52,7 +52,7 @@ const SelectDays: FC = () => {
   const next = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
     setStep('schedule');
-    console.log('Selected days', days, timetable);
+    // console.log('Selected days', days, timetable);
   };
 
   const prev = () => setStep('profile');

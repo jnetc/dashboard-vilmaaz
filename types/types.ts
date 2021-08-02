@@ -116,6 +116,8 @@ export interface ProfilesTimeType extends DaysType {
 
 // STORES / CONTEXTS
 export interface StoreCtxProps extends DaysType {
+  indexDB: IDBDatabase | null;
+  setIndexDB: (data: IDBDatabase) => void;
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
   timelineHours: Array<TimePosition>;

@@ -12,6 +12,7 @@ import { useStepsStore } from '@Hooks/useStores';
 
 export const ProfileColorPicker: FC<{ reset: boolean }> = ({ reset }) => {
   const { profile, setProfile } = useStepsStore();
+  if (!profile) return null;
   const [color, setColor] = useState(profile.color);
 
   const pickColor = (ev: ChangeEvent<Input>) => {

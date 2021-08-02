@@ -6,6 +6,8 @@ import { Lesson } from '@Types';
 import { InputFeatures } from './InputFeatures';
 //Hook
 import { useStepsStore } from '@Hooks/useStores';
+// HelperFunc
+import { transformTimeToNum } from '@Helpers';
 
 interface LessonPropType {
   data: Lesson;
@@ -47,6 +49,7 @@ export const ScheduleLesson: FC<LessonPropType> = ({
 
   const getStartTime = (ev: ChangeEvent<HTMLInputElement>) => {
     lessonState.start.time = ev.currentTarget.value;
+    lessonState.start.position = transformTimeToNum(ev.currentTarget.value);
     setLessonState(prev => {
       return { ...prev, ...lessonState };
     });
@@ -54,6 +57,7 @@ export const ScheduleLesson: FC<LessonPropType> = ({
 
   const getEndTime = (ev: ChangeEvent<HTMLInputElement>) => {
     lessonState.end.time = ev.currentTarget.value;
+    lessonState.end.position = transformTimeToNum(ev.currentTarget.value);
     setLessonState(prev => {
       return { ...prev, ...lessonState };
     });

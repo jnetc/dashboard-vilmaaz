@@ -12,10 +12,11 @@ import { ProfileName } from '@Modals/profile-name/ProfileName';
 import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
-import { colors } from '@Constants';
+import { colors, newProfile } from '@Constants';
 
 const CreateProfile: FC = () => {
   let { setStep, profile, setProfile } = useStepsStore();
+  // if (!profile) return null;
   const [hasError, setHasError] = useState({
     nameErr: false,
     avatarErr: false,
@@ -41,19 +42,20 @@ const CreateProfile: FC = () => {
     if (hasError.nameErr ?? hasError.avatarErr) return;
 
     setStep('days');
-    console.log('Created profile', profile);
+    // console.log('Created profile', profile);
   };
 
   // Set to default state
   const clear = () => {
     setReset(!reset);
     setProfile({
-      id: profile.id,
+      id: `${Math.random()}`,
       name: '',
       color: colors[0].en,
       avatar: { name: '', img: '' },
     });
-    console.log('reset profile', profile);
+    // setProfile(newProfile);
+    // console.log('reset profile', profile);
   };
 
   return (

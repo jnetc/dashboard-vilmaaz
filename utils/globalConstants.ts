@@ -42,3 +42,10 @@ export const hours = [
   '22:00',
   '23:00',
 ];
+
+export const newProfile = {
+  id: `${Math.random()}`,
+  name: '',
+  color: colors[0].en,
+  avatar: { name: '', img: '' },
+};

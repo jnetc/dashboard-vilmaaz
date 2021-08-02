@@ -29,6 +29,9 @@ export const ProfileName: FC<PropsErrHandler> = ({
   profileErrHandler,
 }) => {
   const { profile, setProfile } = useStepsStore();
+
+  if (!profile) return null;
+
   const [typing, setTyping] = useState(profile.name);
   const [profileNameError, setProfileNameError] = useState<ErrorHandler>({
     isError: false,
@@ -42,7 +45,7 @@ export const ProfileName: FC<PropsErrHandler> = ({
   };
 
   useEffect(() => {
-    const typingCheck = typing.match(RegExp(/[a-яA-Я0-9]/gmu))?.join('');
+    const typingCheck = typing?.match(RegExp(/[a-яA-Я0-9]/gmu))?.join('');
 
     if (typingCheck !== typing && typing.length > 0) {
       setProfile(changeProfile(profile, typing));
