@@ -29,6 +29,7 @@
       "@RightProfilePanel/*": ["components/right-profile-panel/*"],
       "@Timeline/*": ["components/timeline/*"],
       "@Store": ["./store/Store"],
+      "@IndexedDB": ["./store/indexedDB"],
       "@Hooks/*": ["./hooks/*"],
       "@Constants": ["./utils/globalConstants"],
       "@Helpers": ["./utils/helperFunctions"],

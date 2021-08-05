@@ -12,10 +12,10 @@ import { ProfileName } from '@Modals/profile-name/ProfileName';
 import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
-import { colors, newProfile } from '@Constants';
+import { colors } from '@Constants';
 
 const CreateProfile: FC = () => {
-  let { setStep, profile, setProfile } = useStepsStore();
+  let { setStep, setProfile } = useStepsStore();
   // if (!profile) return null;
   const [hasError, setHasError] = useState({
     nameErr: false,
@@ -54,7 +54,6 @@ const CreateProfile: FC = () => {
       color: colors[0].en,
       avatar: { name: '', img: '' },
     });
-    // setProfile(newProfile);
     // console.log('reset profile', profile);
   };
 

@@ -10,8 +10,10 @@ import {
 import Modal from '@Modals/Modal';
 // Component
 import { SwitchStep } from './SwitchStep';
+// Hook
+import { useGlobalStore } from '@Hooks/useStores';
 // Global const
-import { colors, newProfile } from '@Constants';
+import { colors } from '@Constants';
 // Types
 import { User, Timetable } from '@Types';
 
@@ -72,20 +74,22 @@ const reducer = (error: Error, action: Action) => {
 };
 
 export const Steps: FC = () => {
+  let { updateStore } = useGlobalStore();
   const [error, dispatch] = useReducer(reducer, state.error);
   const [step, setStep] = useState(state.step);
-  const [profile, setProfile] = useState({
-    id: `${Math.random()}`,
-    name: '',
-    color: colors[0].en,
-    avatar: { name: '', img: '' },
-  });
+  const [profile, setProfile] = useState(state.profile);
   const [timetable, setTimetable] = useState(state.timetable);
 
   useEffect(() => {
-    console.log(state.profile, profile, timetable);
-    setProfile(profile);
-  }, [profile]);
+    setProfile({
+      id: `${Math.random()}`,
+      name: '',
+      color: colors[0].en,
+      avatar: { name: '', img: '' },
+    });
+    setTimetable([]);
+    console.log('update steps', profile, timetable);
+  }, [updateStore]);
 
   return (
     <CreateStepsStore.Provider

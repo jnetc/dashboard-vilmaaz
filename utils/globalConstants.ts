@@ -43,9 +43,9 @@ export const hours = [
   '23:00',
 ];
 
-export const newProfile = {
-  id: `${Math.random()}`,
-  name: '',
-  color: colors[0].en,
-  avatar: { name: '', img: '' },
-};
+export const minutesInHour: number = 60;
+export const step: number = 340; // Length every hour
+export const hourDistance = step + minutesInHour; // The distance between the every hour
+export const minuteDistance = hourDistance / minutesInHour; // The distance between the every minute
+export const hourDivWidth: number = 90;
+export const rightPanelWidth = 300;

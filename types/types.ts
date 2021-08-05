@@ -60,9 +60,7 @@ export interface Timetable {
 export interface ProfileTimetable {
   timetable: Array<Timetable>;
 }
-export interface ProfileStore extends User {
-  timetable: Array<ProfileTimetable>;
-}
+export interface ProfileStore extends User, ProfileTimetable {}
 //!===
 
 export interface UserDataType extends User {
@@ -71,6 +69,9 @@ export interface UserDataType extends User {
 
 export interface Schedule extends User {
   timetable: Array<SchoolDay>;
+}
+export interface Schedule2 extends User {
+  timetable: Array<Timetable>;
 }
 
 export interface LessonsType extends UserDataType {
@@ -96,6 +97,7 @@ export interface StaticValues {
   startLessons: number;
   endLessons: number;
   totalTime: number;
+  timelineWidth: number;
 }
 
 export interface DaysType {
@@ -115,15 +117,18 @@ export interface ProfilesTimeType extends DaysType {
 }
 
 // STORES / CONTEXTS
+export interface UpdateStore {
+  status: 'default' | 'added' | 'updated' | 'deleted' | 'error';
+  message?: string;
+}
+
 export interface StoreCtxProps extends DaysType {
-  indexDB: IDBDatabase | null;
-  setIndexDB: (data: IDBDatabase) => void;
+  updateStore: UpdateStore;
+  setUpdateStore: (update: UpdateStore) => void;
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
-  timelineHours: Array<TimePosition>;
-  timelineWidth: number;
   content: Array<LessonsType>;
-  timepoints: Array<string>;
+  timepoints: Array<{ time: string; position: number }>;
   timeline: StaticValues;
 }
 

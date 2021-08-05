@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useState } from 'react';
+import { FC, MouseEvent, useState } from 'react';
 // Style
 import { ScheduleCreateStyle } from './ScheduleCreate.style';
 // Component
@@ -6,41 +6,35 @@ import { ModalTitle } from '@Modals/modal-title/ModalTitle';
 import { ScheduleTable } from '@Modals/schedule-table/ScheduleTable';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
-import { useStepsStore, useMainStore } from '@Hooks/useStores';
+import { useStepsStore, useMainStore, useGlobalStore } from '@Hooks/useStores';
 // Types
-import { Form } from '@Types';
+import { Form, ProfileStore } from '@Types';
 // Global const
 import { colors } from '@Constants';
+// IndexedDB
+import { createNewProfileIndexedDB } from '@IndexedDB';
 
 const ScheduleCreate: FC = () => {
   let { setStep, error, profile, setProfile, timetable, setTimetable } =
     useStepsStore();
   const { setOpenModal } = useMainStore();
-  const [trigger, setTrigger] = useState(false);
-  let [db, setDb] = useState<IDBDatabase | null>(null);
+  let { setUpdateStore } = useGlobalStore();
 
-  const getSchedule = (ev: MouseEvent<Form>) => {
+  const [trigger, setTrigger] = useState(false);
+
+  const saveToDB = async (ev: MouseEvent<Form>) => {
     ev.preventDefault();
-    const obj = { ...profile, timetable };
+
+    const obj = { ...profile, timetable } as ProfileStore;
 
     setTrigger(!trigger);
-    if (!db) return;
-    console.log('trans', db);
+    const createProfile = await createNewProfileIndexedDB('schedule', obj);
+    // if (!iDB) return;
 
-    const transition = db.transaction('data', 'readwrite');
-    const schedule = transition.objectStore('data');
-
-    const request = schedule.add({ ...obj });
-
-    request.addEventListener('success', () => {
-      console.log(`added to the store: ${request.result}`);
-      db?.close();
-    });
-
-    request.addEventListener('error', () => {
-      console.log(`error: ${request.error}`);
-    });
-
+    console.log(createProfile);
+    if (!createProfile.created) {
+      return console.log(createProfile.message);
+    }
     setProfile({
       id: `${Math.random()}`,
       name: '',
@@ -50,53 +44,14 @@ const ScheduleCreate: FC = () => {
     setTimetable([]);
     setStep('profile');
     setOpenModal(false);
-    console.log('Created Schedule');
+    setUpdateStore({ status: 'added', message: createProfile.message });
+    console.log(createProfile.message);
   };
-
-  useEffect(() => {
-    let database = indexedDB.open('database', 1);
-
-    database.addEventListener(
-      'error',
-      (err: IDBOpenDBRequestEventMap['error']) => {
-        console.warn('error', err);
-      }
-    );
-
-    database.addEventListener(
-      'success',
-      (ev: IDBOpenDBRequestEventMap['success']) => {
-        const req = ev.target as IDBRequest<IDBDatabase>;
-        db = req.result;
-        console.info('success');
-        setDb(db);
-      }
-    );
-
-    database.addEventListener(
-      'upgradeneeded',
-      (ev: IDBOpenDBRequestEventMap['upgradeneeded']) => {
-        const req = ev.target as IDBRequest<IDBDatabase>;
-        db = req.result;
-        const oldVersion = ev.oldVersion;
-        const newVersion = ev.newVersion || req.result.version;
-        console.log(`DB upgraded form v.${oldVersion} to v.${newVersion}`);
-        if (!db.objectStoreNames.contains('data')) {
-          console.log('database created!!!');
-          db.createObjectStore('data', {
-            keyPath: 'id',
-            autoIncrement: true,
-          });
-        }
-        setDb(db);
-      }
-    );
-  }, [trigger]);
 
   const prev = () => setStep('days');
 
   return (
-    <ScheduleCreateStyle onSubmit={getSchedule} name="schedule">
+    <ScheduleCreateStyle onSubmit={saveToDB} name="schedule">
       <ModalTitle>Lukujärjestys</ModalTitle>
       <ScheduleTable />
       <ModalButton

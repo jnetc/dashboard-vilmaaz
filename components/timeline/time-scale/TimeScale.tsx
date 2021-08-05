@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 // Hook
 import { useGlobalStore } from '@Hooks/useStores';
 // Components
@@ -6,9 +6,19 @@ import { TimelinePoints } from '@Timeline/timeline-points/TimelinePoints';
 import { TimelineStep } from '@Timeline/timeline-step/TimelineStep';
 // Styles
 import { TimeScaleStyle } from './TimeScale.style';
+//
+// import { hours } from '@Constants';
+import { hourPositions } from '@Helpers';
+import { TimePosition } from '@Types';
 
 export const TimeScale: FC = () => {
-  const { timelineHours, activeDay } = useGlobalStore();
+  const { activeDay } = useGlobalStore();
+  const [timelineHours, setTimelineHours] = useState<Array<TimePosition>>([]);
+
+  useEffect(() => {
+    const getHours = hourPositions();
+    setTimelineHours(getHours);
+  }, []);
 
   const points = timelineHours
     .sort((a, b) => {
@@ -24,7 +34,5 @@ export const TimeScale: FC = () => {
       {points}
       <TimelineStep />
     </TimeScaleStyle>
-  ) : (
-    <></>
-  );
+  ) : null;
 };

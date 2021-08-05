@@ -16,13 +16,11 @@ import { This, Div, Element, TimelineStoreProps } from '@Types';
 // Styles
 import { MainStyle, TimelineStyle, TimelineEmptyStyle } from './Timeline.style';
 
-// Timetable Context
-
 const state: TimelineStoreProps = { mainWidth: 0, timetableEl: null };
 export const TimelineStore = createContext(state);
 
 const Timeline = () => {
-  const { timeline, timelineWidth, activeDay } = useGlobalStore();
+  const { timeline, activeDay } = useGlobalStore();
   const { setAutoMovement } = useMainStore();
 
   const [currentPosEl, setCurrentPosEl] = useState<number>(0);
@@ -111,7 +109,7 @@ const Timeline = () => {
             onMouseUp={mouseUp}
             onMouseLeave={mouseLeave}
             onTransitionEnd={() => cssAnimationHandler}
-            hours={timelineWidth}>
+            hours={timeline.timelineWidth}>
             <TimeScale />
             <TimeField />
           </TimelineStyle>

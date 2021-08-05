@@ -10,7 +10,7 @@ import {
   useMainStore,
 } from '@Hooks/useStores';
 // Store const
-import { hourDivWidth } from '@Store';
+import { hourDivWidth } from '@Constants';
 // Styles
 import { TimelineStepStyle } from './TimelineStep.style';
 
@@ -47,7 +47,5 @@ export const TimelineStep: FC = () => {
     <TimelineStepStyle id="current-time" position={position} w={hourDivWidth}>
       {currentTimeStr}
     </TimelineStepStyle>
-  ) : (
-    <></>
-  );
+  ) : null;
 };

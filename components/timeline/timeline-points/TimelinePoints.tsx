@@ -4,7 +4,7 @@ import { TimePosition } from '@Types';
 // Styles
 import { TimelinePointsStyle } from './TimelinePoints.style';
 // Store const
-import { hourDivWidth } from '@Store';
+import { hourDivWidth } from '@Constants';
 
 // TODO Over 200 classes were generated for component styled.div with the id of "sc-1y7h4wd-9"
 //? Example:

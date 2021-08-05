@@ -1,22 +1,24 @@
 // Types
 import {
-  Schedule,
+  Schedule2,
   LessonsType,
   Lesson,
   InitLesson,
   StaticValues,
   Element,
   Timetable,
+  TimePosition,
 } from '@Types';
 
 import {
   step,
+  hours,
   hourDistance,
   minuteDistance,
   minutesInHour,
   hourDivWidth,
   rightPanelWidth,
-} from '@Store';
+} from './globalConstants';
 
 export const dateFormat = (options: Intl.DateTimeFormatOptions) => {
   const date = new Date();
@@ -24,12 +26,12 @@ export const dateFormat = (options: Intl.DateTimeFormatOptions) => {
 };
 
 export const transform = (
-  data: Array<Schedule>,
+  data: Array<Schedule2>,
   day: string,
   set: boolean = true
 ) => {
   // Used Set constructor for remove duplicate from array
-  const newTimelineSet: Set<string> = new Set();
+  const newTimelineSet: Set<TimePosition> = new Set();
   const newTimefieldArr: Array<LessonsType> = new Array();
 
   data.forEach(tb => {
@@ -52,8 +54,8 @@ export const transform = (
     const findEndOfArr = schoolday.lessons.length - 1;
     const start = schoolday.lessons[0].start.time;
     const end = schoolday.lessons[findEndOfArr].end.time;
-    const startPos = transformTimeToNum(start);
-    const endPos = transformTimeToNum(end);
+    const startPos = schoolday.lessons[0].start.position;
+    const endPos = schoolday.lessons[findEndOfArr].end.position;
     const timetableWithBreak = fillEmptySpace(schoolday.lessons);
 
     if (!set) {
@@ -65,8 +67,8 @@ export const transform = (
       });
     }
     if (set) {
-      newTimelineSet.add(start);
-      newTimelineSet.add(end);
+      newTimelineSet.add({ time: start, position: startPos });
+      newTimelineSet.add({ time: end, position: endPos });
     }
   });
 
@@ -117,21 +119,31 @@ const addTimePosition = (obj: InitLesson, start: number, end: number) => {
   return Object.assign({}, obj) as Lesson;
 };
 
-export const staticValues = (timearr: Array<string>) => {
+export const staticValues = (timearr: Array<TimePosition>) => {
   const arr: Array<number> = [];
 
   for (const i of timearr) {
-    arr.push(transformTimeToNum(i));
+    arr.push(i.position);
   }
-  //TODO Добавить сюда переменную длины элемента #timeline
-  let startLessons = Math.min(...arr);
-  let endLessons = Math.max(...arr);
-  let totalTime = endLessons - startLessons;
 
-  return { startLessons, endLessons, totalTime };
+  const endPoint = hourPositions().find(
+    p => p.time === '23:00'
+  ) as TimePosition;
+  const endPointAndRigthPanelWidth = endPoint.position + rightPanelWidth;
+
+  const startLessons = Math.min(...arr);
+  const endLessons = Math.max(...arr);
+  const totalTime = endLessons - startLessons;
+
+  return {
+    startLessons,
+    endLessons,
+    totalTime,
+    timelineWidth: endPointAndRigthPanelWidth,
+  };
 };
 
-export const hourPositions = (hours: Array<string>) => {
+export const hourPositions = () => {
   return hours.map(h => {
     const timepoint = transformTimeToNum(h);
     if (timepoint === 0) {

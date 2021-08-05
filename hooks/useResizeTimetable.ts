@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // Global const
-import { hourDivWidth, rightPanelWidth } from '@Store';
+import { hourDivWidth, rightPanelWidth } from '@Constants';
 // Types
 import { StaticValues } from '@Types';
 
