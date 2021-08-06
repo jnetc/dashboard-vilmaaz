@@ -17,12 +17,9 @@ import { colors } from '@Constants';
 // Types
 import { User, Timetable } from '@Types';
 
-type Steps = 'profile' | 'days' | 'schedule';
 interface StepsType {
   error: Error;
   dispatch: Dispatch<Action>;
-  step: Steps;
-  setStep: (step: Steps) => void;
   profile: User | null;
   setProfile: (obj: User) => void;
   timetable: Array<Timetable>;
@@ -32,8 +29,6 @@ interface StepsType {
 export const state: StepsType = {
   error: { isError: false },
   dispatch: obj => obj,
-  step: 'profile',
-  setStep: step => step,
   profile: null,
   setProfile: obj => obj,
   timetable: [],
@@ -76,7 +71,7 @@ const reducer = (error: Error, action: Action) => {
 export const Steps: FC = () => {
   let { updateStore } = useGlobalStore();
   const [error, dispatch] = useReducer(reducer, state.error);
-  const [step, setStep] = useState(state.step);
+
   const [profile, setProfile] = useState(state.profile);
   const [timetable, setTimetable] = useState(state.timetable);
 
@@ -96,10 +91,8 @@ export const Steps: FC = () => {
       value={{
         error,
         dispatch,
-        step,
         profile,
         timetable,
-        setStep,
         setProfile,
         setTimetable,
       }}>

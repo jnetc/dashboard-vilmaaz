@@ -122,11 +122,15 @@ export interface UpdateStore {
   message?: string;
 }
 
+export type Steps = 'profile' | 'days' | 'schedule';
+
 export interface StoreCtxProps extends DaysType {
   updateStore: UpdateStore;
   setUpdateStore: (update: UpdateStore) => void;
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
+  step: Steps;
+  setStep: (step: Steps) => void;
   content: Array<LessonsType>;
   timepoints: Array<{ time: string; position: number }>;
   timeline: StaticValues;

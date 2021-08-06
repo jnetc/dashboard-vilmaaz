@@ -1,15 +1,18 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ProfilesStyle } from './Profiles.style';
 // Type
 import { ProfilesType } from '@Types';
 // Component
 import { ProfilesTime } from '@RightProfilePanel/profiles-time/ProfilesTime';
+import { ProfileMenu } from '@RightProfilePanel/profile-menu/ProfileMenu';
 // Hook
 import { useMainStore } from '@Hooks/useStores';
 
 export const Profiles: FC<{ data: ProfilesType }> = ({ data }) => {
   const { setProfileLine } = useMainStore();
+  const [isOpen, setIsOpen] = useState(false);
+
   const { avatar, name, end, start, lessons, today, activeDay, id, color } =
     data;
   const timedata = {
@@ -23,8 +26,27 @@ export const Profiles: FC<{ data: ProfilesType }> = ({ data }) => {
     setProfileLine({ id, color });
   };
 
+  const openMenu = () => {
+    setIsOpen(true);
+  };
+
+  const closeMenu = (close: boolean) => {
+    console.log('close');
+    setIsOpen(close);
+  };
+
+  useEffect(() => {
+    const outEl = document.querySelector('body');
+    outEl?.addEventListener('click', ev => {
+      const target = ev.target as HTMLBodyElement;
+      if (!target.closest('.profile')) {
+        setIsOpen(false);
+      }
+    });
+  }, []);
+
   return (
-    <ProfilesStyle onMouseEnter={noticeLine}>
+    <ProfilesStyle onMouseEnter={noticeLine} className="profile">
       <figure>
         {avatar.img ? (
           <Image
@@ -43,7 +65,16 @@ export const Profiles: FC<{ data: ProfilesType }> = ({ data }) => {
       <p className="amount">
         Oppitunnit <b>{activeDay ? lessons : 0}</b>
       </p>
-      <button>•</button>
+      <div
+        className="profile-menu"
+        role="button"
+        tabIndex={0}
+        onClick={openMenu}>
+        •
+      </div>
+      {isOpen ? (
+        <ProfileMenu open={isOpen} id={id} closeMenu={closeMenu} />
+      ) : null}
     </ProfilesStyle>
   );
 };

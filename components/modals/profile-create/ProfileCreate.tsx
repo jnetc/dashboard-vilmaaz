@@ -2,7 +2,7 @@ import { FC, MouseEvent, useState } from 'react';
 //Style
 import { ProfileCreateStyle } from './ProfileCreate.style';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useGlobalStore, useStepsStore } from '@Hooks/useStores';
 // Types
 import { Form } from '@Types';
 // Components
@@ -15,7 +15,9 @@ import { ModalButton } from '@Modals/modal-button/ModalButton';
 import { colors } from '@Constants';
 
 const CreateProfile: FC = () => {
-  let { setStep, setProfile } = useStepsStore();
+  const { setStep } = useGlobalStore();
+  const { setProfile } = useStepsStore();
+
   // if (!profile) return null;
   const [hasError, setHasError] = useState({
     nameErr: false,

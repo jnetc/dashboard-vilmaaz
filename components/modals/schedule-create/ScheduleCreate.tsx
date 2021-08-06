@@ -15,10 +15,9 @@ import { colors } from '@Constants';
 import { createNewProfileIndexedDB } from '@IndexedDB';
 
 const ScheduleCreate: FC = () => {
-  let { setStep, error, profile, setProfile, timetable, setTimetable } =
-    useStepsStore();
+  let { error, profile, setProfile, timetable, setTimetable } = useStepsStore();
   const { setOpenModal } = useMainStore();
-  let { setUpdateStore } = useGlobalStore();
+  const { setUpdateStore, setStep } = useGlobalStore();
 
   const [trigger, setTrigger] = useState(false);
 
@@ -29,7 +28,6 @@ const ScheduleCreate: FC = () => {
 
     setTrigger(!trigger);
     const createProfile = await createNewProfileIndexedDB('schedule', obj);
-    // if (!iDB) return;
 
     console.log(createProfile);
     if (!createProfile.created) {

@@ -12,6 +12,8 @@ const state: StoreCtxProps = {
   setUpdateStore: update => update,
   dayOfWeek: '',
   setDayOfWeek: day => day,
+  step: 'profile',
+  setStep: step => step,
   today: true,
   activeDay: false,
   content: [],
@@ -30,6 +32,7 @@ const Store: FC = ({ children }) => {
   const [updateStore, setUpdateStore] = useState(state.updateStore);
   const [data, setData] = useState<Array<Schedule2>>([]);
   const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
+  const [step, setStep] = useState(state.step);
   // const [refresh, setRefresh] = useState(false);
 
   //
@@ -185,6 +188,8 @@ const Store: FC = ({ children }) => {
         setUpdateStore,
         dayOfWeek,
         setDayOfWeek,
+        step,
+        setStep,
         today: isToday,
         activeDay: isActiveDay,
         content,

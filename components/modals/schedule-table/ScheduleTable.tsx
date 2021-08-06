@@ -4,14 +4,15 @@ import { ScheduleTableStyle } from './ScheduleTable.style';
 
 import { ScheduleDay } from '@Modals/schedule-day/ScheduleDay';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useStepsStore, useGlobalStore } from '@Hooks/useStores';
 // Helper func
 import { removeDayFromSchedule } from 'utils/helperFunctions';
 // Type
 import { Input } from '@Types';
 
 export const ScheduleTable: FC = () => {
-  const { timetable, setTimetable, setStep } = useStepsStore();
+  const { timetable, setTimetable } = useStepsStore();
+  const { setStep } = useGlobalStore();
   const selectedDays = timetable.map(d => d.day);
   const [days, setDays] = useState<Array<string>>(selectedDays);
 

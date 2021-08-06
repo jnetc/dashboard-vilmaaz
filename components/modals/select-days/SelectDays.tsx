@@ -6,7 +6,7 @@ import { ModalTitle } from '@Modals/modal-title/ModalTitle';
 import { SelectDay } from '@Modals/select-days/SelectDay';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useStepsStore, useGlobalStore } from '@Hooks/useStores';
 // Types
 import { Form, Input } from '@Types';
 // Helper func
@@ -18,7 +18,8 @@ import {
 import { daysOfWeek } from '@Constants';
 
 const SelectDays: FC = () => {
-  let { setStep, timetable, setTimetable } = useStepsStore();
+  const { timetable, setTimetable } = useStepsStore();
+  const { setStep } = useGlobalStore();
   const selectedDays = timetable.map(d => d.day);
   const [days, setDays] = useState<Array<string>>(selectedDays);
 

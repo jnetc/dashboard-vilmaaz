@@ -6,6 +6,7 @@ export const ProfilesStyle = styled.div`
   grid-template-rows: 30px 25px 21px;
   padding: 10px;
   gap: 7px 15px;
+  position: relative;
   background: ${({ theme }) => theme.bg_middle()};
   border-radius: ${({ theme }) => theme.border_radius};
   box-shadow: 0 10px 20px ${({ theme }) => theme.bg_black(0.2)},
@@ -13,9 +14,12 @@ export const ProfilesStyle = styled.div`
   transition: all 0.3s ease-in-out;
   user-select: none;
   &:hover {
-    background: ${({ theme }) => theme.bg_soft()};
+    background: ${({ theme }) => theme.bg_light()};
     box-shadow: 0 20px 20px ${({ theme }) => theme.bg_black(0.3)},
       0 10px 10px ${({ theme }) => theme.bg_black(0.4)};
+    figure {
+      background: ${({ theme }) => theme.bg_middle()};
+    }
   }
   figure {
     grid-column: 1;
@@ -28,6 +32,7 @@ export const ProfilesStyle = styled.div`
     overflow: hidden;
     border-radius: 50%;
     background: ${({ theme }) => theme.bg_light()};
+    transition: all 0.3s ease-in-out;
     user-select: none;
   }
   h4 {
@@ -47,11 +52,14 @@ export const ProfilesStyle = styled.div`
       color: ${({ theme }) => theme.white_soft()};
     }
   }
-  button {
+  div.profile-menu {
     grid-column: 3;
     grid-row: 1 /-1;
+    display: flex;
     width: 30px;
     height: 40px;
+    align-items: center;
+    justify-content: center;
     color: ${({ theme }) => theme.grey_light()};
     font-size: 1rem;
     position: relative;
