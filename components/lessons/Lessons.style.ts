@@ -31,10 +31,9 @@ export const LessonsStyle = styled.div<LessonStyleType>`
     content: '';
     position: absolute;
     inset: 0;
-    mix-blend-mode: overlay;
-    animation: ${({ lineColor }) => (lineColor ? linenotice(lineColor) : '')} 2s
-      ease-in-out forwards;
-
+    opacity: 0.5;
+    box-shadow: inset 0 0 0 1px var(--${({ lineColor }) => lineColor});
+    transition: all 0.3s ease-in-out;
     z-index: 11;
   }
 `;

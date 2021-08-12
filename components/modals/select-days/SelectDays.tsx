@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ChangeEvent, useState } from 'react';
+import { FC, MouseEvent, ChangeEvent } from 'react';
 // Style
 import { SelectDaysStyle } from './SelectDays.style';
 // Component
@@ -6,7 +6,7 @@ import { ModalTitle } from '@Modals/modal-title/ModalTitle';
 import { SelectDay } from '@Modals/select-days/SelectDay';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
-import { useStepsStore, useGlobalStore } from '@Hooks/useStores';
+import { useMainStore } from '@Hooks/useStores';
 // Types
 import { Form, Input } from '@Types';
 // Helper func
@@ -18,25 +18,29 @@ import {
 import { daysOfWeek } from '@Constants';
 
 const SelectDays: FC = () => {
-  const { timetable, setTimetable } = useStepsStore();
-  const { setStep } = useGlobalStore();
-  const selectedDays = timetable.map(d => d.day);
-  const [days, setDays] = useState<Array<string>>(selectedDays);
+  const { setStep, newUser, setNewUser } = useMainStore();
+  if (!newUser) return null;
+
+  const selectedDays = newUser.timetable.map(d => d.day) as Array<string>;
 
   const pickDay = (ev: ChangeEvent<Input>) => {
     const getDayStr = ev.currentTarget.id;
 
-    if (days?.includes(getDayStr)) {
-      const idx = days.findIndex(idx => idx === getDayStr);
-      days.splice(idx, 1);
+    if (selectedDays.includes(getDayStr)) {
+      const idx = selectedDays.findIndex(idx => idx === getDayStr);
+      selectedDays.splice(idx, 1);
 
-      const remove = removeDayFromSchedule(getDayStr, timetable);
+      const remove = removeDayFromSchedule(getDayStr, newUser.timetable);
 
-      setTimetable(remove);
-      return setDays(days);
+      setNewUser(prevState => {
+        if (!prevState) return null;
+
+        prevState.timetable = remove;
+        return { ...prevState, ...newUser };
+      });
     }
 
-    const sortedDays = addDayToTheSchedule(getDayStr, timetable).sort(
+    const sortedDays = addDayToTheSchedule(getDayStr, newUser.timetable).sort(
       (a, b) => {
         const aNum = daysOfWeek.indexOf(a.day);
         const bNum = daysOfWeek.indexOf(b.day);
@@ -46,17 +50,21 @@ const SelectDays: FC = () => {
       }
     );
 
-    setDays([...days, getDayStr]);
-    setTimetable(sortedDays);
+    setNewUser(prevState => {
+      if (!prevState) return null;
+
+      prevState.timetable = sortedDays;
+      return { ...prevState, ...newUser };
+    });
   };
 
   const next = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
-    setStep('schedule');
+    setStep({ value: 'schedule' });
     // console.log('Selected days', days, timetable);
   };
 
-  const prev = () => setStep('profile');
+  const prev = () => setStep({ value: 'profile' });
 
   const dayslist = daysOfWeek.map(day => {
     return (
@@ -64,7 +72,7 @@ const SelectDays: FC = () => {
         key={day}
         day={day}
         onChange={pickDay}
-        isChecked={days.includes(day)}
+        isChecked={selectedDays.includes(day)}
       />
     );
   });
@@ -81,7 +89,7 @@ const SelectDays: FC = () => {
         aria-label="reset by default">
         Takaisin
       </ModalButton>
-      {days.length !== 0 ? (
+      {newUser.timetable.length !== 0 ? (
         <ModalButton
           ButtonStyle="confirm"
           row={3}

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, ChangeEvent, MouseEvent } from 'react';
+import { FC, ChangeEvent, MouseEvent } from 'react';
 // Style
 import {
   ProfileAvatarStyle,
@@ -8,61 +8,67 @@ import {
 // Types
 import { Input } from '@Types';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useMainStore, useStepsStore } from '@Hooks/useStores';
 
-interface PropsErrHandler {
-  reset: boolean;
-  profileErrHandler: (err: boolean) => void;
-}
-
-export const ProfileAvatar: FC<PropsErrHandler> = ({
-  reset,
-  profileErrHandler,
-}) => {
-  const { profile, setProfile } = useStepsStore();
-  if (!profile) return null;
-  const [avatarError, setAvatarError] = useState(false);
-  const [file, setFile] = useState<File | null>();
-  const [image, setImage] = useState<string>(profile.avatar.img);
+export const ProfileAvatar: FC = () => {
+  const { newUser, setNewUser } = useMainStore();
+  const { error, dispatch } = useStepsStore();
 
   const getFile = (ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;
 
-    if (!el.files || !el.files[0]) return setFile(null);
+    if (!el.files || !el.files[0]) return;
     if (el.files[0].size > 300000) {
-      setAvatarError(true);
-      profileErrHandler(true);
+      setNewUser(prevState => {
+        if (!prevState) return null;
+
+        prevState.avatar.img = '';
+        return { ...prevState, ...newUser };
+      });
+
+      if (newUser?.avatar.name.length == 2) {
+        dispatch({
+          type: 'file-size-limit',
+          payload: { isActive: true, isMaxSize: true },
+        });
+        return;
+      }
+
+      dispatch({
+        type: 'file-size-limit',
+        payload: { isActive: false, isMaxSize: true },
+      });
       return;
     }
 
-    setAvatarError(false);
-    profileErrHandler(false);
-
-    setFile(el.files[0]);
-  };
-
-  // API fileReader & get string image to state
-  useEffect(() => {
+    const file = el.files[0];
     if (!file) return;
+
     const reader = new FileReader();
-    reader.onload = () => setImage(reader.result as string);
+
+    reader.onload = () =>
+      setNewUser(prevState => {
+        const result = reader.result as string;
+        if (!prevState) return null;
+
+        prevState.avatar.img = result;
+        return { ...prevState, ...newUser };
+      });
     reader.readAsDataURL(file);
-  }, [file]);
 
-  // Update component for show avatar
-  useEffect(() => {
-    if (!image) return;
-    profile.avatar.img = image;
-    setProfile(profile);
-  }, [image]);
-
-  // Reset to default
-  useEffect(() => {
-    if (profile.avatar.img === '') {
-      setAvatarError(false);
-      setImage('');
+    if (newUser?.avatar.name.length == 2) {
+      dispatch({
+        type: 'no-errors',
+        payload: { isActive: true, isMaxSize: false },
+      });
+      return;
     }
-  }, [reset]);
+
+    dispatch({
+      type: 'no-errors',
+      payload: { isActive: false, isMaxSize: false },
+    });
+  };
 
   // onChange event can't clear target value. Use it!
   const resetAvatar = (ev: MouseEvent<Input>) => {
@@ -78,19 +84,21 @@ export const ProfileAvatar: FC<PropsErrHandler> = ({
         id="upload-avatar"
         accept=".png, .jpg, .jpeg, .webp, .svg"
         tabIndex={0}
-        styleErr={avatarError}
+        styleErr={error.isMaxSize ?? false}
         onChange={getFile}
         onClick={resetAvatar}
       />
       <UploadAvatarStyle
         aria-label="● Tiedostojen enimmäiskoko on 300 kt"
-        styleErr={avatarError}
+        styleErr={error.isMaxSize ?? false}
         htmlFor="upload-avatar">
         <ProfileAvatarStyle aria-label="● Voit ladata webp- png-, svg- tai jpg-tiedostoja">
-          {image ? (
-            <img src={image} alt={file?.name} />
+          {newUser?.avatar.img ? (
+            <img src={newUser.avatar.img} alt={newUser?.name} />
           ) : (
-            <figcaption>{profile.avatar.name}</figcaption>
+            <figcaption>
+              {newUser?.avatar.name ? newUser?.avatar.name : ''}
+            </figcaption>
           )}
         </ProfileAvatarStyle>
         <p id="upload-warning"></p>

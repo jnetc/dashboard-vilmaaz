@@ -1,10 +1,16 @@
-import { FC, createContext, useState } from 'react';
+import { FC, createContext, useState, useEffect } from 'react';
 // Types
-import { MainCtxProps } from '@Types';
+import { MainCtxProps, Schedule2 } from '@Types';
+// Hook
+import { useGlobalStore } from '@Hooks/useStores';
 
 const state: MainCtxProps = {
   openModal: false,
   setOpenModal: open => open,
+  step: { value: 'profile' },
+  setStep: step => step,
+  newUser: null,
+  setNewUser: obj => obj,
   autoMovement: true,
   setAutoMovement: el => el,
   profileLine: { id: '', color: '' },
@@ -14,15 +20,37 @@ const state: MainCtxProps = {
 export const MainContext = createContext(state);
 
 const Main: FC = ({ children }) => {
+  const { content } = useGlobalStore();
   const [openModal, setOpenModal] = useState(state.openModal);
+  const [step, setStep] = useState(state.step);
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
   const [profileLine, setProfileLine] = useState(state.profileLine);
+  const [newUser, setNewUser] = useState<Schedule2 | null>(null);
+
+  useEffect(() => {
+    if (!openModal) return;
+    content.find(prof => {
+      if (prof.id === step.id) {
+        const { timetable, start, end, ...profile } = prof;
+        const schedule = { ...profile, timetable };
+
+        // const time = timetable as Timetable[]
+        // localStorage.setItem('profile', JSON.stringify(schedule));
+        console.log('content', schedule);
+        setNewUser(schedule);
+      }
+    });
+  }, [openModal]);
 
   return (
     <MainContext.Provider
       value={{
         openModal,
         setOpenModal,
+        step,
+        setStep,
+        newUser,
+        setNewUser,
         autoMovement,
         setAutoMovement,
         profileLine,

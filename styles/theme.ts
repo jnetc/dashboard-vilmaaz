@@ -55,7 +55,7 @@ export const theme: DefaultTheme = {
   danger_hover: (alpha = 1) => `hsl(346 90% 55% / ${alpha})`, //'hsl(346, 90%, 55%)'
   pink: (alpha = 1) => `hsl(330 35% 65%/ ${alpha})`, //'hsl(330, 35%, 65%)'
   green: (alpha = 1) => `hsl(155 55% 65% / ${alpha})`, //'hsl(155, 35%, 65%)'
-  blue: (alpha = 1) => `hsl(226 35% 65% / ${alpha})`, //'hsl(216, 35%, 65%)'
+  blue: (alpha = 1) => `hsl(226 35% 65% / ${alpha})`, //'hsl(226, 35%, 65%)'
   brown: (alpha = 1) => `hsl(20 55% 65% / ${alpha})`, //'hsl(20, 35%, 65%)'
   violet: (alpha = 1) => `hsl(265 35% 65% / ${alpha})`, //'hsl(265, 35%, 65%)'
   // pink: (alpha = 1) => `hsl(346 90% 75%/ ${alpha})`, //'hsl(346, 90%, 75%)'

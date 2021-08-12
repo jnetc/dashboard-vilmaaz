@@ -1,61 +1,29 @@
-import {
-  FC,
-  createContext,
-  useState,
-  useReducer,
-  Dispatch,
-  useEffect,
-} from 'react';
+import { FC, createContext, useReducer } from 'react';
 // HOC
 import Modal from '@Modals/Modal';
 // Component
 import { SwitchStep } from './SwitchStep';
 // Hook
-import { useGlobalStore } from '@Hooks/useStores';
+// import { useMainStore } from '@Hooks/useStores';
 // Global const
-import { colors } from '@Constants';
+// import { colors } from '@Constants';
 // Types
-import { User, Timetable } from '@Types';
+import { StepsCtxProps, Error, Action } from '@Types';
+// IDB
+// import { getByIdIndexedDB } from '@IndexedDB';
 
-interface StepsType {
-  error: Error;
-  dispatch: Dispatch<Action>;
-  profile: User | null;
-  setProfile: (obj: User) => void;
-  timetable: Array<Timetable>;
-  setTimetable: (arr: Array<Timetable>) => void;
-}
-
-export const state: StepsType = {
+export const state: StepsCtxProps = {
   error: { isError: false },
   dispatch: obj => obj,
-  profile: null,
-  setProfile: obj => obj,
-  timetable: [],
-  setTimetable: arr => arr,
 };
 
 export const CreateStepsStore = createContext(state);
 
-export interface Error {
-  isError: boolean;
-  message?: string;
-  id?: string;
-}
-type ErrorActionType =
-  | 'numbers-and-letters'
-  | 'file-size-limit'
-  | 'empty-days'
-  | 'no-errors';
-
-interface Action {
-  type?: ErrorActionType;
-  payload: Error;
-}
-
 const reducer = (error: Error, action: Action) => {
   switch (action.type) {
     case 'numbers-and-letters':
+      return action.payload;
+    case 'two-letter-or-more':
       return action.payload;
     case 'file-size-limit':
       return action.payload;
@@ -69,32 +37,21 @@ const reducer = (error: Error, action: Action) => {
 };
 
 export const Steps: FC = () => {
-  let { updateStore } = useGlobalStore();
+  // const { step, openModal, setNewUser } = useMainStore();
   const [error, dispatch] = useReducer(reducer, state.error);
 
-  const [profile, setProfile] = useState(state.profile);
-  const [timetable, setTimetable] = useState(state.timetable);
-
-  useEffect(() => {
-    setProfile({
-      id: `${Math.random()}`,
-      name: '',
-      color: colors[0].en,
-      avatar: { name: '', img: '' },
-    });
-    setTimetable([]);
-    console.log('update steps', profile, timetable);
-  }, [updateStore]);
+  // Reset states after create data
+  // useEffect(() => {
+  // setProfile(null);
+  // setTimetable([]);
+  // console.log('update steps', profile, timetable);
+  // }, [updateStore]);
 
   return (
     <CreateStepsStore.Provider
       value={{
         error,
         dispatch,
-        profile,
-        timetable,
-        setProfile,
-        setTimetable,
       }}>
       <Modal>
         <SwitchStep />

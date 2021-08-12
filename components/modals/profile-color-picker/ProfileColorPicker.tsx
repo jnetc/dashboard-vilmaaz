@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, useEffect } from 'react';
+import { FC, ChangeEvent } from 'react';
 // Style
 import { ProfileColorPickerStyle } from './ProfileColorPicker.style';
 // Global const
@@ -8,36 +8,32 @@ import { ProfileColor } from '@Modals/profile-color-picker/ProfileColor';
 //Types
 import { Input } from '@Types';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useMainStore } from '@Hooks/useStores';
 
-export const ProfileColorPicker: FC<{ reset: boolean }> = ({ reset }) => {
-  const { profile, setProfile } = useStepsStore();
-  if (!profile) return null;
-  const [color, setColor] = useState(profile.color);
+export const ProfileColorPicker: FC = () => {
+  const { newUser, setNewUser } = useMainStore();
 
   const pickColor = (ev: ChangeEvent<Input>) => {
     const colorStr = ev.currentTarget.dataset.color;
     if (!colorStr) return;
-    setColor(colorStr);
+
+    setNewUser(newUser);
+    setNewUser(prevState => {
+      if (!prevState) return null;
+
+      prevState.color = colorStr;
+      return { ...prevState, ...newUser };
+    });
   };
 
-  useEffect(() => {
-    profile.color = color;
-    setProfile(profile);
-  }, [color]);
-
-  // Reset to default
-  useEffect(() => {
-    if (profile.color.includes(colors[0].en)) setColor(colors[0].en);
-  }, [reset]);
-
   const radioBtns = colors.map(clr => {
+    // if (!newUser) return null;
     return (
       <ProfileColor
         key={clr.en}
         clr={clr}
         onChange={pickColor}
-        checked={clr.en.includes(color)}
+        checked={clr.en.includes(newUser?.color || 'brown')}
       />
     );
   });

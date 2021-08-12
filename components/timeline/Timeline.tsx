@@ -12,11 +12,11 @@ import { TimeField } from '@Timeline/time-field/TimeField';
 import { useGlobalStore, useMainStore } from '@Hooks/useStores';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
 // Types
-import { This, Div, Element, TimelineStoreProps } from '@Types';
+import { This, Div, Element, TimelineCtxProps } from '@Types';
 // Styles
 import { MainStyle, TimelineStyle, TimelineEmptyStyle } from './Timeline.style';
 
-const state: TimelineStoreProps = { mainWidth: 0, timetableEl: null };
+const state: TimelineCtxProps = { mainWidth: 0, timetableEl: null };
 export const TimelineStore = createContext(state);
 
 const Timeline = () => {

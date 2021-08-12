@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 // SIMPLE TYPES
 export type Div = HTMLDivElement;
 export type Button = HTMLButtonElement;
@@ -73,8 +74,11 @@ export interface Schedule extends User {
 export interface Schedule2 extends User {
   timetable: Array<Timetable>;
 }
+export interface Schedule2 extends User {
+  timetable: Array<Timetable>;
+}
 
-export interface LessonsType extends UserDataType {
+export interface LessonsType extends Schedule2 {
   start: TimePosition;
   end: TimePosition;
 }
@@ -118,43 +122,74 @@ export interface ProfilesTimeType extends DaysType {
 
 // STORES / CONTEXTS
 export interface UpdateStore {
-  status: 'default' | 'added' | 'updated' | 'deleted' | 'error';
+  status: 'default' | 'added' | 'updated' | 'deleted' | 'error' | 'reset';
   message?: string;
 }
 
 export type Steps = 'profile' | 'days' | 'schedule';
 
 export interface StoreCtxProps extends DaysType {
+  profile: User | null;
+  setProfile: (obj: User | null) => void;
+  timetable: Array<Timetable>;
+  setTimetable: (arr: Array<Timetable>) => void;
   updateStore: UpdateStore;
   setUpdateStore: (update: UpdateStore) => void;
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
-  step: Steps;
-  setStep: (step: Steps) => void;
   content: Array<LessonsType>;
   timepoints: Array<{ time: string; position: number }>;
   timeline: StaticValues;
 }
 
+export type setNewUserType = Dispatch<SetStateAction<Schedule2 | null>>; // for prevState!!!
 export interface MainCtxProps {
   openModal: boolean;
   setOpenModal: (open: boolean) => void;
+  step: { value: Steps; id?: string };
+  setStep: (data: { value: Steps; id?: string }) => void;
+  newUser: Schedule2 | null;
+  setNewUser: setNewUserType;
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
   profileLine: { id: string; color: string };
   setProfileLine: (obj: { id: string; color: string }) => void;
 }
 
-export interface TimelineStoreProps {
+export interface StepsCtxProps {
+  error: Error;
+  dispatch: Dispatch<Action>;
+}
+
+export interface TimelineCtxProps {
   mainWidth: number;
   timetableEl: Element;
 }
 
-export interface CreateProfileStoreProps extends User {
-  setUsername: (str: string) => void;
-  setColor: (str: string) => void;
-  setAvatar: (str: string | undefined) => void;
-  reset: boolean;
+// export interface CreateProfileStoreProps extends User {
+//   setUsername: (str: string) => void;
+//   setColor: (str: string) => void;
+//   setAvatar: (str: string | undefined) => void;
+//   reset: boolean;
+// }
+
+// STEPS
+export type Error = {
+  isError?: boolean;
+  isActive?: boolean;
+  isMaxSize?: boolean;
+  message?: string;
+  id?: string;
+};
+
+export interface Action {
+  type?:
+    | 'numbers-and-letters'
+    | 'two-letter-or-more'
+    | 'file-size-limit'
+    | 'empty-days'
+    | 'no-errors';
+  payload: Error;
 }
 
 // BUTTONS

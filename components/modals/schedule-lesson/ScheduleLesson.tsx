@@ -13,20 +13,20 @@ interface LessonPropType {
   data: Lesson;
   getRows: (data: Lesson) => void;
   removeRow: (id: string) => void;
-  hasError: {
-    isError: boolean;
-    message?: string;
-    id?: string;
-  };
+  // hasError: {
+  //   isError: boolean;
+  //   message?: string;
+  //   id?: string;
+  // };
 }
 
 export const ScheduleLesson: FC<LessonPropType> = ({
   data,
   getRows,
   removeRow,
-  hasError,
+  // hasError = false,
 }) => {
-  const { dispatch } = useStepsStore();
+  const { error } = useStepsStore();
   const [lessonState, setLessonState] = useState(data);
   const [isCopy, setIsCopy] = useState(false);
   const ref = useRef<HTMLInputElement | null>(null);
@@ -42,6 +42,8 @@ export const ScheduleLesson: FC<LessonPropType> = ({
 
   const getValue = (ev: ChangeEvent<HTMLInputElement>) => {
     lessonState.lesson = ev.currentTarget.value;
+
+    getRows(lessonState);
     setLessonState(prev => {
       return { ...prev, ...lessonState };
     });
@@ -68,31 +70,26 @@ export const ScheduleLesson: FC<LessonPropType> = ({
     return () => clearTimeout(clear);
   }, [isCopy]);
 
-  useEffect(() => {
-    const typingCheck =
-      lessonState.lesson.match(RegExp(/[\sa-яA-Я0-9]/gmu))?.join('') || '';
-
-    if (typingCheck !== lessonState.lesson) {
-      const error = {
-        isError: true,
-        id: lessonState.id,
-        message: 'Käytä vain numeroita tai kirjaimia',
-      };
-      dispatch({ type: 'numbers-and-letters', payload: error });
-    }
-
-    if (typingCheck === lessonState.lesson) {
-      dispatch({ type: 'no-errors', payload: { isError: false } });
-    }
-
-    getRows(lessonState);
-  }, [lessonState]);
+  // useEffect(() => {
+  // const typingCheck =
+  //   lessonState.lesson.match(RegExp(/[\sa-яA-Я0-9]/gmu))?.join('') || '';
+  // if (typingCheck !== lessonState.lesson) {
+  //   const error = {
+  //     isError: true,
+  //     id: lessonState.id,
+  //     message: 'Käytä vain numeroita tai kirjaimia',
+  //   };
+  //   dispatch({ type: 'numbers-and-letters', payload: error });
+  // }
+  // if (typingCheck === lessonState.lesson) {
+  //   dispatch({ type: 'no-errors', payload: { isError: false } });
+  // }
+  // getRows(lessonState);
+  // }, [lessonState]);
 
   return (
-    <ScheduleLessonStyle styleErr={hasError?.isError}>
-      {hasError?.isError ? (
-        <span className="error-type">Käytäkää vain numeroita</span>
-      ) : null}
+    <ScheduleLessonStyle
+      styleErr={error.id?.includes(data.id) ?? error.isError ?? false}>
       <input
         type="time"
         name="lesson"

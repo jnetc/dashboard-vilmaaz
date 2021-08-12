@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, useEffect } from 'react';
+import { FC, ChangeEvent, useState } from 'react';
 // Style
 import { ScheduleDayStyle } from './ScheduleDay.style';
 import {
@@ -13,7 +13,7 @@ import { firstUpperCase } from 'utils/helperFunctions';
 import { LessonBtns } from '@Modals/schedule-buttons/LessonBtns';
 import { ScheduleLesson } from '@Modals/schedule-lesson/ScheduleLesson';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useMainStore, useStepsStore } from '@Hooks/useStores';
 
 export interface SelectDayType {
   data: Timetable;
@@ -27,34 +27,71 @@ export const ScheduleDay: FC<SelectDayType> = ({
   onChange,
 }) => {
   const { day, lessons } = data;
-  const { timetable, setTimetable, dispatch, error } = useStepsStore();
+  const { dispatch } = useStepsStore();
+  const { setNewUser } = useMainStore();
   const [rows, setRows] = useState(lessons);
 
   const isEmptyRows = rows.length <= 0;
   const dayStr = firstUpperCase(day);
 
   const getRows = (data: Lesson) => {
+    // console.log(data.lesson);
+
+    // Check for errors
+    const typingCheck =
+      data.lesson.match(RegExp(/[\sa-яA-Я0-9]/gmu))?.join('') || '';
+
+    if (typingCheck !== data.lesson) {
+      dispatch({
+        type: 'numbers-and-letters',
+        payload: {
+          isError: true,
+          id: data.id,
+          message: 'Käytä vain numeroita tai kirjaimia',
+        },
+      });
+    }
+
+    if (typingCheck === data.lesson) {
+      dispatch({ type: 'no-errors', payload: { isError: false } });
+    }
+
     const idx = rows.findIndex(idx => idx.id === data.id);
     rows[idx] = data;
     setRows(rows);
+
+    // Update state
+    setNewUser(prevState => {
+      if (!prevState) return null;
+
+      prevState.timetable.map(tb => {
+        if (tb.day === day) {
+          return (tb.lessons = rows);
+        }
+        return tb;
+      });
+
+      return { ...prevState };
+    });
   };
 
   const removeRow = (id: string) => {
     const filtered = rows.filter(r => r.id !== id);
     setRows(filtered);
-  };
 
-  const lessonsRows = rows.map(l => {
-    return (
-      <ScheduleLesson
-        key={l.id}
-        data={l}
-        getRows={getRows}
-        removeRow={removeRow}
-        hasError={l.id === error.id ? error : { isError: false }}
-      />
-    );
-  });
+    setNewUser(prevState => {
+      if (!prevState) return null;
+
+      prevState.timetable.map(tb => {
+        if (tb.day === day) {
+          return (tb.lessons = filtered);
+        }
+        return tb;
+      });
+
+      return { ...prevState };
+    });
+  };
 
   const addNewRow = () => {
     const newRow = {
@@ -63,22 +100,36 @@ export const ScheduleDay: FC<SelectDayType> = ({
       start: { time: '', position: 0 },
       end: { time: '', position: 0 },
     };
+
     setRows([...rows, newRow]);
   };
 
-  useEffect(() => {
-    const idx = timetable.findIndex(idx => idx.day === day);
-    timetable[idx].lessons = rows;
-    setTimetable(timetable);
+  const lessonsRows = rows.map(l => {
+    // dispatch({ type: 'no-errors', payload: { id: l.id } });
+    return (
+      <ScheduleLesson
+        key={l.id}
+        data={l}
+        getRows={getRows}
+        removeRow={removeRow}
+        // hasError={l.id === error.id ? error : { isError: false }}
+      />
+    );
+  });
 
-    const hasLessons = timetable.find(t => t.lessons.length !== 0 && t);
-    if (!hasLessons) {
-      dispatch({
-        type: 'empty-days',
-        payload: { isError: true, message: 'täytä ainakin yksi rivi ' },
-      });
-    }
-  }, [rows]);
+  // useEffect(() => {
+  //   const idx = newUser.timetable.findIndex(idx => idx.day === day);
+  //   newUser.timetable[idx].lessons = rows;
+  //   // setTimetable(newUser.timetable);
+
+  //   const hasLessons = newUser.timetable.find(t => t.lessons.length !== 0 && t);
+  //   if (!hasLessons) {
+  //     dispatch({
+  //       type: 'empty-days',
+  //       payload: { isError: true, message: 'täytä ainakin yksi rivi ' },
+  //     });
+  //   }
+  // }, [rows]);
 
   return (
     <ScheduleDayStyle isEmptyRows={isEmptyRows}>

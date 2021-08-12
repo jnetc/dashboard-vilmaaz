@@ -5,6 +5,8 @@ import { useMainStore } from '@Hooks/useStores';
 export const Switcher = () => {
   const { autoMovement, setAutoMovement } = useMainStore();
 
+  console.log(autoMovement);
+
   const automovement = () => setAutoMovement(!autoMovement);
 
   return (

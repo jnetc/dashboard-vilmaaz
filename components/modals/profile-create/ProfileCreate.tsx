@@ -2,7 +2,7 @@ import { FC, MouseEvent, useState } from 'react';
 //Style
 import { ProfileCreateStyle } from './ProfileCreate.style';
 // Hook
-import { useGlobalStore, useStepsStore } from '@Hooks/useStores';
+import { useMainStore, useStepsStore } from '@Hooks/useStores';
 // Types
 import { Form } from '@Types';
 // Components
@@ -15,58 +15,52 @@ import { ModalButton } from '@Modals/modal-button/ModalButton';
 import { colors } from '@Constants';
 
 const CreateProfile: FC = () => {
-  const { setStep } = useGlobalStore();
-  const { setProfile } = useStepsStore();
+  const { setStep, step, newUser, setNewUser } = useMainStore();
+  const { error, dispatch } = useStepsStore();
 
-  // if (!profile) return null;
-  const [hasError, setHasError] = useState({
-    nameErr: false,
-    avatarErr: false,
-  });
   const [reset, setReset] = useState(false);
-
-  const nameErrHandler = (err: boolean) => {
-    setHasError(prev => {
-      hasError.nameErr = err;
-      return { ...prev, ...hasError };
-    });
-  };
-
-  const avatarErrHandler = (err: boolean) => {
-    setHasError(prev => {
-      hasError.avatarErr = err;
-      return { ...prev, ...hasError };
-    });
-  };
 
   const next = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
-    if (hasError.nameErr ?? hasError.avatarErr) return;
 
-    setStep('days');
+    setStep({ value: 'days' });
+
+    // setUpdateStore({ status: 'updated' });
     // console.log('Created profile', profile);
   };
 
   // Set to default state
   const clear = () => {
+    if (!newUser) return;
+
     setReset(!reset);
-    setProfile({
+    setNewUser({
       id: `${Math.random()}`,
       name: '',
       color: colors[0].en,
       avatar: { name: '', img: '' },
+      timetable: [],
     });
-    // console.log('reset profile', profile);
+    dispatch({
+      type: 'no-errors',
+      payload: { isError: false, isActive: false },
+    });
   };
+
+  // console.log(error);
 
   return (
     <>
       <ProfileCreateStyle onSubmit={next} name="user">
-        <ModalTitle>Lou uusi tili</ModalTitle>
+        {step.id ? (
+          <ModalTitle>Tilisi</ModalTitle>
+        ) : (
+          <ModalTitle>Lou uusi tili</ModalTitle>
+        )}
         <section id="modal-profile">
-          <ProfileAvatar profileErrHandler={avatarErrHandler} reset={reset} />
-          <ProfileName profileErrHandler={nameErrHandler} reset={reset} />
-          <ProfileColorPicker reset={reset} />
+          <ProfileAvatar />
+          <ProfileName />
+          <ProfileColorPicker />
         </section>
         <ModalButton
           ButtonStyle="reset"
@@ -76,9 +70,9 @@ const CreateProfile: FC = () => {
           aria-label="reset by default">
           Tyhjätä
         </ModalButton>
-        {hasError.nameErr ?? hasError.avatarErr ? (
+        {error.isActive ? (
           <ModalButton
-            ButtonStyle="disable"
+            ButtonStyle="confirm"
             row={3}
             col={2}
             aria-label="go to next">
@@ -86,7 +80,7 @@ const CreateProfile: FC = () => {
           </ModalButton>
         ) : (
           <ModalButton
-            ButtonStyle="confirm"
+            ButtonStyle="disable"
             row={3}
             col={2}
             aria-label="go to next">

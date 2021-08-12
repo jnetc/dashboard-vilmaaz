@@ -1,7 +1,9 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 import { ProfileMenuStyle } from './ProfileMenu.style';
 import { MenuCloseBtnStyle } from './CloseBtnMenu.style';
 import { ScheduleIcon, UserIcon, WeekDayIcon } from '@Icons/ProfileMenu';
+// Hook
+import { useMainStore } from '@Hooks/useStores';
 
 interface ProfileMenu {
   open: boolean;
@@ -10,21 +12,43 @@ interface ProfileMenu {
 }
 
 export const ProfileMenu: FC<ProfileMenu> = ({ open, id, closeMenu }) => {
+  const { setOpenModal, setStep } = useMainStore();
+  const ref = useRef<HTMLDivElement>(null);
+
   const openProfile = () => {
     console.log('openProfile', id);
+    setOpenModal(true);
+    setStep({ value: 'profile', id: id });
     closeMenu(false);
   };
   const openWeekDay = () => {
-    console.log('openWeekDay', id);
+    // console.log('openWeekDay', id);
+    setOpenModal(true);
+    setStep({ value: 'days', id: id });
     closeMenu(false);
   };
   const openSchedule = () => {
-    console.log('openSchedule', id);
+    // console.log('openSchedule', id);
+    setOpenModal(true);
+    setStep({ value: 'schedule', id: id });
     closeMenu(false);
   };
 
+  useEffect(() => {
+    const outSideClick = (ev: HTMLElementEventMap['click']) => {
+      const el = ev.target as HTMLDivElement;
+      if (!el.closest('.submenu')) {
+        closeMenu(false);
+      }
+    };
+    document.body.addEventListener('mousedown', outSideClick, true);
+    return () => {
+      document.body.removeEventListener('mousedown', outSideClick, true);
+    };
+  }, []);
+
   return (
-    <ProfileMenuStyle open={open}>
+    <ProfileMenuStyle open={open} className="submenu" ref={ref}>
       <button className="profile-menu-item" onClick={openProfile}>
         <UserIcon />
         <span>Muokka profiili</span>

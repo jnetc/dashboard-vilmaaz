@@ -1,101 +1,101 @@
-import { FC, ChangeEvent, useEffect, useState } from 'react';
+import { FC, ChangeEvent, useEffect } from 'react';
 // Style
 import { ProfileNameStyle } from './ProfileName.style';
 // Types
-import { Input, User } from '@Types';
+import { Input, Schedule2 } from '@Types';
 // Helper
 import { firstUpperCase } from 'utils/helperFunctions';
 // Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useMainStore, useStepsStore } from '@Hooks/useStores';
 
-interface ErrorHandler {
-  isError: boolean;
-  message?: string;
-}
-
-interface PropsErrHandler {
-  reset: boolean;
-  profileErrHandler: (err: boolean) => void;
-}
-
-const changeProfile = (profile: User, typing: string) => {
+const changeProfile = (profile: Schedule2 | null, typing: string) => {
+  if (!profile) return null;
   profile.name = typing;
   profile.avatar.name = typing.substring(0, 2);
   return profile;
 };
 
-export const ProfileName: FC<PropsErrHandler> = ({
-  reset,
-  profileErrHandler,
-}) => {
-  const { profile, setProfile } = useStepsStore();
+export const ProfileName: FC = () => {
+  const { newUser, setNewUser } = useMainStore();
+  const { error, dispatch } = useStepsStore();
 
-  if (!profile) return null;
-
-  const [typing, setTyping] = useState(profile.name);
-  const [profileNameError, setProfileNameError] = useState<ErrorHandler>({
-    isError: false,
-  });
-
-  const getOnChange = (ev: ChangeEvent<Input>) => {
+  const getInputName = (ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;
     const string = el.value.toLowerCase().trim();
-    const name = firstUpperCase(string);
-    setTyping(name);
+    const nameProf = firstUpperCase(string);
+
+    const typingCheck = nameProf?.match(RegExp(/[a-яA-Я0-9]/gmu))?.join('');
+
+    if (typingCheck !== nameProf && nameProf.length > 0) {
+      setNewUser(changeProfile(newUser, nameProf));
+      console.log(newUser);
+      dispatch({
+        type: 'numbers-and-letters',
+        payload: {
+          isError: true,
+          message: 'Käytä vain numeroita tai kirjaimia',
+        },
+      });
+      return;
+    }
+
+    if (nameProf.length <= 1) {
+      setNewUser(changeProfile(newUser, nameProf));
+      dispatch({
+        type: 'two-letter-or-more',
+        payload: {
+          isError: true,
+          message: 'Pitäisi sisältää 2 ja yli kirjainta',
+        },
+      });
+      return;
+    }
+
+    if (nameProf.length <= 1) {
+      dispatch({
+        type: 'two-letter-or-more',
+        payload: {
+          isError: true,
+          message: 'Pitäisi sisältää 2 ja yli kirjainta',
+        },
+      });
+    } else {
+      dispatch({ type: 'no-errors', payload: { isError: false } });
+    }
+
+    setNewUser(changeProfile(newUser, nameProf));
+    dispatch({
+      type: 'no-errors',
+      payload: { isError: false, isActive: true },
+    });
   };
 
+  // Initial dispatch
   useEffect(() => {
-    const typingCheck = typing?.match(RegExp(/[a-яA-Я0-9]/gmu))?.join('');
-
-    if (typingCheck !== typing && typing.length > 0) {
-      setProfile(changeProfile(profile, typing));
-      setProfileNameError({
-        isError: true,
-        message: 'Käytä vain numeroita tai kirjaimia',
+    if (newUser?.name === '') {
+      dispatch({
+        type: 'no-errors',
+        payload: { isError: false, isActive: false },
       });
-
-      profileErrHandler(true);
       return;
     }
-
-    if (typing.length === 1) {
-      setProfile(changeProfile(profile, typing));
-      setProfileNameError({
-        isError: true,
-        message: 'Pitäisi sisältää 2 ja yli kirjainta',
-      });
-      profileErrHandler(true);
-      return;
-    }
-
-    if (typing.length <= 1) {
-      profileErrHandler(true);
-    } else {
-      profileErrHandler(false);
-    }
-
-    setProfile(changeProfile(profile, typing));
-    setProfileNameError({ isError: false });
-  }, [typing]);
-
-  // Reset to default
-  useEffect(() => {
-    if (profile.name === '') setTyping('');
-  }, [reset]);
+    dispatch({
+      type: 'no-errors',
+      payload: { isError: false, isActive: true },
+    });
+  }, []);
 
   return (
-    <ProfileNameStyle styleErr={profileNameError.isError}>
-      <legend>
-        {profileNameError.isError ? profileNameError.message : 'Keksiä nimesi'}
-      </legend>
+    <ProfileNameStyle styleErr={error.isError ?? false}>
+      <legend>{error.isError ? error.message : 'Tilin nimesi'}</legend>
 
       <input
         type="text"
         name="username"
         id="username"
-        placeholder="Tilin nimi"
-        value={profile.name}
-        onChange={getOnChange}
+        placeholder="Keksiä nimesi"
+        value={newUser?.name || ''}
+        onChange={getInputName}
         required
       />
     </ProfileNameStyle>

@@ -9,44 +9,44 @@ import { ModalButton } from '@Modals/modal-button/ModalButton';
 import { useStepsStore, useMainStore, useGlobalStore } from '@Hooks/useStores';
 // Types
 import { Form, ProfileStore } from '@Types';
-// Global const
-import { colors } from '@Constants';
 // IndexedDB
 import { createNewProfileIndexedDB } from '@IndexedDB';
+// Helpers
+import { getBreaks } from '@Helpers';
 
 const ScheduleCreate: FC = () => {
-  let { error, profile, setProfile, timetable, setTimetable } = useStepsStore();
-  const { setOpenModal } = useMainStore();
-  const { setUpdateStore, setStep } = useGlobalStore();
+  let { error } = useStepsStore();
+  const { setOpenModal, setStep, newUser, setNewUser } = useMainStore();
+  const { setUpdateStore } = useGlobalStore();
 
   const [trigger, setTrigger] = useState(false);
 
   const saveToDB = async (ev: MouseEvent<Form>) => {
     ev.preventDefault();
 
-    const obj = { ...profile, timetable } as ProfileStore;
+    try {
+      const content = getBreaks(newUser);
+      console.log(content);
 
-    setTrigger(!trigger);
-    const createProfile = await createNewProfileIndexedDB('schedule', obj);
+      const obj = { ...content } as ProfileStore;
+      setTrigger(!trigger);
+      const createProfile = await createNewProfileIndexedDB('schedule', obj);
 
-    console.log(createProfile);
-    if (!createProfile.created) {
-      return console.log(createProfile.message);
+      console.log(createProfile);
+      if (!createProfile.created) {
+        return console.log(createProfile.message);
+      }
+      setNewUser(null);
+      setStep({ value: 'profile' });
+      setOpenModal(false);
+      setUpdateStore({ status: 'added', message: createProfile.message });
+      console.log(createProfile.message, obj);
+    } catch (error) {
+      console.log(error);
     }
-    setProfile({
-      id: `${Math.random()}`,
-      name: '',
-      color: colors[0].en,
-      avatar: { name: '', img: '' },
-    });
-    setTimetable([]);
-    setStep('profile');
-    setOpenModal(false);
-    setUpdateStore({ status: 'added', message: createProfile.message });
-    console.log(createProfile.message);
   };
 
-  const prev = () => setStep('days');
+  const prev = () => setStep({ value: 'days' });
 
   return (
     <ScheduleCreateStyle onSubmit={saveToDB} name="schedule">
