@@ -40,7 +40,6 @@ const ProfilePanel = () => {
       if (root) {
         const color = root.getAttribute('data-color');
         const id = root.id;
-        console.log('in root', id, color);
         setProfileLine({ id: id, color: color || '' });
         return;
       }

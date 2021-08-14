@@ -134,3 +134,35 @@ export const createNewProfileIndexedDB = async (
     });
   });
 };
+
+export const updateProfileIndexedDB = async (
+  storeName: string,
+  data: Schedule2 | null
+) => {
+  const db = await connection('vilmazz', storeName);
+  const transaction = db.transaction(storeName, 'readwrite');
+
+  transaction.oncomplete = () => {
+    console.log(`====> Transaction is complite / Was updated`);
+  };
+  // create an object store on the transaction
+  const store = transaction.objectStore(storeName);
+  // updating our newItem object to the object store
+  // id no needed ^_^
+  const request = store.put({ ...data });
+
+  return new Promise((resolve, reject) => {
+    request.addEventListener('error', () => {
+      console.log(`Profile wasn't updated: ${request.error}`);
+      reject({
+        created: false,
+        message: `Profile wasn't updated: ${request.error}`,
+      });
+    });
+
+    request.addEventListener('success', () => {
+      resolve({ created: true, message: 'Profile was updated!' });
+      console.log(`Profile was updated: ${request.result}`);
+    });
+  });
+};

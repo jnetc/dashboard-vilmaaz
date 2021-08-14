@@ -2,7 +2,7 @@ import { FC, MouseEvent, useState } from 'react';
 //Style
 import { ProfileCreateStyle } from './ProfileCreate.style';
 // Hook
-import { useMainStore, useStepsStore } from '@Hooks/useStores';
+import { useMainStore, useStepsStore, useGlobalStore } from '@Hooks/useStores';
 // Types
 import { Form } from '@Types';
 // Components
@@ -13,20 +13,38 @@ import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPic
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
 import { colors } from '@Constants';
+// IndexedDB
+import { updateProfileIndexedDB } from '@IndexedDB';
 
 const CreateProfile: FC = () => {
-  const { setStep, step, newUser, setNewUser } = useMainStore();
+  const { setUpdateStore } = useGlobalStore();
+  const { setOpenModal, setStep, step, newUser, setNewUser } = useMainStore();
   const { error, dispatch } = useStepsStore();
 
   const [reset, setReset] = useState(false);
 
-  const next = (ev: MouseEvent<Form>) => {
+  const nextStep = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
 
     setStep({ value: 'days' });
 
     // setUpdateStore({ status: 'updated' });
     // console.log('Created profile', profile);
+  };
+  const updateProfileHandler = async (ev: MouseEvent<Form>) => {
+    ev.preventDefault();
+
+    console.log(newUser);
+
+    try {
+      const updateProfile = await updateProfileIndexedDB('schedule', newUser);
+      console.log('Update profile', updateProfile);
+      setNewUser(null);
+      setOpenModal(false);
+      setUpdateStore({ status: 'updated', message: '' });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Set to default state
@@ -35,11 +53,11 @@ const CreateProfile: FC = () => {
 
     setReset(!reset);
     setNewUser({
-      id: `${Math.random()}`,
+      id: newUser.id,
       name: '',
       color: colors[0].en,
       avatar: { name: '', img: '' },
-      timetable: [],
+      timetable: newUser.timetable,
     });
     dispatch({
       type: 'no-errors',
@@ -51,7 +69,9 @@ const CreateProfile: FC = () => {
 
   return (
     <>
-      <ProfileCreateStyle onSubmit={next} name="user">
+      <ProfileCreateStyle
+        onSubmit={step.id ? updateProfileHandler : nextStep}
+        name="user">
         {step.id ? (
           <ModalTitle>Tilisi</ModalTitle>
         ) : (
@@ -70,7 +90,25 @@ const CreateProfile: FC = () => {
           aria-label="reset by default">
           Tyhjätä
         </ModalButton>
-        {error.isActive ? (
+        {step.id ? (
+          error.isActive ? (
+            <ModalButton
+              ButtonStyle="update"
+              row={3}
+              col={2}
+              aria-label="update profile">
+              Päivittää
+            </ModalButton>
+          ) : (
+            <ModalButton
+              ButtonStyle="disable"
+              row={3}
+              col={2}
+              aria-label="go to next">
+              Päivittää
+            </ModalButton>
+          )
+        ) : error.isActive ? (
           <ModalButton
             ButtonStyle="confirm"
             row={3}

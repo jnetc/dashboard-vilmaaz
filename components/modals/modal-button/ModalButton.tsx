@@ -5,9 +5,10 @@ import {
   ModalButtonResetStyle,
   ModalButtonUpdateStyle,
   ModalButtonDisableStyle,
+  ModalButtonDeleteStyle,
 } from './ModalButton.style';
 
-type ButtonStyle = 'confirm' | 'reset' | 'update' | 'disable';
+type ButtonStyle = 'confirm' | 'reset' | 'update' | 'disable' | 'delete';
 interface ModalButtonType {
   ButtonStyle: ButtonStyle;
   onClick?: () => void;
@@ -43,6 +44,12 @@ export const ModalButton: FC<ModalButtonType> = ({
         <ModalButtonConfirmStyle type="submit" pos={{ row, col }}>
           {children}
         </ModalButtonConfirmStyle>
+      );
+    case 'delete':
+      return (
+        <ModalButtonDeleteStyle type="submit" pos={{ row, col }}>
+          {children}
+        </ModalButtonDeleteStyle>
       );
     default:
       return (

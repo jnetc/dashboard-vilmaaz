@@ -12,9 +12,9 @@
   --bg_dark: hsl(220, 15%, 17%);
   --bg_black: hsl(220, 15%, 15%);
   --primary: hsl(111, 28%, 75%);
-  --primary_hover: hsl(127, 28%, 55%);
+  --primary_hover: hsl(127, 28%, 85%);
   --danger: hsl(346, 90%, 75%);
-  --danger_hover: hsl(346, 90%, 55%);
+  --danger_hover: hsl(346, 90%, 85%);
 
   --brown: hsl(20, 35%, 65%);
   --green: hsl(155, 35%, 65%);

@@ -46,7 +46,7 @@ const ScheduleCreate: FC = () => {
     }
   };
 
-  const prev = () => setStep({ value: 'days' });
+  const prevPrev = () => setStep({ value: 'days' });
 
   return (
     <ScheduleCreateStyle onSubmit={saveToDB} name="schedule">
@@ -54,7 +54,7 @@ const ScheduleCreate: FC = () => {
       <ScheduleTable />
       <ModalButton
         ButtonStyle="reset"
-        onClick={prev}
+        onClick={prevPrev}
         row={3}
         col={1}
         aria-label="reset by default">

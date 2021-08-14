@@ -35,10 +35,19 @@ export const ModalButtonResetStyle = styled(ModalButtonStyle)`
 `;
 
 export const ModalButtonUpdateStyle = styled(ModalButtonStyle)`
-  color: ${({ theme }) => theme.bg_dark()};
-  background: ${({ theme }) => theme.white_soft()};
+  color: ${({ theme }) => theme.primary()};
+  border-color: ${({ theme }) => theme.primary()};
   &:hover {
-    background: ${({ theme }) => theme.grey_light()};
+    border-color: ${({ theme }) => theme.primary_hover()};
+    color: ${({ theme }) => theme.primary_hover()};
+  }
+`;
+export const ModalButtonDeleteStyle = styled(ModalButtonStyle)`
+  color: ${({ theme }) => theme.danger()};
+  border-color: ${({ theme }) => theme.danger()};
+  &:hover {
+    border-color: ${({ theme }) => theme.danger_hover()};
+    color: ${({ theme }) => theme.danger_hover()};
   }
 `;
 

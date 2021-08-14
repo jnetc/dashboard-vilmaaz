@@ -4,7 +4,6 @@ export const ProfilePanelStyle = styled.aside`
   grid-column: 2;
   grid-row: 1 / -1;
   width: 300px;
-  /* height: 100%; */
   display: grid;
   grid-template-rows: 195px 50px 1fr;
   padding: 0px 20px 35px;

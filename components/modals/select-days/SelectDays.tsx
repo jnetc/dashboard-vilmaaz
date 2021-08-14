@@ -58,13 +58,13 @@ const SelectDays: FC = () => {
     });
   };
 
-  const next = (ev: MouseEvent<Form>) => {
+  const nextStep = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
     setStep({ value: 'schedule' });
     // console.log('Selected days', days, timetable);
   };
 
-  const prev = () => setStep({ value: 'profile' });
+  const prevStep = () => setStep({ value: 'profile' });
 
   const dayslist = daysOfWeek.map(day => {
     return (
@@ -78,12 +78,12 @@ const SelectDays: FC = () => {
   });
 
   return (
-    <SelectDaysStyle onSubmit={next} name="days">
+    <SelectDaysStyle onSubmit={nextStep} name="days">
       <ModalTitle>Valitse päivät</ModalTitle>
       <section id="modal-days">{dayslist}</section>
       <ModalButton
         ButtonStyle="reset"
-        onClick={prev}
+        onClick={prevStep}
         row={3}
         col={1}
         aria-label="reset by default">

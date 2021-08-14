@@ -16,19 +16,16 @@ export const ProfileMenu: FC<ProfileMenu> = ({ open, id, closeMenu }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const openProfile = () => {
-    console.log('openProfile', id);
     setOpenModal(true);
     setStep({ value: 'profile', id: id });
     closeMenu(false);
   };
   const openWeekDay = () => {
-    // console.log('openWeekDay', id);
     setOpenModal(true);
     setStep({ value: 'days', id: id });
     closeMenu(false);
   };
   const openSchedule = () => {
-    // console.log('openSchedule', id);
     setOpenModal(true);
     setStep({ value: 'schedule', id: id });
     closeMenu(false);
