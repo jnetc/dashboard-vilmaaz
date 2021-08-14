@@ -13,7 +13,7 @@ export const ProfileCreateStyle = styled.form`
     grid-column: 1 / -1;
     grid-row: 2;
     display: grid;
-    grid-template-rows: 320px 73px 73px;
+    grid-template-rows: 270px 73px 73px;
     gap: 25px;
     place-items: center;
     position: relative;

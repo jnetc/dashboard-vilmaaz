@@ -77,12 +77,12 @@ export const BreakCurrentStyle = styled(BreakStyle)`
   }
 `;
 
-type ProgressLineType = { track: number; progress: number; color: string };
+type ProgressLineType = { track: number; $progress: number; color: string };
 export const ProgressLine = styled.circle<ProgressLineType>`
   fill: none;
   stroke: var(--${({ color }) => color});
   stroke-dasharray: ${({ track }) => track};
-  stroke-dashoffset: ${({ progress }) => progress};
+  stroke-dashoffset: ${({ $progress }) => $progress};
   stroke-width: 4;
   transform: rotate(-90deg);
   transform-origin: center;

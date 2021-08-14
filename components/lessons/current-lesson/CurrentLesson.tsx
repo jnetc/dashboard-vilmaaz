@@ -52,6 +52,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
   }
 
   //TODO Пересмотреть компонент, такой подход передобавляет класс каждую минуту!!!
+  //! Добавил $ `progress={step}` посмотрим как будет себя вести дальше
   useEffect(() => {
     const transition = setTimeout(() => {
       lessonRef.current?.classList.add('active');
@@ -89,7 +90,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
             className="progress"
             color={color}
             track={circumference}
-            progress={step}></ProgressLine>
+            $progress={step}></ProgressLine>
         </svg>
         <span className="timer">{showMeTime}</span>
       </div>
@@ -109,7 +110,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
           className="progress"
           color={color}
           track={circumference}
-          progress={step}></ProgressLine>
+          $progress={step}></ProgressLine>
       </svg>
       <span className="timer">{showMeTime}</span>
     </BreakCurrentStyle>

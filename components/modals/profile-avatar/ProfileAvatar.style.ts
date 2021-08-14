@@ -1,59 +1,91 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const UploadAvatarStyle = styled.label<{ styleErr: boolean }>`
+export const AvatarStyle = styled.div<{ styleErr: boolean }>`
   grid-column: 1 / -1;
   grid-row: 1;
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  border-radius: 15px;
-  border: 3px dashed ${({ theme }) => theme.bg_light()};
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  z-index: 10;
-  &::after {
-    content: attr(aria-label);
-    position: absolute;
-    bottom: 25px;
+  p {
     font-size: ${({ theme }) => theme.fontsize_14};
+    color: ${({ theme }) => theme.grey_middle()};
+  }
+  p#upload-warning {
+    margin-top: 10px;
     color: ${({ styleErr, theme }) =>
       styleErr ? theme.danger() : theme.grey_middle()};
-    background: ${({ theme }) => theme.bg_black()};
-  }
-  &:hover {
-    border-color: ${({ theme }) => theme.grey_dark()};
   }
 `;
 
-export const UploadInputAvatarStyle = styled.input<{ styleErr: boolean }>`
-  opacity: 0;
+const AvatarButtons = css`
+  width: 4em;
+  height: 4em;
   position: absolute;
-  z-index: -1;
+  bottom: 0;
+  background: ${({ theme }) => theme.bg_light()};
+  border: 6px solid ${({ theme }) => theme.bg_black()};
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  &::before,
+  &::after {
+    content: '';
+    width: 15px;
+    height: 2px;
+    position: absolute;
+    inset: 50%;
+    background: ${({ theme }) => theme.grey_light()};
+    transition: all 0.3s cubic-bezier(0.03, 1.63, 0.69, 1.43);
+  }
+  &:hover {
+    background: ${({ theme }) => theme.grey_dark()};
+  }
+`;
+
+export const UploadAvatarStyle = styled.label`
+  ${AvatarButtons}
+  right: 0;
+  &::before {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  input {
+    width: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+`;
+
+export const DeleteAvatarStyle = styled.div`
+  ${AvatarButtons}
+  left: 0;
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 `;
 
 export const ProfileAvatarStyle = styled.figure`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  top: -25px;
+  margin-bottom: 25px;
   border-radius: 50%;
   background: ${({ theme }) => theme.bg_light()};
   color: ${({ theme }) => theme.white_soft()};
-  &::after {
-    content: attr(aria-label);
-    width: 300%;
-    position: absolute;
-    bottom: -55px;
-    color: ${({ theme }) => theme.grey_middle()};
-    font-size: ${({ theme }) => theme.fontsize_14};
-    text-align: center;
-  }
+
   img {
     width: inherit;
     height: inherit;
@@ -62,6 +94,6 @@ export const ProfileAvatarStyle = styled.figure`
     isolation: isolate;
   }
   figcaption {
-    font-size: ${({ theme }) => theme.fontsize_48};
+    font-size: 5em;
   }
 `;

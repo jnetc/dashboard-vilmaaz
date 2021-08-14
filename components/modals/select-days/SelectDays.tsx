@@ -38,6 +38,7 @@ const SelectDays: FC = () => {
         prevState.timetable = remove;
         return { ...prevState, ...newUser };
       });
+      return;
     }
 
     const sortedDays = addDayToTheSchedule(getDayStr, newUser.timetable).sort(

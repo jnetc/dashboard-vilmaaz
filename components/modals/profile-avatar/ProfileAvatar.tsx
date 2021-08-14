@@ -2,8 +2,9 @@ import { FC, ChangeEvent, MouseEvent } from 'react';
 // Style
 import {
   ProfileAvatarStyle,
+  AvatarStyle,
   UploadAvatarStyle,
-  UploadInputAvatarStyle,
+  DeleteAvatarStyle,
 } from './ProfileAvatar.style';
 // Types
 import { Input } from '@Types';
@@ -70,6 +71,14 @@ export const ProfileAvatar: FC = () => {
     });
   };
 
+  const removeAvatar = () => {
+    setNewUser(prevState => {
+      if (!prevState) return null;
+      prevState.avatar.img = '';
+      return { ...prevState };
+    });
+  };
+
   // onChange event can't clear target value. Use it!
   const resetAvatar = (ev: MouseEvent<Input>) => {
     const el = ev.target as Input;
@@ -77,32 +86,36 @@ export const ProfileAvatar: FC = () => {
   };
 
   return (
-    <>
-      <UploadInputAvatarStyle
-        type="file"
-        name="avatar"
-        id="upload-avatar"
-        accept=".png, .jpg, .jpeg, .webp, .svg"
-        tabIndex={0}
-        styleErr={error.isMaxSize ?? false}
-        onChange={getFile}
-        onClick={resetAvatar}
-      />
-      <UploadAvatarStyle
-        aria-label="● Tiedostojen enimmäiskoko on 300 kt"
-        styleErr={error.isMaxSize ?? false}
-        htmlFor="upload-avatar">
-        <ProfileAvatarStyle aria-label="● Voit ladata webp- png-, svg- tai jpg-tiedostoja">
-          {newUser?.avatar.img ? (
-            <img src={newUser.avatar.img} alt={newUser?.name} />
-          ) : (
-            <figcaption>
-              {newUser?.avatar.name ? newUser?.avatar.name : ''}
-            </figcaption>
-          )}
-        </ProfileAvatarStyle>
-        <p id="upload-warning"></p>
-      </UploadAvatarStyle>
-    </>
+    <AvatarStyle styleErr={error.isMaxSize ?? false}>
+      <ProfileAvatarStyle>
+        {newUser?.avatar.img ? (
+          <img src={newUser.avatar.img} alt={newUser?.name} />
+        ) : (
+          <figcaption>
+            {newUser?.avatar.name ? newUser?.avatar.name : ''}
+          </figcaption>
+        )}
+        <UploadAvatarStyle htmlFor="upload-avatar">
+          <input
+            type="file"
+            name="avatar"
+            id="upload-avatar"
+            accept=".png, .jpg, .jpeg, .webp, .svg"
+            tabIndex={0}
+            onChange={getFile}
+            onClick={resetAvatar}
+          />
+        </UploadAvatarStyle>
+        {newUser?.avatar.img ? (
+          <DeleteAvatarStyle
+            role="button"
+            tabIndex={0}
+            onClick={removeAvatar}
+          />
+        ) : null}
+      </ProfileAvatarStyle>
+      <p>● Voit ladata webp- png-, svg- tai jpg-tiedostoja</p>
+      <p id="upload-warning"> ● Tiedostojen enimmäiskoko on 300 kt</p>
+    </AvatarStyle>
   );
 };
