@@ -9,13 +9,18 @@ import { AddProfileButton } from '@RightProfilePanel/add-profile-button/AddProfi
 import { Logotip } from '@Icons/Logos';
 
 const ProfilePanel = () => {
-  const { content, today, activeDay } = useGlobalStore();
+  const { content, today, activeDay, dayOfWeek } = useGlobalStore();
   const { setProfileLine } = useMainStore();
   const ref = useRef<HTMLDivElement>(null);
 
   const profiles = content.map(prof => {
     const { id, avatar, color, name, end, start } = prof;
-    const lessons = prof.timetable[0].lessons.filter(
+
+    const getCurrentTimetable = prof.timetable.find(
+      tb => tb.day === dayOfWeek && tb.lessons
+    );
+
+    const lessons = getCurrentTimetable?.lessons.filter(
       l => l.lesson !== 'taukko'
     ).length;
     const dataProfile = {

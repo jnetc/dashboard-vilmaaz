@@ -14,14 +14,14 @@ import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
 import { colors } from '@Constants';
 // IndexedDB
-import { updateProfileIndexedDB } from '@IndexedDB';
+import { updateProfileIndexedDB, deleteProfileIndexedDB } from '@IndexedDB';
 
 const CreateProfile: FC = () => {
   const { setUpdateStore } = useGlobalStore();
   const { setOpenModal, setStep, step, newUser, setNewUser } = useMainStore();
   const { error, dispatch } = useStepsStore();
 
-  const [reset, setReset] = useState(false);
+  const [removeData, setRemoveData] = useState(false);
 
   const nextStep = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
@@ -33,25 +33,43 @@ const CreateProfile: FC = () => {
   };
   const updateProfileHandler = async (ev: MouseEvent<Form>) => {
     ev.preventDefault();
-
-    console.log(newUser);
-
     try {
       const updateProfile = await updateProfileIndexedDB('schedule', newUser);
       console.log('Update profile', updateProfile);
       setNewUser(null);
       setOpenModal(false);
-      setUpdateStore({ status: 'updated', message: '' });
+      setUpdateStore({ status: 'updated', message: updateProfile.message });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const deleteProfileHandler = async (ev: MouseEvent<Form>) => {
+    ev.preventDefault();
+    try {
+      const deleteProfile = await deleteProfileIndexedDB('schedule', step?.id);
+      console.log('Delete profile', deleteProfile);
+      setNewUser(null);
+      setOpenModal(false);
+      setUpdateStore({ status: 'deleted', message: deleteProfile.message });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const beforeDelete = () => {
+    console.log('delete');
+    setTimeout(() => {
+      setRemoveData(true);
+    }, 0);
   };
 
   // Set to default state
   const clear = () => {
     if (!newUser) return;
 
-    setReset(!reset);
+    console.log('clear', removeData);
+    setRemoveData(!removeData);
     setNewUser({
       id: newUser.id,
       name: '',
@@ -65,12 +83,16 @@ const CreateProfile: FC = () => {
     });
   };
 
-  // console.log(error);
-
   return (
     <>
       <ProfileCreateStyle
-        onSubmit={step.id ? updateProfileHandler : nextStep}
+        onSubmit={
+          step.id
+            ? removeData
+              ? deleteProfileHandler
+              : updateProfileHandler
+            : nextStep
+        }
         name="user">
         {step.id ? (
           <ModalTitle>Tilisi</ModalTitle>
@@ -82,46 +104,69 @@ const CreateProfile: FC = () => {
           <ProfileName />
           <ProfileColorPicker />
         </section>
-        <ModalButton
-          ButtonStyle="reset"
-          row={3}
-          col={1}
-          onClick={clear}
-          aria-label="reset by default">
-          Tyhjätä
-        </ModalButton>
+        {step.id ? (
+          removeData ? (
+            <ModalButton
+              type={'submit'}
+              ButtonStyle="delete"
+              row={'3'}
+              col={'1'}
+              tooltip="Ole varovainen, jos poistat profiilisi, myös aikataulu poistetaan ">
+              Poistako?
+            </ModalButton>
+          ) : (
+            <ModalButton
+              type={'button'}
+              ButtonStyle="delete"
+              row={'3'}
+              col={'1'}
+              onClick={beforeDelete}
+              tooltip="Ole varovainen, jos poistat profiilisi, myös aikataulu poistetaan ">
+              Poistaa profilli
+            </ModalButton>
+          )
+        ) : (
+          <ModalButton
+            type={'submit'}
+            ButtonStyle="reset"
+            row={'3'}
+            col={'1'}
+            onClick={clear}>
+            Tyhjätä
+          </ModalButton>
+        )}
         {step.id ? (
           error.isActive ? (
             <ModalButton
+              type={'submit'}
               ButtonStyle="update"
-              row={3}
-              col={2}
-              aria-label="update profile">
+              row={'3'}
+              col={'2'}>
               Päivittää
             </ModalButton>
           ) : (
             <ModalButton
+              type={'submit'}
               ButtonStyle="disable"
-              row={3}
-              col={2}
-              aria-label="go to next">
+              row={'3'}
+              col={'2'}>
               Päivittää
             </ModalButton>
           )
         ) : error.isActive ? (
           <ModalButton
+            type={'submit'}
             ButtonStyle="confirm"
-            row={3}
-            col={2}
-            aria-label="go to next">
+            row={'3'}
+            col={'2'}>
             Seuraava
           </ModalButton>
         ) : (
           <ModalButton
+            type={'submit'}
             ButtonStyle="disable"
-            row={3}
-            col={2}
-            aria-label="go to next">
+            row={'3'}
+            col={'2'}>
             Seuraava
           </ModalButton>
         )}

@@ -11,49 +11,62 @@ import {
 type ButtonStyle = 'confirm' | 'reset' | 'update' | 'disable' | 'delete';
 interface ModalButtonType {
   ButtonStyle: ButtonStyle;
+  type: 'button' | 'submit';
   onClick?: () => void;
-  row: number;
-  col: number;
+  row: string;
+  col: string;
+  selfStretch?: boolean;
+  tooltip?: string;
 }
 
 export const ModalButton: FC<ModalButtonType> = ({
   children,
   ButtonStyle,
+  type,
   row,
   col,
+  selfStretch,
+  tooltip,
   onClick,
 }) => {
   switch (ButtonStyle) {
     case 'reset':
       return (
         <ModalButtonResetStyle
-          type="button"
-          pos={{ row, col }}
+          type={type}
+          pos={{ row, col, selfStretch }}
           onClick={onClick}>
           {children}
         </ModalButtonResetStyle>
       );
     case 'update':
       return (
-        <ModalButtonUpdateStyle type="submit" pos={{ row, col }}>
+        <ModalButtonUpdateStyle type={type} pos={{ row, col, selfStretch }}>
           {children}
         </ModalButtonUpdateStyle>
       );
     case 'confirm':
       return (
-        <ModalButtonConfirmStyle type="submit" pos={{ row, col }}>
+        <ModalButtonConfirmStyle type={type} pos={{ row, col, selfStretch }}>
           {children}
         </ModalButtonConfirmStyle>
       );
     case 'delete':
       return (
-        <ModalButtonDeleteStyle type="submit" pos={{ row, col }}>
+        <ModalButtonDeleteStyle
+          type={type}
+          pos={{ row, col, selfStretch }}
+          onClick={onClick}
+          aria-label={tooltip}>
           {children}
         </ModalButtonDeleteStyle>
       );
     default:
       return (
-        <ModalButtonDisableStyle type="button" pos={{ row, col }} disabled>
+        <ModalButtonDisableStyle
+          type={type}
+          pos={{ row, col, selfStretch }}
+          disabled>
           {children}
         </ModalButtonDisableStyle>
       );

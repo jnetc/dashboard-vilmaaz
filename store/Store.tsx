@@ -55,12 +55,13 @@ const Store: FC = ({ children }) => {
   // Manual check day
   // let day = 'perjantai';
   const day = dayOfWeek;
-
   const content = transform(data, day, false) as LessonsType[];
   const timepoints = transform(data, day) as Array<TimePosition>;
   const timeline = staticValues(timepoints);
   const isActiveDay = timepoints.length !== 0;
   const isToday = today === dayOfWeek;
+
+  console.log(content);
 
   useEffect(() => {
     setDayOfWeek(today);

@@ -18,7 +18,7 @@ import {
 import { daysOfWeek } from '@Constants';
 
 const SelectDays: FC = () => {
-  const { setStep, newUser, setNewUser } = useMainStore();
+  const { step, setStep, newUser, setNewUser } = useMainStore();
   if (!newUser) return null;
 
   const selectedDays = newUser.timetable.map(d => d.day) as Array<string>;
@@ -62,7 +62,10 @@ const SelectDays: FC = () => {
   const nextStep = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
     setStep({ value: 'schedule' });
-    // console.log('Selected days', days, timetable);
+  };
+  const nextStepId = (ev: MouseEvent<Form>) => {
+    ev.preventDefault();
+    setStep({ value: 'schedule', id: step.id });
   };
 
   const prevStep = () => setStep({ value: 'profile' });
@@ -79,30 +82,46 @@ const SelectDays: FC = () => {
   });
 
   return (
-    <SelectDaysStyle onSubmit={nextStep} name="days">
+    <SelectDaysStyle onSubmit={step.id ? nextStepId : nextStep} name="days">
       <ModalTitle>Valitse päivät</ModalTitle>
       <section id="modal-days">{dayslist}</section>
-      <ModalButton
-        ButtonStyle="reset"
-        onClick={prevStep}
-        row={3}
-        col={1}
-        aria-label="reset by default">
-        Takaisin
-      </ModalButton>
-      {newUser.timetable.length !== 0 ? (
+
+      {!step.id && (
         <ModalButton
+          type={'button'}
+          ButtonStyle="reset"
+          onClick={prevStep}
+          row={'3'}
+          col={'1'}
+          aria-label="reset by default">
+          Takaisin
+        </ModalButton>
+      )}
+      {step.id ? (
+        <ModalButton
+          type={'submit'}
           ButtonStyle="confirm"
-          row={3}
-          col={2}
+          row={'3'}
+          col={'1/ -1'}
+          selfStretch
+          aria-label="go to next">
+          Lukujärjestykseen
+        </ModalButton>
+      ) : newUser.timetable.length !== 0 ? (
+        <ModalButton
+          type={'submit'}
+          ButtonStyle="confirm"
+          row={'3'}
+          col={'2'}
           aria-label="go to next">
           Seuraava
         </ModalButton>
       ) : (
         <ModalButton
+          type={'button'}
           ButtonStyle="disable"
-          row={3}
-          col={2}
+          row={'3'}
+          col={'2'}
           aria-label="go to next">
           Seuraava
         </ModalButton>

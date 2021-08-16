@@ -8,15 +8,15 @@ import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
 import { useStepsStore, useMainStore, useGlobalStore } from '@Hooks/useStores';
 // Types
-import { Form, ProfileStore } from '@Types';
+import { Form } from '@Types';
 // IndexedDB
-import { createNewProfileIndexedDB } from '@IndexedDB';
+import { createNewProfileIndexedDB, updateProfileIndexedDB } from '@IndexedDB';
 // Helpers
 import { getBreaks } from '@Helpers';
 
 const ScheduleCreate: FC = () => {
   let { error } = useStepsStore();
-  const { setOpenModal, setStep, newUser, setNewUser } = useMainStore();
+  const { setOpenModal, step, setStep, newUser, setNewUser } = useMainStore();
   const { setUpdateStore } = useGlobalStore();
 
   const [trigger, setTrigger] = useState(false);
@@ -25,10 +25,10 @@ const ScheduleCreate: FC = () => {
     ev.preventDefault();
 
     try {
-      const content = getBreaks(newUser);
-      console.log(content);
-
-      const obj = { ...content } as ProfileStore;
+      if (!newUser) return;
+      // const content = getBreaks(newUser);
+      // console.log(content);
+      const obj = { ...newUser };
       setTrigger(!trigger);
       const createProfile = await createNewProfileIndexedDB('schedule', obj);
 
@@ -46,33 +46,85 @@ const ScheduleCreate: FC = () => {
     }
   };
 
+  const updateDB = async (ev: MouseEvent<Form>) => {
+    ev.preventDefault();
+
+    try {
+      // const content = getBreaks(newUser);
+      // console.log(content);
+
+      // const obj = { ...content } as ProfileStore;
+      setTrigger(!trigger);
+      const updateProfile = await updateProfileIndexedDB('schedule', newUser);
+
+      console.log(updateProfile);
+      if (!updateProfile.created) {
+        return console.log(updateProfile.message);
+      }
+      setNewUser(null);
+      setStep({ value: 'profile' });
+      setOpenModal(false);
+      setUpdateStore({ status: 'added', message: updateProfile.message });
+      console.log(updateProfile.message, newUser);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const prevPrev = () => setStep({ value: 'days' });
+  const prevPrevId = () => setStep({ value: 'days', id: step.id });
 
   return (
-    <ScheduleCreateStyle onSubmit={saveToDB} name="schedule">
+    <ScheduleCreateStyle
+      onSubmit={step.id ? updateDB : saveToDB}
+      name="schedule">
       <ModalTitle>Lukujärjestys</ModalTitle>
       <ScheduleTable />
-      <ModalButton
-        ButtonStyle="reset"
-        onClick={prevPrev}
-        row={3}
-        col={1}
-        aria-label="reset by default">
-        Takaisin
-      </ModalButton>
-      {!error.isError ? (
+      {step.id ? (
         <ModalButton
+          type={'button'}
+          ButtonStyle="reset"
+          onClick={prevPrevId}
+          row={'3'}
+          col={'1'}
+          aria-label="reset by default">
+          Valitse päivät
+        </ModalButton>
+      ) : (
+        <ModalButton
+          type={'button'}
+          ButtonStyle="reset"
+          onClick={prevPrev}
+          row={'3'}
+          col={'1'}
+          aria-label="reset by default">
+          Takaisin
+        </ModalButton>
+      )}
+      {step.id ? (
+        <ModalButton
+          type={'submit'}
+          ButtonStyle="update"
+          row={'3'}
+          col={'2'}
+          aria-label="save your profile & schedule">
+          Tallentaa
+        </ModalButton>
+      ) : !error.isError ? (
+        <ModalButton
+          type={'submit'}
           ButtonStyle="confirm"
-          row={3}
-          col={2}
+          row={'3'}
+          col={'2'}
           aria-label="save your profile & schedule">
           Tallentaa
         </ModalButton>
       ) : (
         <ModalButton
+          type={'button'}
           ButtonStyle="disable"
-          row={3}
-          col={2}
+          row={'3'}
+          col={'2'}
           aria-label="save your profile & schedule">
           Tallentaa
         </ModalButton>

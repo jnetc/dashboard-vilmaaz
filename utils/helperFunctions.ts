@@ -55,7 +55,7 @@ export const transform = (
     const end = schoolday.lessons[findEndOfArr].end.time;
     const startPos = schoolday.lessons[0].start.position;
     const endPos = schoolday.lessons[findEndOfArr].end.position;
-    // const timetableWithBreak = fillEmptySpace(schoolday.lessons);
+    // const timetableWithBreak = fillEmptySpace(day, schoolday);
 
     if (!set) {
       newTimefieldArr.push({
@@ -87,14 +87,18 @@ export const getBreaks = (data: Schedule2 | null) => {
   return data;
 };
 
+//! Отказаться от этого
+//! Причина в округлении времени
 // define if of lesson have empty space in time or not
-export const fillEmptySpace = (day: string, arr: Array<InitLesson>) => {
+export const fillEmptySpace = (day: string, arr: Array<Lesson>) => {
   const fillArray: Array<Lesson> = [];
-  let startBreakPosition = transformTimeToNum(arr[0].start.time);
+  let startBreakPosition = arr[0].start.position;
+
+  debugger;
 
   for (let i of arr) {
-    const startLesson = transformTimeToNum(i.start.time);
-    const endLesson = transformTimeToNum(i.end.time);
+    const startLesson = i.start.position;
+    const endLesson = i.end.position;
     const isEmptyTime = startLesson - startBreakPosition;
 
     if (isEmptyTime === 0) {
@@ -103,12 +107,13 @@ export const fillEmptySpace = (day: string, arr: Array<InitLesson>) => {
       fillArray.push(z);
     }
 
+    console.log(isEmptyTime);
     if (isEmptyTime !== 0) {
       const startBreak = transformNumToTime(startBreakPosition);
       const endBreak = transformNumToTime(startLesson);
 
       fillArray.push({
-        id: i.id + 2,
+        id: `${Math.random()}`,
         lesson: 'taukko',
         start: { time: startBreak.time, position: startBreakPosition },
         end: { time: endBreak.time, position: startLesson },

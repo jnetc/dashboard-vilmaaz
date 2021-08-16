@@ -5,7 +5,7 @@ export const ProfileCreateStyle = styled.form`
   height: max-content;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 50px 1fr 54px;
+  grid-template-rows: 50px 1fr 54px 54px;
   column-gap: 30px;
   row-gap: 45px;
   user-select: none;
