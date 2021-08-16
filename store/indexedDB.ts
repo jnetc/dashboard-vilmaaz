@@ -1,4 +1,4 @@
-import { Schedule2 } from '@Types';
+import { Schedule } from '@Types';
 
 // Connecting to indexedDB
 export const connection = (dbName: string, storeName: string) => {
@@ -9,7 +9,6 @@ export const connection = (dbName: string, storeName: string) => {
     request.addEventListener(
       'error',
       (err: IDBOpenDBRequestEventMap['error']) => {
-        // console.warn('error', err);
         reject(`Error indexedDB: ${err}`);
       }
     );
@@ -48,7 +47,6 @@ export const connection = (dbName: string, storeName: string) => {
 
 export const getAllFromIndexedDB = async (storeName: string) => {
   const db = await connection('vilmazz', storeName);
-  // var arr: Array<Schedule2> = [];
   const transaction = db.transaction(storeName, 'readonly');
   // If everything was fine
   transaction.oncomplete = () => {
@@ -59,7 +57,7 @@ export const getAllFromIndexedDB = async (storeName: string) => {
   const store = transaction.objectStore(storeName);
   const res = store.getAll();
   // Handler if got all data
-  return new Promise<Array<Schedule2>>((resolve, reject) => {
+  return new Promise<Array<Schedule>>((resolve, reject) => {
     res.onerror = (err: IDBRequestEventMap['error']) => {
       reject(`Error transaction: ${err}`);
     };
@@ -67,7 +65,7 @@ export const getAllFromIndexedDB = async (storeName: string) => {
     res.onsuccess = (ev: IDBRequestEventMap['success']) => {
       const req = ev.target as IDBRequest<IDBDatabase>;
       const resetType = req.result as unknown;
-      const arr = resetType as Array<Schedule2>;
+      const arr = resetType as Array<Schedule>;
       resolve(arr);
     };
   });
@@ -85,7 +83,7 @@ export const getByIdIndexedDB = async (storeName: string, id: string) => {
   // add our newItem object to the object store
   const request = store.get(id);
 
-  return new Promise<Schedule2>((resolve, reject) => {
+  return new Promise<Schedule>((resolve, reject) => {
     request.addEventListener('error', () => {
       console.log(`Profile was not saved: ${request.error}`);
       reject({
@@ -97,16 +95,15 @@ export const getByIdIndexedDB = async (storeName: string, id: string) => {
     request.addEventListener('success', (ev: IDBRequestEventMap['success']) => {
       const req = ev.target as IDBRequest<IDBDatabase>;
       const resetType = req.result as unknown;
-      const user = resetType as Schedule2;
+      const user = resetType as Schedule;
       resolve(user);
-      // console.log(`Get profile ID: ${req.result}`);
     });
   });
 };
 
 export const createNewProfileIndexedDB = async (
   storeName: string,
-  data: Schedule2
+  data: Schedule
 ): Promise<{ created: boolean; message: string }> => {
   const db = await connection('vilmazz', storeName);
   const transaction = db.transaction(storeName, 'readwrite');
@@ -137,7 +134,7 @@ export const createNewProfileIndexedDB = async (
 
 export const updateProfileIndexedDB = async (
   storeName: string,
-  data: Schedule2 | null
+  data: Schedule | null
 ): Promise<{ created: boolean; message: string }> => {
   const db = await connection('vilmazz', storeName);
   const transaction = db.transaction(storeName, 'readwrite');
@@ -179,8 +176,7 @@ export const deleteProfileIndexedDB = async (
   };
   // create an object store on the transaction
   const store = transaction.objectStore(storeName);
-  // updating our newItem object to the object store
-  // id no needed ^_^
+  // Delete profile form store
   const request = store.delete(key || '');
 
   return new Promise((resolve, reject) => {

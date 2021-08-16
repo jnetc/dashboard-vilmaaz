@@ -20,17 +20,13 @@ const CreateProfile: FC = () => {
   const { setUpdateStore } = useGlobalStore();
   const { setOpenModal, setStep, step, newUser, setNewUser } = useMainStore();
   const { error, dispatch } = useStepsStore();
-
   const [removeData, setRemoveData] = useState(false);
 
   const nextStep = (ev: MouseEvent<Form>) => {
     ev.preventDefault();
-
     setStep({ value: 'days' });
-
-    // setUpdateStore({ status: 'updated' });
-    // console.log('Created profile', profile);
   };
+
   const updateProfileHandler = async (ev: MouseEvent<Form>) => {
     ev.preventDefault();
     try {
@@ -136,7 +132,16 @@ const CreateProfile: FC = () => {
           </ModalButton>
         )}
         {step.id ? (
-          error.isActive ? (
+          removeData ? (
+            <ModalButton
+              type={'button'}
+              ButtonStyle="reset"
+              row={'3'}
+              col={'2'}
+              onClick={() => setRemoveData(false)}>
+              Peruuttaa
+            </ModalButton>
+          ) : error.isActive ? (
             <ModalButton
               type={'submit'}
               ButtonStyle="update"

@@ -9,7 +9,6 @@ export const MenuCloseBtnStyle = styled.div`
   top: 5px;
   right: 11px;
   border-radius: 50%;
-  /* background: ${({ theme }) => theme.bg_light()}; */
   cursor: pointer;
   &::before,
   &::after {

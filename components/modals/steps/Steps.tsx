@@ -3,16 +3,10 @@ import { FC, createContext, useReducer } from 'react';
 import Modal from '@Modals/Modal';
 // Component
 import { SwitchStep } from './SwitchStep';
-// Hook
-// import { useMainStore } from '@Hooks/useStores';
-// Global const
-// import { colors } from '@Constants';
 // Types
 import { StepsCtxProps, Error, Action } from '@Types';
-// IDB
-// import { getByIdIndexedDB } from '@IndexedDB';
 
-export const state: StepsCtxProps = {
+const state: StepsCtxProps = {
   error: { isError: false },
   dispatch: obj => obj,
 };
@@ -37,15 +31,7 @@ const reducer = (error: Error, action: Action) => {
 };
 
 export const Steps: FC = () => {
-  // const { step, openModal, setNewUser } = useMainStore();
   const [error, dispatch] = useReducer(reducer, state.error);
-
-  // Reset states after create data
-  // useEffect(() => {
-  // setProfile(null);
-  // setTimetable([]);
-  // console.log('update steps', profile, timetable);
-  // }, [updateStore]);
 
   return (
     <CreateStepsStore.Provider

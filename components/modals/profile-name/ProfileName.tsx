@@ -2,13 +2,13 @@ import { FC, ChangeEvent, useEffect } from 'react';
 // Style
 import { ProfileNameStyle } from './ProfileName.style';
 // Types
-import { Input, Schedule2 } from '@Types';
+import { Input, Schedule } from '@Types';
 // Helper
 import { firstUpperCase } from 'utils/helperFunctions';
 // Hook
 import { useMainStore, useStepsStore } from '@Hooks/useStores';
 
-const changeProfile = (profile: Schedule2 | null, typing: string) => {
+const changeProfile = (profile: Schedule | null, typing: string) => {
   if (!profile) return null;
   profile.name = typing;
   profile.avatar.name = typing.substring(0, 2);

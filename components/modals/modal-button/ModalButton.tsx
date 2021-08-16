@@ -34,20 +34,22 @@ export const ModalButton: FC<ModalButtonType> = ({
       return (
         <ModalButtonResetStyle
           type={type}
-          pos={{ row, col, selfStretch }}
+          options={{ row, col, selfStretch }}
           onClick={onClick}>
           {children}
         </ModalButtonResetStyle>
       );
     case 'update':
       return (
-        <ModalButtonUpdateStyle type={type} pos={{ row, col, selfStretch }}>
+        <ModalButtonUpdateStyle type={type} options={{ row, col, selfStretch }}>
           {children}
         </ModalButtonUpdateStyle>
       );
     case 'confirm':
       return (
-        <ModalButtonConfirmStyle type={type} pos={{ row, col, selfStretch }}>
+        <ModalButtonConfirmStyle
+          type={type}
+          options={{ row, col, selfStretch }}>
           {children}
         </ModalButtonConfirmStyle>
       );
@@ -55,7 +57,7 @@ export const ModalButton: FC<ModalButtonType> = ({
       return (
         <ModalButtonDeleteStyle
           type={type}
-          pos={{ row, col, selfStretch }}
+          options={{ row, col, selfStretch, tooltip }}
           onClick={onClick}
           aria-label={tooltip}>
           {children}
@@ -65,7 +67,7 @@ export const ModalButton: FC<ModalButtonType> = ({
       return (
         <ModalButtonDisableStyle
           type={type}
-          pos={{ row, col, selfStretch }}
+          options={{ row, col, selfStretch }}
           disabled>
           {children}
         </ModalButtonDisableStyle>

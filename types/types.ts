@@ -6,16 +6,10 @@ export type Input = HTMLInputElement;
 export type Form = HTMLFormElement;
 export type FieldSet = HTMLFieldSetElement;
 export type Element = Div | null;
-export type This = globalThis.MouseEvent;
 
 export interface Avatar {
   img: string;
   name: string;
-}
-
-export interface LessonsColor {
-  accent: string; // акцентирующий цвет
-  shade: string; // оттенок цета, акцентный + чёрный
 }
 
 export interface User {
@@ -34,13 +28,6 @@ export interface TimePosition {
   position: number;
 }
 
-export interface InitLesson {
-  id: string;
-  lesson: string;
-  start: Time;
-  end: Time;
-}
-
 export interface Lesson {
   id: string;
   lesson: string;
@@ -48,37 +35,20 @@ export interface Lesson {
   end: TimePosition;
 }
 
-export interface SchoolDay {
-  day: string;
-  lessons: Array<InitLesson>;
-}
-
-//!=== STEPS
 export interface Timetable {
   day: string;
   lessons: Array<Lesson>;
 }
-export interface ProfileTimetable {
-  timetable: Array<Timetable>;
-}
-export interface ProfileStore extends User, ProfileTimetable {}
-//!===
 
 export interface UserDataType extends User {
   timetable?: Array<Lesson>;
 }
 
 export interface Schedule extends User {
-  timetable: Array<SchoolDay>;
-}
-export interface Schedule2 extends User {
-  timetable: Array<Timetable>;
-}
-export interface Schedule2 extends User {
   timetable: Array<Timetable>;
 }
 
-export interface LessonsType extends Schedule2 {
+export interface LessonsType extends Schedule {
   start: TimePosition;
   end: TimePosition;
 }
@@ -90,12 +60,6 @@ export interface LessonComponent {
   start: TimePosition;
   end: TimePosition;
 }
-
-export type Order = {
-  id: string;
-  name: string;
-  order: number;
-};
 
 export interface StaticValues {
   startLessons: number;
@@ -142,13 +106,13 @@ export interface StoreCtxProps extends DaysType {
   timeline: StaticValues;
 }
 
-export type setNewUserType = Dispatch<SetStateAction<Schedule2 | null>>; // for prevState!!!
+export type setNewUserType = Dispatch<SetStateAction<Schedule | null>>; // for prevState!!!
 export interface MainCtxProps {
   openModal: boolean;
   setOpenModal: (open: boolean) => void;
   step: { value: Steps; id?: string };
   setStep: (data: { value: Steps; id?: string }) => void;
-  newUser: Schedule2 | null;
+  newUser: Schedule | null;
   setNewUser: setNewUserType;
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
@@ -165,13 +129,6 @@ export interface TimelineCtxProps {
   mainWidth: number;
   timetableEl: Element;
 }
-
-// export interface CreateProfileStoreProps extends User {
-//   setUsername: (str: string) => void;
-//   setColor: (str: string) => void;
-//   setAvatar: (str: string | undefined) => void;
-//   reset: boolean;
-// }
 
 // STEPS
 export type Error = {
@@ -191,21 +148,3 @@ export interface Action {
     | 'no-errors';
   payload: Error;
 }
-
-// BUTTONS
-export interface ButtonStyleType {
-  isFill?: boolean;
-  colorTheme: string;
-}
-
-type Styled = ({ isFill?: true } | { isFill: never }) &
-  (
-    | { colorTheme: 'primary' }
-    | { colorTheme: 'default' }
-    | { colorTheme: 'danger' }
-  );
-
-export type ButtonProps = {
-  children: React.ReactChild;
-  onClick: () => void;
-} & Styled;
