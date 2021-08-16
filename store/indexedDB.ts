@@ -1,4 +1,4 @@
-import { Schedule2, ProfileStore } from '@Types';
+import { Schedule2 } from '@Types';
 
 // Connecting to indexedDB
 export const connection = (dbName: string, storeName: string) => {

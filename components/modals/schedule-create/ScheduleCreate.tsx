@@ -11,8 +11,6 @@ import { useStepsStore, useMainStore, useGlobalStore } from '@Hooks/useStores';
 import { Form } from '@Types';
 // IndexedDB
 import { createNewProfileIndexedDB, updateProfileIndexedDB } from '@IndexedDB';
-// Helpers
-import { getBreaks } from '@Helpers';
 
 const ScheduleCreate: FC = () => {
   let { error } = useStepsStore();
