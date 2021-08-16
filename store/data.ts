@@ -1,5 +1,5 @@
-import { Schedule } from '@Types';
-export const database: Array<Schedule> = [
+// import { Schedule } from '@Types';
+export const database = [
   {
     id: '4a5s45d2as1d45we5',
     name: 'Johannes',

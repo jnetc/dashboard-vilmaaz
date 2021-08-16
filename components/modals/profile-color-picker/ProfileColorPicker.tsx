@@ -27,7 +27,6 @@ export const ProfileColorPicker: FC = () => {
   };
 
   const radioBtns = colors.map(clr => {
-    // if (!newUser) return null;
     return (
       <ProfileColor
         key={clr.en}

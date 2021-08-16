@@ -13,18 +13,12 @@ interface LessonPropType {
   data: Lesson;
   getRows: (data: Lesson) => void;
   removeRow: (id: string) => void;
-  // hasError: {
-  //   isError: boolean;
-  //   message?: string;
-  //   id?: string;
-  // };
 }
 
 export const ScheduleLesson: FC<LessonPropType> = ({
   data,
   getRows,
   removeRow,
-  // hasError = false,
 }) => {
   const { error } = useStepsStore();
   const [lessonState, setLessonState] = useState(data);
@@ -69,23 +63,6 @@ export const ScheduleLesson: FC<LessonPropType> = ({
     const clear = setTimeout(() => setIsCopy(false), 1000);
     return () => clearTimeout(clear);
   }, [isCopy]);
-
-  // useEffect(() => {
-  // const typingCheck =
-  //   lessonState.lesson.match(RegExp(/[\sa-яA-Я0-9]/gmu))?.join('') || '';
-  // if (typingCheck !== lessonState.lesson) {
-  //   const error = {
-  //     isError: true,
-  //     id: lessonState.id,
-  //     message: 'Käytä vain numeroita tai kirjaimia',
-  //   };
-  //   dispatch({ type: 'numbers-and-letters', payload: error });
-  // }
-  // if (typingCheck === lessonState.lesson) {
-  //   dispatch({ type: 'no-errors', payload: { isError: false } });
-  // }
-  // getRows(lessonState);
-  // }, [lessonState]);
 
   return (
     <ScheduleLessonStyle

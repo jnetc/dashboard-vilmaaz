@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const TimelineStyle = styled.div<{ hours: number }>`
-  /* width: calc(${({ hours }) => hours}px + 300px); */
   width: ${({ hours }) => hours}px;
   max-height: inherit;
   min-height: calc(100vh - 115px);

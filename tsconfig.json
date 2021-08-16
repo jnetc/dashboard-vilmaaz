@@ -20,7 +20,6 @@
     "baseUrl": ".",
     "paths": {
       "@styles/*": ["./styles/*"],
-      "@Buttons/*": ["./components/buttons/*"],
       "@Header/*": ["components/header/*"],
       "@Icons/*": ["./components/icons/*"],
       "@Lessons/*": ["./components/lessons/*"],

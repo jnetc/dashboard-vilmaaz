@@ -35,9 +35,6 @@ export const ScheduleDay: FC<SelectDayType> = ({
   const dayStr = firstUpperCase(day);
 
   const getRows = (data: Lesson) => {
-    // console.log(data.lesson);
-
-    // Check for errors
     const typingCheck =
       data.lesson.match(RegExp(/[\sa-яA-Я0-9]/gmu))?.join('') || '';
 
@@ -105,31 +102,15 @@ export const ScheduleDay: FC<SelectDayType> = ({
   };
 
   const lessonsRows = rows.map(l => {
-    // dispatch({ type: 'no-errors', payload: { id: l.id } });
     return (
       <ScheduleLesson
         key={l.id}
         data={l}
         getRows={getRows}
         removeRow={removeRow}
-        // hasError={l.id === error.id ? error : { isError: false }}
       />
     );
   });
-
-  // useEffect(() => {
-  //   const idx = newUser.timetable.findIndex(idx => idx.day === day);
-  //   newUser.timetable[idx].lessons = rows;
-  //   // setTimetable(newUser.timetable);
-
-  //   const hasLessons = newUser.timetable.find(t => t.lessons.length !== 0 && t);
-  //   if (!hasLessons) {
-  //     dispatch({
-  //       type: 'empty-days',
-  //       payload: { isError: true, message: 'täytä ainakin yksi rivi ' },
-  //     });
-  //   }
-  // }, [rows]);
 
   return (
     <ScheduleDayStyle isEmptyRows={isEmptyRows}>
@@ -145,7 +126,6 @@ export const ScheduleDay: FC<SelectDayType> = ({
       <LessonBtns style="add" onClick={addNewRow}>
         Luo uusi tunti
       </LessonBtns>
-      {/* <LessonBtns style="clear">Poista kaikki</LessonBtns> */}
     </ScheduleDayStyle>
   );
 };

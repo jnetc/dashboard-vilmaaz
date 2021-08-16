@@ -12,7 +12,7 @@ import { TimeField } from '@Timeline/time-field/TimeField';
 import { useGlobalStore, useMainStore } from '@Hooks/useStores';
 import { useResizeTimetable } from '@Hooks/useResizeTimetable';
 // Types
-import { This, Div, Element, TimelineCtxProps } from '@Types';
+import { Div, Element, TimelineCtxProps } from '@Types';
 // Styles
 import { MainStyle, TimelineStyle, TimelineEmptyStyle } from './Timeline.style';
 
@@ -43,7 +43,7 @@ const Timeline = () => {
     setAutoMovement(true);
   }, [activeDay, width]);
 
-  const mouseDown = (ev: MouseEvent<Div, This>) => {
+  const mouseDown = (ev: MouseEvent<Div>) => {
     setAutoMovement(false);
     setStartMove(true);
 
@@ -58,7 +58,7 @@ const Timeline = () => {
     setMouseDownCursorPos(ev.clientX);
   };
 
-  const mouseMove = (ev: MouseEvent<Div, This>) => {
+  const mouseMove = (ev: MouseEvent<Div>) => {
     ev.preventDefault();
 
     if (!startMove ?? !timetable) return;
@@ -69,7 +69,7 @@ const Timeline = () => {
     }px, 0, 0)`;
   };
 
-  const mouseUp = (ev: MouseEvent<Div, This>) => {
+  const mouseUp = (ev: MouseEvent<Div>) => {
     ev.preventDefault();
 
     if (!startMove ?? !timetable) return;
@@ -81,7 +81,7 @@ const Timeline = () => {
     setStartMove(false);
   };
 
-  const mouseLeave = (ev: MouseEvent<Div, This>) => {
+  const mouseLeave = (ev: MouseEvent<Div>) => {
     ev.preventDefault();
 
     if (!startMove ?? !timetable) return;

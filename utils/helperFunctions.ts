@@ -1,9 +1,9 @@
 // Types
 import {
-  Schedule2,
+  Schedule,
   LessonsType,
   Lesson,
-  InitLesson,
+  // InitLesson,
   StaticValues,
   Element,
   Timetable,
@@ -26,7 +26,7 @@ export const dateFormat = (options: Intl.DateTimeFormatOptions) => {
 };
 
 export const transform = (
-  data: Array<Schedule2>,
+  data: Array<Schedule>,
   day: string,
   set: boolean = true
 ) => {
@@ -75,7 +75,7 @@ export const transform = (
   return [...newTimelineSet];
 };
 
-export const getBreaks = (data: Schedule2 | null) => {
+export const getBreaks = (data: Schedule | null) => {
   if (!data) return null;
   const arr: Timetable[] = [];
 
@@ -161,7 +161,7 @@ export const fillEmptySpace = (day: string, arr: Array<Lesson>) => {
 //   return fillArray;
 // };
 
-const addTimePosition = (obj: InitLesson, start: number, end: number) => {
+const addTimePosition = (obj: Lesson, start: number, end: number) => {
   const startPos = { ...obj.start, position: start };
   const endPos = { ...obj.end, position: end };
   obj.start = startPos;
@@ -206,8 +206,6 @@ export const hourPositions = () => {
 export const transformTimeToNum = (time: string | number): number => {
   if ('number' === typeof time) return time;
 
-  // const hours = Number(time.split(':')[0]);
-  // const minutes = Number(time.split(':')[1]);
   const hours = +time.split(':')[0];
   const minutes = +time.split(':')[1];
 

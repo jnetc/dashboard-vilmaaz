@@ -1,6 +1,6 @@
 import { FC, createContext, useState, useEffect } from 'react';
 // Types
-import { MainCtxProps, Schedule2 } from '@Types';
+import { MainCtxProps, Schedule } from '@Types';
 // Hook
 import { useGlobalStore } from '@Hooks/useStores';
 
@@ -25,7 +25,7 @@ const Main: FC = ({ children }) => {
   const [step, setStep] = useState(state.step);
   const [autoMovement, setAutoMovement] = useState(state.autoMovement);
   const [profileLine, setProfileLine] = useState(state.profileLine);
-  const [newUser, setNewUser] = useState<Schedule2 | null>(null);
+  const [newUser, setNewUser] = useState<Schedule | null>(null);
 
   useEffect(() => {
     if (!openModal) return;
@@ -33,10 +33,6 @@ const Main: FC = ({ children }) => {
       if (prof.id === step.id) {
         const { timetable, start, end, ...profile } = prof;
         const schedule = { ...profile, timetable };
-
-        // const time = timetable as Timetable[]
-        // localStorage.setItem('profile', JSON.stringify(schedule));
-        console.log('content', schedule);
         setNewUser(schedule);
       }
     });

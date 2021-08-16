@@ -1,16 +1,41 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-interface Pos {
+interface Options {
   row: string;
   col: string;
   selfStretch?: boolean;
+  tooltip?: string;
 }
 
-export const ModalButtonStyle = styled.button<{ pos: Pos }>`
-  grid-row: ${({ pos }) => pos.row};
-  grid-column: ${({ pos }) => pos.col};
+const tooltipProperty = css`
+  &::after {
+    content: attr(aria-label);
+    width: max-content;
+    position: absolute;
+    top: -43px;
+    left: -2px;
+    padding: 10px 15px;
+    opacity: 0;
+    border-radius: 5px;
+    background: ${({ theme }) => theme.bg_soft()};
+    color: ${({ theme }) => theme.danger()};
+    font-size: ${({ theme }) => theme.fontsize_13};
+    font-weight: 300;
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 1;
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+`;
+
+export const ModalButtonStyle = styled.button<{ options: Options }>`
+  grid-row: ${({ options }) => options.row};
+  grid-column: ${({ options }) => options.col};
   align-self: flex-start;
-  justify-self: ${({ pos }) => (pos.selfStretch ? 'stretch' : 'flex-start')};
+  justify-self: ${({ options }) =>
+    options.selfStretch ? 'stretch' : 'flex-start'};
   min-width: 235px;
   padding: 15px 30px;
   border-radius: 8px;
@@ -20,25 +45,7 @@ export const ModalButtonStyle = styled.button<{ pos: Pos }>`
   font-weight: bold;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  &::after {
-    content: attr(aria-label);
-    width: max-content;
-    position: absolute;
-    top: -25px;
-    left: 0%;
-    padding: 10px 15px;
-    opacity: 0;
-    background: ${({ theme }) => theme.bg_soft()};
-    color: ${({ theme }) => theme.white_soft()};
-    font-size: ${({ theme }) => theme.fontsize_13};
-    font-weight: 300;
-    transform: translate(0%, -50%);
-    transition: all 0.3s ease-in-out;
-    z-index: 1;
-  }
-  &:hover::after {
-    opacity: 1;
-  }
+  ${({ options }) => options.tooltip && tooltipProperty}
 `;
 
 export const ModalButtonDisableStyle = styled(ModalButtonStyle)`

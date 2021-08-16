@@ -1,7 +1,7 @@
 import { FC, createContext, useEffect, useState } from 'react';
 
 // Types
-import { Schedule2, StoreCtxProps, LessonsType, TimePosition } from '@Types';
+import { Schedule, StoreCtxProps, LessonsType, TimePosition } from '@Types';
 import { transform, staticValues, dateFormat } from 'utils/helperFunctions';
 
 // import { database } from './data';
@@ -32,7 +32,7 @@ export const StoreContext = createContext(state);
 
 const Store: FC = ({ children }) => {
   const [updateStore, setUpdateStore] = useState(state.updateStore);
-  const [data, setData] = useState<Array<Schedule2>>([]);
+  const [data, setData] = useState<Array<Schedule>>([]);
   const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
   const [profile, setProfile] = useState(state.profile);
   const [timetable, setTimetable] = useState(state.timetable);
@@ -42,13 +42,6 @@ const Store: FC = ({ children }) => {
       const data = await getAllFromIndexedDB('schedule');
       setData(data);
     })();
-
-    // const status = setTimeout(() => {
-    //   setUpdateStore({ status: 'default' });
-    // }, 3000);
-    // console.log('status', updateStore);
-
-    // return () => clearTimeout(status);
   }, [dayOfWeek, updateStore]);
 
   const today = dateFormat({ weekday: 'long' });

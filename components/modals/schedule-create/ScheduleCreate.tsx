@@ -24,8 +24,6 @@ const ScheduleCreate: FC = () => {
 
     try {
       if (!newUser) return;
-      // const content = getBreaks(newUser);
-      // console.log(content);
       const obj = { ...newUser };
       setTrigger(!trigger);
       const createProfile = await createNewProfileIndexedDB('schedule', obj);
@@ -48,10 +46,6 @@ const ScheduleCreate: FC = () => {
     ev.preventDefault();
 
     try {
-      // const content = getBreaks(newUser);
-      // console.log(content);
-
-      // const obj = { ...content } as ProfileStore;
       setTrigger(!trigger);
       const updateProfile = await updateProfileIndexedDB('schedule', newUser);
 
