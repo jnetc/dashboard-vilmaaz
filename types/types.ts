@@ -98,7 +98,6 @@ export interface StoreCtxProps extends DaysType {
   timetable: Array<Timetable>;
   setTimetable: (arr: Array<Timetable>) => void;
   updateStore: UpdateStore;
-  // setUpdateStore: (update: UpdateStore) => void;
   setUpdateStore: Dispatch<SetStateAction<UpdateStore>>; // for prevState!!!
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
