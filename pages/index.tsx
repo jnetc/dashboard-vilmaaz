@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Header from '@Header/Header';
-import Timetable from 'components/timeline/Timeline';
-import RightPanel from 'components/right-profile-panel/ProfilePanel';
+import Timetable from '@Timeline/Timeline';
+import RightPanel from '@RightProfilePanel/ProfilePanel';
+import Notifications from '@Notifications/Notification';
 import { Steps } from '@Modals/steps/Steps';
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <Timetable />
       <RightPanel />
+      <Notifications />
     </>
   );
 }

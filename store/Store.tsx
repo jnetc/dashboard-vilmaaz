@@ -54,7 +54,7 @@ const Store: FC = ({ children }) => {
   const isActiveDay = timepoints.length !== 0;
   const isToday = today === dayOfWeek;
 
-  console.log(content);
+  // console.log(updateStore);
 
   useEffect(() => {
     setDayOfWeek(today);

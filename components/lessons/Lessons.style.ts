@@ -16,12 +16,11 @@ const linenotice = (color: string) => keyframes`
 `;
 
 export const LessonsStyle = styled.div<LessonStyleType>`
-  width: ${({ distance }) => distance}px;
+  width: 100%;
+  height: 80px;
   display: flex;
   align-items: center;
   position: relative;
-  /* 2px same, like line width hours component */
-  left: calc(${({ position }) => position}px - 2px);
   transition: all 0.3s ease-in-out;
   user-select: none;
   cursor: default;

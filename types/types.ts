@@ -86,7 +86,7 @@ export interface ProfilesTimeType extends DaysType {
 
 // STORES / CONTEXTS
 export interface UpdateStore {
-  status: 'default' | 'added' | 'updated' | 'deleted' | 'error' | 'reset';
+  status: 'default' | 'success' | 'error';
   message?: string;
 }
 
@@ -98,7 +98,8 @@ export interface StoreCtxProps extends DaysType {
   timetable: Array<Timetable>;
   setTimetable: (arr: Array<Timetable>) => void;
   updateStore: UpdateStore;
-  setUpdateStore: (update: UpdateStore) => void;
+  // setUpdateStore: (update: UpdateStore) => void;
+  setUpdateStore: Dispatch<SetStateAction<UpdateStore>>; // for prevState!!!
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
   content: Array<LessonsType>;
@@ -106,14 +107,13 @@ export interface StoreCtxProps extends DaysType {
   timeline: StaticValues;
 }
 
-export type setNewUserType = Dispatch<SetStateAction<Schedule | null>>; // for prevState!!!
 export interface MainCtxProps {
   openModal: boolean;
   setOpenModal: (open: boolean) => void;
   step: { value: Steps; id?: string };
   setStep: (data: { value: Steps; id?: string }) => void;
   newUser: Schedule | null;
-  setNewUser: setNewUserType;
+  setNewUser: Dispatch<SetStateAction<Schedule | null>>; // for prevState!!!
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
   profileLine: { id: string; color: string };

@@ -28,17 +28,20 @@ const ScheduleCreate: FC = () => {
       setTrigger(!trigger);
       const createProfile = await createNewProfileIndexedDB('schedule', obj);
 
-      console.log(createProfile);
       if (!createProfile.created) {
+        setUpdateStore({
+          status: 'error',
+          message: 'Tilisi ei ole tallennettu',
+        });
         return console.log(createProfile.message);
       }
+
       setNewUser(null);
       setStep({ value: 'profile' });
       setOpenModal(false);
-      setUpdateStore({ status: 'added', message: createProfile.message });
-      console.log(createProfile.message, obj);
+      setUpdateStore({ status: 'success', message: 'Tilisi on tallennettu' });
     } catch (error) {
-      console.log(error);
+      setUpdateStore({ status: 'error', message: 'Database error' });
     }
   };
 
@@ -49,17 +52,23 @@ const ScheduleCreate: FC = () => {
       setTrigger(!trigger);
       const updateProfile = await updateProfileIndexedDB('schedule', newUser);
 
-      console.log(updateProfile);
       if (!updateProfile.created) {
+        setUpdateStore({
+          status: 'error',
+          message: 'Lukujärjestys ei päivitetty',
+        });
         return console.log(updateProfile.message);
       }
+
       setNewUser(null);
       setStep({ value: 'profile' });
       setOpenModal(false);
-      setUpdateStore({ status: 'added', message: updateProfile.message });
-      console.log(updateProfile.message, newUser);
+      setUpdateStore({
+        status: 'success',
+        message: 'Lukujärjestys päivitetty',
+      });
     } catch (error) {
-      console.log(error);
+      setUpdateStore({ status: 'error', message: 'Database error' });
     }
   };
 

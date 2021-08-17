@@ -26,6 +26,7 @@
       "@Main": ["./components/MainContext"],
       "@Modals/*": ["./components/modals/*"],
       "@RightProfilePanel/*": ["components/right-profile-panel/*"],
+      "@Notifications/*": ["components/notifications/*"],
       "@Timeline/*": ["components/timeline/*"],
       "@Store": ["./store/Store"],
       "@IndexedDB": ["./store/indexedDB"],

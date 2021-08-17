@@ -19,7 +19,7 @@ export const CurrentLessonStyle = styled(LessonStyle)`
       transparent 0%,
       var(--${({ color }) => color}) 100%
     );
-    transform: translateX(calc(${({ position }) => position}px - 50px));
+    transform: translateX(calc(${({ process }) => process}px - 52px));
     transition: all 0.3s ease-in-out;
     mix-blend-mode: soft-light;
     z-index: 1;
