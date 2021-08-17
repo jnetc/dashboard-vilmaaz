@@ -11,7 +11,10 @@ const Notification: FC = () => {
     if (updateStore.status === 'default') return;
 
     const timer = setTimeout(() => {
-      setUpdateStore(prevState => (prevState = { status: 'default' }));
+      setUpdateStore(prevState => {
+        prevState = { status: 'default' };
+        return prevState;
+      });
       clearTimeout(timer);
     }, duration);
 
