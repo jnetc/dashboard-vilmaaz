@@ -18,7 +18,7 @@ export const connection = (dbName: string, storeName: string) => {
       (ev: IDBOpenDBRequestEventMap['success']) => {
         const req = ev.target as IDBRequest<IDBDatabase>;
         db = req.result;
-        console.info('====> Connection success');
+        // console.info('====> Connection success');
         resolve(db);
       }
     );
@@ -29,13 +29,12 @@ export const connection = (dbName: string, storeName: string) => {
         const req = ev.target as IDBRequest<IDBDatabase>;
         db = req.result;
         // indexedID version
-        const oldVersion = ev.oldVersion;
-        const newVersion = ev.newVersion || req.result.version;
+        // const oldVersion = ev.oldVersion;
+        // const newVersion = ev.newVersion || req.result.version;
 
-        console.log(`DB upgraded form v.${oldVersion} to v.${newVersion}`);
         // Checking an existing store
         if (!db.objectStoreNames.contains(storeName)) {
-          console.info('database created!!!');
+          // console.info('database created!!!');
           db.createObjectStore(storeName, {
             keyPath: 'id',
           });
@@ -50,7 +49,7 @@ export const getAllFromIndexedDB = async (storeName: string) => {
   const transaction = db.transaction(storeName, 'readonly');
   // If everything was fine
   transaction.oncomplete = () => {
-    console.log(`====> Transaction is complite / Get All`);
+    // console.log(`====> Transaction is complite / Get All`);
   };
 
   // Define store name and get all
@@ -76,7 +75,7 @@ export const getByIdIndexedDB = async (storeName: string, id: string) => {
   const transaction = db.transaction(storeName, 'readwrite');
 
   transaction.oncomplete = () => {
-    console.log(`====> Transaction is complite / Get By Id`);
+    // console.log(`====> Transaction is complite / Get By Id`);
   };
   // create an object store on the transaction
   const store = transaction.objectStore(storeName);
@@ -85,7 +84,6 @@ export const getByIdIndexedDB = async (storeName: string, id: string) => {
 
   return new Promise<Schedule>((resolve, reject) => {
     request.addEventListener('error', () => {
-      console.log(`Profile was not saved: ${request.error}`);
       reject({
         created: false,
         message: `Profile was not saved: ${request.error}`,
@@ -109,7 +107,7 @@ export const createNewProfileIndexedDB = async (
   const transaction = db.transaction(storeName, 'readwrite');
 
   transaction.oncomplete = () => {
-    console.log(`====> Transaction is complite / Create New`);
+    // console.log(`====> Transaction is complite / Create New`);
   };
   // create an object store on the transaction
   const store = transaction.objectStore(storeName);
@@ -118,7 +116,6 @@ export const createNewProfileIndexedDB = async (
 
   return new Promise((resolve, reject) => {
     request.addEventListener('error', () => {
-      console.log(`Profile was not saved: ${request.error}`);
       reject({
         created: false,
         message: `Profile was not saved: ${request.error}`,
@@ -127,7 +124,6 @@ export const createNewProfileIndexedDB = async (
 
     request.addEventListener('success', () => {
       resolve({ created: true, message: 'Profile was saved!' });
-      console.log(`Profile was saved: ${request.result}`);
     });
   });
 };
@@ -140,7 +136,7 @@ export const updateProfileIndexedDB = async (
   const transaction = db.transaction(storeName, 'readwrite');
 
   transaction.oncomplete = () => {
-    console.log(`====> Transaction is complite / Was updated`);
+    // console.log(`====> Transaction is complite / Was updated`);
   };
   // create an object store on the transaction
   const store = transaction.objectStore(storeName);
@@ -150,7 +146,6 @@ export const updateProfileIndexedDB = async (
 
   return new Promise((resolve, reject) => {
     request.addEventListener('error', () => {
-      console.log(`Profile wasn't updated: ${request.error}`);
       reject({
         created: false,
         message: `Profile wasn't updated: ${request.error}`,
@@ -159,7 +154,6 @@ export const updateProfileIndexedDB = async (
 
     request.addEventListener('success', () => {
       resolve({ created: true, message: 'Profile was updated!' });
-      console.log(`Profile was updated: ${request.result}`);
     });
   });
 };
@@ -172,7 +166,7 @@ export const deleteProfileIndexedDB = async (
   const transaction = db.transaction(storeName, 'readwrite');
 
   transaction.oncomplete = () => {
-    console.log(`====> Transaction is complite / Was updated`);
+    // console.log(`====> Transaction is complite / Was updated`);
   };
   // create an object store on the transaction
   const store = transaction.objectStore(storeName);
@@ -181,7 +175,6 @@ export const deleteProfileIndexedDB = async (
 
   return new Promise((resolve, reject) => {
     request.addEventListener('error', () => {
-      console.log(`Profile wasn't deleted: ${request.error}`);
       reject({
         created: false,
         message: `Profile wasn't deleted: ${request.error}`,
@@ -190,7 +183,6 @@ export const deleteProfileIndexedDB = async (
 
     request.addEventListener('success', () => {
       resolve({ created: true, message: 'Profile was deleted!' });
-      console.log(`Profile was deleted: ${request.result}`);
     });
   });
 };

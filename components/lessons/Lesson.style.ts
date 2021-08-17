@@ -3,7 +3,8 @@ import styled, { keyframes } from 'styled-components';
 interface LessonsDataType {
   lessonWidth: number;
   color: string;
-  position?: number;
+  position: number;
+  process?: number;
 }
 
 const sleepAnimation = keyframes`
@@ -23,7 +24,8 @@ export const LessonStyle = styled.div<LessonsDataType>`
   gap: 4px 5px;
   place-self: center;
   padding: 13px;
-  position: relative;
+  position: absolute;
+  left: ${({ position }) => position}px;
   overflow: hidden;
   user-select: none;
   background: ${({ theme }) => theme.bg_middle()};
@@ -85,7 +87,8 @@ export const BreakStyle = styled.div<LessonsDataType>`
   justify-content: center;
   align-items: center;
   padding: 12px;
-  position: relative;
+  position: absolute;
+  left: ${({ position }) => position}px;
   overflow: hidden;
   border-left: 2px solid ${({ theme }) => theme.grey_dark()};
   z-index: 11;

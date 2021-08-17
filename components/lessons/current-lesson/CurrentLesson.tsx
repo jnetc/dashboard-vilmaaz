@@ -65,7 +65,8 @@ export const CurrentLesson: FC<LessonComponent> = ({
     <CurrentLessonStyle
       lessonWidth={width}
       color={color}
-      position={currentPosition}
+      position={start.position}
+      process={currentPosition}
       ref={lessonRef}>
       <div className="lesson-duration">
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
@@ -99,7 +100,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
     <BreakCurrentStyle
       lessonWidth={width}
       color={color}
-      position={currentPosition}
+      position={start.position}
       ref={breakRef}>
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r={radius} className="track"></circle>

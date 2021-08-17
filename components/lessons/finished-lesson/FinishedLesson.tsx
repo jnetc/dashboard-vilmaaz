@@ -13,7 +13,10 @@ export const FinishedLesson: FC<LessonComponent> = ({
   end,
 }) => {
   return lesson !== 'taukko' ? (
-    <FinishedLessonStyle lessonWidth={width} color={color}>
+    <FinishedLessonStyle
+      lessonWidth={width}
+      color={color}
+      position={start.position}>
       <div className="lesson-duration">
         <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
           <path
@@ -47,7 +50,7 @@ export const FinishedLesson: FC<LessonComponent> = ({
       </div>
     </FinishedLessonStyle>
   ) : (
-    <BreakStyle lessonWidth={width} color={color}>
+    <BreakStyle lessonWidth={width} color={color} position={start.position}>
       <svg width="56" height="56" viewBox="0 0 56 56">
         <circle cx="28" cy="28" r="24" className="track"></circle>
       </svg>

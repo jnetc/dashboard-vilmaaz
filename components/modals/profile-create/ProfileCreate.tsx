@@ -31,12 +31,18 @@ const CreateProfile: FC = () => {
     ev.preventDefault();
     try {
       const updateProfile = await updateProfileIndexedDB('schedule', newUser);
-      console.log('Update profile', updateProfile);
+      if (!updateProfile.created) {
+        setUpdateStore({
+          status: 'error',
+          message: 'Tilisi ei ole päivitetty',
+        });
+        return console.log(updateProfile.message);
+      }
       setNewUser(null);
       setOpenModal(false);
-      setUpdateStore({ status: 'updated', message: updateProfile.message });
+      setUpdateStore({ status: 'success', message: 'Tilisi on päivitetty' });
     } catch (error) {
-      console.log(error);
+      setUpdateStore({ status: 'error', message: 'Database error' });
     }
   };
 
@@ -44,17 +50,19 @@ const CreateProfile: FC = () => {
     ev.preventDefault();
     try {
       const deleteProfile = await deleteProfileIndexedDB('schedule', step?.id);
-      console.log('Delete profile', deleteProfile);
+      if (!deleteProfile.created) {
+        setUpdateStore({ status: 'error', message: 'Tilisi ei ole poistettu' });
+        return console.log(deleteProfile.message);
+      }
       setNewUser(null);
       setOpenModal(false);
-      setUpdateStore({ status: 'deleted', message: deleteProfile.message });
+      setUpdateStore({ status: 'success', message: 'Tilisi on poistettu' });
     } catch (error) {
-      console.log(error);
+      setUpdateStore({ status: 'error', message: 'Database error' });
     }
   };
 
   const beforeDelete = () => {
-    console.log('delete');
     setTimeout(() => {
       setRemoveData(true);
     }, 0);
