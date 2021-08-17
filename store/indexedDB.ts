@@ -4,7 +4,7 @@ import { Schedule } from '@Types';
 export const connection = (dbName: string, storeName: string) => {
   return new Promise<IDBDatabase>((resolve, reject) => {
     let db: IDBDatabase | null;
-    let request = indexedDB.open(dbName, 3);
+    let request = indexedDB.open(dbName, 1);
 
     request.addEventListener(
       'error',
