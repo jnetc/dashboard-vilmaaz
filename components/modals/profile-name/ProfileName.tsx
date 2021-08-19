@@ -6,7 +6,7 @@ import { Input, Schedule } from '@Types';
 // Helper
 import { firstUpperCase } from 'utils/helperFunctions';
 // Hook
-import { useMainStore, useStepsStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 
 const changeProfile = (profile: Schedule | null, typing: string) => {
   if (!profile) return null;
@@ -16,8 +16,7 @@ const changeProfile = (profile: Schedule | null, typing: string) => {
 };
 
 export const ProfileName: FC = () => {
-  const { newUser, setNewUser } = useMainStore();
-  const { error, dispatch } = useStepsStore();
+  const { error, dispatch, newUser, setNewUser } = useCommonUsersStore();
 
   const getInputName = (ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;
@@ -28,7 +27,6 @@ export const ProfileName: FC = () => {
 
     if (typingCheck !== nameProf && nameProf.length > 0) {
       setNewUser(changeProfile(newUser, nameProf));
-      console.log(newUser);
       dispatch({
         type: 'numbers-and-letters',
         payload: {

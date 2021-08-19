@@ -7,6 +7,10 @@ export const SelectDayInputStyle = styled.input`
     border-color: ${({ theme }) => theme.grey_light()};
     background: ${({ theme }) => theme.white_soft(0.15)};
   }
+  &:checked + label:hover {
+    border-color: ${({ theme }) => theme.grey_dark()};
+    background: ${({ theme }) => theme.white_soft(0.15)};
+  }
   &:checked + label::before {
     border-color: ${({ theme }) => theme.white_soft()};
   }
@@ -52,5 +56,8 @@ export const SelectDayLabelStyle = styled.label`
     border-radius: 50%;
     background: ${({ theme }) => theme.white_soft()};
     transition: all 0.5s cubic-bezier(0, 2, 0.5, 0.9);
+  }
+  &:hover {
+    border: 2px solid ${({ theme }) => theme.grey_light()};
   }
 `;

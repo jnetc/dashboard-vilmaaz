@@ -13,7 +13,7 @@ import { firstUpperCase } from 'utils/helperFunctions';
 import { LessonBtns } from '@Modals/schedule-buttons/LessonBtns';
 import { ScheduleLesson } from '@Modals/schedule-lesson/ScheduleLesson';
 // Hook
-import { useMainStore, useStepsStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 
 export interface SelectDayType {
   data: Timetable;
@@ -27,8 +27,7 @@ export const ScheduleDay: FC<SelectDayType> = ({
   onChange,
 }) => {
   const { day, lessons } = data;
-  const { dispatch } = useStepsStore();
-  const { setNewUser } = useMainStore();
+  const { dispatch, setNewUser } = useCommonUsersStore();
   const [rows, setRows] = useState(lessons);
 
   const isEmptyRows = rows.length <= 0;
@@ -101,8 +100,6 @@ export const ScheduleDay: FC<SelectDayType> = ({
     setRows([...rows, newRow]);
   };
 
-  console.log(rows);
-
   const lessonsRows = rows.map(l => {
     return (
       <ScheduleLesson
@@ -123,7 +120,12 @@ export const ScheduleDay: FC<SelectDayType> = ({
         onChange={onChange}
         tabIndex={0}
       />
-      <SelectDayLabelStyle htmlFor={day}>{dayStr}</SelectDayLabelStyle>
+      <SelectDayLabelStyle htmlFor={day}>
+        {dayStr}
+        <span className="day-label-info">
+          Klikkaa jos haluat poistaa tätä päivää
+        </span>
+      </SelectDayLabelStyle>
       {!isEmptyRows && <ul>{lessonsRows}</ul>}
       <LessonBtns style="add" onClick={addNewRow}>
         Luo uusi tunti

@@ -49,3 +49,4 @@ export const hourDistance = step + minutesInHour; // The distance between the ev
 export const minuteDistance = hourDistance / minutesInHour; // The distance between the every minute
 export const hourDivWidth: number = 90;
 export const rightPanelWidth = 300;
+export const modalAnimationDuration = 300;

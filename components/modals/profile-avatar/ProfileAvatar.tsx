@@ -9,11 +9,10 @@ import {
 // Types
 import { Input } from '@Types';
 // Hook
-import { useMainStore, useStepsStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 
 export const ProfileAvatar: FC = () => {
-  const { newUser, setNewUser } = useMainStore();
-  const { error, dispatch } = useStepsStore();
+  const { error, dispatch, newUser, setNewUser } = useCommonUsersStore();
 
   const getFile = (ev: ChangeEvent<Input>) => {
     const el = ev.target as Input;

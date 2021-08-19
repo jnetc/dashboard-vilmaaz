@@ -5,7 +5,7 @@ import { Lesson } from '@Types';
 // Componets
 import { InputFeatures } from './InputFeatures';
 //Hook
-import { useStepsStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 // HelperFunc
 import { transformTimeToNum } from '@Helpers';
 
@@ -20,7 +20,7 @@ export const ScheduleLesson: FC<LessonPropType> = ({
   getRows,
   removeRow,
 }) => {
-  const { error } = useStepsStore();
+  const { error } = useCommonUsersStore();
   const [lessonState, setLessonState] = useState(data);
   const [isCopy, setIsCopy] = useState(false);
   const ref = useRef<HTMLInputElement | null>(null);
@@ -63,8 +63,6 @@ export const ScheduleLesson: FC<LessonPropType> = ({
     const clear = setTimeout(() => setIsCopy(false), 1000);
     return () => clearTimeout(clear);
   }, [isCopy]);
-
-  console.log(data);
 
   return (
     <ScheduleLessonStyle

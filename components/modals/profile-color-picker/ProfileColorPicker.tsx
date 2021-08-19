@@ -8,10 +8,10 @@ import { ProfileColor } from '@Modals/profile-color-picker/ProfileColor';
 //Types
 import { Input } from '@Types';
 // Hook
-import { useMainStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 
 export const ProfileColorPicker: FC = () => {
-  const { newUser, setNewUser } = useMainStore();
+  const { newUser, setNewUser } = useCommonUsersStore();
 
   const pickColor = (ev: ChangeEvent<Input>) => {
     const colorStr = ev.currentTarget.dataset.color;

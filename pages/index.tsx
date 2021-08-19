@@ -3,7 +3,11 @@ import Header from '@Header/Header';
 import Timetable from '@Timeline/Timeline';
 import RightPanel from '@RightProfilePanel/ProfilePanel';
 import Notifications from '@Notifications/Notification';
-import { Steps } from '@Modals/steps/Steps';
+import Steps from '@Modals/steps/CommonUsers';
+// HOC
+import Modal from '@Modals/Modal';
+// Component
+import { SwitchStep } from '@Modals/steps/SwitchStep';
 
 export default function Home() {
   return (
@@ -16,10 +20,14 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Steps />
+      <Steps>
+        <Modal>
+          <SwitchStep />
+        </Modal>
+        <RightPanel />
+      </Steps>
       <Header />
       <Timetable />
-      <RightPanel />
       <Notifications />
     </>
   );

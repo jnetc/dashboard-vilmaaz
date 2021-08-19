@@ -107,7 +107,6 @@ export const fillEmptySpace = (day: string, arr: Array<Lesson>) => {
       fillArray.push(z);
     }
 
-    console.log(isEmptyTime);
     if (isEmptyTime !== 0) {
       const startBreak = transformNumToTime(startBreakPosition);
       const endBreak = transformNumToTime(startLesson);

@@ -1,15 +1,28 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { ModalStyle } from './Modal.style';
 // Hook
-import { useMainStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
+// Component
 import { ModalCloseBtn } from '@Modals/modal-button/ModalCloseBtn';
+// Global const
+import { modalAnimationDuration } from '@Constants';
 
 const Modal = ({ children }: { children: ReactNode }) => {
-  const { openModal, setOpenModal } = useMainStore();
+  const { openModal, setOpenModal } = useCommonUsersStore();
 
-  return openModal ? (
-    <ModalStyle>
-      <ModalCloseBtn setOpenModal={setOpenModal} />
+  useEffect(() => {
+    setTimeout(() => {
+      if (openModal.isOpen) {
+        setOpenModal({ isOpen: true, action: true });
+      }
+      return;
+    }, 0);
+  }, [openModal.isOpen]);
+
+  return openModal.isOpen ? (
+    <ModalStyle
+      options={{ open: openModal.action, duration: modalAnimationDuration }}>
+      <ModalCloseBtn />
       <div className="wrapper">{children}</div>
     </ModalStyle>
   ) : null;
