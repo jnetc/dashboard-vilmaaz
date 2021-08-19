@@ -12,7 +12,7 @@ export const FinishedLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  return lesson !== 'taukko' ? (
+  return !['tauko', 'lounas', 'ruokatauko'].includes(lesson) ? (
     <FinishedLessonStyle
       lessonWidth={width}
       color={color}

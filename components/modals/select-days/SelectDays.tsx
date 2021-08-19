@@ -1,5 +1,6 @@
 import { FC, MouseEvent, ChangeEvent } from 'react';
 // Style
+import { Titleh1Style } from '@Modals/modal-title/ModalTitle.style';
 import { SelectDaysStyle } from './SelectDays.style';
 // Component
 import { ModalTitle } from '@Modals/modal-title/ModalTitle';
@@ -83,7 +84,9 @@ const SelectDays: FC = () => {
 
   return (
     <SelectDaysStyle onSubmit={step.id ? nextStepId : nextStep} name="days">
-      <ModalTitle>Valitse päivät</ModalTitle>
+      <ModalTitle>
+        <Titleh1Style>Valitse päivät</Titleh1Style>
+      </ModalTitle>
       <section id="modal-days">{dayslist}</section>
 
       {!step.id && (

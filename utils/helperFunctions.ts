@@ -2,8 +2,6 @@
 import {
   Schedule,
   LessonsType,
-  Lesson,
-  // InitLesson,
   StaticValues,
   Element,
   Timetable,
@@ -55,7 +53,6 @@ export const transform = (
     const end = schoolday.lessons[findEndOfArr].end.time;
     const startPos = schoolday.lessons[0].start.position;
     const endPos = schoolday.lessons[findEndOfArr].end.position;
-    // const timetableWithBreak = fillEmptySpace(day, schoolday);
 
     if (!set) {
       newTimefieldArr.push({
@@ -73,99 +70,6 @@ export const transform = (
 
   if (!set) return newTimefieldArr;
   return [...newTimelineSet];
-};
-
-export const getBreaks = (data: Schedule | null) => {
-  if (!data) return null;
-  const arr: Timetable[] = [];
-
-  for (const i of data.timetable) {
-    arr.push(fillEmptySpace(i.day, i.lessons));
-  }
-
-  data.timetable = arr;
-  return data;
-};
-
-//! Отказаться от этого
-//! Причина в округлении времени
-// define if of lesson have empty space in time or not
-export const fillEmptySpace = (day: string, arr: Array<Lesson>) => {
-  const fillArray: Array<Lesson> = [];
-  let startBreakPosition = arr[0].start.position;
-
-  debugger;
-
-  for (let i of arr) {
-    const startLesson = i.start.position;
-    const endLesson = i.end.position;
-    const isEmptyTime = startLesson - startBreakPosition;
-
-    if (isEmptyTime === 0) {
-      // Push lessons before init first break
-      const z = addTimePosition(i, startLesson, endLesson);
-      fillArray.push(z);
-    }
-
-    if (isEmptyTime !== 0) {
-      const startBreak = transformNumToTime(startBreakPosition);
-      const endBreak = transformNumToTime(startLesson);
-
-      fillArray.push({
-        id: `${Math.random()}`,
-        lesson: 'taukko',
-        start: { time: startBreak.time, position: startBreakPosition },
-        end: { time: endBreak.time, position: startLesson },
-      });
-      // Push lessons after init first break
-      const z = addTimePosition(i, startLesson, endLesson);
-      fillArray.push(z);
-    }
-    startBreakPosition = endLesson;
-  }
-  return { day, lessons: fillArray };
-};
-
-// export const fillEmptySpace = (arr: Array<InitLesson>) => {
-//   const fillArray: Array<Lesson> = [];
-//   let startBreakPosition = transformTimeToNum(arr[0].start.time);
-
-//   for (let i of arr) {
-//     const startLesson = transformTimeToNum(i.start.time);
-//     const endLesson = transformTimeToNum(i.end.time);
-//     const isEmptyTime = startLesson - startBreakPosition;
-
-//     if (isEmptyTime === 0) {
-//       // Push lessons before init first break
-//       const z = addTimePosition(i, startLesson, endLesson);
-//       fillArray.push(z);
-//     }
-
-//     if (isEmptyTime !== 0) {
-//       const startBreak = transformNumToTime(startBreakPosition);
-//       const endBreak = transformNumToTime(startLesson);
-
-//       fillArray.push({
-//         id: i.id + 2,
-//         lesson: 'taukko',
-//         start: { time: startBreak.time, position: startBreakPosition },
-//         end: { time: endBreak.time, position: startLesson },
-//       });
-//       // Push lessons after init first break
-//       const z = addTimePosition(i, startLesson, endLesson);
-//       fillArray.push(z);
-//     }
-//     startBreakPosition = endLesson;
-//   }
-//   return fillArray;
-// };
-
-const addTimePosition = (obj: Lesson, start: number, end: number) => {
-  const startPos = { ...obj.start, position: start };
-  const endPos = { ...obj.end, position: end };
-  obj.start = startPos;
-  obj.end = endPos;
-  return Object.assign({}, obj) as Lesson;
 };
 
 export const staticValues = (timearr: Array<TimePosition>) => {

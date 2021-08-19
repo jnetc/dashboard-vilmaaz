@@ -21,7 +21,7 @@ const ProfilePanel = () => {
     );
 
     const lessons = getCurrentTimetable?.lessons.filter(
-      l => l.lesson !== 'taukko'
+      l => !['tauko', 'lounas', 'ruokatauko'].includes(l.lesson)
     ).length;
     const dataProfile = {
       id,

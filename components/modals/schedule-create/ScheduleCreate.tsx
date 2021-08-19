@@ -3,6 +3,11 @@ import { FC, MouseEvent, useState } from 'react';
 import { ScheduleCreateStyle } from './ScheduleCreate.style';
 // Component
 import { ModalTitle } from '@Modals/modal-title/ModalTitle';
+// Styles
+import {
+  Titleh1Style,
+  Titleh4Style,
+} from '@Modals/modal-title/ModalTitle.style';
 import { ScheduleTable } from '@Modals/schedule-table/ScheduleTable';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
@@ -84,7 +89,13 @@ const ScheduleCreate: FC = () => {
     <ScheduleCreateStyle
       onSubmit={step.id ? updateDB : saveToDB}
       name="schedule">
-      <ModalTitle>Lukujärjestys</ModalTitle>
+      <ModalTitle>
+        <Titleh1Style>Lukujärjestys</Titleh1Style>
+        <Titleh4Style>
+          *Jos kirjoita "tauko", "ruokatauko" tai "lounas" tämä solu visuaalinen
+          vaihtuu lukujärjestyksessä.
+        </Titleh4Style>
+      </ModalTitle>
       <ScheduleTable />
       {step.id ? (
         <ModalButton

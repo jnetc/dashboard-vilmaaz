@@ -1,5 +1,6 @@
 import { FC, MouseEvent, useState } from 'react';
 //Style
+import { Titleh1Style } from '@Modals/modal-title/ModalTitle.style';
 import { ProfileCreateStyle } from './ProfileCreate.style';
 // Hook
 import { useCommonUsersStore, useGlobalStore } from '@Hooks/useStores';
@@ -102,9 +103,13 @@ const CreateProfile: FC = () => {
         }
         name="user">
         {step.id ? (
-          <ModalTitle>Tilisi</ModalTitle>
+          <ModalTitle>
+            <Titleh1Style>Tilisi</Titleh1Style>
+          </ModalTitle>
         ) : (
-          <ModalTitle>Lou uusi tili</ModalTitle>
+          <ModalTitle>
+            <Titleh1Style>Lou uusi tili</Titleh1Style>
+          </ModalTitle>
         )}
         <section id="modal-profile">
           <ProfileAvatar />
