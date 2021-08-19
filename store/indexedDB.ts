@@ -1,4 +1,5 @@
 import { Schedule } from '@Types';
+import { testdata } from './data';
 
 // Connecting to indexedDB
 export const connection = (dbName: string, storeName: string) => {
@@ -65,6 +66,14 @@ export const getAllFromIndexedDB = async (storeName: string) => {
       const req = ev.target as IDBRequest<IDBDatabase>;
       const resetType = req.result as unknown;
       const arr = resetType as Array<Schedule>;
+
+      // For visual test data
+      const lS = localStorage.getItem('is-first-visit');
+      if (!lS || arr.length === 0) {
+        localStorage.setItem('is-first-visit', 'true');
+        resolve(testdata);
+        return;
+      }
       resolve(arr);
     };
   });

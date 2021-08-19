@@ -9,7 +9,7 @@
       "webRoot": "${workspaceFolder}",
       // "runtimeArgs": ["--incognito"],
       "sourceMapPathOverrides": {
-        "webpack://_N_E/./components/main/*": "${webRoot}/*"
+        "webpack://_N_E/./components/*": "${webRoot}/*"
       }
     }
   ]

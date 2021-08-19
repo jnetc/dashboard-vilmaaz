@@ -33,6 +33,9 @@ const Main: FC = ({ children }) => {
       if (prof.id === step.id) {
         const { timetable, start, end, ...profile } = prof;
         const schedule = { ...profile, timetable };
+
+        console.log(schedule);
+
         setNewUser(schedule);
       }
     });

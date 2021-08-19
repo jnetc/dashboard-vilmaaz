@@ -36,6 +36,7 @@ export const ProfileMenu: FC<ProfileMenu> = ({ open, id, closeMenu }) => {
       const el = ev.target as HTMLDivElement;
       if (!el.closest('.submenu')) {
         closeMenu(false);
+        document.body.removeEventListener('mousedown', outSideClick, true);
       }
     };
     document.body.addEventListener('mousedown', outSideClick, true);

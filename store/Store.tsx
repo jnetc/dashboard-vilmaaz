@@ -4,7 +4,6 @@ import { FC, createContext, useEffect, useState } from 'react';
 import { Schedule, StoreCtxProps, LessonsType, TimePosition } from '@Types';
 import { transform, staticValues, dateFormat } from 'utils/helperFunctions';
 
-// import { database } from './data';
 import { getAllFromIndexedDB } from '@IndexedDB';
 
 const state: StoreCtxProps = {
@@ -53,8 +52,6 @@ const Store: FC = ({ children }) => {
   const timeline = staticValues(timepoints);
   const isActiveDay = timepoints.length !== 0;
   const isToday = today === dayOfWeek;
-
-  // console.log(updateStore);
 
   useEffect(() => {
     setDayOfWeek(today);

@@ -101,6 +101,8 @@ export const ScheduleDay: FC<SelectDayType> = ({
     setRows([...rows, newRow]);
   };
 
+  console.log(rows);
+
   const lessonsRows = rows.map(l => {
     return (
       <ScheduleLesson

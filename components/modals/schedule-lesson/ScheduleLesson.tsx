@@ -64,6 +64,8 @@ export const ScheduleLesson: FC<LessonPropType> = ({
     return () => clearTimeout(clear);
   }, [isCopy]);
 
+  console.log(data);
+
   return (
     <ScheduleLessonStyle
       styleErr={error.id?.includes(data.id) ?? error.isError ?? false}>
