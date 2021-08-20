@@ -3,18 +3,25 @@ import { FC, MouseEvent, useState } from 'react';
 import { ScheduleCreateStyle } from './ScheduleCreate.style';
 // Component
 import { ModalTitle } from '@Modals/modal-title/ModalTitle';
+// Styles
+import {
+  Titleh1Style,
+  Titleh4Style,
+} from '@Modals/modal-title/ModalTitle.style';
 import { ScheduleTable } from '@Modals/schedule-table/ScheduleTable';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
-import { useStepsStore, useMainStore, useGlobalStore } from '@Hooks/useStores';
+import { useCommonUsersStore, useGlobalStore } from '@Hooks/useStores';
 // Types
 import { Form } from '@Types';
 // IndexedDB
 import { createNewProfileIndexedDB, updateProfileIndexedDB } from '@IndexedDB';
+// Global const
+import { modalAnimationDuration } from '@Constants';
 
 const ScheduleCreate: FC = () => {
-  let { error } = useStepsStore();
-  const { setOpenModal, step, setStep, newUser, setNewUser } = useMainStore();
+  const { error, setOpenModal, step, setStep, newUser, setNewUser } =
+    useCommonUsersStore();
   const { setUpdateStore } = useGlobalStore();
 
   const [trigger, setTrigger] = useState(false);
@@ -33,13 +40,15 @@ const ScheduleCreate: FC = () => {
           status: 'error',
           message: 'Tilisi ei ole tallennettu',
         });
-        return console.log(createProfile.message);
       }
 
-      setNewUser(null);
-      setStep({ value: 'profile' });
-      setOpenModal(false);
-      setUpdateStore({ status: 'success', message: 'Tilisi on tallennettu' });
+      setOpenModal({ isOpen: true, action: false });
+      setTimeout(() => {
+        setNewUser(null);
+        setStep({ value: 'profile' });
+        setOpenModal({ isOpen: false, action: false });
+        setUpdateStore({ status: 'success', message: 'Tilisi on tallennettu' });
+      }, modalAnimationDuration);
     } catch (error) {
       setUpdateStore({ status: 'error', message: 'Database error' });
     }
@@ -57,16 +66,17 @@ const ScheduleCreate: FC = () => {
           status: 'error',
           message: 'Lukujärjestys ei päivitetty',
         });
-        return console.log(updateProfile.message);
       }
-
-      setNewUser(null);
-      setStep({ value: 'profile' });
-      setOpenModal(false);
-      setUpdateStore({
-        status: 'success',
-        message: 'Lukujärjestys päivitetty',
-      });
+      setOpenModal({ isOpen: true, action: false });
+      setTimeout(() => {
+        setNewUser(null);
+        setStep({ value: 'profile' });
+        setOpenModal({ isOpen: false, action: false });
+        setUpdateStore({
+          status: 'success',
+          message: 'Lukujärjestys päivitetty',
+        });
+      }, 300);
     } catch (error) {
       setUpdateStore({ status: 'error', message: 'Database error' });
     }
@@ -79,7 +89,13 @@ const ScheduleCreate: FC = () => {
     <ScheduleCreateStyle
       onSubmit={step.id ? updateDB : saveToDB}
       name="schedule">
-      <ModalTitle>Lukujärjestys</ModalTitle>
+      <ModalTitle>
+        <Titleh1Style>Lukujärjestys</Titleh1Style>
+        <Titleh4Style>
+          *Jos kirjoita "tauko", "ruokatauko" tai "lounas" tämä solu visuaalinen
+          vaihtuu lukujärjestyksessä.
+        </Titleh4Style>
+      </ModalTitle>
       <ScheduleTable />
       {step.id ? (
         <ModalButton

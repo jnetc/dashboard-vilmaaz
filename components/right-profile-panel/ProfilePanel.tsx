@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { ProfilePanelStyle } from './ProfilePanel.style';
 // Hook
-import { useGlobalStore, useMainStore } from '@Hooks/useStores';
+import { useGlobalStore } from '@Hooks/useStores';
 // Component
 import { Profiles } from '@RightProfilePanel/profiles/Profiles';
 import { AddProfileButton } from '@RightProfilePanel/add-profile-button/AddProfileButton';
@@ -10,7 +10,7 @@ import { Logotip } from '@Icons/Logos';
 
 const ProfilePanel = () => {
   const { content, today, activeDay, dayOfWeek } = useGlobalStore();
-  const { setProfileLine } = useMainStore();
+
   const ref = useRef<HTMLDivElement>(null);
 
   const profiles = content.map(prof => {
@@ -21,7 +21,7 @@ const ProfilePanel = () => {
     );
 
     const lessons = getCurrentTimetable?.lessons.filter(
-      l => l.lesson !== 'taukko'
+      l => !['tauko', 'lounas', 'ruokatauko'].includes(l.lesson)
     ).length;
     const dataProfile = {
       id,
@@ -37,27 +37,6 @@ const ProfilePanel = () => {
 
     return <Profiles key={id} data={dataProfile} />;
   });
-
-  useEffect(() => {
-    const outSideClick = (ev: HTMLElementEventMap['click']) => {
-      const el = ev.target as HTMLDivElement;
-      const root = el.closest('.profile');
-      if (root) {
-        const color = root.getAttribute('data-color');
-        const id = root.id;
-        setProfileLine({ id: id, color: color || '' });
-        return;
-      }
-      if (!root) {
-        setProfileLine({ id: '', color: '' });
-        return;
-      }
-    };
-    document.addEventListener('mousedown', outSideClick, true);
-    return () => {
-      document.removeEventListener('mousedown', outSideClick, true);
-    };
-  }, []);
 
   return (
     <ProfilePanelStyle>

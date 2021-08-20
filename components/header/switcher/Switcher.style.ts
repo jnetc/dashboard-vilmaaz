@@ -33,7 +33,7 @@ export const SwitcherStyle = styled.label`
     position: relative;
     top: 2px;
     left: 2px;
-    background: ${({ theme }) => theme.grey_middle()};
+    background: ${({ theme }) => theme.grey_light()};
     transition: all 0.3s ease-in-out;
     z-index: 10;
   }
@@ -41,7 +41,7 @@ export const SwitcherStyle = styled.label`
     position: absolute;
     top: 6px;
     font-size: 10px;
-    color: ${({ theme }) => theme.grey_light()};
+    color: ${({ theme }) => theme.white_soft()};
   }
   span:nth-of-type(1) {
     left: 6px;

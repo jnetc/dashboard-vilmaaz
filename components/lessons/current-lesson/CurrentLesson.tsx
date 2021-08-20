@@ -61,7 +61,7 @@ export const CurrentLesson: FC<LessonComponent> = ({
     return () => clearTimeout(transition);
   }, [currentTimeNum]);
 
-  return lesson !== 'taukko' ? (
+  return !['tauko', 'lounas', 'ruokatauko'].includes(lesson) ? (
     <CurrentLessonStyle
       lessonWidth={width}
       color={color}

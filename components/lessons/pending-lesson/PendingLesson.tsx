@@ -12,7 +12,7 @@ export const PendingLesson: FC<LessonComponent> = ({
   start,
   end,
 }) => {
-  return lesson !== 'taukko' ? (
+  return !['tauko', 'lounas', 'ruokatauko'].includes(lesson) ? (
     <PendingLessonStyle
       lessonWidth={width}
       color={color}

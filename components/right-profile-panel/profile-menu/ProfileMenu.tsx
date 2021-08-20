@@ -3,7 +3,7 @@ import { ProfileMenuStyle } from './ProfileMenu.style';
 import { MenuCloseBtnStyle } from './CloseBtnMenu.style';
 import { ScheduleIcon, UserIcon, WeekDayIcon } from '@Icons/ProfileMenu';
 // Hook
-import { useMainStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 
 interface ProfileMenu {
   open: boolean;
@@ -12,21 +12,21 @@ interface ProfileMenu {
 }
 
 export const ProfileMenu: FC<ProfileMenu> = ({ open, id, closeMenu }) => {
-  const { setOpenModal, setStep } = useMainStore();
+  const { setOpenModal, setStep } = useCommonUsersStore();
   const ref = useRef<HTMLDivElement>(null);
 
   const openProfile = () => {
-    setOpenModal(true);
+    setOpenModal({ isOpen: true, action: false });
     setStep({ value: 'profile', id: id });
     closeMenu(false);
   };
   const openWeekDay = () => {
-    setOpenModal(true);
+    setOpenModal({ isOpen: true, action: false });
     setStep({ value: 'days', id: id });
     closeMenu(false);
   };
   const openSchedule = () => {
-    setOpenModal(true);
+    setOpenModal({ isOpen: true, action: false });
     setStep({ value: 'schedule', id: id });
     closeMenu(false);
   };
@@ -36,6 +36,7 @@ export const ProfileMenu: FC<ProfileMenu> = ({ open, id, closeMenu }) => {
       const el = ev.target as HTMLDivElement;
       if (!el.closest('.submenu')) {
         closeMenu(false);
+        document.body.removeEventListener('mousedown', outSideClick, true);
       }
     };
     document.body.addEventListener('mousedown', outSideClick, true);

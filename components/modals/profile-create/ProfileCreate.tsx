@@ -1,8 +1,9 @@
 import { FC, MouseEvent, useState } from 'react';
 //Style
+import { Titleh1Style } from '@Modals/modal-title/ModalTitle.style';
 import { ProfileCreateStyle } from './ProfileCreate.style';
 // Hook
-import { useMainStore, useStepsStore, useGlobalStore } from '@Hooks/useStores';
+import { useCommonUsersStore, useGlobalStore } from '@Hooks/useStores';
 // Types
 import { Form } from '@Types';
 // Components
@@ -12,14 +13,14 @@ import { ProfileName } from '@Modals/profile-name/ProfileName';
 import { ProfileColorPicker } from '@Modals/profile-color-picker/ProfileColorPicker';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Global const
-import { colors } from '@Constants';
+import { colors, modalAnimationDuration } from '@Constants';
 // IndexedDB
 import { updateProfileIndexedDB, deleteProfileIndexedDB } from '@IndexedDB';
 
 const CreateProfile: FC = () => {
   const { setUpdateStore } = useGlobalStore();
-  const { setOpenModal, setStep, step, newUser, setNewUser } = useMainStore();
-  const { error, dispatch } = useStepsStore();
+  const { error, dispatch, setOpenModal, setStep, step, newUser, setNewUser } =
+    useCommonUsersStore();
   const [removeData, setRemoveData] = useState(false);
 
   const nextStep = (ev: MouseEvent<Form>) => {
@@ -36,11 +37,13 @@ const CreateProfile: FC = () => {
           status: 'error',
           message: 'Tilisi ei ole päivitetty',
         });
-        return console.log(updateProfile.message);
       }
-      setNewUser(null);
-      setOpenModal(false);
-      setUpdateStore({ status: 'success', message: 'Tilisi on päivitetty' });
+      setOpenModal({ isOpen: true, action: false });
+      setTimeout(() => {
+        setNewUser(null);
+        setOpenModal({ isOpen: false, action: false });
+        setUpdateStore({ status: 'success', message: 'Tilisi on päivitetty' });
+      }, modalAnimationDuration);
     } catch (error) {
       setUpdateStore({ status: 'error', message: 'Database error' });
     }
@@ -52,11 +55,13 @@ const CreateProfile: FC = () => {
       const deleteProfile = await deleteProfileIndexedDB('schedule', step?.id);
       if (!deleteProfile.created) {
         setUpdateStore({ status: 'error', message: 'Tilisi ei ole poistettu' });
-        return console.log(deleteProfile.message);
       }
-      setNewUser(null);
-      setOpenModal(false);
-      setUpdateStore({ status: 'success', message: 'Tilisi on poistettu' });
+      setOpenModal({ isOpen: true, action: false });
+      setTimeout(() => {
+        setNewUser(null);
+        setOpenModal({ isOpen: false, action: false });
+        setUpdateStore({ status: 'success', message: 'Tilisi on poistettu' });
+      }, modalAnimationDuration);
     } catch (error) {
       setUpdateStore({ status: 'error', message: 'Database error' });
     }
@@ -72,7 +77,6 @@ const CreateProfile: FC = () => {
   const clear = () => {
     if (!newUser) return;
 
-    console.log('clear', removeData);
     setRemoveData(!removeData);
     setNewUser({
       id: newUser.id,
@@ -99,9 +103,13 @@ const CreateProfile: FC = () => {
         }
         name="user">
         {step.id ? (
-          <ModalTitle>Tilisi</ModalTitle>
+          <ModalTitle>
+            <Titleh1Style>Tilisi</Titleh1Style>
+          </ModalTitle>
         ) : (
-          <ModalTitle>Lou uusi tili</ModalTitle>
+          <ModalTitle>
+            <Titleh1Style>Lou uusi tili</Titleh1Style>
+          </ModalTitle>
         )}
         <section id="modal-profile">
           <ProfileAvatar />

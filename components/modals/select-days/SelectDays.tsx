@@ -1,12 +1,13 @@
 import { FC, MouseEvent, ChangeEvent } from 'react';
 // Style
+import { Titleh1Style } from '@Modals/modal-title/ModalTitle.style';
 import { SelectDaysStyle } from './SelectDays.style';
 // Component
 import { ModalTitle } from '@Modals/modal-title/ModalTitle';
 import { SelectDay } from '@Modals/select-days/SelectDay';
 import { ModalButton } from '@Modals/modal-button/ModalButton';
 // Hook
-import { useMainStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 // Types
 import { Form, Input } from '@Types';
 // Helper func
@@ -18,7 +19,7 @@ import {
 import { daysOfWeek } from '@Constants';
 
 const SelectDays: FC = () => {
-  const { step, setStep, newUser, setNewUser } = useMainStore();
+  const { step, setStep, newUser, setNewUser } = useCommonUsersStore();
   if (!newUser) return null;
 
   const selectedDays = newUser.timetable.map(d => d.day) as Array<string>;
@@ -83,7 +84,9 @@ const SelectDays: FC = () => {
 
   return (
     <SelectDaysStyle onSubmit={step.id ? nextStepId : nextStep} name="days">
-      <ModalTitle>Valitse päivät</ModalTitle>
+      <ModalTitle>
+        <Titleh1Style>Valitse päivät</Titleh1Style>
+      </ModalTitle>
       <section id="modal-days">{dayslist}</section>
 
       {!step.id && (

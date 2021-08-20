@@ -1,7 +1,7 @@
 import { FC, MouseEvent } from 'react';
-import { Alert, Copy, Delete } from './InputFeatures.style';
+import { Copy, Delete } from './InputFeatures.style';
 
-type InputFeatureName = 'alert' | 'copy' | 'delete';
+type InputFeatureName = 'copy' | 'delete';
 interface Props {
   type: InputFeatureName;
   isCopy?: boolean;
@@ -27,6 +27,6 @@ export const InputFeatures: FC<Props> = ({ type, onClick, isCopy }) => {
         </Delete>
       );
     default:
-      return <Alert role="button" />;
+      return null;
   }
 };

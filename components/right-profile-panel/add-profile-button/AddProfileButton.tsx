@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { AddProfileButtonStyle } from './AddProfileButton.style';
 // Hook
-import { useMainStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
 // Global const
 import { colors } from '@Constants';
 
 export const AddProfileButton: FC = () => {
-  const { setOpenModal, setStep, setNewUser } = useMainStore();
+  const { setOpenModal, setStep, setNewUser } = useCommonUsersStore();
   const open = () => {
-    setOpenModal(true);
+    setOpenModal({ isOpen: true, action: false });
     setStep({ value: 'profile' });
     setNewUser({
       id: `${Math.random()}`,
@@ -18,5 +18,7 @@ export const AddProfileButton: FC = () => {
       timetable: [],
     });
   };
-  return <AddProfileButtonStyle onClick={open}></AddProfileButtonStyle>;
+  return (
+    <AddProfileButtonStyle onClick={open}>Uusi tili</AddProfileButtonStyle>
+  );
 };

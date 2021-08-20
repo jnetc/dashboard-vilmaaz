@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ProfilesStyle = styled.div`
+export const ProfilesStyle = styled.div<{ showTimeline: string }>`
   display: grid;
   grid-template-columns: 60px 1fr 30px;
   grid-template-rows: 30px 25px 21px;
@@ -20,6 +20,23 @@ export const ProfilesStyle = styled.div`
     figure {
       background: ${({ theme }) => theme.bg_middle()};
     }
+    div.show-timeline {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  div.show-timeline {
+    width: 3px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    left: -20px;
+    opacity: 0;
+    border-radius: 5px;
+    background: var(--${({ showTimeline }) => showTimeline});
+    transform: translateX(35px);
+    transition: all 0.3s cubic-bezier(0, 1.59, 0.63, 0.79);
+    z-index: -1;
   }
   figure {
     grid-column: 1;

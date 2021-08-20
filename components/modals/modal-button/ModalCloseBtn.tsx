@@ -1,17 +1,18 @@
 import { FC } from 'react';
 import { ModalCloseBtnStyle } from './ModalCloseBtn.style';
 // Hook
-import { useMainStore } from '@Hooks/useStores';
+import { useCommonUsersStore } from '@Hooks/useStores';
+// Consts
+import { modalAnimationDuration } from '@Constants';
 
-interface CloseBtnType {
-  setOpenModal: (open: boolean) => void;
-}
-
-export const ModalCloseBtn: FC<CloseBtnType> = ({ setOpenModal }) => {
-  const { setNewUser } = useMainStore();
+export const ModalCloseBtn: FC = () => {
+  const { setNewUser, setOpenModal } = useCommonUsersStore();
   const closeModalWindow = () => {
-    setOpenModal(false);
-    setNewUser(null);
+    setOpenModal({ isOpen: true, action: false });
+    setTimeout(() => {
+      setOpenModal({ isOpen: false, action: false });
+      setNewUser(null);
+    }, modalAnimationDuration);
   };
   return (
     <ModalCloseBtnStyle

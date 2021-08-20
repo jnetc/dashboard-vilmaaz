@@ -98,7 +98,6 @@ export interface StoreCtxProps extends DaysType {
   timetable: Array<Timetable>;
   setTimetable: (arr: Array<Timetable>) => void;
   updateStore: UpdateStore;
-  // setUpdateStore: (update: UpdateStore) => void;
   setUpdateStore: Dispatch<SetStateAction<UpdateStore>>; // for prevState!!!
   dayOfWeek: string;
   setDayOfWeek: (day: string) => void;
@@ -108,21 +107,21 @@ export interface StoreCtxProps extends DaysType {
 }
 
 export interface MainCtxProps {
-  openModal: boolean;
-  setOpenModal: (open: boolean) => void;
-  step: { value: Steps; id?: string };
-  setStep: (data: { value: Steps; id?: string }) => void;
-  newUser: Schedule | null;
-  setNewUser: Dispatch<SetStateAction<Schedule | null>>; // for prevState!!!
   autoMovement: boolean;
   setAutoMovement: (el: boolean) => void;
   profileLine: { id: string; color: string };
   setProfileLine: (obj: { id: string; color: string }) => void;
 }
 
-export interface StepsCtxProps {
+export interface CommonUsersCtxProps {
   error: Error;
   dispatch: Dispatch<Action>;
+  openModal: { isOpen: boolean; action: boolean };
+  setOpenModal: (open: { isOpen: boolean; action: boolean }) => void;
+  step: { value: Steps; id?: string };
+  setStep: (data: { value: Steps; id?: string }) => void;
+  newUser: Schedule | null;
+  setNewUser: Dispatch<SetStateAction<Schedule | null>>; // for prevState!!!
 }
 
 export interface TimelineCtxProps {
