@@ -1,12 +1,8 @@
-<header style="width: 100%; display: flex; ">
- <a href="https://vercel.com/jnetc/dashboard-vilmaaz" style="margin: auto">
-  <figure>
-
-![logo](./public/Logo.png)
-
-  </figure>
- </a>
-</header>
+<p align="center">
+  <a href="https://vercel.com/jnetc/dashboard-vilmaaz">
+    <img src="./public/Logo.png">
+  </a>
+</p>
 
 ## Goals in this project
 
