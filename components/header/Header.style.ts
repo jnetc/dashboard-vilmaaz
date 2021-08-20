@@ -15,6 +15,6 @@ export const SwitcherWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: ${({ theme }) => theme.grey_middle()};
+  color: ${({ theme }) => theme.white_hard()};
   font-size: ${({ theme }) => theme.fontsize_14};
 `;

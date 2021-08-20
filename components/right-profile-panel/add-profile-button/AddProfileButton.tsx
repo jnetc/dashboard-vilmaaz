@@ -18,5 +18,7 @@ export const AddProfileButton: FC = () => {
       timetable: [],
     });
   };
-  return <AddProfileButtonStyle onClick={open}></AddProfileButtonStyle>;
+  return (
+    <AddProfileButtonStyle onClick={open}>Uusi tili</AddProfileButtonStyle>
+  );
 };

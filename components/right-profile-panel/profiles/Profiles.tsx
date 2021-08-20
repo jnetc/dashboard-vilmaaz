@@ -28,7 +28,8 @@ export const Profiles: FC<{ data: ProfilesType }> = ({ data }) => {
   };
 
   return (
-    <ProfilesStyle id={id} data-color={color} className="profile">
+    <ProfilesStyle id={id} showTimeline={color} className="profile">
+      <div className="show-timeline"></div>
       <figure>
         {avatar.img ? (
           <Image
