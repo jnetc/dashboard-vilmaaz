@@ -1,10 +1,8 @@
 <header style="width: 100%; display: flex; ">
  <a href="https://vercel.com/jnetc/dashboard-vilmaaz" style="margin: auto">
-  <figure>
 
 ![logo](./public/Logo.png)
 
-  </figure>
  </a>
 </header>
 
