@@ -34,7 +34,7 @@ export const ProfilesStyle = styled.div<{ showTimeline: string }>`
     opacity: 0;
     border-radius: 5px;
     background: var(--${({ showTimeline }) => showTimeline});
-    transform: translateX(35px);
+    transform: translateX(15px);
     transition: all 0.3s cubic-bezier(0, 1.59, 0.63, 0.79);
     z-index: -1;
   }
