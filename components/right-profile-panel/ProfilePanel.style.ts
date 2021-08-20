@@ -15,7 +15,7 @@ export const ProfilePanelStyle = styled.aside`
   background: ${({ theme }) => theme.bg_middle()};
   box-shadow: -10px 0px 40px ${({ theme }) => theme.bg_black(0.2)},
     -10px 0px 10px ${({ theme }) => theme.bg_black(0.3)};
-  z-index: 1;
+  z-index: 100;
   svg#logotip {
     place-self: center;
   }
