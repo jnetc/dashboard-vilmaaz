@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vercel.com/jnetc/dashboard-vilmaaz">
-    <img src="./public/Logo.png">
+    <img src="./public/vilmazz_logo.svg">
   </a>
 </p>
 
