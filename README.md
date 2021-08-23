@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://vercel.com/jnetc/dashboard-vilmaaz">
+  <a href="https://dashboard-vilmaaz.vercel.app/">
     <img src="./public/vilmazz_logo.svg">
   </a>
 </p>

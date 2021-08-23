@@ -85,7 +85,7 @@ export const ScheduleLesson: FC<LessonPropType> = ({
       <input
         type="text"
         name="lesson"
-        placeholder="matematiikka"
+        placeholder="Esim."
         autoComplete="off"
         onChange={getValue}
         ref={ref}

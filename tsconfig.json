@@ -24,6 +24,7 @@
       "@Icons/*": ["./components/icons/*"],
       "@Lessons/*": ["./components/lessons/*"],
       "@Main": ["./components/MainContext"],
+      "@Preloader": ["./components/preloader/Preloader"],
       "@Modals/*": ["./components/modals/*"],
       "@RightProfilePanel/*": ["components/right-profile-panel/*"],
       "@Notifications/*": ["components/notifications/*"],

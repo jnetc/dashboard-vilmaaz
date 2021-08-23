@@ -7,6 +7,7 @@ import { transform, staticValues, dateFormat } from 'utils/helperFunctions';
 import { getAllFromIndexedDB } from '@IndexedDB';
 
 const state: StoreCtxProps = {
+  isAppLoaded: false,
   profile: null,
   setProfile: obj => obj,
   timetable: [],
@@ -30,6 +31,7 @@ const state: StoreCtxProps = {
 export const StoreContext = createContext(state);
 
 const Store: FC = ({ children }) => {
+  const [isAppLoaded, setIsAppLoaded] = useState(state.isAppLoaded);
   const [updateStore, setUpdateStore] = useState(state.updateStore);
   const [data, setData] = useState<Array<Schedule>>([]);
   const [dayOfWeek, setDayOfWeek] = useState(state.dayOfWeek);
@@ -41,6 +43,7 @@ const Store: FC = ({ children }) => {
       const data = await getAllFromIndexedDB('schedule');
       setData(data);
     })();
+    setIsAppLoaded(true);
   }, [dayOfWeek, updateStore]);
 
   const today = dateFormat({ weekday: 'long' });
@@ -60,6 +63,7 @@ const Store: FC = ({ children }) => {
   return (
     <StoreContext.Provider
       value={{
+        isAppLoaded,
         profile,
         setProfile,
         timetable,
