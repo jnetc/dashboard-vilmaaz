@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://dashboard-vilmaaz.vercel.app/">
-    <img src="./public/vilmazz_logo.svg">
+    <img src="./public/vilmaaz_logo.svg">
   </a>
 </p>
 
