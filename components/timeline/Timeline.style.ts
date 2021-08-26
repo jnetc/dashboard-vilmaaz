@@ -30,7 +30,7 @@ export const MainStyle = styled.main`
   }
 `;
 
-export const TimelineEmptyStyle = styled.h2`
+export const TimelineEmptyStyle = styled.section`
   grid-column: 1;
   grid-row: 2;
   place-self: center;
