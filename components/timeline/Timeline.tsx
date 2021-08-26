@@ -1,4 +1,6 @@
 import { useState, useEffect, MouseEvent, createContext, useRef } from 'react';
+import Image from 'next/image';
+import weekend from '../../public/weekend.svg';
 // Helpers
 import {
   cssAnimationHandler,
@@ -115,7 +117,9 @@ const Timeline = () => {
           </TimelineStyle>
         </MainStyle>
       ) : (
-        <TimelineEmptyStyle>Viikonloppu</TimelineEmptyStyle>
+        <TimelineEmptyStyle>
+          <Image src={weekend} alt="weekend" height="500" width="800" />
+        </TimelineEmptyStyle>
       )}
     </TimelineStore.Provider>
   );

@@ -134,7 +134,7 @@ const CreateProfile: FC = () => {
               col={'1'}
               onClick={beforeDelete}
               tooltip="Ole varovainen, jos poistat profiilisi, myös aikataulu poistetaan ">
-              Poistaa profilli
+              Poista profilli
             </ModalButton>
           )
         ) : (

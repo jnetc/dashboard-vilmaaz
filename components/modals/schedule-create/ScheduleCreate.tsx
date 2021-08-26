@@ -92,8 +92,8 @@ const ScheduleCreate: FC = () => {
       <ModalTitle>
         <Titleh1Style>Lukujärjestys</Titleh1Style>
         <Titleh4Style>
-          *Jos kirjoita "tauko", "ruokatauko" tai "lounas" tämä solu visuaalinen
-          vaihtuu lukujärjestyksessä.
+          *Huom "tauko", "ruokatauko" tai "lounas" visuaalisesti vaihtuu solu
+          aikajanalla.
         </Titleh4Style>
       </ModalTitle>
       <ScheduleTable />
@@ -125,7 +125,7 @@ const ScheduleCreate: FC = () => {
           row={'3'}
           col={'2'}
           aria-label="save your profile & schedule">
-          Tallentaa
+          Tallenna
         </ModalButton>
       ) : !error.isError ? (
         <ModalButton
@@ -134,7 +134,7 @@ const ScheduleCreate: FC = () => {
           row={'3'}
           col={'2'}
           aria-label="save your profile & schedule">
-          Tallentaa
+          Tallenna
         </ModalButton>
       ) : (
         <ModalButton
@@ -143,7 +143,7 @@ const ScheduleCreate: FC = () => {
           row={'3'}
           col={'2'}
           aria-label="save your profile & schedule">
-          Tallentaa
+          Tallenna
         </ModalButton>
       )}
     </ScheduleCreateStyle>

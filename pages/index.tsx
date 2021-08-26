@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Header from '@Header/Header';
+import Preloader from '@Preloader';
 import Timetable from '@Timeline/Timeline';
 import RightPanel from '@RightProfilePanel/ProfilePanel';
 import Notifications from '@Notifications/Notification';
@@ -20,6 +21,8 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <Preloader />
       <Steps>
         <Modal>
           <SwitchStep />

@@ -37,8 +37,7 @@ export const transform = (
 
     const schoolday = timetable.find(l => l.day === day && l.lessons);
 
-    if (!schoolday) return;
-    if (schoolday.lessons.length === 0) {
+    if (schoolday?.lessons.length === 0 || !schoolday) {
       newTimefieldArr.push({
         ...data,
         timetable: timetable,

@@ -93,6 +93,7 @@ export interface UpdateStore {
 export type Steps = 'profile' | 'days' | 'schedule';
 
 export interface StoreCtxProps extends DaysType {
+  isAppLoaded: boolean;
   profile: User | null;
   setProfile: (obj: User | null) => void;
   timetable: Array<Timetable>;
