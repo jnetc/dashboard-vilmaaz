@@ -618,7 +618,7 @@ export const testdata: Array<Schedule> = [
     color: 'pink',
     avatar: {
       name: 'JE',
-      img: '/avatar/jekky.png',
+      img: '/avatars/jekky.png',
     },
     timetable: [
       {
@@ -822,7 +822,7 @@ export const testdata: Array<Schedule> = [
     color: 'brown',
     avatar: {
       name: 'RM',
-      img: '/avatar/romario.png',
+      img: '/avatars/romario.png',
     },
     timetable: [
       {
@@ -1020,7 +1020,7 @@ export const testdata: Array<Schedule> = [
     color: 'blue',
     avatar: {
       name: 'RS',
-      img: '/avatar/rosalitta.png',
+      img: '/avatars/rosalitta.png',
     },
     timetable: [
       {
